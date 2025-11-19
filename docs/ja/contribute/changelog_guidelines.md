@@ -1,96 +1,98 @@
-# Changelog Guidelines
+# 変更履歴のガイドライン
 
-PR title follows [Convensional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for easier
-changelog generation. The format is one of:
+PR(プルリクエスト)のタイトルは、変更履歴をより簡単に生成できるように、 [Convensional Commits](https://www.conventionalcommits.org/en/v1.0.0/) に従ってください。
+形式は以下のいずれかです:
 
 ```
 <Type>: <PR subject>
 <Type>(<Scope>, <Scope>, ...): <PR subject>
 ```
 
-For Example, a PR title can be:
+例えば、PRのタイトルは以下のようになります:
 
 ```
 feat: add new mutation
 feat(port): port mutation description from DDA
 ```
 
-The PR title should be easy to understand for players at a glance. It's recommended to use imperative and descriptive title (`<verb> <noun>`) like:
+PRのタイトルは、プレイヤーが一目で理解しやすいようにすべきです。命令形かつ説明的なタイトルand 命令形かつ説明的なタイトル(`<verb> <noun>`) を使用することが推奨されます:
+
+例えば以下のとおりです。
 
 ```diff
 - feat: rebalancing some rifles
 + feat: nerf jam chance of m16 and m4
 ```
 
-before: it's hard to know whether they are buffed or nerfed, and which rifles are changed unless reading the full PR description.
-after: it's easy to understand what exactly is changed from the title itself.
+変更前: バフされたのかナーフされたのか、どのライフルが変更されたのか、PR(プルリクエスト)の完全な説明を読まないと分かりづらい。
+変更後: タイトル自体から何が正確に変更されたのか容易に理解できる。
 
-## Type
+## タイプ
 
-The type is the first word in the PR title. They specify the type of change being made. When in
-doubt, use `feat` for new features, and `fix` for bugfixes. Here are some frequently used
-categories:
+タイプはPRタイトルの最初の単語です。行われている変更の種類を指定します。
+迷ったときは、新しい機能には`feat`を、バグ修正には`fix`を使用してください。
+以下に、頻繁に使用されるいくつかのカテゴリを示します:
 
-### `feat`: Features
+### `feat`: 機能
 
-New features, additions, or balance changes.
+新しい機能、追加、またはバランス調整。
 
-### `fix`: Bugfixes
+### `fix`: バグ修正
 
-Anything that fixes a bug or makes the game more stable.
+バグを修正するもの、またはゲームをより安定させるもの。
 
-### `refactor`: Infrastructure
+### `refactor`: インフラ整備
 
-Make development easier without changing its behavior. For example:
+動作を変更せずに開発を容易にするもの。例えば、以下のとおりです。
 
-- `C++` refactorings and overhaul
-- `Json` reorganizations
-- `docs/`, `.github/` and repository changes
-- other development tools
+- `C++` のリファクタリングとオーバーホール
+- `Json` の再編成
+- `docs/`, `.github/` およびリポジトリの変更
+- その他の開発ツール
 
-### `build`: Build
+### `build`: ビルド
 
-Improve build process:
+ビルドプロセスを改善する:
 
-- more robust
-- easier to use
-- faster compile time
+- より堅牢にする
+- より使いやすくする
+- コンパイル時間を短縮する
 
-### Others
+### その他
 
-- `docs`: Documentation changes
-- `style`: Code style changes (whitespace, formatting, etc), usu. fixing JSON formatting.
-- `perf`: Performance Improvements
-- `test`: Adding missing tests or correcting existing tests
-- `ci`: Changes to CI process
-- `chore`: Other changes that don't fit into any of the above categories
-- `revert`: Reverts a previous commit
+- `docs`: ドキュメントの変更
+- `style`: コードスタイルの変更（空白、フォーマットなど）、通常はJSONフォーマットの修正
+- `perf`: パフォーマンスの改善
+- `test`: 不足しているテストの追加または既存のテストの修正
+- `ci`: CI（継続的インテグレーション）プロセスの変更
+- `chore`: 上記のどのカテゴリにも当てはまらないその他の変更
+- `revert`: 以前のコミットの取り消し
 
-## Scopes
+## スコープ
 
-1. Use them inside parentheses after the category to further narrow the scope of your PR.
-2. There are no limits to number of scopes.
-3. They are optional, but recommended.
-4. these are only guidelines, not rules. choose the best one for your PR freely!
+1. スコープをさらに絞り込むために、カテゴリの後に括弧内でそれらを使用します。
+2. スコープの数に制限はありません。
+3. それらは任意ですが、推奨されます。
+4. これらは単なるガイドラインであり、ルールではありません。ご自身のPRに最適なものを自由に選択してください！
 
-### `<None>`: General Features
+### `<None>`: 一般的な機能
 
-For example,
+例として:
 
-Changes related to player:
+プレイヤーに関連する変更点:
 
-- player can do something new (e.g: mutations, skills)
-- something new can happen to the player (e.g: new disease)
+- プレイヤーが何か新しいことを実行できる (例：変異、スキル)
+- プレイヤーに何か新しいことが起こり得る (例：新しい病気)
 
-New contents like:
+新しいコンテンツとして:
 
-- new monsters
-- new map areas
-- new items
-- new vehicles
-- new doohickeys
+- 新しいモンスター
+- 新しいマップエリア
+- 新しいアイテム
+- 新しい乗り物
+- 新しい仕掛け
 
-Example PR title:
+PRタイトルの例:
 
 ```
 feat: strength training activity
@@ -99,70 +101,73 @@ feat: semi-plausible smokeless gunpowder recipe
 feat(port): game store
 ```
 
-### `lua`: Changes to Lua API
+### `lua`: Lua APIへの変更
 
-Changes to the Lua API, such as:
+Lua APIへの変更。例えば、以下のものを含みます:
 
-- [adding new bindings](../mod/lua/guides/binding.md)
-- improving lua documentation/API generation
-- [migrating hardcoded C++ features to lua](https://github.com/cataclysmbnteam/Cataclysm-BN/pull/6901)
+- [新しいバインディングの追加](../mod/lua/guides/binding.md)
+- Luaのドキュメント／API生成の改善
+- [ハードコードされたC++機能をLuaへ移行](https://github.com/cataclysmbnteam/Cataclysm-BN/pull/6901)
 
-Example PR title:
+PRタイトルの例:
 
 ```
 feat(lua): add dialogue bindings
 ```
 
-### `UI`: Interfaces
+### `UI`: インターフェース
 
-UI/UX changes like:
+UI/UX（ユーザーインターフェース／ユーザーエクスペリエンス）の変更。
+例えば、以下のものを含みます:
 
-- adding mouse support
-- adding/adjusting menus
-- change shortcuts
-- streamlining workflows
-- quality of life improvements
+- マウスサポートの追加
+- メニューの追加／調整
+- ショートカットの変更
+- ワークフローの合理化
+- プレイ体験の改善
 
-Example PR title:
+PRタイトルの例:
 
 ```
 feat(UI): More info about items dropped with bags
 feat(UI): overhaul encumbrance UI
 ```
 
-### `i18n`: Internationalization
+### `i18n`: 国際化
 
-Improve translation and other languages support.
+
+翻訳およびその他の言語のサポートを改善します。
 
 ```
 fix(UI,i18n): recipe names not translated unless learned
 ```
 
-### `mods` or `mods/<MOD_ID>`: Mods
+### `mods` および `mods/<MOD_ID>`: Mods
 
-- changes contained within a mod
-- extends what is capable within a mod
+- Mod内に含まれる変更
+- Mod内で可能なことを拡張するもの
 
-Example PR title:
+PRタイトルの例::
 
 ```
 feat(mods/Magical_Nights): add missing owlbear pelts recipe
 fix(mods): No Hope doesn't make the world freezing
 ```
 
-### `balance`: Balance Changes
+### `balance`: バランス調整
 
-Changes to game balance.
 
-Example PR title:
+ゲームバランスへの変更
+
+PRタイトルの例:
 
 ```
 feat(balance): Give moose pelts instead of hides
 ```
 
-### `port`: Ports from DDA or other forks
+### `port`: DDAまたはその他のフォークからの移植
 
-Example PR title:
+PRタイトルの例:
 
 ```
 feat(port): game shop
