@@ -135,7 +135,6 @@ feat(UI): overhaul encumbrance UI
 
 ### `i18n`: 国際化
 
-
 翻訳およびその他の言語のサポートを改善します。
 
 ```
@@ -155,7 +154,6 @@ fix(mods): No Hope doesn't make the world freezing
 ```
 
 ### `balance`: バランス調整
-
 
 ゲームバランスへの変更
 
