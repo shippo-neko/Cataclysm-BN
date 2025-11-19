@@ -1,75 +1,71 @@
-# Contributing
+# 貢献
 
 > [!TIP]
 >
-> #### Opening new issue
+> #### 新規issueの作成
 >
-> Check [how to open a issue](./issues).
+> [issueの作成方法](./issues)を確認してください。
 
 # Want to help?
 
-Help is appreciated, especially with:
+協力していただけませんか？:
+以下の分野での協力は特に歓迎されます。
 
-- Reporting bugs. Including ones inherited from DDA.
-- Identifying problems that aren't bugs. Misleading descriptions, values that are clearly off
-  compared to similar cases, grammar mistakes, UI wonkiness that has an obvious solution.
-- Making useless things useful or putting them on a blacklist. Adding deconstruction recipes for
-  things that should have them but don't, replacing completely redundant items with their generic
-  versions (say, "tiny marked bottle" with just "tiny bottle") in spawn lists.
-- Tileset work. I'm occasionally adding new objects, like the new electric grid elements, and they
-  could use new tiles.
-- Balance analysis. Those should be rather in depth or "obviously correct". Obviously correct would
-  be things like: "weapon x has strictly better stats than y, but y requires rarer components and
-  has otherwise identical requirements".
-- Identifying performance bottlenecks with a profiler.
-- Code quality help.
+- バグの報告。DDAから引き継いだバグも含む。
+- バグではないが問題がある点の特定。誤解を招く説明、類似ケースと比較して明らかに不適切な値、文法上の誤
+  り、明白な解決策があるUIの不具合など。
+- 役に立たないものを有用にする、またはブラックリストに載せること。解体レシピを持つべきなのに持っていな
+  いアイテムにレシピを追加する、スポーンリスト内で完全に冗長なアイテムをその汎用版（例えば「小さな目印付きボトル」を単なる「小さなボトル」に）置き換えること。
+- タイルセットの作業。 新しい電線グリッド要素など、私が時折新しいオブジェクトを追加しており、それらには
+  新しいタイルが必要です。
+- バランス分析。 これらはかなり詳細であるか、「明らかに正しい」ものであるべきです。「明らかに正しい」例
+  としては、「武器Xは武器Yよりも厳密に優れたステータスを持っているが、Yはより希少なコンポーネントを必要とし、その他の要件は同一である」といったケースです。
+- プロファイラを用いたパフォーマンス上のボトルネックの特定。
+- コード品質の向上。
 
-## How-to
+## 貢献方法
 
-Contributing to Cataclysm: Bright Nights is easy:
+Cataclysm: Bright Nightsへの貢献は簡単です:
 
-1. Fork the repository here on GitHub.
-2. Make your changes.
-3. Send us a pull request.
+1. GitHubで本リポジトリをフォークします。
+2. 変更を加えます。
+3. プルリクエスト(PR)を送信します。
 
 > [!NOTE]
 >
-> #### License
+> #### ライセンス
 >
-> Cataclysm: Bright Nights is released under the Creative Commons Attribution ShareAlike 3.0 license.
-> The code and content of the game is free to use, modify, and redistribute for any purpose
-> whatsoever. See http://creativecommons.org/licenses/by-sa/3.0/ for details. This means any
-> contribution you make to the project will also be covered by the same license, and this license is
-> irrevocable.
+> Cataclysm: Bright Nightsは、Creative Commons Attribution ShareAlike 3.0ライセンスのもとでリリース
+> されています。ゲームのコードとコンテンツは、いかなる目的であれ、自由に使用、変更、再配布が可能です。詳細については、
+> http://creativecommons.org/licenses/by-sa/3.0/ を参照してください。これは、あなたがプロジェクトに対して行ういかなる貢献も、同じライセンスの対象となり、このライセンスは撤回不能であることを意味します。
 
-## Guidelines
+## ガイドライン
 
-There are a couple of guidelines we suggest sticking to:
+遵守することを推奨するいくつかのガイドラインがあります:
 
-- Add this repository as an `upstream` remote.
-- Keep your `main` branch clean. This means you can easily pull changes made to this repository into
-  yours.
-- Create a new branch for each new feature or set of related bug fixes.
-- Never merge from your local branches into your `main` branch. Only update that by pulling from
-  `upstream/main`.
+- 本リポジトリを`upstream`リモートとして追加してください
+- メインブランチ（`main` branch）をクリーンに保ってください。これにより、本リポジトリに加えられた変更を、簡単に自分のリポジトリにプルできるようになります。
+- 新しい機能や、関連するバグ修正のセットごとに、新しいブランチを作成してください。
+- ローカルブランチから自分の `main` ブランチへマージすることは避けてください。
+  `upstream/main`からプルすることによってのみ更新してください。
 
-## Code Style
+## コードスタイル
 
 ### C++
 
-Code style is enforced across the codebase by `astyle`. See
-[CODE_STYLE](./../dev/explanation/code_style.md) for details.
+コードスタイルは、コードベース全体で `astyle` によって強制されています。詳細については、
+[CODE_STYLE](./../dev/explanation/code_style.md) を参照してください。
 
 ### JSON
 
-JSON files are formatted using custom formatter available in `tools/format`. Visit
-[JSON Style Guide](./../mod/json/explanation/json_style.md) for details.
+JSONファイルは、 `tools/format`で利用可能なカスタムフォーマッタを使用してフォーマットされます。詳細については、
+[JSON スタイルガイド](./../mod/json/explanation/json_style.md) を参照してください。
 
 ### Markdown
 
-Markdown files such as `doc/` are formatted using [`deno`](https://deno.com)'s built-in formatter.
-Run [`deno fmt`](https://deno.land/manual/tools/formatter) anywhere to format markdown files. On
-VSCode, you can set following configuration to auto-format markdown files on save:
+`doc/` などのMarkdownファイルは、[`deno`](https://deno.com)の組み込みフォーマッタを使用してフォーマットされます。Markdownファイルをフォーマットするには、どこからでも
+[`deno fmt`](https://deno.land/manual/tools/formatter) を実行してください。
+VSCodeでは、保存時にMarkdownファイルを自動フォーマットするために、以下の設定を行うことができます:
 
 ```json
 // .vscode/settings.json
@@ -83,23 +79,21 @@ VSCode, you can set following configuration to auto-format markdown files on sav
 
 ### Lua
 
-Lua files are formatted using [`dprint`](https://dprint.dev)'s built-in formatter. Run
-[`deno task dprint fmt`](https://dprint.dev/plugins/lua) anywhere to format Lua files. For details,
-see [Lua Style Guide](./../mod/lua/explanation/lua_style.md).
+Luaファイルは、 [`dprint`](https://dprint.dev)の組み込みフォーマッタを使用してフォーマットされます。Luaファイルをフォーマットするには、どこからでも
+[`deno task dprint fmt`](https://dprint.dev/plugins/lua) を実行してください。詳細については、 [Lua スタイルガイド](./../mod/lua/explanation/lua_style.md)を参照してください。
 
-## Translations
+## 翻訳
 
-The translation of Cataclysm: BN is done using Transifex. Look at the
-[translation project](https://app.transifex.com/bn-team/cataclysm-bright-nights/) for an up-to-date
-list of supported languages.
+Cataclysm: BNの翻訳はTransifexを使用して行われています。サポートされている言語の最新リストについては、
+[翻訳プロジェクト](https://app.transifex.com/bn-team/cataclysm-bright-nights/)を参照してください。
 
-For more information:
+詳細については、以下を参照してください:
 
 - [For translators](./../i18n/tutorial/transifex)
 - [For developers](./../i18n/reference/translation)
 - [For maintainers](./../i18n/guides/maintain)
 
-## Documentation
+## ドキュメンテーション
 
 <!--
 ![](./img/contributing-doxy1.png)
@@ -108,104 +102,103 @@ For more information:
 Autogenerated documentation is hosted on
 [GitHub Pages](https://cataclysmbnteam.github.io/Cataclysm-BN). -->
 
-### Doxygen Comments
+### Doxygenコメント
 
-Extensive documentation of classes and class members will make the code more readable to new
-contributors. New doxygen comments for existing classes are a welcomed contribution.
+クラスとクラスメンバーを広範囲にわたってドキュメント化することで、新規貢献者にとってコードの可読性が向上します。既存のクラスに対する新しいDoxygenコメントは、歓迎される貢献です。
 
-Use the following template for commenting classes:
+クラスをコメントアウトするには、以下のテンプレートを使用してください。
 
 ```cpp
 /**
- * Brief description
+ * (簡潔な説明)
  *
- * Lengthy description with many words. (optional)
+ * 長文の説明（多くの単語を使用）。 (オプション)
  */
 class foo {
 
 }
 ```
 
-Use the following template for commenting functions:
+関数をコメントアウトするには、以下のテンプレートを使用してください。
 
 ```cpp
 /**
- * Brief description
+ * 簡潔な説明
  *
- * Lengthy description with many words. (optional)
- * @param param1 Description of param1 (optional)
- * @return Description of return (optional)
+ * 長文の説明。 (オプション)
+ * @param param1 の説明 (オプション)
+ * @return 戻り値の説明 (オプション)
  */
 int foo(int param1);
 ```
 
-Use the following template for commenting member variables:
+メンバー変数をコメントアウトするには、以下のテンプレートを使用してください。
 
 ```cpp
-/** Brief description **/
+/** 簡潔な説明 **/
 int foo;
 ```
 
-### Guidelines for adding documentation
+### ドキュメンテーション追加のガイドライン
 
-- Doxygen comments should describe behavior towards the outside, not implementation, but since many
-  classes in Cataclysm are intertwined, it's often necessary to describe implementation.
-- Describe things that aren't obvious to newcomers just from the name.
-- Don't describe redundantly: `/** Map **/; map* map;` is not a helpful comment.
-- When documenting X, describe how X interacts with other components, not just what X itself does.
+- Doxygenコメントは、外部に向けた振る舞いを説明すべきであり、実装については説明すべきではありませんが、
+  Cataclysmの多くのクラスは絡み合っているため、実装の説明が必要になることもよくあります。
+- 名前からでは新参者には明らかではない事柄を説明してください。
+- 冗長な説明は避けてください。例: `/** Map **/; map* map;` は役立つコメントではありません。
+- Xをドキュメント化する際は、X自体が何をするかだけでなく、Xが他のコンポーネントとどのように相互作用するかを説明してください。
 
-### Building the documentation for viewing it locally
+### ローカルで表示するためのドキュメンテーションのビルド
 
-- Install doxygen
-- `doxygen doxygen_doc/doxygen_conf.txt`
-- `firefox doxygen_doc/html/index.html` (replace firefox with your browser of choice)
+- doxygenをインストールします
+- `doxygen doxygen_doc/doxygen_conf.txt` を実行します
+- `firefox doxygen_doc/html/index.html` を実行します (firefoxをお好みのブラウザに置き換えてください)
 
-## Example Workflow
+## ワークフローの例
 
-### Setup your environment
+### 環境のセットアップ
 
-_(This only needs to be done once.)_
+_(これは一度だけ実行する必要があります。)_
 
-1. Fork this repository here on GitHub.
+1. GitHubで本リポジトリをフォークします。
 
-1. Clone your fork locally.
+2. 自分のフォークをローカルにクローンします。
 
 ```sh
 $ git clone https://github.com/YOUR_USERNAME/Cataclysm-BN.git
-# Clones your fork of the repository into the current directory in terminal
+# 自分のフォークのリポジトリを、ターミナルのカレントディレクトリにクローンします
 ```
 
-3. Set commit message template.
+3. コミットメッセージのテンプレートを設定します。
 
 ```sh
 $ git config --local commit.template .gitmessage
 ```
 
-4. Add this repository as a remote.
+4. 本リポジトリをリモートとして追加します。
 
 ```sh
 $ cd Cataclysm-BN
-# Changes the active directory in the prompt to the newly cloned "Cataclysm-BN" directory
+# プロンプトのアクティブディレクトリを、新しくクローンされた "Cataclysm-BN" ディレクトリに変更します
 $ git remote add -f upstream https://github.com/cataclysmbnteam/Cataclysm-BN.git
-# Assigns the original repository to a remote called "upstream"
+# オリジナルリポジトリを "upstream" というリモートに割り当てます
 ```
 
-For further details about commit message guidelines please visit:
+コミットメッセージのガイドラインに関する詳細については、以下を参照してください:
 
 - [codeinthehole.com](https://codeinthehole.com/tips/a-useful-template-for-commit-messages/)
 - [chris.beams.io](https://chris.beams.io/posts/git-commit/)
 - [help.github.com](https://help.github.com/articles/closing-issues-using-keywords/)
 
-### Update your `main` branch
+### メインブランチ `main` の更新
 
-0. **Make sure your `main` branch is tracking upstream's `main` not origin's `main` by typing:**
+0. **自分の `main` ブランチが、originの `main` ではなく、upstream の `main` を追跡していることを、以下のコマンドで確認してください。**
 
 ```sh
 $ git branch --set-upstream-to upstream/main main
-# makes your branch 'main' to track upstream's main.
+# 自分のブランチ 'main' が upstream の main を追跡するように設定します。
 ```
 
-To check whether your `main` is correctly pointing to upstream, type `git remote -v` and you should see something like
+自分の `main` が正しくアップストリームを指しているかを確認するには、 `git remote -v` と入力してください。以下のような出力が表示されるはずです。
 
 ```sh
 $ git remote -v
@@ -216,7 +209,7 @@ upstream        https://github.com/cataclysmbnteam/Cataclysm-BN.git (fetch)
 upstream        https://github.com/cataclysmbnteam/Cataclysm-BN.git (push)
 ```
 
-and when you type `git branch -vv` you should see `[upstream/main]` next to `main` branch like:
+そして、 `git branch -vv` と入力すると、`main` ブランチの横に `[upstream/main]` が表示されるはずです。
 
 ```sh
 $ git branch -vv
@@ -226,61 +219,54 @@ $ git branch -vv
 # ...
 ```
 
-1. Make sure you are on your `main` branch.
+1. `main` ブランチにいることを確認します。
 
 ```sh
 $ git switch main
 ```
 
-2. Pull the changes from the `upstream/main` branch.
+2. `upstream/main` ブランチから変更をプルします。
 
 ```sh
 $ git pull --ff-only upstream main
-# gets changes from "main" branch on the "upstream" remote
+# "upstream" リモートの "main" ブランチから変更を取得します
 ```
 
-> **Note** If this gives you an error, it means you have committed directly to your local `main`
-> branch.
-> [Click here for instructions on how to fix this issue](#why-does-git-pull---ff-only-result-in-an-error).
+> **注記**これでエラーが発生した場合、それはローカルの `main`ブランチに直接コミットしたことを意味します。
+> [この問題を解決する方法について、こちらをクリックしてください。](#why-does-git-pull---ff-only-result-in-an-error).
 
-### Make your changes
+### 変更の作成
 
-0. Update your `main` branch, if you haven't already.
+0. まだ更新していない場合は `main` ブランチを更新します。
 
-1. For each new feature or bug fix, create a new branch.
+1. 新しい機能またはバグ修正ごとに、新しいブランチを作成します。
 
 ```sh
 $ git switch --create new_feature
-# Creates a new branch called "new_feature" and makes it the active branch
+# "new_feature" という新しいブランチを作成し、それをアクティブなブランチにします
 ```
 
-2. Once you've committed some changes locally, you need to push them to your fork here on GitHub.
+2. ローカルでいくつかの変更をコミットしたら、GitHub上の自分のフォークにそれらをプッシュする必要があります。
 
 ```sh
 $ git push origin new_feature
-# origin was automatically set to point to your fork when you cloned it
+# クローンしたときに origin は自動的に自分のフォークを指すように設定されています
 ```
 
-3. Once you're finished working on your branch, and have committed and pushed all your changes,
-   submit a pull request from your `new_feature` branch to this repository's `main` branch.
+3. ブランチでの作業を終え、すべての変更をコミットしてプッシュしたら、自分の `new_feature` ブランチから本リポジトリの`main` ブランチに対してプルリクエストを送信します。
 
-> **Note** any new commits to the `new_feature` branch on GitHub will automatically be included in
-> the pull request, so make sure to only commit related changes to the same branch.
+> **注記** GitHub上の `new_feature` ブランチへの新しいコミットは、自動的にプルリクエストに含まれるため、関連する変更のみを同じブランチにコミットするようにしてください。
 
-## Pull Request Notes
+## プルリクエストに関する注意点
 
-If you file a PR but you're still working on it, please mark it as
-[draft](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests#draft-pull-requests).
-This can help speed up our review process by allowing us to only review the things that are ready
-for it, and will prevent anything that isn't completely ready from being merged in.
+PRを提出したが、まだ作業中の場合は
+[draft](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests#draft-pull-requests)としてマークしてください。これにより、準備が整ったものだけをレビューし、完全に準備ができていないものがマージされるのを防ぐことができるため、レビュープロセスを迅速化できます。
 
-It is not required to solve or reference an open issue to file a PR, however, if you do so, you need
-to explain the problem your PR is solving in full detail.
+PRを提出するために、未解決のIssueを解決または参照する必要はありませんが、参照する場合は、PRが解決しようとしている問題を完全に詳細に説明する必要があります。
 
-### Closing issues using keywords
+### キーワードを使用したIssueのクローズ
 
-One more thing: when marking your PR as closing, fixing, or resolving issues, please include this
-somewhere in the description:
+もう一つ：PRをIssueのクローズ、修正、または解決としてマークする際は、説明のどこかに以下を含めてください:
 
 ```md
 - {keyword} #{issue}
@@ -288,9 +274,9 @@ somewhere in the description:
 
 for example: `- fixed #12345`
 
-### keyword
+### キーワード
 
-`{keyword}` must be one of the following:
+`{keyword}` は次のいずれかである必要があります。
 
 - `close`, `closes`, `closed`
 - `fix`, `fixes`, `fixed`
@@ -298,32 +284,29 @@ for example: `- fixed #12345`
 
 ### issue
 
-and `{issue}` is the number of the issue you're closing after PR gets merged.
+そして `{issue}` は、PRがマージされた後にクローズするIssueの番号です。
 
-This would automatically close the issue when the PR is pulled in, and allows merges to work
-slightly faster.
+これにより、PRが取り込まれたときにIssueが自動的にクローズされ、マージの作業がわずかに迅速になります。
 
-### closing multiple issues at once
+### 複数のIssueを一度にクローズする
 
 ```md
 - {keyword} #{issue}, {keyword} #{issue}
 ```
 
-See https://help.github.com/articles/closing-issues-using-keywords for more.
+詳細については、 https://help.github.com/articles/closing-issues-using-keywords を参照してください。
 
-## Tooling support
+## ツールのサポート
 
-Various tools are available to help you keep your contributions conforming to the appropriate style.
-See [DEVELOPER_TOOLING](./../dev/reference/tooling) for more details.
+貢献内容が適切なスタイルに準拠していることを維持するために、さまざまなツールが利用可能です。詳細については、[開発ツール](./../dev/reference/tooling)を参照してください。
 
-## Advanced Techniques
+## 応用テクニック
 
-These guidelines aren't essential, but they can make keeping things in order much easier.
+これらのガイドラインは必須ではありませんが、物事を整理しておくのに非常に役立ちます。
 
-### Using remote tracking branches
+### リモート追跡ブランチの使用
 
-Remote tracking branches allow you to easily stay in touch with this repository's `main` branch, as
-they automatically know which remote branch to get changes from.
+リモート追跡ブランチを使用すると、本リポジトリの `main` ブランチとの連携を簡単に維持できます。これは、どのリモートブランチから変更を取得すべきかを自動的に知っているためです。
 
 ```sh
 $ git branch -vv
@@ -331,9 +314,8 @@ $ git branch -vv
   new_feature xxxx ....
 ```
 
-Here you can see we have two branches; `main` which is tracking `origin/main`, and `new_feature`
-which isn't tracking any branch. In practice, what this means is that git won't know where to get
-changes from.
+ここでは、2つのブランチがあることがわかります; `main` は `origin/main`を追跡しており、`new_feature`
+はどのブランチも追跡していません。実際には、これはgitがどこから変更を取得すべきかわからないことを意味します。
 
 ```sh
 $ git checkout new_feature
@@ -343,8 +325,7 @@ There is no tracking information for the current branch.
 Please specify which branch you want to merge with.
 ```
 
-In order to easily pull changes from `upstream/main` into the `new_feature` branch, we can tell git
-which branch it should track. (You can even do this for your local main branch.)
+`upstream/main`からの変更を `new_feature` ブランチに簡単にプルできるように、gitにどのブランチを追跡すべきかを伝えることができます (これはローカルのmainブランチにも設定できます)。
 
 ```sh
 $ git branch -u upstream/main new_feature
@@ -354,16 +335,15 @@ Updating xxxx..xxxx
 ....
 ```
 
-You can also set the tracking information at the same time as creating the branch.
+ブランチを作成すると同時に、追跡情報を設定することもできます。
 
 ```sh
 $ git branch new_feature_2 --track upstream/main
 Branch new_feature_2 set up to track remote branch main from upstream.
 ```
 
-> **Note**: Although this makes it easier to pull from `upstream/main`, it doesn't change anything
-> with regards to pushing. `git push` fails because you don't have permission to push to
-> `upstream/main`.
+> **注記**: これにより`upstream/main`からのプルは簡単になりますが、プッシュに関しては何も変わりません。
+> `upstream/main`へのプッシュ権限がないため、`git push` は失敗します。
 
 ```sh
 $ git push
@@ -375,13 +355,10 @@ To https://github.com/YOUR_USERNAME/Cataclysm-BN.git
 xxxx..xxxx  new_feature -> new_feature
 ```
 
-## Unit tests
+## ユニットテスト
 
-There is a suite of tests built into the source tree at tests/ You should run the test suite after
-ANY change to the game source. An ordinary invocation of `make` will build the test executable at
-tests/cata_test, and it can be invoked like any ordinary executable, or via `make check`. With no
-arguments it will run the entire test suite. With `--help` it will print a number of invocation
-options you can use to adjust its operation.
+tests/ には、ソースツリーに組み込まれたテストスイートがあります。ゲームソースにいかなる変更を加えた後も、テストスイートを実行する必要があります。通常の `make` の呼び出しにより、
+tests/cata_testにテスト実行可能ファイルがビルドされ、通常の実行可能ファイルと同様に、または `make check`を介して呼び出すことができます。引数がない場合、テストスイート全体が実行されます。`--help` を使用すると、その操作を調整するために使用できる多くの呼び出しオプションが出力されます。
 
 ```sh
 $ make
@@ -394,60 +371,50 @@ Ended test at Fri Nov  9 04:37:45 2018
 The test took 41.772 seconds
 ```
 
-I recommend habitually invoking make like `make YOUR BUILD OPTIONS && make check`.
+私は、 `make YOUR BUILD OPTIONS && make check`のように、make を習慣的に呼び出すことを推奨します。
 
-## In-game testing, test environment and the debug menu
+## ゲーム内テスト、テスト環境、およびデバッグメニュー
 
-Whether you are implementing a new feature or whether you are fixing a bug, it is always a good
-practice to test your changes in-game. It can be a hard task to create the exact conditions by
-playing a normal game to be able to test your changes, which is why there is a debug menu. There is
-no default key to bring up the menu so you will need to assign one first.
+新しい機能を実装している場合でも、バグを修正している場合でも、ゲーム内で変更をテストすることは常に良い習慣です。通常のゲームをプレイして、変更をテストできる正確な条件を作り出すのは難しい作業になる可能性があるため、デバッグメニューがあります。このメニューを呼び出すためのデフォルトキーはないため、まずキーを割り当てる必要があります。
 
-Bring up the keybindings menu (press `Escape` then `1`), scroll down almost to the bottom and press
-`+` to add a new key binding. Press the letter that corresponds to the _Debug menu_ item, then press
-the key you want to use to bring up the debug menu. To test your changes, create a new world with a
-new character. Once you are in that world, press the key you just assigned for the debug menu and
-you should see something like this:
+キーバインディングメニューを呼び出し ( `Escape` キーを押してから `1`)、ほぼ一番下までスクロールして
+`+` を押して新しいキーバインドを追加します。_デバッグメニュー_アイテムに対応する文字を押し、次にデバッグメニューを呼び出すために使用したいキーを押します。変更をテストするには、新しいキャラクターで新しいワールドを作成します。そのワールドに入ったら、デバッグメニューに割り当てたキーを押すと、次のような画面が表示されるはずです:
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│ Debug Functions - Manipulate the fabric of reality! │
+│ デバッグ機能 - 現実の構造を操作！                   │
 ├─────────────────────────────────────────────────────┤
-│ i Info                                              │
-│ Q Quit to main menu                                 │
-│ s Spawning...                                       │
-│ p Player...                                         │
-│ t Teleport...                                       │
-│ m Map...                                            │
+│ i 情報                                              │
+│ Q メインメニューへ終了                              │
+│ s スポーン...                                       │
+│ p プレイヤー...                                     │
+│ t テレポート...                                     │
+│ m マップ...                                         │
 └─────────────────────────────────────────────────────┘
 ```
 
-With these commands, you should be able to recreate the proper conditions to test your changes. The
-[DDA wiki](http://cddawiki.chezzo.com/cdda_wiki/index.php) may have useful informations regarding
-debug menu.
+これらのコマンドを使用すると、変更をテストするための適切な条件を再現できるはずです。デバッグメニューに関する有用な情報は、
+[DDA wiki](http://cddawiki.chezzo.com/cdda_wiki/index.php) にあるかもしれません。
 
-## Frequently Asked Questions
+## よくある質問
 
-### Why does `git pull --ff-only` result in an error?
+### なぜ `git pull --ff-only` でエラーが発生するのですか？
 
-If `git pull --ff-only` shows an error, it means that you've committed directly to your local `main`
-branch. To fix this, we create a new branch with these commits, find the point at which we diverged
-from `upstream/main`, and then reset `main` to that point.
+`git pull --ff-only` でエラーが表示される場合、それはローカルの `main`ブランチに直接コミットしたことを意味します。これを修正するには、これらのコミットを含む新しいブランチを作成し、 `upstream/main`から分岐したポイントを見つけて、そのポイントに `main` をリセットします。
 
 ```sh
 $ git pull --ff-only upstream main
 From https://github.com/cataclysmbnteam/Cataclysm-BN
  * branch            main     -> FETCH_HEAD
 fatal: Not possible to fast-forward, aborting.
-$ git branch new_branch main          # mark the current commit with a tmp branch
+$ git branch new_branch main          # 現在のコミットを一時ブランチでマークします
 $ git merge-base main upstream/main
-cc31d0... # the last commit before we committed directly to main
+cc31d0... # main に直接コミットする前の最後のコミット
 $ git reset --hard cc31d0....
 HEAD is now at cc31d0... ...
 ```
 
-Now that `main` has been cleaned up, we can easily pull from `upstream/main`, and then continue
-working on `new_branch`.
+これで `main` がクリーンアップされたので、`upstream/main`から簡単にプルし、`new_branch`での作業を続行できます。
 
 ```sh
 $ git pull --ff-only upstream main
@@ -455,4 +422,4 @@ $ git pull --ff-only upstream main
 $ git checkout new_branch
 ```
 
-For more frequently asked questions, see the [developer FAQ](./../dev/reference/faq.md).
+その他のよくある質問については、[developer FAQ](./../dev/reference/faq.md)を参照してください。
