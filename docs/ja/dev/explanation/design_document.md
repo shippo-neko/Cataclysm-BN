@@ -1,124 +1,102 @@
-# Design document
+# 設計文書
 
-See [Game Balance](../../mod/json/explanation/game_balance.md) and
-[Lore](../../game/lore/factions.md) for more detailed discussion coresponding to particular elements
-of the CDDA design document. This document covers the core philosphy of CBN.
+CDDA 設計文書の特定の要素に対応する、より詳細な議論については、[ゲームバランス](../../mod/json/explanation/game_balance.md) および
+[ロア](../../game/lore/factions.md) を参照してください。この文書は、CBN の核となる哲学について述べています。
 
-One of the primary priorities of Cataclysm Bright Nights is fun.
+Cataclysm Bright Nights の主要な優先事項の一つは、楽しさ です。
 
-Gameplay is more important than realism.
+ゲームプレイはリアリズムよりも重要です。
 
-Realism isn't inherently wrong. But it often comes at the expense of the new player experience. So
-the fundamentals of Game Design are a priority for Cataclysm Bright Nights.
+リアリズムが本質的に間違っているわけではありません。しかし、リアリズムは新規プレイヤーの体験を犠牲にすることが多々あります。したがって、Cataclysm Bright Nights においては、ゲームデザインの基本が優先事項となります。
 
-Depth is preferable to complexity. But complexity is valuable as long as it isn't overwhelming. See
-porting principles 3 and 5. Complexity generally becomes overwhelming when there are too many things
-to track at the same time to be able to tell what is important. So then you have to put in more work
-than you want to, to understand and filter the information down to what matters.
+複雑性（Complexity） よりも奥深さ（Depth） が望ましいとされます。しかし、複雑性が圧倒的でない限り、価値があります。ポーティングの原則 3 および 5 を参照してください。
 
-Generally a cap should be set for how many things are displayed or being dealt with simultaneously.
+一般に、同時に追跡すべき情報が多すぎると、何が重要かを判断できなくなり、複雑さは圧倒的になります。そうなると、必要な情報を理解し、フィルタリングするために、プレイヤーが望む以上の労力を費やさなければなりません。
+同時に表示される、または処理される物事の数には、一般的に上限を設けるべきです。
 
-Complexity can be managed:
+複雑性は以下の方法で管理できます:
 
-- By having the most important info visible at a glance.
-- Making the most important menus more apparent and accessible.
+- 最も重要な情報を一目で分かるように表示すること。
+- 最も重要なメニューをより明確かつアクセスしやすくすること。
 
-## General rules
+## 一般的な原則
 
-There are six principles applied for content in general:
+一般的なコンテンツに適用される 6 つの原則があります:
 
-1. Things that are useless should be either made useful or removed.
+1. 役に立たないものは、有用にするか、あるいは削除する必要があります。
 
-2. Weird/wonky mechanics should be either reworked or removed. If there is value in retaining them,
-   they should be clearly communicated to the player through UI.
+2. 奇妙で不格好なメカニクスは、作り直すか、あるいは削除する必要があります。保持する価値がある場合は、UI を通じてプレイヤーに明確に伝達されるべきです。
 
-3. Each mechanic/item/monster/etc. should fill its own niche or have its own purpose, e.g. there
-   shouldn't be many different effects that penalize the character in the same way, or a dozen of
-   guns that differ only in name and +1 to damage value. If such variety is desired, it should be
-   relegated to mods.
+3. 各メカニクス、アイテム、モンスターなどは、独自のニッチ（居場所）を持つか、独自の目的を持つべきです。
+   - 例として、キャラクターに同じ方法でペナルティを与える異なる効果が多数あってはなりません。
+   - あるいは、名前とダメージ値が +1 違うだけの銃が 10 種類以上あってはなりません。
+   - そのような多様性が望まれる場合は、MODに委ねるべきです。
 
-3.1 Clutter benefits nobody. If these additions are just more bloat, mainline mod it.
-Examples are guns, books, food, drugs, morale items, furniture variants, clothes.
-Opt-out is preferred for additional bloat, and Opt-in for things that change game theme.
-e.g. Magical Nights, Aftershock, CRIT. When in doubt, ask.
+3.1 煩雑さは誰の利益にもなりません。追加される要素が単なる肥大化である場合、それをメインラインMODとして扱うべきです。
+例：銃、本、食料、薬、モラルアイテム、備品のバリエーション、衣類など。 追加的な肥大化についてはオプトアウト（デフォルトで含まれるが除外可能）が、ゲームテーマを変更する要素（例：Magical Nights、Aftershock、CRIT）についてはオプトイン（ユーザーが意図的に有効化する）が推奨されます。迷った場合は、尋ねてください。
 
-4. The gameplay should be less about pressing buttons and spending time in submenus and more about
-   interacting with the surrounding world and progressing (achieving results).
+4. ゲームプレイは、ボタンを押したり、サブメニューで時間を費やしたりすることよりも、周囲の世界との交流や進行（結果の達成） に重点を置くべきです。
 
-5. Different play styles should be balanced against each other, with their own upsides and
-   downsides, so that you can actually choose a different play style and have it not suck just
-   because "realistically, firearms are better than everything else", but actually be playable and
-   have a different feel to it.
+5. 異なるプレイスタイルは、それぞれに長所と短所を持つようにバランスが取られるべきです。これにより、「現実的には銃器が他の全てより優れている」という理由だけでつまらなくなるのではなく、実際に別のプレイスタイルを選択でき、異なる感触を得られるようにします。
 
-6. Rewards should be proportional to amount of effort spent on achieving them (e.g. weapon with
-   harder craft recipe, or one that requires rarer components, or rarer ammo, should deal more
-   damage).
+6. 報酬は、達成するために費やされた労力に見合っているべきです。（例：クラフトレシピが難しい武器、またはより希少なコンポーネントや希少な弾薬を必要とする武器は、より高いダメージを与えるべきです）。
 
-### Reasoning
+### 理由付け
 
-1. useless things only serve to clutter interfaces and item lists. increasing complexity for little
-   value. Often strategically removing things can add more value than an addition.
-2. weirdness is a sign that things are unintuitive. Somethings benefit from not being obvious. But
-   things that are too far from people's expectations break the suspension of disbelief and require
-   people to remember more disconnected elements.
-3. More items means more interactions, more depth, but finding what you want or understanding
-   what items are good when we have 30 AK pattern rifles and 30 AR-15 platforms.
-   Distributions are also cluttered badly from increased variants. This is bad for gameplay.
-   A more believable world has 10,000 firearm variants, a more playable world has 10.
-   If in doubt, Add your new items as a mod package.
-4. Sorting through complexity in menus isn't fun. menus are only fun when there are meaningful
-   choices or tradeoffs being made there. (I.E. what to equip, what to carry, what to loot first,
-   etc.)
-5. and 6. are kind of common sense applications of prioritizing gameplay.
+1. 役に立たないものは、インターフェースやアイテムリストを煩雑にするだけであり、わずかな価値のために複雑性を増大させます。多くの場合、戦略的に物事を削除する方が、追加するよりも価値をもたらします。
+2. 奇妙さは、物事が直感的でないことの兆候です。明白でないことによる利点もありますが、人々の期待からあまりにもかけ離れたものは、不信の停止を破り、より多くの無関係な要素を記憶することを要求します。
+3. アイテムが増えることは、より多くの相互作用とより深い奥深さを意味しますが、AK 系ライフルが 30 種類、AR-15 プラットフォームが 30 種類ある場合、欲しいものを見つけることや、どのアイテムが良いかを理解することが困難になります。バリエーションの増加は、分布もひどく煩雑にします。これはゲームプレイにとって悪影響です。
+   より信憑性のある世界には 10,000 種類の銃器があるかもしれませんが、よりプレイしやすい世界には 10 種類しかありません。
+   疑わしい場合は、新しいアイテムをMOD パッケージとして追加してください。
+4. メニュー内の複雑さを整理するのは楽しくありません。メニューが楽しいのは、そこで意味のある選択やトレードオフが行われる場合のみです。（例：何を装備するか、何を運ぶか、何を最初に略奪するか、など）
+5. および 6. は、ゲームプレイを優先するという、常識的な応用です。
 
-### Removals and re-adding
+### 削除と再追加
 
-Removal of content is a contentious problem in the community. To clarify official stance:
+コンテンツの削除は、コミュニティ内で議論の的となる問題です。公式のスタンスを明確にします:
 
-- Content should not be kept inside the mainline on the basis of "it can be made good".
-  If it isn't good now, it isn't good. Shift it to a mainline mod, or improve/obsolete it.
-- Content should not be re-added to mainline on the basis of "it was present before".
-  Re-added content should be treated the same way new content is.
-- Content should not be "spared" from shifting/obsoletion by giving it forced updates that still
-  don't make it good enough. It should be treated like new content is.
-- This doesn't cover arguments regarding content being thematic, liked etc., content can still be
-  given extra "points" based on those. We want a level of flavor to the world.
+- コンテンツは、「良くすることができる」という理由でメインライン内に保持されるべきではありません。
+  今良くないなら、それは良くありません。メインライン MOD に移行するか、改善するか、あるいは廃止すべきです。
+- コンテンツは、「以前に存在していた」という理由でメインラインに再追加されるべきではありません。
+  再追加されるコンテンツは、新しいコンテンツと同じ方法で扱われるべきです。
+- コンテンツは、十分な品質に達していないにもかかわらず、強制的なアップデートを与えられることで、移行や廃止から「免除」されるべきではありません。新しいコンテンツと同じように扱われるべきです。
+- これは、コンテンツがテーマ性がある、好まれているなどといった議論を網羅するものではありません。コンテンツは、これらに基づいて追加の「ポイント」を与えられることがあります。私たちは世界に一定レベルの趣を求めています。
 
-In short, if it doesn't feel like a good "default" experience, improve or shift to a mod.
+要するに、それが良い「デフォルトの体験」だと感じられない場合は、改善するか、MOD に移行してください。
 
-## Depth
+## 奥深さ
 
-Depth occurs primarily from interactions between mechanics and different elements of the game. For
-example, a common scenario is:
+奥深さは、主にメカニクス間およびゲームの異なる要素間の相互作用から生じます。例として、一般的なシナリオを挙げます:
 
-enemies spot you close, what do you do? The general options are: run away quickly.(Where to?) move
-to a good spot and fight them. kite them at location.
+敵が近くであなたを見つけました。どうしますか？一般的な選択肢は以下の通りです。
 
-But the exact details change the preferable answer. those factors bring depth into that decision and
-interesting gameplay. As well as playing into resource management elements that are classic fun
-elements of roguelikes.
+- 急いで逃げる。（どこへ？）
+- 良い場所に移動して戦う。
+- その場所で敵をカイトする（引きつける）。
 
-Some factors here are: damage you deal vs. enemy resilience and numbers (How long to kill? Can I
-kill?) How much cost do you take from a fight? How far/fast can I run vs. them (Speed + stamina)
-terrain nearby.(terrain speed slowdowns. damage terrain, chokepoints, etc.) other clusters of
-enemies. How much benefit is there to a fight? (zombie drops + nearby loot locations that are now
-safe)
+しかし、正確な詳細によって好ましい答えが変わります。これらの要因が、その決定に奥深さと興味深いゲームプレイをもたらします。これは、ローグライクの古典的な楽しい要素であるリソース管理にも関連しています。
 
-## Bloat
+ここでのいくつかの要因は以下の通りです。
 
-Bloat happens because we all want to add things that we personally like. But we can't add everything.
+- 与えるダメージ 対 敵の耐久力と数（倒すのにかかる時間？倒せるか？）
+- 戦闘から受けるコストはどれくらいか？
+- 敵に対してどれだけ速く遠くまで走れるか（速度 + スタミナ）
+- 近くの地形（地形による速度低下、ダメージ地形、チョークポイントなど）
+- 他の敵集団。
+- 戦闘によるメリットはどれくらいか？（ゾンビのドロップ品 + 安全になった近くの戦利品ロケーション）
 
-The rule on bloat is to save it for opt-out/opt-in mods, or third party mods.
+## 肥大化
 
-Bloat is when there is no meaningful reason to have something in the game, A gun is a gun.
-Clothes are clothes. We don't want 30 variations of the same T-Shirt but colored differently inside
-the base game. Now you can't find what you want.
+肥大化は、私たち全員が個人的に好きなものを追加したいと望むために発生します。しかし、全てを追加することはできません。
 
-There is a difference between bloat, and flavor. Flavor is adding a missing cooking recipe.
-We've historically not represented much European/African/Asian cooking. Some recipes exist,
-Such as lutefisk and haggis, but a lot of recipes are generic or common American fare.
+肥大化に関するルールは、それをオプトアウト/オプトインの MOD、またはサードパーティの MODのために取っておくことです。
 
-Bloat is adding rechambered versions of firearms, example being Vektor variants.
-Another example would be adding 30 variations of the bible, or 30 novels. Put it in an expanded literature mod, or a religion mod in the case of religious books.
-We don't need 20 types of beer, it just makes it harder to parse the comestibles menu. Put it in a (craft) brewery mod.
-We don't need clothes whose only distinction is a different player sprite. Put it in a clothing/fashion mod.
+肥大化とは、ゲーム内に何かを持つ理由に意味がない場合です。銃は銃です。衣類は衣類です。ゲーム本体に、色が違うだけの同じ T シャツのバリエーションが 30 種類も欲しいわけではありません。こうなると、プレイヤーは欲しいものを見つけられなくなります。
+
+肥大化と趣には違いがあります。
+
+- 趣とは、例えば欠けている料理レシピを追加することです。私たちは歴史的に、ヨーロッパ/アフリカ/アジアの料理をあまり表現してきませんでした。ルーテフィスクやハギスのようなレシピはいくつかありますが、多くのレシピは一般的または一般的なアメリカ料理です。
+- 肥大化とは、例えば Vektor のバリエーションのように、再チャンバーされたバージョンの銃器を追加することです。
+- 別の例として、聖書を 30 種類、または小説を 30 種類追加することです。これらは拡張文学 MOD、または宗教書の場合は宗教 MOD に入れてください。
+- ビールが 20 種類も必要ありません。それは単に食料メニューの解析を困難にするだけです。（クラフト）醸造 MOD に入れてください。
+- 唯一の違いがプレイヤーの別スプライトとしての衣類は必要ありません。衣類/ファッション MOD に入れてください。
