@@ -8,78 +8,56 @@ sidebar:
 
 > [!CAUTION]
 >
-> This document is from DDA and does not necessarily up-to-date with BN guidelines.
+> この文書はDDA由来のものであり、必ずしもBNのガイドラインと最新の情報で整合しているわけではありません。
 
-GitHub issues are used for everything from bug reporting to suggesting long-term ideas. You can make
-everything run much smoother by following some simple rules.
+GitHub Issueは、バグ報告から長期的なアイデアの提案まで、あらゆる目的で使用されます。いくつかの簡単な規則に従うことで、全てのプロセスを円滑に進めることができます。
 
-### Rule zero
+### 規則ゼロ
 
-Always give your issue a meaningful title as this is the first thing anyone will see.
+Issueのタイトルは、他の人が最初に見る情報であるため、常に意味のあるものを付けてください。
 
-Note: `[CR]` and `[WIP]` "tags" are meaningful only for PRs. All open issues by definition are
-request for comments and work in progress.
+注記: `[CR]` や `[WIP]` といった「タグ」は、PR（プルリクエスト）でのみ意味を持ちます。起票されている全てのIssueは、定義上、コメントの要求（request for comments）であり、進行中の作業（work in progress）です。
 
-### Bug reports
+### バグ報告
 
-Before you submit a bug always search the current list of issues to see if it has been reported
-already.
+バグを提出する前に、必ず現在のIssueリストを検索し、既に報告されていないかを確認してください。
 
-Your bug report has to include:
+バグ報告には、以下の情報を含める必要があります:
 
-- On what OS did you experience the problem (Windows, Linux, OS X etc.)
-- What version were you playing:
-- Tiles or Curses (text-based)
-- Version string (preferably full version e.g. "0.C-4547-g3f1c109", or Jenkins build number
-  e.g. 3245)
-- Description of the problem written in a way that enables anyone to try and recreate it
+- 問題が発生したOS（Windows、Linux、OS Xなど）
+- プレイしていたバージョン:
+- タイル版（Tiles）か、またはCurses（テキストベース）か
+- バージョン文字列（できれば完全なバージョン、例: "0.C-4547-g3f1c109"、またはJenkinsのビルド番号、例: 3245）
+- 誰でも再現を試みることができるように書かれた、問題の詳細な説明
 
-Your bug report may include:
+バグ報告には、以下の情報を含めても構いません:
 
-- Screenshot(s) as some things are best explained visually
-- Save file (e.g. link to a dropbox upload)
+- スクリーンショット（視覚的に説明するのが最も効果的な場合があります）
+- セーブファイル（例: Dropboxへのアップロードリンク）
 
-Bonus points for:
+推奨事項:
 
-- Checking if the bug exists under latest nightly build
-- Checking if it is OS specific
+- 最新のナイトリービルドでバグが存在するかどうかを確認する
+- それがOS固有の問題であるかどうかを確認する
 
-The OS and BN version are very important - with the pace of changes here it is possible the bug you
-have encountered has already been fixed. After that reproducibility is the key, so write your report
-with all the necessary details.
+OSとBNのバージョンは非常に重要です。開発変更のペースが速いため、遭遇したバグは既に修正されている可能性があります。その次に、再現性が鍵となりますので、必要な全ての詳細情報を含めて報告書を作成してください。
 
-### Enhancements and addition ideas
+### 機能強化および追加アイデアの提案
 
-We have hundreds of issues open - most of them are ideas and suggestions. If you have a general idea
-or anything that can't be easily described in terms of _current_ code changes you'd be better off
-suggesting it in the appropriate section of [the forum](https://discourse.cataclysmdda.org/). You'll
-also get much broader exposure for your idea there. After developing a polished idea on the forum,
-it should be easy to make a GitHub issue for it.
+何百ものIssueが起票されており、そのほとんどがアイデアや提案です。もし、一般的なアイデアや、現在のコード変更の観点から容易に説明できないものがある場合は、[フォーラム](https://discourse.cataclysmdda.org/)の適切なセクションで提案した方が良いでしょう。そうすることで、あなたのアイデアがより多くの人に見てもらえる機会が得られます。フォーラムでアイデアを洗練させた後であれば、GitHub Issueを作成するのは容易になるはずです。
 
-Please first search if something like what you have on mind has been already proposed. If so, feel
-free to join the discussion! If your idea is related but sufficiently different, open a new issue
-and refer to the older discussion (use GitHub's `#issue_number` reference system).
+まず、あなたが考えているものと類似の提案が既に行われていないか検索してください。もしあれば、その議論に自由に参加してください！あなたのアイデアが関連しているが十分に異なる場合は、新しいIssueを起票し、古い議論を参照してください (GitHubの`#issue_number` 参照システムを使用)。
 
-Remember to take part in the discussion of your suggestions.
+提案した議論には、あなた自身も参加することを忘れないでください。
 
-### Questions
+### 質問
 
-You should direct your questions to the forum or ask on IRC. You should also read the included
-documentation and additional text files, e.g. [compiling](./../dev/guides/building/cmake.md) if you
-have problems building.
+質問は、フォーラムまたはIRCで尋ねるようにしてください。また、ビルドに問題がある場合は、付属のドキュメントや追加のテキストファイル、例として [コンパイル](./../dev/guides/building/cmake.md) ガイドを読む必要があります。
 
-## Bounties
+## 報奨金
 
-Placing a bounty _does not_ necessarily mean that change will be incorporated into the main game.
-Please coordinate in the issue you intend to place a bounty on to determine if it is a change the
-project will accept, and keep in mind that placing a bounty will not confer special status on the
-issue. A good way of thinking about bounties is as encouragement for contributors to work on a
-particular issue, and certainly not as "paying for features".
+報奨金を設定したからといって、必ずしもその変更がメインのゲームに組み込まれるわけではありません。報奨金を設定しようとしているIssueにおいて、プロジェクトがその変更を受け入れるかどうかを判断するために、必ず事前に調整を行ってください。また、報奨金を設定しても、そのIssueに特別なステータスが付与されるわけではないことに留意してください。報奨金は、特定のIssueに取り組むための貢献者への奨励と考えるのが適切であり、「機能にお金を払う」ことではないことを理解しておいてください。
 
-## Issue resolution
+## Issue の解決
 
-We do not assign people to issues. If you plan to work on a bug fix or a validated idea feel free to
-just comment about that. Actual PRs are of much greater value than any assignments. In general the
-first correct PR about something will be the PR that will get merged, but remember: we are using
-Git - you can collaborate with someone else easily by sending them patches or PRs against their PR
-branch.
+私たちは、Issueに担当者を割り当てません。バグ修正や検証済みのアイデアに取り組む予定がある場合は、その旨をコメントするだけで構いません。実際のPRは、いかなる割り当てよりもはるかに大きな価値があります。原則として、最初に提出された正しいPRがマージされますが、思い出してください。私たちはGitを使用しています。パッチや、相手のPRブランチに対するPRを送ることで、他の人と簡単に共同作業を行うことができます。
