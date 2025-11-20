@@ -1,69 +1,55 @@
-# Game Objects
+# ゲームオブジェクト
 
-Many of the things that physically exist within the game world are **game objects(GO)**. Currently
-this only covers items, but creatures and vehicles are coming soon and then probably furniture at
-some point. GOs have a small common interface with methods like name and position that you can find
-in `game_object.h`. GOs use private constructors, this means **your variables must always be
-references or pointers**. Trying to assign a variable without a layer of indirection like that will
-cause a compile error. Likewise trying to copy one object over another will cause a similar error.
+ゲームワールド内に物理的に存在する多くの要素は、ゲームオブジェクト **game objects**です。現在、これはアイテムのみを対象としていますが、クリーチャーやビークルも間もなく追加され、その後、どこかの時点で備品もおそらく含まれるでしょう。GO は、`game_object.h` name や position のようなメソッドを持つ、小さな共通インターフェースを備えています。
+GO はプライベートコンストラクタを使用しています。これは、GO の変数は常に参照またはポインタでなければならないことを意味します。そのような間接レイヤーなしで変数を割り当てようとすると、コンパイルエラーが発生します。同様に、あるオブジェクトを別のオブジェクトにコピーしようとすると、同様のエラーが発生します。
 
 ```cpp
-item& it_ref = ...; // Good
-item* it_pointer; // Good
+item& it_ref = ...; // 適切
+item* it_pointer; // 適切
 
-item it = ...; // Compile error
-it_ref = other; // Compile error
-*it_pointer = other; // Compile error
+item it = ...; // コンパイルエラー
+it_ref = other; // コンパイルエラー
+*it_pointer = other; // コンパイルエラー
 ```
 
-New GOs can be created via `::spawn` static methods that return a `detached_ptr` to the newly
-created game object. A `detached_ptr` represents an object that does not currently exist in the game
-world. There can only be one `detached_ptr` to an object at a time (those who know
-[`std::unique_ptr`](https://en.cppreference.com/w/cpp/memory/unique_ptr) will be familiar with this
-behavior). Functions that add an object to the world will require that you `std::move` in a
-`detached_ptr`. In general `detached_ptr`s must be `std::move`'d when they're passed into a
-function. Note that you should never use any variable after it has been moved. Likewise functions
-that remove an object from the world will return a `detached_ptr`. This ensures that you can't add
-the same thing to the world twice.
+新しい GO は、新しく作成されたゲームオブジェクトへの`detached_ptr` を返す`::spawn` 静的メソッドを介して作成できます。 `detached_ptr`は、現在ゲームワールドに存在しないオブジェクトを表します。
 
-Functions that don't add things to the world just accept normal pointers. You can turn a
-`detached_ptr` into a normal pointer by doing this. Note that you can use this to keep a valid
-pointer to something even after you `std::move` it, but you must do this before the `std::move`
-happens.
+一つのオブジェクトに対して同時に存在できる `detached_ptr` は一つだけです
+([`std::unique_ptr`](https://en.cppreference.com/w/cpp/memory/unique_ptr) を知っている方は、この挙動に慣れているでしょう)。
+
+オブジェクトをワールドに追加する関数は、`detached_ptr` を `std::move` で渡すことを要求します。一般に、`detached_ptr` は関数に渡す際に `std::move` されなければなりません。`std::move` された変数をその後使用してはならないことに注意してください。同様に、ワールドからオブジェクトを削除する関数は、`detached_ptr` を返します。これにより、同じものをワールドに二重に追加できないことが保証されます。
+
+ワールドに何も追加しない関数は、通常のポインタを受け取ります。
+
+`detached_ptr` を通常のポインタに変換するには、以下のようにします。これを使用すると、`std::move` の前に行う必要はありますが、 `std::move`した後でも有効なポインタを保持できることに注意してください。
 
 ```cpp
 &*detached
 ```
 
-And you can go the other way using this. Though note that it removes the object from the game world
-in the process and will cause errors if called on an object that isn't in the game world.
+また、以下を使用して逆の操作を行うこともできます。ただし、そのプロセスでオブジェクトがゲームワールドから削除され、ゲームワールドにないオブジェクトに対して呼び出すとエラーが発生することに注意してください。
 
 ```cpp
 detached_ptr<item> as_detached = normal_ptr->detach();
 ```
 
-Trying to access an invalid `detached_ptr` (for instance one that has been `std::move`'d from) will
-cause a debugmsg and give you the null version of that object.
+無効な `detached_ptr`（例えば、`std::move` されたもの）にアクセスしようとすると、`debugmsg` が発生し、そのオブジェクトの `null` バージョンが返されます。
 
-## Safe References
+## 安全な参照
 
-Game objects support safe references. `safe_reference<item>` will refuse access to an object that
-has been destroyed or is outside of the reality bubble without losing track of it, and they can be
-saved and loaded. You must check them as a boolean (e.g. `if( ref )`) to see if they're valid.
-Trying to access them when they're not will cause debugmsgs and give you a null object instead. They
-have a small interface that lets you check if they're destroyed or unloaded etc. If they were
-destroyed or unloaded this turn, they have a method that will allow you to access the object in a
-const fashion, for instance to display an error message.
+ゲームオブジェクトは安全な参照をサポートしています。
+`safe_reference<item>` は、オブジェクトが破壊された、または現実バブル外にある場合にアクセスを拒否しますが、そのオブジェクトを見失うことはありません。また、セーブおよびロードが可能です。
 
-If you're moving objects around you need to use `detached_ptr`s, but otherwise when choosing which
-reference to use the most important thing to consider is how long you want to hold onto it. If
-you're just using something temporarily, for instance most arguments and variables, you should use a
-normal reference or pointer. If you need to store it for longer you should use a safe reference and
-this means it can be easily stored in the save file. In the rare case that you do want to save it
-across turns but don't want to store it in the save file, which means caches, there's also a fast
-`cache_reference<item>`, which does last across turns but can't be saved.
+それが有効であるかどうかを確認するには、ブール値としてチェックする必要があります (例:`if( ref )`) 。有効でないときにアクセスしようとすると、 debugmsgs が発生し、代わりにヌルオブジェクトが返されます。
+それらは、破壊されたか、アンロードされたかなどをチェックできる小さなインターフェースを持っています。もし、そのターンに破壊またはアンロードされた場合、オブジェクトに const 形式でアクセスできるメソッドがあり、例えばエラーメッセージを表示するために使用できます。
 
-Game objects can sometimes be split into pieces or merged together. Item stacks are the main example
-of this but there are others like vehicles being split or dissoluted devourers merging. When a stack
-of items is split, the stack that stays in place is the one that safe references will follow. When
-they are merged safe references to either half of the merge will now point to the merge result.
+オブジェクトを移動する場合は `detached_ptr`を使用する必要がありますが、それ以外でどの参照を使用するかを選択する際に最も重要な考慮事項は、どれくらいの期間それを保持したいかです。
+
+- 一時的に使用する場合（例：ほとんどの引数と変数）は、通常の参照またはポインタを使用すべきです。
+- より長く保存する必要がある場合は、安全な参照 (safe_reference) を使用すべきであり、これによりセーブファイルに簡単に保存できます。
+- 稀なケースとして、ターンをまたいで保存したいが、セーブファイルには保存したくない場合（つまりキャッシュ）、`cache_reference<item>` もあります。これはターンをまたいで持続しますが、保存することはできません。
+
+ゲームオブジェクトは、断片に分割されたり、互いにマージされたりすることがあります。アイテムスタックがその主な例ですが、ビークルの分割や溶解したデバウラーの合体など、他にもあります。
+
+- アイテムスタックが分割されたとき、その場に残るスタックが、安全な参照が追跡する対象です。
+- マージされたとき、マージ前のどちらかの半分への安全な参照も、マージ後の結果を指すようになります。
