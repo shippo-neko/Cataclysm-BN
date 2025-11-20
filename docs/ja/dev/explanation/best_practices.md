@@ -1,60 +1,53 @@
-# best practices
+# ベストプラクティス
 
-List of conventions used in the project, plus just plain good practices. Not rules per se, most of
-the codebase doesn't meet those standards.
+本プロジェクトで使用されている慣例、および純粋に優れた実践のリストです。これらは厳格な規則ではなく、コードベースの大部分がこれらの基準を満たしているわけではありません。
 
-# Naming
+# 命名規則
 
-Good names:
+良い名前とは:
 
-- Are not abbreviated if it could make meaning less obvious - `count`, not `cnt`
-- Are obvious from context - `direction::left` is clear, `int rotate` requires reading the
-  documentation
-- Obey same conventions as nearby names - `max_stored_kcal` and `stored_kcal`, not
-  `max_stored_calories` but `stored_kcal` or `caloried_stored`
+- 短縮しない:意味が不明瞭になる場合は短縮しません。 例: `count`は良いが `cnt`は良くない。
+- 文脈から明白: `direction::left`は明確です。一方、`int rotate` はドキュメントを読む必要があります。
+- 周囲の命名規則に従う:
+  - `max_stored_kcal` と `stored_kcal`のように、近くの変数名と同じ慣例に従います。
+  - `max_stored_calories` と `stored_kcal` のような混在を避ける代わりに、`stored_kcal` または `caloried_stored` のように一貫させます。
 
-`snake_case` is preferred for consistency with most of the project's code.
+プロジェクトの大部分のコードとの一貫性を保つため、`snake_case` が推奨されます。
 
-# Classes
+# クラス
 
-- Don't add methods where a regular function in a namespace would work -
-  `crafting::consume_tools(tool_list,Character &)`, not `Character.consume_tools(tool_list)`
-- Don't add both getters and setters if all they do is read/write a field - those are just disguised
-  fields
-  - Getters without (public) setters are OK
-- Use `private` where possible, `public` when not, `protected` only when there's a clear reason for
-  it
+- 名前空間内の通常の関数で機能する場合、メソッドを追加しない:
+  - 誤った例:`Character.consume_tools(tool_list)`
+  - 推奨例:`crafting::consume_tools(tool_list,Character &)`(名前空間内の関数)
+- フィールドの読み書きしか行わない場合、ゲッターとセッターの両方を追加しない: これらは単なる隠されたフィールドであるためです。
+  - パブリックなセッターがないゲッターは許可されます。
+- アクセス指定子:
+  1. 可能な限り`private` を使用します。
+  2. 1 のケースが不可能な場合に`public` を使用します。
+  3. 明確な理由がある場合にのみ `protected` を使用します。
 
-# Types
+# 型の定義
 
-- Avoid pointers, instead use references, `std::optional` or even a function overload where possible
-- Avoid using `std::pair` and `std::tuple` in headers, instead create a named struct
-- Avoid using `int` or `std::string` where an `enum class` would work
+- ポインタを避ける:代わりに、参照、`std::optional` または可能な場合は関数オーバーロードを使用します。
+- ヘッダー内での `std::pair` および `std::tuple` の使用を避ける: 代わりに、名前付きの構造体を作成します。
+- `enum class` が機能する場合、`int` や `std::string` の使用を避ける。
 
-# File organization
+# ファイル編成
 
-Try to avoid including headers from other headers. This negatively impacts compilation times (both
-clean and partial builds), especially when the header in question is already big and widely used
-(such as `character.h`, `avatar.h`, `map.h`, `game.h`, `item.h`, `npc.h`, etc.), and frequently
-pollutes source files with definitions they have no need to know.
+他のヘッダーからヘッダーをインクルードすることは、できる限り避けてください。これはコンパイル時間（クリーンビルドと部分ビルドの両方）に悪影響を及ぼし、特に問題のヘッダーが既に大きい
+(例: `character.h`、`avatar.h`、`map.h`、`game.h`、`item.h`、`npc.h`など)か、広く使用されている場合に顕著です。また、ソースファイルに、知る必要のない定義が不用意に含まれることになります。
 
-Some tips here:
+ここではいくつかのヒントがあります:
 
-- Compiler doesn't always need to know the whole definition of a class, a declaration may be enough.
-  Say, if in `character.h` the `vehicle` class is only ever used for a function argument of type
-  `vehicle &` - references are always of the same size regardless of what type they refer to, so
-  compiler only needs to know there exists a type named `vehicle`, not its internal details. Adding
-  `class vehicle;` declaration in `character.h` is enough in this case.
-- It's possible to use `pointer-to-implementation` idiom for class members to remove the need for
-  the definition, see `src/pimpl.h` for implementation and explanation. There are many usage
-  examples in the codebase (mainly `game.h`), but the overall idea is to replace class member with a
-  pointer, and only require definition when accessing the member through pointer. This incurs a tiny
-  performance overhead, but it's unnoticeable in most cases.
-- If you're adding some functionality to a frequently included header, and that functionality is
-  supposed to be used only in a few source files, consider creating a separate header instead. This
-  way, your code won't make it into dozens or hundreds of compilation units which don't ever use it,
-  and the compiler wouldn't spend time to build it all these dozens or hundreds of unneeded times.
-- Including system and std headers is OK, most of them are precompiled anyway.
-- Including common "utility" headers (`optional.h`, `calendar.h`, `coordinates.h`, etc.) is OK,
-  those are already extensively used in many headers and source files, so not including them makes
-  too little impact to warrant the inconvenience.
+- 前方宣言を使用する: コンパイラは、常にクラスの完全な定義を知る必要はありません。前方宣言で十分な場合があります。
+  - 例えば、`character.h` で `vehicle` クラスが 型の関数引数としてのみ使用されている場合、参照は参照する型に関係なく常に同じサイズであるため、コンパイラは
+    `vehicle &` という名前の型が存在することだけを知っていればよく、その内部の詳細は必要ありません。
+  - この場合、`character.h` に `class vehicle` の宣言を追加するだけで十分です。
+
+- Pimpl イディオムを使用する クラスメンバの定義の必要性を排除するために、`pointer-to-implementation` イディオムを使用することが可能です。
+  - 実装と説明については`src/pimpl.h` を参照してください。コードベースには多くの使用例がありますが(主に game.h)、全体的な考え方は、クラスメンバーをポインタに置き換え、ポインタを介してメンバにアクセスするときにのみ定義を要求するというものです。
+  - これにはわずかなパフォーマンスオーバーヘッドが発生しますが、ほとんどの場合は無視できる程度です。
+- 専用ヘッダーを作成する: 頻繁にインクルードされるヘッダーに何らかの機能を追加していて、その機能が少数のソースファイルでのみ使用されることになっている場合、個別のヘッダーを作成することを検討してください。
+  - これにより、あなたのコードはそれを一切使用しない数十または数百のコンパイルユニットに取り込まれることがなくなり、コンパイラは不要なビルドに時間を費やさなくなります。
+- システムヘッダーと標準ヘッダーのインクルードは許可: それらのほとんどはプリコンパイルされているため、問題ありません。
+- 一般的な「ユーティリティ」ヘッダーのインクルードは許可:(例:`optional.h`、 `calendar.h`、 `coordinates.h`など) これらはすでに多くのヘッダーやソースファイルで広範囲に使用されているため、これらをインクルードしないことによる影響は、不便さを正当化するには小さすぎます。
