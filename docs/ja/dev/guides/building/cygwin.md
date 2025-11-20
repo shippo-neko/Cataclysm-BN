@@ -4,82 +4,71 @@ title: Cygwin
 
 > [!CAUTION]
 >
-> Cygwin build has not been tested in a very long time, and this article is mostly kept around for posterity
+> Cygwin ビルドは非常に長い間テストされておらず、この記事は主に記録のために残されています。
 
-This guide contains instructions for compiling Cataclysm-BN on Windows under Cygwin.
+このガイドには、Windows 環境で Cygwin を使用して『Cataclysm-BN』をコンパイルする手順が含まれています。
 
 > [!NOTE]
 >
-> These instructions _are not intended_ to produce a redistributable copy of CBN. Please download the
-> official builds from the website or
-> [cross-compile from Linux](./makefile.md#cross-compile-to-windows-from-linux) if that is your
-> intention.
+> これらの手順は、再配布可能な CBN のコピーを作成することを意図していません。 再配布が目的の場合は、公式サイトから公式ビルドをダウンロードするか、
+> [LinuxからWindows向けにクロスコンパイル](./makefile.md#cross-compile-to-windows-from-linux) してください。
 
-These instructions were written using 64-bit Windows 7 and the 64-bit version of Cygwin; the steps
-should be the same for other versions of Windows.
+これらの手順は、64ビット版の Windows 7 と 64ビット版の Cygwin を使用して作成されましたが、他のバージョンの Windows でも手順は同じはずです。
 
-Due to slow environment setup and execution of the resulting binary, compilation using MSYS2 is
-preferred.
+環境設定と生成されたバイナリの実行が遅いため、MSYS2 を使用したコンパイルが推奨されます。
 
-## Prerequisites:
+## 前提条件:
 
-- 64-bit version of Windows 7, 8, 8.1, or 10
-- NTFS partition with ~10 Gb free space (~2 Gb for Cygwin installation, ~3 Gb for repository and ~5
-  Gb for ccache)
-- 64-bit version of Cygwin
+- 64ビット版の Windows 7、8、8.1、または 10
+- 約 10 GB の空き容量がある NTFS パーティション (Cygwin インストールに約 2 GB、リポジトリに約 3 GB、ccache に約 5 GB)
+- 64ビット版の Cygwin
 
-## Installation:
+## インストール:
 
-1. Go to the [Cygwin homepage](https://cygwin.com/) and download the 64-bit installer (e.g.
-   [setup-x86_64.exe](https://cygwin.com/setup-x86_64.exe)).
+1. [Cygwin のホームページ](https://cygwin.com/) にアクセスし、64ビット版のインストーラー (例
+   [setup-x86_64.exe](https://cygwin.com/setup-x86_64.exe))をダウンロードします。
 
-2. Run downloaded file and install Cygwin. Select `Install from Internet` and select the desired
-   installation directory. It is suggested that you install into a dev-specific directory (e.g.
-   `C:\dev\cygwin64`), but it's not strictly necessary. Install for all users.
+2. ダウンロードしたファイルを実行し、Cygwin をインストールします。`Install from Internet` を選択し、任意のインストールディレクトリを選択します。開発専用のディレクトリ (例:
+   `C:\dev\cygwin64`)にインストールすることが推奨されますが、厳密には必須ではありません。すべてのユーザー向けにインストールしてください。
 
-3. Give the `\downloads\` folder as the local package directory (e.g. `C:\dev\cygwin64\downloads`).
+3. ローカルパッケージディレクトリとして `\downloads\` フォルダを指定します(例: `C:\dev\cygwin64\downloads`)。
 
-4. Use system proxy settings unless you know you have a reason not to.
+4. 特に理由がない限り、システムプロキシ設定を使用してください。
 
-5. On the next screen, select any mirror you like.
+5. 次の画面で、好きなミラーを選択します。
 
-6. Enter `wget` into the search box, expand the "Web" category and select the latest version in the
-   drop-down (1.21.1-1 as of the time this guide was written).
+6. 検索ボックスに`wget` と入力し、「Web」カテゴリを展開して、ドロップダウンから最新バージョンを選択します（このガイド作成時点では 1.21.1-1）。
 
-7. Confirm that wget is shown in the following screen by scrolling to the bottom. This is the full
-   list of packages that Cygwin will download and install.
+7. 画面を一番下までスクロールし、`wget` が表示されていることを確認します。これが、`Cygwin` をダウンロードおよびインストールするパッケージの完全なリストです。
 
-8. Retry any packages that throw errors.
+8. エラーが発生したパッケージがあれば、再試行します。
 
-9. Check boxes to add shortcuts to Start Menu and/or Desktop, then press `Finish` button.
+9. スタートメニューやデスクトップにショートカットを追加するチェックボックスをオンにし、`Finish` ボタンを押します。
 
-## Configuration:
+## 設定:
 
-1. Launch the Cygwin64 terminal from your desktop.
+1. デスクトップから Cygwin64 ターミナルを起動します。
 
-2. Install `apt-cyg` for easier package installation:
+2. より簡単なパッケージインストールのために `apt-cyg` をインストールします:
 
 ```bash
 wget https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg -O /bin/apt-cyg
 chmod 755 /bin/apt-cyg
 ```
 
-3. Install packages required for compilation:
+3. コンパイルに必要なパッケージをインストールします:
 
 ```bash
 apt-cyg install astyle ccache gcc-g++ intltool git libSDL2_image-devel libSDL2_mixer-devel libSDL2_ttf-devel make xinit
 ```
 
-You will see messages saying packages are already installed, as well as Cygwin installing packages
-you didn't ask for; this is the result of Cygwin's package manager automatically resolving
-dependencies.
+一部のパッケージが既にインストールされているというメッセージや、Cygwin が要求していないパッケージをインストールしているというメッセージが表示されますが、これは Cygwin のパッケージマネージャが依存関係を自動的に解決した結果です。
 
-## Cloning and compilation:
+## クローンとコンパイル:
 
-1. Clone the Cataclysm-BN repository with following command:
+1. 次のコマンドで Cataclysm-BN リポジトリをクローンします。:
 
-**Note:** This will download the entire CBN repository and all of its history (3GB). If you're just
-testing, you should probably add `--depth=1` (~350MB).
+**注記:** これにより、CBN リポジトリとそのすべての履歴（3GB）全体がダウンロードされます。単にテストしているだけの場合は、おそらく `--depth=1` (約350MB)を追加すべきです。
 
 ```bash
 cd /cygdrive/c/dev
@@ -87,31 +76,27 @@ git clone https://github.com/cataclysmbnteam/Cataclysm-BN.git
 cd Cataclysm-BN
 ```
 
-2. Compile:
+2. コンパイルします。
 
 ```bash
 make -j$((`nproc`+0)) CCACHE=1 RELEASE=1 CYGWIN=1 DYNAMIC_LINKING=1 SDL=1 TILES=1 SOUND=1 LANGUAGES=all LINTJSON=0 ASTYLE=0 BACKTRACE=0 RUNTESTS=0
 ```
 
-You will receive warnings about unterminated character constants; they do not impact the compilation
-as far as this writer is aware.
+文字定数が終了していないという警告が表示されますが、この作成者が知る限り、コンパイルには影響しません。
 
-**Note**: This will compile release version with Sound and Tiles support and all localization
-languages, skipping checks and tests and using ccache for faster build. You can use other switches,
-but `CYGWIN=1`, `DYNAMIC_LINKING=1` and `BACKTRACE=0` are required to compile without issues.
+**注記**: これは、Sound および Tiles サポートとすべてのローカライゼーション言語を含むリリースバージョンをコンパイルし、チェックとテストをスキップし、ccache を使用して高速ビルドを行います。他のスイッチを使用することもできますが、問題を発生させずにコンパイルするには `CYGWIN=1`、`DYNAMIC_LINKING=1` および `BACKTRACE=0` が必須です。
 
-## Running:
+## 実行:
 
-1. Execute the XWin Server from the Start menu.
+1. スタートメニューから XWin Server を実行します。
 
-2. When the icons appear in the system tray, right-click the one that looks like a black C (X
-   Applications Menu.)
+2. システムトレイにアイコンが表示されたら、黒い C のようなアイコン（X Applications Menu）を右クリックします。
 
-3. Point to System Tools, then click UXTerm.
+3. 「System Tools」をポイントし、「UXTerm」をクリックします。
 
 ```bash
 cd /cygdrive/c/dev/Cataclysm-BN
 ./cataclysm-bn-tiles
 ```
 
-There is no functionality for running Cygwin-compiled CBN from outside of UXTerm.
+Cygwin でコンパイルされた CBN を UXTerm の外部から実行する機能はありません。
