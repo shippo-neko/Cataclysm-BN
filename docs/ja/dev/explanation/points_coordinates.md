@@ -1,115 +1,89 @@
-# Points, tripoints, and coordinate systems
+# ポイント、トライポイント、および座標システム
 
-## Axes
+## 軸
 
-The game is three-dimensional, with the axes oriented as follows:
+本ゲームは三次元であり、軸は以下のように設定されています:
 
-- The **x-axis** goes from left to right across the display (in non-isometric views).
-- The **y-axis** goes from top to bottom of the display.
-- The **z-axis** is vertical, with negative z pointing underground and positive z pointing to the
-  sky.
+- **x軸** ディスプレイ上を左から右へ進む方向（非アイソメトリックビューの場合）。
+- **y軸** ディスプレイ上を上から下へ進む方向。
+- **z軸** 垂直方向で、負のzは地下を指し、正のzは上空を指します。
 
-## Coordinate systems
+## 座標システム
 
-CDDA uses a variety of coordinate systems for different purposes. These differ by scale and origin.
+CDDAでは、様々な目的のために多様な座標システムが使用されています。これらはスケールと原点が異なります。
 
-The most precise coordinates are **map square** (ms) coordinates. These refer to the tiles you see
-normally when playing the game.
+最も精度の高い座標は**マップマス** (ms) 座標です。これらは、通常ゲームをプレイする際に見るタイルを指します。
 
-Two origins for map square coordinates are common:
+マップマス座標には2種類の一般的な原点があります:
 
-- **Absolute** coordinates, sometimes called global, which are a global system for the whole game,
-  relative to a fixed origin.
-- **Local** coordinates, which are relative to the corner of the current "reality bubble", or `map`
-  roughly centered on the avatar. In local map square coordinates, `x` and `y` values will both fall
-  in the range `[0, MAPSIZE_X)`.
+- **絶対座標** グローバルとも呼ばれ、固定された原点に対するゲーム全体にわたるグローバルシステムです。
+- **ローカル座標** 現在の「現実バブル」またはアバターを中心とした大まかな `map`
+  の角を基準とする座標です。ローカルマップマス座標では、 `x` 値 `y` 値 値は共に範囲`[0, MAPSIZE_X)`に収まります。
 
-The next scale is **submap** (sm) coordinates. One submap is 12x12 (`SEEX`x`SEEY`) map squares.
-Submaps are the scale at which chunks of the map are loaded or saved as they enter or leave the
-reality bubble.
+次のスケールはサブマップ **submap** (sm) 座標です。1つのサブマップは 12x12 (`SEEX`x`SEEY`)のマップマスです。サブマップは、現実バブルに出入りする際に、マップのチャンクがロードまたはセーブされる際のスケールです。
 
-Next comes **overmap terrain** (omt) coordinates. One overmap terrain is 2x2 submaps. Overmap
-terrains correspond to a single tile on the map view in-game, and are the scale of chunk of mapgen.
+その次はオーバーマップ地形 **overmap terrain** (omt) 座標です。1つのオーバーマップ地形は 2x2 のサブマップです。オーバーマップ地形は、ゲーム内のマップビューで単一のタイルに対応し、マップ生成処理のチャンクのスケールです。
 
-Largest are **overmap** (om) coordinates. One overmap is 180x180 (`OMAPX`x`OMAPY`) overmap terrains.
-Large-scale mapgen (e.g. city layout) happens one overmap at a time.
+最も大きいのはオーバーマップ **overmap** (om) 座標です。1つのオーバーマップは180x180 (`OMAPX`x`OMAPY`) のオーバーマップ地形です。大規模なマップ生成処理（例：都市のレイアウト）は、オーバーマップ単位で行われます。
 
-Lastly, these is a system called **segment** (seg) coordinates. These are only used in
-saving/loading submaps and you are unlikely to encounter them.
+最後に、セグメント **segment** (seg) と呼ばれるシステムがあります。これらはサブマップのセーブ/ロードでのみ使用され、あなたが遭遇する可能性は低いです。
 
-As well as absolute and local coordinates, sometimes we need to use coordinates relative so some
-larger scale. For example, when performing mapgen for a single overmap, we want to work with
-coordinates within that overmap. This will be an overmap terrain-scale point relative to the corner
-of its containing overmap, and so typically take `x` and `y` values in the range [0,180).
+絶対座標とローカル座標に加えて、より大きなスケールに対する相対座標を使用する必要がある場合もあります。例えば、単一のオーバーマップに対してマップ生成処理を行う場合、そのオーバーマップ内の座標で作業したいと考えます。これは、それを含むオーバーマップの角を基準としたオーバーマップ地形スケールのポイントとなり、通常 (0,180)の範囲の `x` 値と `y` 値を持ちます。
 
-## Vertical coordinates
+## 垂直座標
 
-Although `x` and `y` coordinates work at all these various scales, `z` coordinates are consistent
-across all contexts. They lie in the range [-`OVERMAP_DEPTH`,`OVERMAP_HEIGHT`].
+`x` 座標と `y` 座標はこれら全てのスケールで機能しますが、`z` 座標は全てのコンテキストで一貫しています。これらは範囲 [-`OVERMAP_DEPTH`,`OVERMAP_HEIGHT`]内に存在します。
 
-## Vehicle coordinates
+## 乗り物座標
 
-Each vehicle has its own origin point, which will be at a particular part of the vehicle (e.g. it
-might be at the driver's seat). The origin can move if the vehicle is damaged and all the vehicle
-parts at that location are destroyed.
+各乗り物 には独自の原点があり、それは乗り物の特定の部位に配置されます（例：運転席にあるかもしれません）。乗り物が損傷し、その位置にある全ての車両パーツが破壊された場合、原点は移動する可能性があります。
 
-Vehicles use two systems of coordinates relative to their origin:
+乗り物は、その原点に対する相対的な2つの座標システムを使用します:
 
-- **mount** coordinates provide a location for vehicle parts that does not change as the vehicle
-  moves. It is the map square of that part, relative to the vehicle origin, when the vehicle is
-  facing due east.
+- **マウント** 座標: 乗り物が移動しても変化しない車両パーツの位置を提供します。これは、乗り物が真東を向いているとき、そのパーツが車両原点に対して持つマップマスです。
 
-- **map square** is the map square, relative to the origin, but accounting for the vehicle's current
-  facing.
+- **マップマス** : 原点に対するマップマスですが、乗り物の現在の向きを考慮に入れます。
 
-Vehicle facing is implemented via a combination of rotations (by quarter turns) and shearing to
-interpolate between quarter turns. The logic to convert between vehicle mount and map square
-coordinates is complicated and handled by the `vehicle::coord_translate()` and
-`vehicle::mount_to_tripoint()` families of functions.
+乗り物の向きは、四分の一回転（クォーターターン）と、四分の一回転間の補間を行うためのシアリング（shearing）の組み合わせによって実装されます。乗り物のマウント座標とマップマス座標間で変換を行うロジックは複雑であり、 `vehicle::coord_translate()` および
+`vehicle::mount_to_tripoint()` 系の関数によって処理されます。
 
-Currently, vehicle mount coordinates do not have a z-level component, but vehicle map square
-coordinates do. The z coordinate is relative to the vehicle origin.
+現在、乗り物のマウント座標にはzレベルの要素はありませんが、乗り物のマップマス座標にはzレベルの要素があります。z座標は車両原点に対して相対的です。
 
-## Point types
+## ポイント型
 
-To work with these coordinate systems we have a variety of types. These are defined in
-`coordinates.h`. For example, we have `point_abs_ms` for absolute map-square coordinates. The three
-parts of the type name are _dimension_ `_` _origin_ `_` _scale_.
+これらの座標システムを扱うために、様々な型が用意されています。これらは
+`coordinates.h`で定義されています。例えば、絶対マップマス座標には `point_abs_ms` があります。この型名は、次元
+_次元_ `_` _原点_ `_` _スケール_の三つの部分から構成されています。
 
-- **dimension** is either `point` for two-dimensional or `tripoint` for three-dimensional.
-- **origin** specifies what the value is relative to, and can be:
-  - `rel` means relative to some arbitrary point. This is the result of subtracting two points with
-    a common origin. It would be used for example to represent the offset between the avatar and a
-    monster they are shooting at.
-  - `abs` means global absolute coordinates.
-  - `sm` means relative to a corner of a submap.
-  - `omt` means relative to a corner of an overmap terrain.
-  - `om` means relative to a corner of an overmap.
-  - `veh` means relative to a vehicle origin.
-- **scale** means the scale as discussed above.
-  - `ms` for map square.
-  - `sm` for submap.
-  - `omt` for overmap terrain.
-  - `seg` for segment.
-  - `om` for overmap.
-  - `mnt` for vehicle mount coordinates (only relevant for the `veh` origin).
+- **dimension** 2次元の場合は `point` 、3次元の場合は `tripoint`
+- **origin** 値が何に対する相対値かを示し、以下が可能です:
+  - `rel` 任意の点に対する相対値。これは共通の原点を持つ2つの点を減算した結果です。例えば、アバターと、アバターが射撃しているモンスターとの間のオフセットを表すために使用されます。
+  - `abs` グローバルな絶対座標。
+  - `sm` サブマップの角に対する相対値。
+  - `omt` オーバーマップ地形の角に対する相対値。
+  - `om` オーバーマップの角に対する相対値。
+  - `veh` 乗り物の原点に対する相対値。
+- **scale** 上記で説明されたスケールを意味します。
+  - `ms` マップマス。
+  - `sm` サブマップ。
+  - `omt` オーバーマップ地形。
+  - `seg` セグメント。
+  - `om` オーバーマップ。
+  - `mnt` 乗り物のマウント座標 (`veh` 原点でのみ関連）)。
 
-## Raw point types
+## 生のポイント型
 
-As well as these types with origin and scale encoded into the type, there are simple raw point types
-called just `point` and `tripoint`. These can be used when no particular game scale is intended.
+原点とスケールが型にエンコードされたこれらの型に加えて、単に `point` および `tripoint`と呼ばれる単純な生のポイント型が存在します。これらは特定のゲームスケールを意図しない場合に使用できます。
 
-At time of writing we are still in the process of transitioning the codebase away from using these
-raw point types everywhere, so you are likely to see legacy code using them in places where the more
-type-safe points might seem appropriate.
+執筆時点では、コードベースをこれらの生のポイント型をあらゆる場所で使用する慣行から移行させるプロセスが進行中です。そのため、より型安全なポイント型が適切と思われる箇所で、レガシーコードがこれらの生のポイント型を使用しているのを目にする可能性があります。
 
-New code should prefer to use the types which include their coordinate system where feasible.
+新しいコードでは、可能な限り座標システムを含む型を優先して使用すべきです。
 
-## Converting between point types
+## ポイント型間の変換
 
-### Changing scale
+### スケールの変更
 
-To change the scale of a point without changing its origin, use `project_to`. For example:
+原点を変更せずにポイントのスケールを変更するには、`project_to`を使用します。例:
 
 ```cpp
 point_abs_ms pos_ms = get_avatar()->global_square_location().xy();
@@ -117,15 +91,11 @@ point_abs_omt pos_omt = project_to<coords::omt>( pos_ms );
 assert( pos_omt == get_avatar()->global_omt_location().xy() );
 ```
 
-The same function `project_to` can be used for scaling up or down. When converting to a coarser
-coordinate system precision is of course lost. If you care about the remainder then you must instead
-use `project_remain`.
+同じ関数 `project_to` は、スケールを大きくする場合（粗くする）または小さくする場合（細かくする）の両方で使用できます。より粗い座標システムに変換する場合、当然ながら精度は失われます。剰余
+が必要な場合は、代わりに `project_remain`を使用する必要があります。
 
-`project_remain` allows you to convert to a coarser coordinate system and also capture the remainder
-relative to that coarser point. It returns a helper struct intended to be used with
-[`std::tie`](https://en.cppreference.com/w/cpp/utility/tuple/tie) to capture the two parts of the
-result. For example, suppose you want to know which overmap the avatar is in, and which overmap
-terrain they are in within that overmap.
+`project_remain` を使用すると、より粗い座標システムに変換すると同時に、その粗いポイントに対する剰余をキャプチャできます。これは、結果の2つの部分をキャプチャするために
+[`std::tie`](https://en.cppreference.com/w/cpp/utility/tuple/tie) と組み合わせて使用​​することを意図したヘルパ構造体を返します。例えば、アバターがどのオーバーマップ内にいるか、そしてそのオーバーマップ内でどのオーバーマップ地形内にいるかを知りたい場合を想定します。
 
 ```cpp
 point_abs_omt abs_pos = get_avatar()->global_omt_location().xy();
@@ -134,12 +104,8 @@ point_om_omt omt_within_overmap;
 std::tie( overmap, omt_within_overmap ) = project_remain<coords::om>( abs_pos );
 ```
 
-That makes sense for two-dimensional `point` types, but how does it handle `tripoint`? Recall that
-the z-coordinates do not scale along with the horizontal dimensions, so `z` values are unchanged by
-`project_to` and `project_remain`. However, for `project_remain` we don't want to duplicate the
-z-coordinate in both parts of the result, so you must choose exactly one to be a `tripoint`. In the
-example above, z-coodinates do not have much meaning at the overmap scale, so you probably want the
-z-coordinate in `omt_within_overmap`. That can be done as follows:
+これは二次元の `point` 型では意味を成しますが、 `tripoint`はどのように扱われるでしょうか？ z座標は水平方向の次元に合わせてスケーリングされないため、`z`値は
+`project_to` および `project_remain`によって不変であることを思い出してください。しかし、 `project_remain` では、結果の両方の部分でz座標を複製したくありません。そのため、結果のちょうど一方を `tripoint`になるように選択する必要があります。上記の例では、z座標はオーバーマップスケールではあまり意味がないため、おそらく `omt_within_overmap`にz座標を持たせたいでしょう。これは次のように行えます:
 
 ```cpp
 tripoint_abs_omt abs_pos = get_avatar()->global_omt_location();
@@ -148,10 +114,7 @@ tripoint_om_omt omt_within_overmap;
 std::tie( overmap, omt_within_overmap ) = project_remain<coords::om>( abs_pos );
 ```
 
-The last available operation for rescaling points is `project_combine`. This performs the opposite
-operation from `project_remain`. Given two points where the origin of the second matches the scale
-of the first, you can combine them into a single value. As you might expect from the above
-discussion, one of these two can be a `tripoint`, but not both.
+ポイントのリスケールで利用できる最後の操作は `project_combine`です。これは `project_remain`とは逆の操作を実行します。2つのポイントが与えられ、2番目のポイントの原点が1番目のポイントのスケールと一致する場合、それらを単一の値に結合できます。上記の議論から予想されるように、これら2つのうち一方は `tripoint`にすることができますが、両方はできません。
 
 ```cpp
 tripoint_abs_omt abs_pos = get_avatar()->global_omt_location();
@@ -162,25 +125,20 @@ tripoint_abs_omt abs_pos_again = project_combine( overmap, omt_within_overmap );
 assert( abs_pos == abs_pos_again );
 ```
 
-### Changing origin
+### 原点の変更
 
-`project_remain` and `project_combine` facilitate some changes of origin, but only those origins
-specifically related to rescaling. To convert to or from local or vehicle coordinates requires a
-specific `map` or `vehicle` object.
+`project_remain` と `project_combine` は、リスケーリングに特に関連する原点の変更を容易にしますが、ローカル座標や乗り物座標への、またはそれらからの変換には、特定の `map` オブジェクトまたは `vehicle` オブジェクトが必要です。
 
-TODO: write some examples once this is implemented.
+TODO: これが実装されたら、いくつかの例を記述する。
 
-## Point operations
+## ポイント操作
 
-We provide standard arithmetic operations as overloaded operators, but limit them to prevent bugs.
-For example, most point types cannot be multiplied by a constant, but ones with the `rel` origin can
-(it makes sense to say "half as far in the same direction").
+我々は標準的な算術演算を演算子オーバーロードとして提供していますが、バグを防ぐためにそれらを制限しています。例えば、ほとんどのポイント型は定数を掛けることができませんが、`rel` 原点を持つ型は可能です（「同じ方向に半分の距離」と言うのは理にかなっているため）。
 
-Similarly, you can't generally add two points together, but you can when one of them has the `rel`
-origin, or if one of them is a raw point type.
+同様に、一般に2つのポイントを足し合わせることはできませんが、一方のポイントが `rel` 原点を持っている場合、または一方のポイントが生のポイント型である場合は可能です。
 
-For computing distances a variety of functions are available, depending on your requirements:
-`square_dist`, `trig_dist`, `rl_dist`, `manhattan_dist`. Other related utility functions include
-`direction_from` and `line_to`.
+距離を計算するために、要件に応じて様々な関数が利用可能です:
+`square_dist`、`trig_dist`、`rl_dist`、`manhattan_dist`。その他の関連ユーティリティ関数には、
+`direction_from` および `line_to`が含まれます。
 
-To iterate over nearby points of the same type you can use `closest_points_first`.
+同じ型の近隣のポイントを反復処理するには、`closest_points_first`を使用できます。
