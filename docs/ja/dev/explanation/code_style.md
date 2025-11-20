@@ -1,30 +1,29 @@
-# C++ Code Style Guide
+# C++ コードスタイルガイド
 
-All of the C++ code in the project is styled, you should run any changes you make through astyle
-before pushing a pull request.
+プロジェクト内の全ての C++ コードは、特定のスタイルが適用されています。プルリクエストをプッシュする前に、ご自身の行った変更を astyle に通す必要があります。
 
-We are using astyle version 3.1. Version 3.0.1 will disagree in only a few places, while Version 3.6.6 will disagree in nearly every file.
+現在、astyle バージョン 3.1 を使用しています。バージョン 3.0.1 はわずかな箇所でしか違いを生じませんが、バージョン 3.6.6 では、ほぼ全てのファイルで差異が生じます。
 
-Blocks of code can be passed through astyle to ensure that their formatting is correct:
+コードブロックは、以下のオプションで astyle に渡すことで、フォーマットが正しいことを保証できます。
 
 ```sh
 astyle --style=1tbs --attach-inlines --indent=spaces=4 --align-pointer=name --max-code-length=100 --break-after-logical --indent-classes --indent-switches --indent-preproc-define --indent-col1-comments --min-conditional-indent=0 --pad-oper --add-braces --convet-tabs --unpad-paren --pad-paren-in --keep-one-line-blocks
 ```
 
-These options are mirrored in `.astylerc`, `doc/CODE_STYLE.txt` and
-`msvc-full-features/AStyleExtension-Cataclysm-BN.cfg`
+これらのオプションは、`.astylerc`、 `doc/CODE_STYLE.txt` 、および
+`msvc-full-features/AStyleExtension-Cataclysm-BN.cfg`にも反映されています。
 
-For example, from `vi`, set marks a and b around the block, then:
+例として、`vi`エディタでブロックの周囲にマークa と b を設定した場合、以下のように実行します。
 
 ```sh
 :'a,'b ! astyle --style=1tbs --attach-inlines --indent=spaces=4 --align-pointer=name --max-code-length=100 --break-after-logical --indent-classes --indent-switches --indent-preproc-define --indent-col1-comments --min-conditional-indent=0 --pad-oper --add-braces --convet-tabs --unpad-paren --pad-paren-in --keep-one-line-blocks
 ```
 
-See [DEVELOPER_TOOLING.md](../reference/tooling) for other environments.
+その他の環境については、[DEVELOPER_TOOLING.md](../reference/tooling) を参照してください。
 
-## Code Example
+## コード例
 
-Here's an example that illustrates the most common points of style:
+以下は、最も一般的なスタイル上のポイントを示す例です:
 
 ```cpp
 int foo( int arg1, int *arg2 )
@@ -52,22 +51,20 @@ int foo( int arg1, int *arg2 )
 }
 ```
 
-## Code Guidelines
+## コードガイドライン
 
-These are less generic guidelines and more pain points we've stumbled across over time.
+これらは、より汎用性の低いガイドラインであり、長年にわたり遭遇してきた問題点に基づいています。
 
-- Prefer immutable values and declare variables with `const`. Less moving parts mean more predictable code flow.
-- Prefer `int`.
-  - `long` in particular is problematic since it is _not_ a larger type than int on some platforms
-    we support.
-  - Using integral value larger than 32 bits should be avoided. Use `int64_t` if it's really necessary.
-  - `uint` is also a problem, it has poor behavior when overflowing and should be avoided for
-    general purpose programming.
-    - If you need binary data, `unsigned int` or `unsigned char` are fine, but you should probably
-      use a `std::bitset` instead.
-  - `float` is to be avoided, but has valid uses.
-- Use [`auto` keyword](https://learn.microsoft.com/en-us/cpp/cpp/auto-cpp?view=msvc-170) where it makes sense to do so, for example:
-  - Prefer [trailing return types](https://en.wikipedia.org/wiki/Trailing_return_type) in function declarations. Long return types obscure function name and makes reading class methods a painful experience.
+- 不変の値を優先し、変数を `const`で宣言してください。可動部分が少ないほど、コードの流れはより予測可能になります。
+- `int`を優先してください。
+  - 特に`long`は、サポートしている一部のプラットフォームでは int よりも大きい型ではないため、問題を引き起こ
+    します。
+  - 32 ビットを超える整数値の使用は避けるべきです。本当に必要な場合は `int64_t` を使用してください。
+  - `uint` (符号なし整数) も問題があります。オーバーフロー時に好ましくない振る舞いをするため、一般的なプログラミングでの使用は避けるべきです。
+    - バイナリデータが必要な場合は、`unsigned int` や `unsigned char` は問題ありませんが、代わりに `std::bitset` の使用を推奨します。
+  - `float` の使用は避けるべきですが、有効な用途もあります。
+- [`auto` キーワード](https://learn.microsoft.com/en-us/cpp/cpp/auto-cpp?view=msvc-170)は、以下のように使用することが理にかなっている場所で使用してください:
+  - [後置戻り地型](https://en.wikipedia.org/wiki/Trailing_return_type) を関数宣言で優先してください。長い戻り値型は関数名を不明瞭にし、クラスメソッドの可読性を損ないます。
   ```cpp
   class Bar;
   auto foo( int a ) -> int
@@ -77,7 +74,7 @@ These are less generic guidelines and more pain points we've stumbled across ove
       return is_bar_ok( bar ) ? 42 : 404;
   }
   ```
-  - Use for `decltype` style generic functions
+  - `decltype` スタイルのジェネリック関数に使用する。
   ```diff
   template<typename A, typename B>
   - decltype(std::declval<A&>() * std::declval<B&>()) multiply(A a, B b)
@@ -86,21 +83,21 @@ These are less generic guidelines and more pain points we've stumbled across ove
       return a*b;
   }
   ```
-  - Aliasing for long iterator declarations
+  - 長いイテレータ宣言の省略に使用する。
   ```diff
     std::map<int, std::map<std::string, some_long_typename>> some_map;
 
   - std::map<int, std::map<std::string, some_long_typename>>::iterator iter = some_map.begin();
   + auto iter = some_map.begin();
   ```
-  - Required for Lambda declarations
+  - ラムダ宣言には必須である。
   ```cpp
   auto two_times = []( int a ) { return a * 2; };
   ```
-  - Doesn't otherwise sacrifice readability for expedience. Options for inlay type hinting are available in popular code editor such as [vscode](https://github.com/clangd/vscode-clangd).
+  - それ以外の場合でも、利便性のために可読性を犠牲にしない。[vscode](https://github.com/clangd/vscode-clangd)などの一般的なコードエディタでは、インレイヒントのオプションが利用可能です。
 
-- Avoid `using namespace` for standard namespaces.
-- Avoid adding new member methods to classes unless required.
+- 標準名前空間に対する `using namespace` の使用を避ける。
+- 必要がない限り、クラスに新しいメンバメソッドを追加することを避ける。
   ```diff
   // this function does not access non-public data members or member methods in the class, and thus can be made a free function
   - std::string Character::profession_description() const
