@@ -1,13 +1,9 @@
-# Compatibility with screen readers
+# スクリーンリーダーとの互換性
 
-There are people who use screen readers to play Cataclysm Bright Nights. In order for screen readers
-to announce the most important information in a UI, the terminal cursor has to be placed at the
-correct location. This information may be text such as selected item names in a list, etc, and the
-cursor has to be placed exactly at the beginning of the text for screen readers to announce it.
+Cataclysm Bright Nights をプレイするためにスクリーンリーダーを利用するユーザーが存在します。スクリーンリーダーが UI 内の最も重要な情報をアナウンスできるようにするには、ターミナルカーソルを正しい位置に配置する必要があります。この重要な情報とは、リスト内の選択されたアイテム名などのテキストであり、スクリーンリーダーがそれをアナウンスするためには、カーソルをそのテキストの厳密な開始位置に置く必要があります。
 
-The recommended way to place the cursor is to use `ui_adaptor`. This ensures the desired cursor
-position is preserved when subsequent output code changes the cursor position. You can call
-`ui_adaptor::set_cursor` and similar methods at any position in a redrawing callback, and the last
-cursor position of the topmost UI set via the call will be used as the final cursor position. You
-can also call `ui_adaptor::disable_cursor` to prevent a UI's cursor from being used as the final
-cursor position.
+カーソルを配置するための推奨される方法は、`ui_adaptor`を使用することです。これにより、後続の出力コードがカーソル位置を変更しても、意図したカーソル位置が保持されることが保証されます。
+
+- `ui_adaptor::set_cursor`および類似のメソッドは、再描画コールバック内の任意の場所で呼び出すことができます。
+- 最も上位の UI に対して呼び出された中で、最後に設定されたカーソル位置が、最終的なカーソル位置として使用されます。
+- `ui_adaptor::disable_cursor` を呼び出すことで、その UI のカーソルが最終的なカーソル位置として使用されるのを防止することもできます。
