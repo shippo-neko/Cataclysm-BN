@@ -1,11 +1,9 @@
-# User Interface
+# ユーザーインターフェース
 
-Cataclysm: Bright Nights uses ncurses, or in the case of the tiles build, an ncurses port, for user
-interface. Window management is achieved by `ui_adaptor`, which requires a resizing callback and a
-redrawing callback for each UI to handle resizing and redrawing. Details on how to use `ui_adaptor`
-can be found within `ui_manager.h`.
+Cataclysm: Bright Nights は、ユーザーインターフェースに ncurses、あるいはタイルビルドの場合は ncursesポートを使用しています。 ウィンドウ管理は `ui_adaptor`によって実現されます。この`ui_adaptor`は、各UIに対して、サイズ変更と再描画を処理するためのサイズ変更コールバックと再描画コールバックを必要とします。
+`ui_adaptor` の使用方法に関する詳細は、 `ui_manager.h`内で確認できます。
 
-Some good examples of the usage of `ui_adaptor` can be found within the following files:
+`ui_adaptor` の使用例として適切なものは、以下のファイル内で見つけることができます。
 
-- `query_popup` and `static_popup` in `popup.h/cpp`
-- `Messages::dialog` in `messages.cpp`
+- `popup.h/cpp` 内の`query_popup` および `static_popup`
+- `messages.cpp` 内の `Messages::dialog`
