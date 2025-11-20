@@ -2,12 +2,11 @@
 title: CMake
 ---
 
-## Prerequisites
+## 前提条件
 
-You'll need to have these libraries and their development headers installed in order to build
-CataclysmBN:
+『Cataclysm-BN』をビルドするには、以下のライブラリとその開発用ヘッダーがインストールされている必要があります。
 
-- General
+- 一般
   - `cmake` >= 3.0.0
   - `gcc` >= 14
   - `clang` >= 19
@@ -18,23 +17,23 @@ CataclysmBN:
   - `sqlite3`
 - Curses
   - `ncurses`
-- Tiles
+- タイル
   - `SDL` >= 2.0.0
   - `SDL_image` >= 2.0.0 (with PNG and JPEG support)
   - `SDL_mixer` >= 2.0.0 (with Ogg Vorbis support)
   - `SDL_ttf` >= 2.0.0
   - `freetype`
-- Sound
+- サウンド
   - `vorbis`
   - `libbz2`
   - `libz`
 
-In order to compile localization files, you'll also need `gettext` package.
+ローカライゼーション（地域化）ファイルをコンパイルするためには、さらに `gettext` パッケージが必要です。
 
-## Build Environment
+## ビルド環境の構築
 
-You can obtain the source code tarball for the latest version from
-[git](https://github.com/cataclysmbnteam/Cataclysm-BN).
+最新バージョンのソースコードは、
+[git](https://github.com/cataclysmbnteam/Cataclysm-BN)から tarball またはクローンで取得できます。
 
 ```sh
 git clone --filter=blob:none https://github.com/cataclysmbnteam/Cataclysm-BN.git
@@ -42,13 +41,13 @@ cd Cataclysm-BN
 ```
 
 > [!TIP]
-> `filter=blob:none` creates a [blobless clone](https://github.blog/open-source/git/get-up-to-speed-with-partial-clone-and-shallow-clone/), which makes the initial clone much faster by downloading files on-demand.
+> `filter=blob:none` を使用すると、[ブロブなしクローン](https://github.blog/open-source/git/get-up-to-speed-with-partial-clone-and-shallow-clone/)が作成されます。これにより、ファイルが必要に応じてダウンロードされるため、最初のクローンがはるかに高速になります。
 
-### UNIX Environment
+### UNIX 環境
 
-Obtain packages specified above with your system package manager.
+上記で指定されたパッケージを、お使いのシステムパッケージマネージャで取得してください。
 
-- For Ubuntu-based distros (24.04 onwards):
+- Ubuntu ベースのディストリビューション (24.04 以降):
 
 ```sh
 sudo apt install git cmake ninja-build mold g++-14 clang-20 ccache \
@@ -57,7 +56,7 @@ libfreetype-dev bzip2 zlib1g-dev libvorbis-dev libncurses-dev \
 gettext libflac++-dev libsqlite3-dev zlib1g-dev
 ```
 
-- For Fedora-based distros:
+- Fedora ベースのディストリビューション:
 
 ```sh
 sudo dnf install git cmake ninja-build mold clang ccache \
@@ -66,9 +65,9 @@ freetype glibc bzip2 zlib-ng libvorbis ncurses gettext flac-devel \
 sqlite-devel zlib-devel
 ```
 
-#### Verifying Compiler Version
+#### コンパイラバージョンの確認
 
-You need to have at least `gcc` 14 **and** `clang` 19 to build CataclysmBN. You can check your compiler version with:
+Cataclysm-BN』をビルドするには、少なくとも `gcc` 14 **および** `clang` が必要です。コンパイラのバージョンは、以下のコマンドで確認できます:
 
 ```sh
 $ g++ --version
@@ -87,9 +86,9 @@ Configuration file: /etc/clang/x86_64-redhat-linux-gnu-clang++.cfg
 
 > [!TIP]
 >
-> **when intalled `gcc-{version}` but `gcc` is not found**
+> **`gcc-{version}` はインストールされているが `gcc` が見つからない場合**
 >
-> Use `update-alternatives` to set the default gcc version:
+> `update-alternatives` を使用して、デフォルトのgcc バージョンを設定します:
 >
 > ```sh
 > sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100
@@ -108,7 +107,7 @@ Configuration file: /etc/clang/x86_64-redhat-linux-gnu-clang++.cfg
 > /usr/bin/g++-14 - priority 100
 > ```
 >
-> The same applies to `clang`.
+> `clang`も同様に適用されます。
 >
 > ```sh
 > sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-20 100
@@ -117,14 +116,14 @@ Configuration file: /etc/clang/x86_64-redhat-linux-gnu-clang++.cfg
 
 ### Windows Subsystem for Linux (WSL)
 
-Follow the same instructions for `UNIX environment`; it just works (TM)
+`UNIX 環境`と同じ手順に従ってください。そのまま動作します (TM)。
 
-If you plan on using `tiles`, make sure you have the latest [WSL 2 that supports GUI](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps) and [have installed matching drivers](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps#prerequisites).
+`tiles`バージョンを使用する予定がある場合は、 [WSL 2 that supports GUI](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps)を使用していること、および[対応するドライバーがインストールされていること](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps#prerequisites)を確認してください。
 
-### Windows Environment (MSYS2)
+### Windows 環境 (MSYS2)
 
-1. Follow steps from here: https://msys2.github.io/
-2. Install CataclysmBN build deps:
+1. こちらの手順に従ってください: https://msys2.github.io/
+2. 『Cataclysm-BN』のビルド依存関係をインストールします:
 
 ```sh
 pacman -S mingw-w64-x86_64-toolchain msys/git \
@@ -135,57 +134,53 @@ pacman -S mingw-w64-x86_64-toolchain msys/git \
       base-devel
 ```
 
-This should get your environment set up to build console and tiles version of windows.
+これで、コンソール版および Tiles 版の Windows ビルド環境が整うはずです。
 
 > [!NOTE]
 >
-> If you're trying to test with Jetbrains CLion, point to the cmake version in the `msys32/mingw32`
-> path instead of using the built in. This will let cmake detect the installed packages.
+> Jetbrains CLion でテストしようとしている場合は、内蔵の CMake バージョンを使用する代わりに、`msys32/mingw32`パスにある CMake のバージョンを指定してください。これにより、CMake がインストールされたパッケージを検出できるようになります。
 
-### CMake Build
+### CMake によるビルド
 
-CMake has separate configuration and build steps. Configuration is done using CMake itself, and the
-actual build is done using either `make` (for Makefiles generator) or build-system agnostic
-`cmake --build .` .
+CMake には、設定 (Configuration) とビルド (Build) のステップが分かれています。設定は CMake 自体を使用して行い、実際のビルドは `make` (Makefile ジェネレータの場合) またはビルドシステムに依存しない
+`cmake --build .` を使用して行います。
 
-There are two ways to build CataclysmBN with CMake: inside the source tree or outside of it.
-Out-of-source builds have the advantage that you can have multiple builds with different options
-from one source directory.
+CMake で『Cataclysm-BN』をビルドする方法には、ソースツリーの内部で行う方法と外部で行う方法の2つがあります。ソースツリー外ビルド（Out-of-source builds）には、1つのソースディレクトリから異なるオプションで複数のビルドを作成できるという利点があります。
 
 > [!CAUTION]
 >
-> Inside the source tree build is **NOT** supported.
+> ソースツリーの内部でのビルドは**サポートされていません**。
 
-#### Build with Presets (Recommended)
+#### プリセットを使用したビルド (推奨)
 
-There's multiple predefined [build presets](https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html) available, which simplifies build process to just two commands:
+複数の事前定義された [ビルドプリセット](https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html) が利用可能であり、これによりビルドプロセスがわずか2つのコマンドに簡略化されます。
 
 ```sh
 cmake --preset linux-slim
 cmake --build build --preset linux-slim --target cataclysm-bn-tiles
 ```
 
-This will place the executables into `out/build/linux-slim/`.
+これにより、実行ファイルは `out/build/linux-slim/`に配置されます。
 
 > [!TIP]
-> To build with [clang-tidy plugin](../../reference/tooling.md#clang-tidy) and tracy profiler built-in, try `linux-full`.
+> [clang-tidy plugin](../../reference/tooling.md#clang-tidy)と Tracy プロファイラを組み込んでビルドするには、`linux-full`を試してください。
 
 > [!NOTE]
-> You can build multiple targets at once with:
+> 複数のターゲットを一度にビルドできます:
 >
 > ```sh
 > cmake --build build --preset linux-slim --target cataclysm-bn-tiles cata_test-tiles
 > ```
 >
-> Or limit maximum number of threads with `--parallel` option:
+> または、`--parallel` オプションで最大スレッド数を制限できます:
 >
 > ```sh
 > cmake --build build --preset linux-slim --target cataclysm-bn-tiles --parallel 4
 > ```
 
-#### Build without Presets
+#### プリセットを使用しないビルド
 
-To build CataclysmBN out of source:
+『Cataclysm-BN』をソースツリー外でビルドするには:
 
 ```sh
 mkdir build
@@ -193,66 +188,59 @@ cmake -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build
 ```
 
-The above example creates a build directory inside the source directory, but that's not required -
-you can just as easily create it in a completely different location.
+上記の例では、ソースディレクトリ内にビルドディレクトリを作成していますが、必須ではありません。完全に別の場所に作成することも容易です。
 
-To install CataclysmBN after building (as root using su or sudo if necessary):
+ビルド後に『Cataclysm-BN』をインストールするには (必要に応じて su または sudo を使用して root 権限で):
 
 ```sh
 cmake --install build
 ```
 
-To change build options, you can either pass the options on the command line:
+ビルドオプションを変更するには、コマンドラインでオプションを渡すか:
 
 ```sh
 cmake .. -DOPTION_NAME=option_value
 ```
 
-Or use either the `ccmake` or `cmake-gui` front-ends, which display all options and their cached
-values on a console and graphical UI, respectively.
+または、`ccmake` または `cmake-gui` フロントエンドのいずれかを使用します。これらは、すべてのオプションとそのキャッシュされた値をコンソールおよびグラフィカルな UI にそれぞれ表示します。
 
 ```sh
 ccmake ..
 cmake-gui ..
 ```
 
-## Build for Visual Studio / MSBuild
+## Visual Studio / MSBuild 向けビルド
 
 > [!CAUTION]
 >
-> This guide is quite old and requires manual dependency management.
+> このガイドはかなり古く、手動での依存関係管理が必要です。
 >
-> For modern alternative, see [CMake Visual Studio build with vcpkg](./vs_cmake.md)
+> 最新の代替手段については、[vcpkgを使用した CMake Visual Studio ビルド](./vs_cmake.md)を参照してください。
 
-CMake can generate `.sln` and `.vcxproj` files used either by Visual Studio itself or by MSBuild
-command line compiler (if you don't want a full fledged IDE) and have more "native" binaries than
-what MSYS/Cygwin can provide.
+CMake は、Visual Studio 自体で使用されるか、MSBuild コマンドラインコンパイラで使用される `.sln` および `.vcxproj` ファイルを生成できます
+(フル機能の IDE を必要としない場合)。これにより、MSYS/Cygwin が提供するものよりも「ネイティブな」バイナリが得られます。
 
-At the moment only a limited combination of options is supported (tiles only, no localizations, no
-backtrace).
+現時点では、限られたオプションの組み合わせのみがサポートされています（Tiles のみ、ローカライゼーションなし、バックトレースなし）。
 
-Get the tools:
+必要なツールを入手します。
 
-- CMake from the official site - <https://cmake.org/download/>.
-- Microsoft compiler - <https://visualstudio.microsoft.com/downloads/?q=build+tools> , choose "Build
-  Tools for Visual Studio 2017". When installing chose "Visual C++ Build Tools" options.
-  - alternatively, you can get download and install the complete Visual Studio, but that's not
-    required.
+- CMake 公式サイトから - <https://cmake.org/download/>.
+- Microsoft コンパイラ - <https://visualstudio.microsoft.com/downloads/?q=build+tools> "Build Tools for Visual Studio 2017" を選択します。インストール時に "Visual C++ Build Tools" オプションを選択します。
+  - または、完全な Visual Studio をダウンロードしてインストールすることもできますが、必須ではありません。
 
-Get the required libraries:
+必要なライブラリを入手します:
 
-- [SDL2](https://github.com/libsdl-org/SDL/releases/tag/release-2.28.3) (you need the "(Visual C++
-  32/64-bit)" version. Same below)
+- [SDL2](https://github.com/libsdl-org/SDL/releases/tag/release-2.28.3) (「
+  (Visual C++ 32/64-bit)」バージョンが必要です。以下も同様です)
 - [SDL2_ttf](https://github.com/libsdl-org/SDL_ttf)
 - [SDL2_image](https://github.com/libsdl-org/SDL_image)
-- [SDL2_mixer](https://github.com/libsdl-org/SDL_mixer) (optional, for sound support)
-- Unsupported (and unused in the following instructions) optional libs:
+- [SDL2_mixer](https://github.com/libsdl-org/SDL_mixer) (省略可能、サウンドサポート用)
+- サポートされていない（以下の手順では未使用の）オプションライブラリ:
   - `ncurses` - ???
 
-Unpack the archives with the libraries.
+ライブラリのアーカイブを解凍します。
 
-Open windows command line (or powershell), set the environment variables to point to the libs above
-as follows (adjusting the paths as appropriate):
+Windows のコマンドライン（または PowerShell）を開き、上記ライブラリを指すように環境変数を設定します（パスは適切に調整してください）:
 
 ```sh
 set SDL2DIR=C:\path\to\SDL2-devel-2.0.9-VC
@@ -261,9 +249,9 @@ set SDL2IMAGEDIR=C:\path\to\SDL2_image-devel-2.0.4-VC
 set SDL2MIXERDIR=C:\path\to\SDL2_mixer-devel-2.0.4-VC
 ```
 
-(for powershell the syntax is `$env:SDL2DIR="C:\path\to\SDL2-devel-2.0.9-VC"`).
+(PowerShell の構文は `$env:SDL2DIR="C:\path\to\SDL2-devel-2.0.9-VC"`です)。
 
-Make a build directory and run cmake configuration step
+ビルドディレクトリを作成し、CMake の設定ステップを実行します。
 
 ```sh
 cd <path to cbn sources>
@@ -271,95 +259,81 @@ mkdir build
 cmake -B build -DTILES=ON -DLANGUAGES=none -DBACKTRACE=OFF -DSOUND=ON
 ```
 
-Build!
+ビルドを実行します！
 
 ```
 cmake --build build -j 2 -- /p:Configuration=Release
 ```
 
-The `-j 2` flag controls build parallelism - you can omit it if you wish. The
-`/p:Configuration=Release` flag is passed directly to MSBuild and controls optimizations. If you
-omit it, the `Debug` configuration would be built instead. For powershell you'll need to have an
-extra `--` after the first one.
+`-j 2` フラグはビルドの並列処理を制御します。省略することも可能です。
+`/p:Configuration=Release` フラグは MSBuild に直接渡され、最適化を制御します。これを省略すると、代わりに `Debug`構成がビルドされます。PowerShell の場合は、最初の `--` の後にさらに `--`が必要になります。
 
-The resulting files will be put into a `Release` directory inside your source Cataclysm-BN folder.
-To make them run you'd need to first move them to the source Cataclysm-BN directory itself (so that
-the binary has access to the game data), and second put the required `.dll`s into the same folder -
-you can find those inside the directories for dev libraries under `lib/x86/` or `lib/x64/` (you
-likely need the `x86` ones even if you're on 64-bit machine).
+結果のファイルは、ソースの Cataclysm-BN フォルダ内の `Release` ディレクトリに配置されます。それらを実行可能にするには、まずゲームデータにアクセスできるようにバイナリをソースの Cataclysm-BN ディレクトリ自体に移動し、次に必要な `.dll`ファイルを同じフォルダに配置する必要があります。これらは開発ライブラリのディレクトリ内の `lib/x86/` または `lib/x64/` の下に見つけることができます（64ビットマシンであっても x86 のものが必要になる可能性が高いです）。
 
-The copying of dlls is a one-time task, but you'd need to move the binary out of `Release/` each
-time it's built. To automate it a bit, you can configure cmake and set the desired binaries
-destination directory with `-DCMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE=` option (and similar for
-`CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG`).
+DLL のコピーは一度限りの作業ですが、ビルドのたびにバイナリを `Release/` から移動する必要があります。これを少し自動化するために、CMake を設定し、 `-DCMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE=` オプション（および
+`CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG`の同様のオプション）を使用して、目的のバイナリ出力ディレクトリを設定できます。
 
-Run the game. Should work.
+ゲームを実行します。動作するはずです。
 
-## Build Options
+## ビルドオプション
 
-A full list of options supported by CMake, you may either run the `ccmake` or `cmake-gui`
-front-ends, or run `cmake` and open the generated CMakeCache.txt from the build directory in a text
-editor.
+CMake でサポートされているオプションの完全なリストを確認するには、`ccmake` または `cmake-gui`フロントエンドを実行するか、`cmake` を実行してビルドディレクトリから生成された`CMakeCache.txt`をテキストエディタで開きます。
 
 ```
 cmake -DOPTION_NAME1=option_value1 [-DOPTION_NAME2=option_value2 [...]]
 ```
 
-### CMake specific options
+### CMake 固有のオプション
 
 - CMAKE_BUILD_TYPE=`<build type>`
 
-Selects a specific build configuration when compiling. `release` produces the default, optimized
-(-Os) build for regular use. `debug` produces a slower and larger unoptimized (-O0) build with full
-debug symbols, which is often needed for obtaining detailed backtraces when reporting bugs.
+コンパイル時に特定のビルド構成を選択します。 `release` は、通常の使用のためにデフォルトで最適化された
+(-Os) ビルドを生成します。 `debug` は、バグ報告時に詳細なバックトレースを取得するためによく必要とされる、完全なデバッグシンボルを持つ、低速でサイズの大きい非最適化(-O0) ビルドを生成します。
 
-**NOTE**: By default, CMake will produce `debug` builds unless a different configuration option is
-passed in the command line.
+**注記**: 既定では、コマンドラインで異なる構成オプションが渡されない限り、CMake は `debug` ビルドを生成します。
 
 - CMAKE_INSTALL_PREFIX=`<full path>`
 
-Installation prefix for binaries, resources, and documentation files.
+バイナリ、リソース、およびドキュメントファイルのインストールプレフィックス。
 
-### CataclysmBN specific options
+### CataclysmBN 固有のオプション
 
 - CURSES=`<boolean>`
 
-Build curses version.
+Curses バージョンをビルドします。
 
 - TILES=`<boolean>`
 
-Build graphical tileset version.
+グラフィック Tileset バージョンをビルドします。
 
 - SOUND=`<boolean>`
 
-Support for in-game sounds & music.
+ゲーム内サウンドと音楽のサポート。
 
 - USE_HOME_DIR=`<boolean>`
 
-Use user's home directory for save files.
+セーブファイルにユーザーのホームディレクトリを使用します。
 
 - LANGUAGES=`<str>`
 
-Compile localization files for specified languages. Example:
+指定された言語のローカライゼーションファイルをコンパイルします。例:
 
 ```
 -DLANGUAGES="cs;de;el;es_AR;es_ES"
 ```
 
-Note that language files are only compiled automatically when building the `RELEASE` build type. For
-other build types, you need to add the `translations_compile` target to the `make` command, for
-example `make all translations_compile`.
+言語ファイルは、`RELEASE` ビルドタイプをビルドする場合にのみ自動的にコンパイルされることに注意してください。他のビルドタイプでは、 `translations_compile` `make` コマンドに追加する必要があります。例: `make all translations_compile`。
 
 - DYNAMIC_LINKING=`<boolean>`
 
-Use dynamic linking. Or use static to remove MinGW dependency instead.
+動的リンクを使用します。または、静的リンクを使用して MinGW の依存関係を削除することもできます。
 
 - CUSTOM LINKER=`<str>`
 
-Choose custom linkers such as [gold], [lld] or [mold].
+[gold]、[lld]、[mold]などのカスタムリンカーを選択します。
 
-- Choose ld if you don't use libbacktrace.
-- Choose mold if use libbacktrace. It's the fastest linker, outperforming gold by 24x.
+- libbacktraceを使用しない場合は ld を選択します。
+- libbacktraceを使用する場合は mold を選択します。これは最速のリンカーであり、gold よりも 24 倍優れています。
 
 [gold]: https://en.wikipedia.org/wiki/Gold_(linker)
 [lld]: https://lld.llvm.org
@@ -367,37 +341,35 @@ Choose custom linkers such as [gold], [lld] or [mold].
 
 - BACKTRACE=`<boolean>`
 
-On crash, print a backtrace to the console. Defaults to `ON` for debug builds.
+クラッシュ時に、コンソールにバックトレースを出力します。デバッグビルドではデフォルトで `ON` です。
 
 - LIBBACKTRACE=`<boolean>`
 
-Print backtrace with [libbacktrace]. This allows lld and mold to print backtrace, and is generally
-much faster.
+[libbacktrace]を使用してバックトレースを出力します。これにより、lld および mold がバックトレースを出力できるようになり、一般的に非常に高速です。
 
 [libbacktrace]: https://github.com/ianlancetaylor/libbacktrace
 
 - USE_TRACY=`<boolean>`
 
-Use tracy profiler. See [Profiling with tracy](../tracy.md) for more information.
+Tracy プロファイラを使用します。詳細については、[Tracyを使用したプロファイリング](../tracy.md)を参照してください。
 
 - GIT_BINARY=`<str>`
 
-Override default Git binary name or path.
+既定の Git バイナリ名またはパスを上書きします。
 
 - USE_PREFIX_DATA_DIR=`<boolean>`
 
-Use UNIX system directories for game data in release build.
+リリースビルドでゲームデータに UNIX システムディレクトリを使用します。
 
 - USE_XDG_DIR=`<boolean>`
 
-Use XDG directories for save and config files.
+セーブファイルおよび設定ファイルに XDG ディレクトリを使用します。
 
 - TESTS=`<boolean>`
 
-Whether to build tests.
+テストをビルドするかどうか。
 
-So a CMake command for building Cataclysm-BN in release mode with tiles and sound support will look
-as follows, provided it is run in build directory located in the project.
+したがって、Tiles と Sound サポートを使用して『Cataclysm-BN』をリリースモードでビルドするための CMake コマンドは、プロジェクト内の build ディレクトリで実行されていると仮定すると、次のようになります。
 
 ```sh
 cmake ../ -DCMAKE_BUILD_TYPE=Release -DTILES=ON -DSOUND=ON
