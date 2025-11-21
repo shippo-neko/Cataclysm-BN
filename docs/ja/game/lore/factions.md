@@ -1,321 +1,169 @@
-# Factions
+# ファクション
 
 > [!CAUTION]
 >
 > #### spoiler alert
 >
-> spoilers below!
+> ネタバレ注意!
 >
-> Also worth noting these include future plans, and is a framework for what future additions/lore
-> reworks should keep in mind, rather than what is currently already in the game.
+> また、これらには将来の計画が含まれており、現在ゲームに既に実装されている内容というよりも、将来的な追加要素やロアの再構築が念頭に置くべきフレームワークであることにも留意してください。
 
-## America
+## アメリカ
 
-### Society
+### 社会
 
-The future government of America is sensationalist, reckless, and in many ways quite dystopian.
-However, the average person’s life is pretty good, aside from the constant threat (or at least
-claims of a threat) of military attacks by some foreign power (usually China or Russia) that may or
-may not actually be plotting major military actions. The government has encouraged disaster
-preparedness among the population, and firearm restrictions are distinctly different than they are
-now. While not everyone can purchase and own a firearm, and firearm ownership is very closely
-tracked, it is also actively encouraged by the government to fight off any potential invaders, and
-higher caliber firearms and explosives are actually available on the civilian market.
+未来のアメリカ政府は、センセーショナルで無謀、そして多くの点でディストピア的です。しかし、平均的な人々の生活はかなり良好であり、外国勢力（通常は中国またはロシア）による軍事攻撃の絶え間ない脅威（または少なくともその主張）を除けば問題ありません。この外国勢力が実際に大規模な軍事行動を企てているかどうかは定かではありません。政府は国民の間で災害への備えを奨励しており、銃器の規制は現在とは明確に異なります。誰もが銃器を購入・所有できるわけではなく、銃器の所有は厳しく追跡されていますが、潜在的な侵略者を撃退するために政府によって積極的に奨励されており、大口径の銃器や爆発物は実際に民間の市場で入手可能です。
 
-### Evac Shelters
+### 避難シェルター
 
-The evac shelters were built as part of a government program to help improve both the morale of the
-populace at large (by convincing them the government was looking out for them) while also increasing
-the general sense of fear and danger (by convincing the populace such shelters were needed). They
-approved effective at these goals. The shelters were not, however, ever actually stocked - the
-funding fell out when the military realized both goals had been effectively accomplished, and no
-more money needed to be wasted on them. After all, in the event that the shelters would ever
-actually be needed, it is unlikely they would end up very useful - any major military attack was
-unlikely to leave many survivors. Standing as empty unstocked, relatively insecure buildings on the
-outskirts of the city reminding people of what could happen was the only service they were ever
-actually expected to provide.
+避難シェルターは、政府が国民を気にかけ、士気を向上させる（という安心感を与える）と同時に、シェルターが必要であると国民に納得させることで一般的な恐怖と危険の感覚を高めるために、政府のプログラムの一環として建設されました。シェルターは政府の目論見通り効果的であることが証明されました。しかし、シェルターには実際に物資が備蓄されたことは一度もありませんでした。軍部が両方の目標が効果的に達成されたと認識し、これ以上資金を浪費する必要がないと判断した時点で、資金投入は打ち切られました。結局のところ、シェルターが本当に必要になるような事態（大規模な軍事攻撃など）では、多くの生存者が残る可能性は低いです。備蓄のない、比較的非安全な建物として都市郊外に建ち、人々に何が起こり得るかを思い出させること、それがこれらのシェルターに実際に期待された唯一の役割でした。
 
-### Nether
+### ネセリウム
 
-The Nethereum is a transitive plane, sequestered between realities. It is constantly in flux as it
-mirrors the various worlds that it borders through XE037. The rules and constants between each
-reality vary wildly, and within the Nethereum it continuously swings between them, trying and
-failing to find a balance. The creatures within are no different, each is a reflection of some
-creature from another reality, distorted, incomplete and uncanny. Most are unintelligent or
-animalistic, incomplete snapshots. However, greater, intelligent life does exist within the
-Nethereum, their forms stretching across the void with an intelligence that regards us with the same
-foreign curiosity as a child. Unfortunately, any true contact would only cause madness, as they
-exist in accordance to concepts that make no logical sense, and indeed do not exist on our world.
-Fortunately, our world is as difficult for them to access as theirs is to ours, and they lack the
-focus and technology to ever succeed on their own.
+ネセリウムは、現実間に隔離された遷移的な次元です。それは XE037 を通して境界を接する様々な世界を映し出すため、絶えず変化しています。各現実間の規則や定数は大きく異なり、ネセリウム内では、バランスを見つけようと試み、失敗しながら、それらの規則の間で継続的に揺れ動いています。内部の生物も違いはなく、それぞれが別の現実の生物の反映であり、歪んで、不完全で、不気味です。ほとんどは知性がなく、動物的で、不完全なスナップショットです。しかし、ネセリウム内には、より偉大で知的な生命が存在し、子供のような異質な好奇心で我々を見つめる知性をもって、その形を虚空に広げています。残念ながら、真の接触は狂気を引き起こすだけです。なぜなら、それらは論理的な意味をなさない、そして我々の世界には存在しない概念に従って存在しているからです。幸いなことに、彼らにとって我々の世界にアクセスすることは、我々にとって彼らの世界にアクセスすることと同じくらい難しく、彼らは自力で成功するための集中力と技術を欠いています。
 
-Nether creatures are utterly alien to reality, their bodies rely on the nearby gashes in reality to
-sustain their impossible forms. Should the portals be closed and the bleed between realities stymied
-in some way, the more fantastical nethereum creatures would likely die where they stand.
+ネセリウムの生物は、我々の現実にとって完全に異質な存在であり、その体は、その不可能な形を維持するために、現実にある近くの裂け目に依存しています。ポータルが閉じられ、次元間の浸透が何らかの方法で妨げられた場合、より幻想的なネセリウムの生物は、その場で死滅する可能性が高いでしょう。
 
-The Nethereum itself has a strange connection to the subconscious mind of sapient life. In dreams
-and more traumatically, while in the throes of madness, it is possible to gain glimpses of the
-Nethereum's chaotic plane. Such insights have inspired books across countless civilizations of
-eldritch horrors and creatures that haunt beyond the edge of reality. In the same way, most contact
-with the Nethereum outside of portals is mental, even with the fabric of reality degraded as it is.
-Sometimes information from beings beyond our realm, helpful or not, seeps in through these cracks,
-if one is capable of deciphering it.
+ネセリウム自体は、知性ある生命の潜在意識と奇妙なつながりを持っています。夢の中で、そしてよりトラウマ的な状況として、狂気の淵にある間に、ネセリウムの混沌とした次元を垣間見ることが可能です。このような洞察は、数えきれないほどの文明で、現実の端をさまよう旧支配者のような恐怖や生物に関する書籍に影響を与えてきました。同様に、ポータルを介さないネセリウムとの接触のほとんどは精神的なものであり、現実の構造が劣化した現状であっても同様です。時折、我々の領域を超えた存在からの情報（有益であろうとなかろうと）がこれらの亀裂を通して漏れ込んできます。それを解読する能力があればの話ですが。
 
-Pocket dimensions are constantly forming within the Nethereum, echoes and reflections of worlds far
-beyond our ability to percieve. Portal storms are locations where these pocket dimensions bleed into
-our own, and if the correct conduit can be created, and enough energy gathered, it could be possible
-for humanity to reach into these broken reflections to seek out technologies and materials developed
-by other realities. Be cautious, such dark reflections may not function as originally intended, and
-it will be defended by dark reflections of other things as well...
+小規模次元は、ネセリウム内に絶えず形成されており、我々が知覚できる能力をはるかに超えた世界の残響と反映です。ポータルストームは、これらの小規模次元が我々の世界に流れ込む場所であり、適切な導管を作成し、十分なエネルギーを集めることができれば、人類がこれらの壊れた反映の中に手を伸ばし、他の現実によって開発された技術や物質を探し出すことが可能かもしれません。注意してください、そのような暗い反映は、元の意図どおりに機能しない可能性があり、他のものの暗い反映によっても防御されているでしょう...
 
-### Blob
+### ブロブ
 
-#### Origin (What is it?)
+#### 起源（それは何か？）
 
-The Blob, otherwise known as XE037, is the basic building block of the Nether, all creatures and
-structures within the Nethereum great and small are formed primarily of this substance. It displays
-properties that do not conform to the standard theory of matter, able to change it's characteristics
-and restructure itself seemingly at random. As the Nethereum itself has very weak, if any immutable
-physical laws, XE037 structures itself in response to the weak interactions when the Nethereum and
-other planes intersect. It is also heavily affected by consciousness, and in the very rare
-occassions that minds intersect with the Nethereum it spawns worlds from their dreams... or
-nightmares. It is the primary contributor to the state of the Nether being a roiling storm of
-complete chaos. Post Cataclysm, the entirety of the Earth has been blanketed due to gashes in
-reality caused by the Cataclysm.
+「ブロブ」、別名 XE037 は、ネセリウムの基本的な構成要素であり、ネセリウム内に存在するすべての生物や構造物（大小を問わず）は、主にこの物質によって形成されています。
+この物質は、標準的な物質理論には適合しない特性を示し、一見ランダムにその性質を変化させたり、構造を再構築したりすることが可能です。ネセリウム自体は、不変の物理法則が極めて弱いか、あるいは存在しない領域であるため、XE037 はネセリウムと他の次元が交差する際の弱い相互作用に反応して構造化されます。
+また、XE037は意識によっても強く影響を受けることが判明しており、ごくまれに何らかの心がネセリウムと交差すると、彼らの夢、あるいは悪夢から世界を生み出します。これは、ネセリウムの状態が完全な混沌の荒れ狂う嵐である主要な要因です。
+大災厄の発生後、その出来事によって引き起こされた現実の裂け目により、地球全体がブロブに覆われる状態となっています。
 
-#### Infection and Effects on Living Hosts
+#### 感染と生体宿主への影響
 
-"Infection" by the blob is caused when organisms take up the blob into their cells, replacing a
-portion of their regular mass with XE037. Saturation rates of XE037 in living creatures appears to
-be a ratio affected only slightly by exposure, even immersed within the Nethereum itself only a
-small portion of a creature's mass will be replaced. For lower lifeforms, this has very little
-effect, XE037 functions as whatever mass it was meant to replace, seeming to stabilize in reaction
-to whatever has taken it up. For animals, XE037 has the effect of improving their functions, making
-them stronger, faster, more of whatever they were before, as well as improving their healing
-abilties. Insects however show the most drastic changes, as the improvement of their oxygen intake
-means that they grow much larger than we have seen in recent history, approaching or even exceeding
-prehistoric sizes.
+「ブロブ」による感染は、生物がその実体を細胞内に取り込み、通常の生体質量の一部を未知の物質「XE037」に置き換えることによって発現します。生物内における XE037 の飽和率は、ブロブへの直接的な曝露によってもわずかしか影響を受けない固有の定常値を示すと推測され、ネセリウム自体に浸された場合でさえも、生物の質量を置き換えるのはごく一部に留まります。
+この置換がもたらす影響は生物の種によって異なり、下等生物においては、XE037 は置き換わるはずだった生体質量と同等の機能を発揮し、取り込んだ生物の反応に同調して安定するため、実質的な変化はほとんど見られません。対照的に、動物の場合は、既存の強さ、速さ、その他の身体特性が向上するという機能改善が生じ、加えて治癒能力も高まる効果があります。しかしながら、昆虫は最も劇的な変化を示し、XE037 による酸素摂取効率の改善が引き金となり、近年の歴史で観察されるサイズを遥かに凌駕し、先史時代に匹敵するか、あるいはそれを超える巨大なサイズへと成長します。
 
-In humans however, the effect is markedly different. XE037 appears capable of restructuring the
-body, from simple things like increased muscle mass, brain matter, or thickened skin to drastic
-changes like rapid bone restructuring, and growth of organs that do not typically exist in the
-species. Some of these effects appear to be the Blob reactivating dormant phenotypes (perhaps
-surprisingly gills are classified under these) or over/under expressing certain genes. However, many
-of the more drastic changes seem to use DNA that has never existed within the species, possibly some
-form of "memory" within XE037 regarding the other realities it has come into contact with before.
-While similar to their earth counterparts, many of these structures are subtly different. A
-subject's sense of self and consciousness appears to be involved in the transformations, and to
-access transformational mutations a subject's sense of self must be temporarily altered, this
-alteration however typically becomes permanent once the "threshold" has been crossed, causing the
-subject to permanently identify more closely with the target specimen. This strange limitation of
-ego has casually reignited philosophical questions of consciousness amongst the more fringe
-scientists, who suggest that this could be a sign of the soul. Animals and insects thus far have
-never been observed to have the same breadth of mutations, it is suggested that their inability to
-reinvent themselves mentally contributes to this.
+しかしながら、人間の場合は、その効果が著しく異なります。XE037 は、単純な変化（筋肉量の増加、脳物質の増大、皮膚の肥厚など）から、急速な骨の再構築や、その種には通常存在しない臓器の成長といった劇的な変化まで、身体を再構築する能力があるように見えます。
 
-#### Death of Hosts
+これらの効果の一部は、ブロブが休眠中の表現型を再活性化している（驚くべきことにエラの成長もこれに分類されます）、あるいは特定の遺伝子を過剰または過少発現させているように見受けられます。しかし、より劇的な変化の多くは、その種にかつて存在しなかった DNA を使用しているように見えます。これは、XE037 が以前に接触した他の現実に関する何らかの形の「記憶」を保持している可能性を示唆しています。これらの新たに生成された構造の多くは、地球上の対応物と似ていますが、微妙に異なっています。
 
-On death however the seemingly artificial limitations on mutation are removed. Regeneration is
-initiated, with the corpse cannibalizing itself as the Blob takes drastic steps to reanimate the
-host. The host however, is no longer in control of their body, with the Blob driving them to feed
-and survive. The mutations begin to grow ever more bizarre, the Blob hijacking more and more of the
-cellular makeup of the host, repurposing toward more aggressive purposes (acid/spitter zombies,
-skeletal juggernauts, etc). The Blob in this state also seems capable of hijacking bionics within
-the body, utilizing power storage as sources of electrical shocks, electromagnet implants in
-industrial workers, or utilizing the martial art subroutines within Close Quarter Battle CBMs
-(explaining why bio-operatives seem capable of doing martial arts). It is theorised that the
-mutations integrating bionics may not be unique to "zombies", but would require a human with a
-distorted sense of self that considers the human and machine parts of their body to be one and the
-same. Testing of this was prematurely halted by the Cataclysm (partially explaining the
-Prototype/Broken Cyborgs)
+被験者の自己意識が変容に深く関与しているように見え、変異的な変化にアクセスするには、被験者の自己意識を一時的に変化させる必要があります。この変化は通常、一度「閾値」を超えると恒久的なものとなり、被験者はターゲットの標本とより密接に永続的に同一視するようになります。この奇妙なエゴの制限は、より非主流な科学者の間で、意識に関する哲学的な疑問を何気なく再燃させており、これは魂の兆候である可能性を示唆されています。
 
-#### Ferals
+動物や昆虫はこれまでに同じ広範囲の変異を持つことが観察されておらず、精神的に自己を再発明する能力がないことが、この現象に寄与していると示唆されています。
 
-In humans with abnormal mentation or brain damage, the changes wrought by XE037 are similar to that
-of zombification, but only partially. Such "ferals" retain a lot more of their human intelligence
-and tool use, and are not nearly as horrifically mutated, but are invariably psychotically violent
-to all other living creatures around them. Zombies appear to consider them kin, and they in turn are
-not violent to other zombies. It's unknown if recovery is even possible for humans affected in this
-way, though it is theorized that XE037 may itself be trying to remedy the injury in it's own
-undirected way. The proliferation and infiltration of XE037 into much of the host cells however,
-means that it is highly likely that any attempt to strip XE037 from the subject would result in
-death.
+#### 宿主の死
 
-#### Player Interactions
+しかし、死においては、変異に対する一見人為的な制限が取り除かれます。
 
-As the Blob has no higher consciousness and no collective it cannot be fought in the conventional
-sense. However, humanity is capable of severely diminishing the threat of the Blob, at least in
-regards to reanimation and mutation. Research prior to the Cataclysm has revealed that the energy
-deficit incurred during reanimation and to some extent their activity after is sustained by nearby
-portal activity in a similar way to Nethereum creatures. A certain threshold of energy must be
-reached before reanimation is even possible, further explaining why only corpses of a certain size
-are able to reanimate. Deep underground in New England, a central lab exists with the largest
-working portal on the continent. It's activation was the tipping point of our dimensional
-instability, leading to rapid global reanimation of corpses and accelerated mutation where prior
-cases had been limited to the local area within labs and near portals, and slow to ineffectual
-elsewhere. (Explaining how the Cataclysm could've gotten so out of control so quickly.) In the
-aftermath, once dimensional fatigue had settled to a more stable state, it now generates the portal
-energies needed to sustain much of the zombies throughout the continent. If this can be disabled,
-zombie activity would become much reduced, as would their evolution.
+再生が開始され、ブロブが宿主を再生するために劇的な措置を講じるにつれて、死体が自己を共食いします。しかし、この状態の宿主はもはや自分の体を制御しておらず、ブロブが彼らを摂食と生存へと駆り立てます。変異はますます奇妙になり始め、ブロブは宿主の細胞構成をますますハイジャックし、より攻撃的な目的（酸/スピッターゾンビ、骨格のジャガーノートなど）に転用します。
 
-### Mycus
+この状態のブロブは、体内のバイオニックをハイジャックする能力もあるように見えます。例えば、蓄電システムを電気ショックの供給源として利用したり、工業労働者の電磁石インプラントを利用したり、近接戦闘 CBM 内の格闘技サブルーチンを利用したりします（バイオ工作員が格闘技を行うことができるように見えるのはこのためであると説明されます）。
 
-#### Origin (What is it?)
+バイオニックを統合する変異は、必ずしも「ゾンビ」に固有のものではないかもしれませんが、その人間の機械部分と人間部分を一つであると見なす、歪んだ自己意識を持つ人間が必要であると理論づけられています。このテストは、大災厄によって早期に中止されました（プロトタイプや壊れたサイボーグの存在を部分的に説明しています）。
 
-The Mycus were once a species of parasitic brain fungus on their homeworld, taking control of
-various animals and using them to spread itself across the planet. Over time, the connection between
-brain and fungus became more and more tight knit, until eventually brain and fungus melted into one
-another, a symbiosis that subsumed their hosts and infiltrated into their very flesh. Their sapience
-was originally formed via weak telepathy between each animal they had infected, and since their
-existence they have never known the concept of individualism. There is only the Mycus.
+#### フェラル
 
-Spreading across the universe, the Mycus found nothing, barren planets and occasionally more hosts,
-but no other minds for them to connect to, to commune. The Mycus turned their gaze beyond their
-reality, seeking others beyond their reality. Cautious about the world beyond, they never opened the
-physical portals into the Nethereum until they had perfected their understanding of it, instead only
-using it to observe other universes for sapient life. By luck, their first inhabited universe was
-our own, in the midst of the Cataclysm. The Mycus watched as civilization was sundered by the
-various Nether creatures and reanimated monstrosities, and mourned the passing of an intelligence
-that might have finally been their peer. Yet as they watched, the tiny fleshlings endured. Single
-fleshlings joined in communion with others, conclaves formed, yet were a pale shadow of their former
-glory, while others were lost, wandering into a doomed world.
+異常な精神状態または脳損傷を持つ人間において、XE037 によって引き起こされる変化は、ゾンビ化に似ていますが、部分的なものに留まります。
 
-The Mycus believe the intelligence must still remain, fragmented between their myriad of hosts, for
-them to be able to continue their function. If the fragments could be gathered, combined, they might
-yet survive the possibility of local dimensional collapse, and through this the Mycus would achieve
-Communion. They gathered their spores, readied their portals, and sent forth a legion of spores into
-the Nethereum, toward humanity. Any of their flesh hosts would not be able to survive the journey,
-but the spores would, even if many would be lost in the tumultous expanse all that was needed was a
-single main node. The Mycus would grow.
+そのような「フェラル」は、人間のような知性や道具の使用能力を遥かに多く保持しており、それほど恐ろしく変異してはいません。しかし、例外なく周囲の他のすべての生物に対して、精神病的な暴力性を示します。ゾンビは彼らを仲間と見なしているようで、彼ら自身も他のゾンビに対しては暴力的ではありません。
 
-#### Goal
+この方法で影響を受けた人間が回復できるかどうかは不明ですが、XE037 自体が、その独自の方向性のない方法で損傷を修復しようとしているのではないかと理論づけられています。しかし、XE037 が宿主細胞の大部分に拡散し浸透していることは、被験者から XE037 を剥ぎ取ろうとするいかなる試みも、死をもたらす可能性が非常に高いことを意味します。
 
-The goal of the Mycus is at its heart, altruistic, it wants to make humanity whole again.
-Unfortunately it has no understanding of individuality, and does not understand that humanity is not
-a hive mind like itself but a collection of individual minds working together (or against one
-another). It's approach toward individual humans is much like the way one would treat a baby or
-frightened animal, it believes we have been fractured so badly that we no longer have the
-intelligence to comprehend it and have been reduced to hiding from the many monsters in our new
-world. It thus entices individuals and conclaves with fruit and the soothing promise of communion.
-It forgives humanity for attacking it and refusing communion because we just don't know any better.
+#### プレイヤーとの相互作用
 
-#### Blob Interactions
+ブロブには高次の意識や集合体が存在しないため、従来の意味で戦うことはできません。しかし、人類は、少なくとも再生と変異に関して、ブロブの脅威を大幅に減少させることが可能だと考えられます。
 
-The Mycus is capable of subverting the blob, but only partially. As a majority of the blob's effects
-are inhibited by a creature's sense of self, a Mycus infection uses the Mycus' own presence to take
-control of the body. This is only temporary, and as a result the Mycus weakens the zombies it
-infects to dispose of them more permanently later.
+大災厄以前の研究により、再生中、およびある程度の活動後のエネルギー不足は、ネセリウムの生物と同様の方法で、近くのポータル活動によって維持されていることが明らかになりました。再生が可能になる前には一定のエネルギー閾値に達する必要があり、これにより、特定のサイズの死体のみが再生できる理由をさらに説明できます。
 
-#### Player Interactions
+ニューイングランドの地下深部には、大陸で最大の稼働中のポータルを持つ中央研究所が存在します。そのポータルの起動は、我々の次元不安定性の転換点となり、以前は研究所内やポータル付近の局所的なエリアに限られ、他の場所では緩慢または効果がなかった死体の急速な世界的再生と変異の加速につながりました（これは、大災厄がこれほど急速に制御不能になった理由を説明しています）。
 
-The player should have several ways of dealing with this. The first is the obvious solution, to burn
-the Mycus to the ground, there is no Queen that controls the Mycus in its totality, but the
-destruction of groves, towers, and similar terrain will prevent the Mycus from properly regrouping
-or replenishing their numbers. Another method is for the player that decides humanity's collective
-mind is best given to the Mycus, so that they may bring it back to their world where it will live
-with the Mycus forever more, all differences erased. The final solution is that of diplomacy, to
-convince the Mycus that we are both not a hive mind, and that our individuality is not a defect to
-be removed. If this can be achieved, the Mycus may be persuaded to enter a symbiotic relationship
-with humanity to aid it in its efforts to heal the world before it succumbs to dimensional collapse.
-Examples of such aid include companions, skills downloaded from the collective mind, resurrection
-using a prior template of one's mind, or bombs to infect and weaken zombies via Mycus.
+その後、次元疲労がより安定した状態に落ち着いた後も、そのポータルは現在、大陸中のゾンビの多くを維持するために必要なポータルエネルギーを生成しています。これを無効にすることができれば、ゾンビの活動、そしてその進化は大幅に減少するでしょう。
 
-### Migo
+### マイカス
 
-#### Origin (What are they?)
+#### 起源（それは何か？）
 
-The Migo are a species of carapace covered humanoids with what appears to be an eusocial caste
-system. Each individual is uniquely adapted to it's station, and if a unit is needed for a specific
-station a worker drone would be elevated to the appropriate position and properly augmented, though
-it would appear that such specialization is permanent. Their society is built on an ironclad sense
-of responsibility to the perpetuation of their species. Each Migo has a rudimentary telepathic bond
-with nearby Migo, allowing them to exchange thoughts and emotions but not memories, despite this
-they lack a true ego and will do anything up to and including self-sacrifice if it serves their
-interests as a whole.
+マイカスは、かつてその母星に生息していた寄生性の脳真菌の一種です。彼らは、様々な動物を支配下に置き、それらを利用して自身を惑星中に拡散させました。時間の経過とともに、脳と真菌のつながりはますます密接になり、最終的には脳と真菌が互いに溶け合い、宿主を取り込んでその肉体にまで浸透する共生関係となりました。
 
-Migo technology is highly advanced but bio-mechanically engineered, and cannot be directly used by
-non-migo. However, the underlying mechanisms and science can be replicated with the right materials
-and knowhow, allowing one with the appropriate knowledge to turn their weapons and technology onto
-their makers, whether this is resin production and manipulation or the reconstruction of their
-"slaver beams" all their technology is repurposable. Their bodies do not tolerate cold well, and
-generally function best in what would be charitably described as a sauna for humanity.
+彼らの知性は、元々、感染させた動物間の弱いテレパシーを介して形成されたものであり、その存在以来、個人主義の概念を知りません。存在するものはマイカスのみです。
 
-#### First Contact
+宇宙全体に広がる中で、マイカスは、不毛の惑星や時折のさらなる宿主は見つけたものの、接続し、交信できる他の心を見つけることはありませんでした。マイカスは、その視線を自分たちの現実を超えた場所に向け、次元を超えた他の世界を探しました。次元の壁を超えた世界に対しては慎重であったため、ネセリウムへの物理的なポータルを開くことは、それを完全に理解するまで行わず、代わりに知性ある生命を観察するためにのみ使用しました。
 
-In the distant past a group of Migo were stranded in the ice caps due to a failed dimensional jump.
-Prior to the Cataclysm the craft's remnants and a few migo stuck in stasis, were recovered by the
-group that would eventually become XEDRA. The incomplete workings of the dimensional drive they used
-filled in gaps into the study of space and dimensional travel, though humanity is still a long way
-from the controlled travel that the migo themselves seem capable of now. Unbecknowst to them,
-meddling with the craft sent out a distress call, which called the Migo toward humanity.
+幸運にも、彼らが最初に住人がいる宇宙を見つけたのは、大災厄の最中の我々の宇宙でした。マイカスは、様々なネセリウムの生物や再生された怪獣によって文明が引き裂かれるのを目撃し、ついに彼らの同等となり得たかもしれない知性の終焉を悼みました。それでも、彼らが観察していると、小さな肉体を持つ者たち（人類）は耐え続けました。単体の肉体を持つ者たちは他の者たちと集会で結びつき、小集団を形成しましたが、それは以前の栄光の青白い影に過ぎず、他方では、破滅的な世界をさまよって失われた者もいました。
 
-When the Migo arrived, they originally were meant to function in secret, gathering information on
-humanity to assess their threat level to the Migo and provide countermeasures should they ever
-breach into true dimensional travel and meet the main body of the Migo civilization. It was during
-this operation that the Cataclysm began. In the ensuing chaos it became abundantly clear to the Migo
-that humanity had been compromised by an extradimensional threat. Further testing and several raids
-confirmed that the Nethereum and the blob were responsible.
+マイカスは、その機能を持続させるためには、知性がその無数の宿主間で断片化されて残っているに違いないと信じています。もしその断片を集め、結合させることができれば、局所的な次元崩壊の可能性を生き延びることができ、これを通じてマイカスは聖餐を達成するでしょう。
 
-As the Migo have mastered dimensional travel, their understanding of the blob is far above humanity.
-Enough so that they have countermeasures in place to prevent their reanimation and mutation. As this
-technology was designed for their biology it will not work on humanity without heavy modification,
-and integrated into Migo biology as it is it will not be noticable to all but the most dedicated of
-xenobiologists.
+彼らは胞子を集め、ポータルを準備し、胞子の軍団をネセリウムに送り出し、人類へと向かわせました。彼らの肉体の宿主は旅を生き延びることはできませんでしたが、胞子は、たとえ多くのものが激動の広大な空間で失われたとしても、単一のメインノードさえあれば生き延びるでしょう。マイカスは成長します。
 
-#### Goals
+#### 目標
 
-With the dimensional instability of the planet, the migo are cut off from their home, and much of
-their current purpose is to reestablish communication as well as create a safe portal with which to
-evacuate the planet prior to local dimensional collapse. The Cataclysm took them by surprise, as
-while they were aware of humanity's experiments on dimensional travel, and had brought in a few of
-their own scientists to observe their results, they were not prepared for the absolutely monumental
-cock up XEDRA had facilitated. As such they lack the manpower and material with which to achieve
-their mission. To make up for this, they are experimenting with conversion of the local population,
-to manpower or material, such that they may form an appropriate beacon with which to escape Earth.
+マイカスの目標は、その核心において利他的であり、人類を再び「全体」へと統合したいと考えています。残念ながら、彼らは個人主義という概念を理解しておらず、人類が彼ら自身のような集合意識ではなく、協調的（あるいは互いに敵対的）に活動する個々の心の集合体であることを認識していません。
 
-The Migo do not resent humanity for its role in experimenting on it's units, as a society they are
-unable to hate due to a lack of ego and thus personal investment in their enemy is anathema. Despite
-this, the experimentation and mental instability displayed by remaining humans has caused them to
-classify humanity as a threat to the Migo, and actions will be taken to prevent humanity from
-threatening their home and their people.
+個々の人間に対する彼らのアプローチは、あたかも赤ん坊や怯えた動物を扱うかのようです。彼らは、我々人類がひどく断片化してしまった結果、もはや彼らを理解する知性を失い、新しい世界で多くの怪物から身を隠す状態に退化してしまったと信じています。したがって、彼らは「果実」とコミュニオンの安らぎに満ちた約束を用いて、個人や小集団を誘惑します。彼らは、人類が単にそれ以上のことを知らないという理由で、彼らを攻撃したり、コミュニオンを拒否したりする行為を許容しています。
 
-#### Player Interactions
+#### ブロブとの相互作用
 
-The player should mostly learn about the migo second hand, from things they find either in the
-towers, testimony from captives, etc. The migo should never enter into diplomatic contact with
-humanity, as it does not serve their goals, and in general humanity is considered too unstable for
-any sort of partnership. The player should however be able to recover their technology and repurpose
-it for their own use.
+マイカスはブロブを無力化することができますが、それは部分的にのみです。
+ブロブの効果の大部分はクリーチャーの自己意識によって阻害されるため、マイカス感染は、マイカス自身の存在を利用して体の制御を奪います。これは一時的な措置に過ぎませんが、その結果、マイカスは感染させたゾンビを弱体化させ、後により恒久的に処分いたします。
 
-### Triffids
+#### プレイヤーとの相互作用
 
-#### Origins (What is it?)
+プレイヤーは、この脅威に対処するためのいくつかの方法を持つべきです。
 
-The triffids are a species of humanoid plants, but it is more accurate to consider them an ecosystem
-unto themselves. The core of this ecosystem is the Triffid Heart, from it, a forest springs forth
-that creates the various triffid warriors, queens and other members of their ranks. Despite
-appearances, they are not sapient, in fact, it is difficult to say if the Triffids are even
-sentient. The triffid ecosystem functions entirely on instinct, it's only purpose is to consume,
-grow, and propagate to another planet to continue the cycle. To this end, it's various guardians
-roam about gathering materials to feed the construction of a biological cannon capable of launching
-a new heart into space.
+1つ目は明白な解決策として、マイカスを焼き払うことです。マイカスの全体を制御する女王は存在しませんが、林、塔、および類似の地形を破壊することは、マイカスが適切に再編成したり、数を補充したりするのを防ぎます。
 
-Each stimuli triggers a response from the Triffid heart, causing it to pull blueprints and engineer
-instinctive responses into the next batch of guardians. The existence of fungus opponents triggers
-fungicidal guardians, while contact with the blob seems to have caused them to gain some kind of
-resistance to them. It is unknown how the Triffid could have come to possess such a feature, but if
-the speculation that the Triffids are a biological machine created by an alien faction are correct,
-then it suggests that this alien faction has had contact with the Blob before. Whether it's downfall
-was precipitated by the Blob or not, it suggests that the Triffid's creators were well aware of the
-risks the Blob can introduce into biological organisms.
+もう1つの方法は、人類の集合的な心をマイカスに与えるのが最善であると判断するプレイヤーのためのものです。これにより、彼らは人類を自分たちの世界に連れ戻し、そこですべての違いが消され、マイカスと共に永遠に生きることになります。
 
-Some scholars speculate that the Triffid Heart was the final time capsule of a dying race, designed
-to seed worlds with information for those advanced enough to learn it. The Triffid Heart is thus of
-much interest, it could contain incalculable knowledge, whether in regards to the blob, the nether,
-blueprints for weapons or the "magic" that the Triffid Queen wields, or perhaps other biological
-catalysts that could be of use to humanity.
+最後の解決策は外交です。我々が集合精神体ではないこと、そして我々の個人性が取り除くべき欠陥ではないことをマイカスに納得させることです。
 
-#### Player Interactions
+これが達成できれば、マイカスは、次元崩壊に屈する前に世界を癒すための努力で人類を助けるために、人類との共生関係に入るよう説得できる可能性があります。援助の例として、コンパニオンの提供、集合的な心からダウンロードされたスキルの付与、自身の心事前のテンプレートを使用した復活、またはマイカスを介してゾンビを感染させ弱体化させる爆弾などが含まれます。
 
-Players should be able to salvage Triffid Hearts and use them to unlock certain recipes or use them
-as components for certain recipes.
+### ミ＝ゴ
+
+#### 起源（彼らは何か？）
+
+ミ＝ゴは、甲羅に覆われたヒト型生物の一種であり、真社会性の階級制度を持っているように見えます。各個体は、その持ち場に固有に適応しており、特定の持ち場に必要なユニットがある場合、ワーカードローンが適切な位置に昇進、増強されますが、そのような特殊化は恒久的であるように見えます。彼らの社会は、種の存続に対する鉄壁の責任感に基づいて構築されています。
+
+各ミ＝ゴは、近くのミ＝ゴと初歩的なテレパシー結合を持っており、思考や感情を交換できますが、記憶は交換できません。それにもかかわらず、彼らは真の自我を欠いており、種全体としての利益に資するならば、自己犠牲を含むあらゆることを実行します。
+
+ミ＝ゴの技術は非常に高度ですが、生体機械工学に基づいており、ミ＝ゴ以外の者が直接使用することはできません。しかし、基礎となるメカニズムと科学は、適切な材料とノウハウがあれば複製できるため、適切な知識を持つ者は、彼らの武器や技術をその製造者に対して転用することができます。これが樹脂の生産と操作であれ、彼らの「奴隷化ビーム」の再構築であれ、彼らの技術はすべて再利用可能です。
+
+彼らの体は寒さに耐性がなく、一般的に人間にとって「サウナ」と好意的に説明されるような高温環境で最もよく機能します。
+
+#### 最初期の接触
+
+遠い過去、次元ジャンプの失敗により、ミ＝ゴのグループが氷冠に取り残されました。大災厄以前に、その船の残骸と、静止状態に閉じ込められた数体のミ＝ゴが、後に XEDRA となるグループによって回収されました。
+
+彼らが使用していた次元ドライブの不完全な動作は、宇宙と次元移動の研究におけるギャップを埋めましたが、人類は、ミ＝ゴ自身が現在可能であるように見える制御された移動からはまだ程遠い状態です。彼らが知らぬ間に、その船をいじったことで遭難信号が発せられ、ミ＝ゴを人類へと呼び寄せました。
+
+ミ＝ゴが地球に到着したとき、元々秘密裏に活動し、人類に関する情報を収集して、ミ＝ゴに対する脅威レベルを評価すること、そしてもし人類が真の次元移動に踏み込み、ミ＝ゴ文明の本体と出会った場合の対抗策を提供することを意図していました。この作戦中に大災厄が始まりました。その後の混乱の中で、人類が次元外の脅威によって侵害されていることがミ＝ゴにとって明白になりました。さらなるテストと数回の襲撃により、ネセリウムとブロブが原因であることが確認されました。
+
+ミ＝ゴは次元移動を習得しているため、ブロブに対する彼らの理解は人類をはるかに上回っています。彼らが再生と変異を防ぐための対抗策を講じているほどにです。この技術は彼らの生物学のために設計されたものであるため、大幅な改変なしに人類には機能せず、ミ＝ゴの生物学に統合されているため、最も熱心な異種生物学者でなければ気づかないでしょう。
+
+#### 目標
+
+地球の次元不安定性により、ミ＝ゴは故郷から切り離されており、彼らの主要な現在の目的は、通信を再確立すること、および局所的な次元崩壊の前に惑星から脱出するための安全なポータルを作成することにあります。
+
+大災厄は彼らに不意打ちを食らわせました。人類の次元移動実験を認識しており、その結果を観察するために数人の科学者を連れてきていましたが、XEDRA がもたらした絶対的に記念碑的な大失敗には準備ができていませんでした。そのため、彼らは任務を達成するための人員と物資を欠いています。これを補うために、地元住民の転換実験をしており、彼らが地球から脱出するための適切なビーコンを形成できるよう、人員または物資へと変えています。
+
+ミ＝ゴは、彼らのユニットに対する実験について、人類を恨んではいません。社会としてミ＝ゴは自我を欠いているため、憎むことができず、したがって敵への個人的な執着は忌まわしいこととされています。それにもかかわらず、残された人間が示す実験と精神的な不安定性により、人類をミ＝ゴに対する脅威として分類しており、故郷とミ＝ゴ社会を守るための行動が取るでしょう。
+
+#### プレイヤーとの相互作用
+
+プレイヤーは、主に間接的な手段、具体的には塔で見つけたものや、捕虜からの証言などからミ＝ゴについて知るべきです。
+ミ＝ゴの目標に役立たないため、人類との外交的な接触を取るべきではありません。そして、人類は、いかなる種類のパートナーシップにしても不安定すぎる相手と見なされています。しかし、プレイヤーはミ＝ゴの技術を回収し、自身の用途に転用することができるはずです。
+
+### トリフィド
+
+#### 起源（それは何か？）
+
+トリフィドは、ヒト型植物の一種ですが、彼らを生態系そのものと見なす方がより正確です。この生態系の核は「トリフィドの心臓」であり、そこから森が生まれ、様々なトリフィドの戦士、女王、その他のメンバーを作り出します。
+
+外見に反して、彼らは知性を持っておらず、実際、トリフィドが感覚を持っているかどうかさえ断言するのは困難です。トリフィドの生態系は、完全に本能に基づいて機能しており、その唯一の目的は、消費し、成長し、別の惑星に伝播してサイクルを継続することです。この目的のために、その様々な守護者は、新しい心臓を宇宙に打ち上げることができる生物学的な大砲の建設に供給するための材料を集めてさまよっています。
+
+各刺激はトリフィドの心臓からの反応を引き起こし、それが設計図を引き出し、次の守護者のバッチに本能的な反応をエンジニアリングします。真菌の敵の存在は殺真菌性の守護者を引き起こし、ブロブとの接触は彼らに何らかの耐性を獲得させたようです。トリフィドがなぜそのような特徴を持つようになったのかは不明ですが、トリフィドがエイリアンの派閥によって作成された生物学的機械であるという推測が正しければ、このエイリアン派閥が以前にブロブと接触していたことを示唆しています。彼らの没落がブロブによって促進されたかどうかに関係なく、それはトリフィドの創造者が、ブロブが生体有機体に導入し得るリスクを十分に認識していたことを示唆しています。
+
+一部の学者は、トリフィドの心臓は、滅びゆく種族の最後のタイムカプセルであり、それを学ぶのに十分な進歩を遂げた人々のために情報を世界に蒔くように設計されたと推測しています。したがって、トリフィドの心臓は非常に興味深い対象です。それは、ブロブ、ネセリウム、武器の設計図、トリフィドの女王が振るう「魔法」、または人類に役立つ可能性のある他の生物学的触媒に関する、計り知れない知識を含んでいる可能性があります。
+
+#### プレイヤーとの相互作用
+
+プレイヤーはトリフィドの心臓を回収し、それを使用して特定のレシピをアンロックしたり、特定のレシピのコンポーネントとして使用したりすることができるはずです。
