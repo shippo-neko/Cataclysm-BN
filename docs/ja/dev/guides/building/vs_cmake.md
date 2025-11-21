@@ -1,181 +1,150 @@
-# CMake + Visual Studio + Vcpkg
+# CMake + Visual Studio + Vcpkgを用いたビルド手順
 
 > [!CAUTION]
 >
-> CMake build is work-in-progress.
+> CMake ビルドは現在、開発途上(WIP)です。
 
-## Prerequisites
+## 前提条件
 
-- `cmake` >= 3.24.0
-- `vcpkg` from [vcpkg.io](https://vcpkg.io/en/getting-started.html)
+- `cmake` バージョン3.24.0以上
+- [vcpkg.io](https://vcpkg.io/en/getting-started.html)からインストールされた`vcpkg`
 
-Note that starting from Visual Studio 2022 version 17.6, `vcpkg` is included with the distribution
-and is available in the VS developer command prompt, so you don't have to install it separately.
+注釈: Visual Studio 2022 バージョン 17.6 以降では、vcpkg はディストリビューションに含まれており、Visual Studio Developer Command Prompt (VS 開発者コマンド プロンプト) から利用可能です。この場合、別途インストールする必要はありません。
 
-## Configure
+## 設定
 
-Configuration can be done using one of the presets in `CMakePresets.json`. They will all build the
-code into the directory `out/build/<preset>/`.
+設定は、`CMakePresets.json`内のいずれかのプリセットを使用して行えます。これらのプリセットはすべて、コードをディレクトリ `out/build/<preset>/`内にビルドします。
 
-### Terminal
+### ターミナル
 
-Ensure that `cmake` can find `vcpkg`. If it can't, it will complain about missing packages. You can
-do this in one of the following ways:
+`cmake` が `vcpkg`を見つけられることを確認してください。見つけられない場合、パッケージが見つからないというエラーが発生します。以下のいずれかの方法で対応できます。
 
-- For VS2022 users with preinstalled `vcpkg`, `vcpkg` should already be available if you're running
-  the VS developer command prompt and not the plain terminal
-- Append `-DVCPKG_ROOT=C:\dev\vcpkg` (or whatever the path is) to any cmake configure commands
-- Set the environment variable `VCPKG_ROOT` to the path to the vcpkg checkout
-- Add the `VCPKG_ROOT` cache variable in `CMakePresets.json` with the appropriate path (not
-  recommended if you plan to work with the code later, git tracks this file)
+- VS2022 ユーザーで `vcpkg`がプレインストールされている場合、プレーンなターミナルではなく VS 開発者コマンド プロンプト を実行していれば、`vcpkg` はすで利用可能になっているはずです。
+- 任意のcmake configureコマンドに `-DVCPKG_ROOT=C:\dev\vcpkg` (または適切なパス) を追記します。
+- 環境変数 `VCPKG_ROOT` に `vcpkg` のチェックアウト先へのパスを設定します。
+- `CMakePresets.json` の中に、`VCPKG_ROOT` キャッシュ変数として適切なパスを追加します(ただし、後でコードを扱う予定がある場合、Gitがこのファイルを追跡するため非推奨です)。
 
-Run the command
+以下のコマンドを実行します。
 
 ```sh
 cmake --list-presets
 ```
 
-It will show the presets available to you. The list changes based on the environment you are in. If
-empty, the environment is not supported.
+これにより、利用可能なプリセットが表示されます。リストは使用中の環境によって変化します。リストが空の場合、その環境はサポートされていません。
 
-Run the command
+以下のコマンドを実行します。
 
 ```sh
 cmake --preset <preset>
 ```
 
-It will download all dependencies and generate build files, as long as `vcpkg` installation is
-available.
+`vcpkg` のインストールが利用可能であれば、これによりすべての依存関係がダウンロードされ、ビルドファイルが生成されます。
 
-If you're using VS2022, be sure to select a preset with `2022` in its name, as presets without that
-suffix will target VS2019.
+VS2022を使用している場合は、名前に `2022` が含まれるプリセットを必ず選択してください。サフィックスがないプリセットは VS2019 をターゲットとします。
 
-You can override any option by appending `-Doption=value` to this command, see
-[Build options](./cmake.md/#build-options) in CMake guide. For example, you can disable building of
-tests with `-DTESTS=OFF` if you don't care about them.
+このコマンドに `-Doption=value` を追記することで、任意のオプションを上書きできます。詳細については、CMakeガイドの
+[ビルドオプション](./cmake.md/#build-options) を参照してください。例えば、テストが不要な場合は、 `-DTESTS=OFF` を使用してテストのビルドを無効にできます。
 
 ### Visual Studio
 
-Open the game source folder in Visual Studio.
+ゲームのソースフォルダを Visual Studio で開きます。
 
-Visual Studio should be able to recognize the folder as a CMake project, and may attempt to start
-configuring it, which will most likely fail because it didn't use the proper preset.
+Visual Studio はフォルダを CMake プロジェクトとして認識し、設定を開始しようとする場合がありますが、適切なプリセットを使用していないため、設定は失敗する可能性が高いです。
 
-The Standard toolbar shows the presets in the `Configuration` drop-down box. Choose the proper one
-(should contain `windows` and `msvc`), then from the main menu, select `Project` ->
-`Configure Cache`.
+標準ツールバー の `Configuration` ドロップダウンボックスにプリセットが表示されます。適切なもの
+(`windows` と `msvc`を含むはず)を選択し、メインメニューから `プロジェクト` ->
+`キャッシュ構成`を選択します。
 
-If you're using VS2022, be sure to select a preset with `2022` in its name, as presets without that
-suffix are targeting VS2019.
+VS2022 を使用している場合は、名前に `2022` が含まれるプリセットを必ず選択してください。サフィックスがないプリセットは VS2019 をターゲットとします。
 
-## Build
+## ビルド
 
-### Terminal
+### ターミナル
 
-Run the command
+以下のコマンドを実行します。
 
 - `cmake --build --preset <preset> --config Release`
 
-You can replace `Release` with `Debug` to get a debug build, or `RelWithDebInfo` for a release build
-with less optimizations but more debug information.
+`Release` を `Debug` に置き換えてデバッグビルドを取得したり、`RelWithDebInfo` に置き換えて最適化は少ないがデバッグ情報が多いリリースビルドを取得したりできます。
 
 ### Visual Studio
 
-From the Standard toolbar's `Build Preset` drop-down menu select the build preset. From the main
-menu, select `Build` -> `Build All`.
+標準ツールバーの `Build Preset` ドロップダウンメニューからビルドプリセットを選択します。メインメニューから `ビルド` -> `すべてビルド`を選択します。
 
-You can also select between `Release`, `Debug` and `RelWithDebInfo` builds, though depending on UI
-layout the drop-down menu for this may be hidden behind the overflow button.
+`Release`、`Debug`、`RelWithDebInfo` のビルドタイプを切り替えることも可能ですが、UIレイアウトによっては、このドロップダウンメニューがオーバーフローボタンの背後に隠れている場合があります。
 
-## Translations
+## 翻訳
 
-Translations are optional and require `msgfmt` binary from `gettext` package; `vcpkg` should install
-it automatically.
+翻訳はオプションであり、`gettext`パッケージの`msgfmt` バイナリが必要です。 `vcpkg` が自動的にインストールするはずです。
 
-### Terminal
+### ターミナル
 
-Run the command
+以下のコマンドを実行します。
 
 - `cmake --build --preset <preset> --target translations_compile`
 
 ### Visual Studio
 
-Visual Studio should have built the translations in the previous step. If it did not, open Solution
-Explorer, switch it into CMake Targets mode (can be done with right click), then right click on
-`translations_compile` target -> `Build translations_compile`.
+Visual Studio は前のステップで翻訳をビルドしているはずです。ビルドされていない場合は、ソリューションエクスプローラーを開き、CMake ターゲットモードに切り替え（右クリックで実行可能）、
+`translations_compile` ターゲットを右クリック -> `Build translations_compile`を実行します。
 
-## Install
+## インストール
 
 > [!CAUTION]
 >
-> Install is still considered WIP and has received little testing.
+> インストール機能はまだ 作業中(WIP)と見なされており、テストはほとんど行われていません。
 
 ### Visual Studio
 
-From the main menu, select `Build` -> `Install CataclysmBN`
+メインメニューから `ビルド` -> `CataclysmBN のインストール` を選択します。
 
-### Terminal
+### ターミナル
 
-Run the command
+以下のコマンドを実行します。
 
 - `cmake --install out/build/<preset>/ --config Release`
 
-Replace `Release` with your chosen build type.
+`Release` を選択したビルドタイプに置き換えてください。
 
-## Run
+## 実行
 
-The game and test executables will both be available in `.\Release\` folder (folder name matches
-build type, so for other build types you'll get other folder names).
+ゲーム実行ファイルとテスト実行ファイルは、両方とも `.\Release\` フォルダ内にあります（フォルダ名はビルドタイプと一致するため、他のビルドタイプでは他のフォルダ名になります）。
 
-You can run them manually from the terminal, as long as you do it from the project's top directory
-as by default the game expects data files to be in current path.
+データファイルが現在のパスにあることをゲームがデフォルトで期待するため、プロジェクトのトップディレクトリから実行する限り、ターミナルから手動で実行できます。
 
-For running and debugging from Visual Studio, it's recommended to open the generated VS solution
-located at `out\build\<preset>\CataclysmBN.sln` (it will be there regardless of whether you've
-completed previous steps in IDE or terminal) and do any further work with it instead.
+Visual Studio からの実行とデバッグについては、生成された VS ソリューションファイル `out\build\<preset>\CataclysmBN.sln` を開き（前のステップを IDE またはターミナルで完了したかどうかに関係なくそこに存在します）、以降の作業はこれで行うことを推奨します。
 
-Alternatively, it's possible to stay in the "Open Folder" mode, but then you'll have to customize
-launch configuration for the game executable (and tests), and there may be other yet undiscovered
-side effects.
+あるいは、「Open Folder」モードのままでいることも可能ですが、その場合、ゲーム実行ファイル（およびテスト）の起動設定をカスタマイズする必要があり、他にもまだ発見されていない副作用があるかもしれません。
 
-### Terminal
+### ターミナル
 
-To start the game, run
+ゲームを起動するには、以下を実行します。
 
 - `.\Release\cataclysm-bn-tiles.exe`
 
-To execute tests, run
+テストを実行するには、以下を実行します。
 
 - `.\Release\cata_test-tiles.exe`
 
-### Visual Studio (Option 1, Recommended)
+### Visual Studio (省略可能 1、推奨)
 
-Close Visual Studio, then navigate to `out\build\<preset>\` and open `CataclysmBN.sln`. Set
-`cataclysm-bn-tiles` as Startup Project (can be done with right click from Solution Explorer), and
-you'll be able to run and debug the game executable without additional issues. It will already be
-preconfigured to look for the data files in the top project directory.
+Visual Studio を閉じ、`out\build\<preset>\` に移動して `CataclysmBN.sln`を開きます。
+`cataclysm-bn-tiles` をスタートアッププロジェクトとして設定し（ソリューションエクスプローラーで右クリックから実行可能）、追加の問題なくゲーム実行ファイルを実行およびデバッグできるようになります。これは、データファイルをトッププロジェクトディレクトリ内で探すように事前設定されています。
 
-To run tests, switch the Startup Project to `cata_test-tiles`.
+テストを実行するには、スタートアッププロジェクトを `cata_test-tiles`に切り替えます。
 
-### Visual Studio (Option 2)
+### Visual Studio (省略可能 2)
 
-Due to how Visual Studio handles CMake projects, it's impossible to specify the working directory
-for the executable while VS is in the "Open Folder" mode. This StackOverflow answer explains it
-nicely: https://stackoverflow.com/a/62309569 Fortunately, VS allows customizing exe launch options
-on individual basis.
+Visual Studio が CMake プロジェクトを処理する方法により、VSが「フォルダを開く」モードにある間は、実行可能ファイルのワーキングディレクトリ（作業ディレクトリ） を指定することは不可能です。このStackOverflowの回答がこの点をうまく説明しています: https://stackoverflow.com/a/62309569 幸いなことに、VSは実行可能ファイルの起動オプションを個別にカスタマイズできます。
 
-Open solution explorer and switch it into CMake Targets mode if you haven't already (can be done
-with a right click). There, right click on the `cataclysm-bn-tiles` target ->
-`Add Debug Configuration`. Visual Studio will open launch configurations file for this project, with
-new configuration for the `cataclysm-bn-tiles` target. Add the following line:
+ソリューションエクスプローラーを開き、まだ行っていない場合は CMake ターゲットモード に切り替えます（右クリックで実行可能）。そこで、 `cataclysm-bn-tiles` ターゲットを右クリック ->
+`デバッグ設定の追加`を選択します。Visual Studio はこのプロジェクトの起動設定ファイルを開き、 `cataclysm-bn-tiles` ターゲットの新しい設定が追加されます。以下の行を設定に追加してファイルを保存します。
 
 ```
 "currentDir": "${workspaceRoot}",
 ```
 
-to the config and save the file.
-
-The final result should look something like this:
+最終的な結果は以下のようになります。
 
 ```json
 {
@@ -193,6 +162,6 @@ The final result should look something like this:
 }
 ```
 
-Now, you should be able to run and debug the game executable from inside Visual Studio.
+これで、Visual Studio 内からゲーム実行ファイルを実行およびデバッグできるようになるはずです。
 
-If you'd like to run tests, repeat this process for the `cata_test-tiles` target.
+テストを実行したい場合は、`cata_test-tiles` ターゲットに対してこのプロセスを繰り返します。
