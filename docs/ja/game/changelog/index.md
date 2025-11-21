@@ -1,8 +1,8 @@
-# About Changelogs
+# 変更履歴について
 
-These are an incomplete list compiled for convenience, see
-[releases](https://github.com/cataclysmbnteam/Cataclysm-BN/releases) for all changes.
+これらは、便宜のためにコンパイルされた不完全なリストです。すべての変更については、
+[リリース](https://github.com/cataclysmbnteam/Cataclysm-BN/releases) を参照してください。
 
-Starts with
-[revision 10614 (just before pockets)](https://github.com/cataclysmbnteam/Cataclysm-BN/commit/8cea0fce70c87ea93c6fd4e409c68558e24ce42e)
-of [CleverRaven/Cataclysm-DDA.](https://github.com/CleverRaven/Cataclysm-DDA)
+本リストは、
+[CleverRaven/Cataclysm-DDA.](https://github.com/CleverRaven/Cataclysm-DDA)の
+[リビジョン 10614 (ポケット機能の直前)](https://github.com/cataclysmbnteam/Cataclysm-BN/commit/8cea0fce70c87ea93c6fd4e409c68558e24ce42e)から始まります。
