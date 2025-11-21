@@ -2,125 +2,124 @@
 edit: false
 ---
 
-# CLI Options
+# CLI オプション
 
 > [!NOTE]
 >
-> This page is auto-generated from `tools/gen_cli_docs.ts` and should not be edited directly.
+> このページは `tools/gen_cli_docs.ts` から自動生成されているため、直接編集しないでください。
 
-The game executable can not only run your favorite roguelike,
-but also provides a number of command line options to help modders and developers.
+ゲームの実行可能ファイルは、皆様お気に入りのローグライクを実行するだけでなく、MOD制作者や開発者を支援するための多数のコマンドラインオプションを提供します。
 
 ---
 
-## Info
+## 情報
 
 ### `--help`
 
-print this message and exit.
+このメッセージを出力して終了します。
 
 ### `--version`
 
-print the version and exit.
+バージョンを出力して終了します。
 
 ### `--paths`
 
-print the paths used by the game and exit.
+ゲームが使用するパスを出力して終了します。
 
-## Command line parameters
+## コマンドライン パラメータ
 
 ### `--seed <string of letters and or numbers>`
 
-Sets the random number generator's seed value.
+乱数ジェネレーターのシード値を設定します。
 
 ### `--jsonverify`
 
-Checks the BN json files.
+BN の JSONファイル をチェックします。
 
 ### `--check-mods [mods…]`
 
-Checks the json files belonging to BN mods.
+BN MODに属する JSON ファイルをチェックします。
 
 ### `--dump-stats <what> [mode = TSV] [opts…]`
 
-Dumps item stats.
+アイテムの統計情報をダンプします。
 
 ### `--world <name>`
 
-Load world.
+ワールドをロードします。
 
 ### `--basepath <path>`
 
-Base path for all game data subdirectories.
+すべてのゲームデータ サブディレクトリのベースパス。
 
 ### `--dont-debugmsg`
 
-If set, no debug messages will be printed.
+設定されている場合、デバッグメッセージは出力されません。
 
 ### `--lua-doc <output path>`
 
-Generate Lua docs to given path and exit.
+指定されたパスに Lua ドキュメントを生成して終了します。
 
 ### `--lua-types <output path>`
 
-Generate Lua types to given path and exit.
+指定されたパスに Lua 型定義を生成して終了します。
 
 ### `--datadir <directory name>`
 
-Sub directory from which game data is loaded.
+ゲームデータがロードされるサブディレクトリ名。
 
 ### `--autopickupfile <filename>`
 
-Name of the autopickup options file within the configdir.
+コンフィグディレクトリ内にあるオートピックアップ オプションファイル名。
 
 ### `--motdfile <filename>`
 
-Name of the message of the day file within the motd directory.
+メッセージ オブ ザ デイ（MOTD）ディレクトリ内にある MOTD ファイル名。
 
-## Map sharing
+## マップ共有
 
 ### `--shared`
 
-Activates the map-sharing mode.
+マップ共有モードを有効にします。
 
 ### `--username <name>`
 
-Instructs map-sharing code to use this name for your character..
+マップ共有コードに対し、キャラクターにこの名前を使用するように指示します。.
 
 ### `--addadmin <username>`
 
-Instructs map-sharing code to use this name for your character and give you access to the cheat functions..
+マップ共有コードに対し、この名前をキャラクターに使用し、チート機能へのアクセス権を与えるように指示します。
 
 ### `--adddebugger <username>`
 
-Informs map-sharing code that you're running inside a debugger.
+マップ共有コードに対し、デバッガー内で実行中であることを通知します。
 
 ### `--competitive`
 
-Instructs map-sharing code to disable access to the in-game cheat functions.
+マップ共有コードに対し、ゲーム内チート機能へのアクセスを無効にするように指示します。
 
 ### `--worldmenu`
 
-Enables the world menu in the map-sharing code.
+マップ共有コードでワールドメニューを有効にします。
 
-## User directories
+## ユーザーディレクトリ
 
 ### `--userdir <path>`
 
-Base path for user-overrides to files from the ./data directory and named below.
+./data ディレクトリおよび以下に名前が指定されたファイルに対するユーザーオーバーライドのベースパス。
 
 ### `--savedir <directory name>`
 
-Subdirectory for game saves.
+ゲームのセーブデータ用のサブディレクトリ名。
 
 ### `--configdir <directory name>`
 
-Subdirectory for game configuration.
+ゲームの設定ファイル用のサブディレクトリ名。
 
 ### `--memorialdir <directory name>`
 
-Subdirectory for memorials.
+メモリアル（記念碑）用のサブディレクトリ名。
 
 ### `--optionfile <filename>`
 
-Name of the options file within the configdir.
+コンフィグディレクトリ内にあるオプションファイル名。
