@@ -4,69 +4,60 @@ title: MSYS2
 
 > [!CAUTION]
 >
-> This set of instructions for MSYS2 have not been updated in a long time. The preferred instructions for building with MSYS2 are instead found in [CMake](./cmake#windows-environment-msys2)
+> この MSYS2 の手順は長期間更新されていません。MSYS2を用いたビルドには、代わりに [CMake](./cmake#windows-environment-msys2) の指示を参照することが推奨されます。
 
-This guide contains instructions for compiling Cataclysm-BN on 64bit Windows under MSYS2.
+このガイドには、64ビット Windows 環境下の MSYS2 で Cataclysm-BN (CBN) をコンパイル（ビルド）するための手順が含まれています。
 
 > [!WARNING]
 >
-> These instructions _are not intended_ to produce a redistributable copy of CBN. Please download the
-> official builds from the website or
-> [cross-compile from Linux](./makefile#cross-compile-to-windows-from-linux) if that is your
-> intention.
+> 注意: これらの手順は、CBNの再頒布可能なコピーを作成することを意図していません。再頒布が目的の場合は、公式サイトから公式ビルドをダウンロードするか、
+> [LinuxからWindows向けにクロスコンパイル](./makefile#cross-compile-to-windows-from-linux) してください。
 
-These instructions were written using 64-bit Windows 7 and the 64-bit version of MSYS2; the steps
-should be the same for other versions of Windows.
+これらの手順は64ビット Windows 7および64ビット版 MSYS2を使用して書かれていますが、他のバージョンの Windows でも手順は同様であるはずです。
 
-## Prerequisites:
+## 前提条件:
 
-- Windows 7, 8, 8.1, or 10
-- NTFS partition with ~10 Gb free space (~2 Gb for MSYS2 installation, ~3 Gb for repository and ~5
-  Gb for ccache)
-- 64-bit version of MSYS2
+- Windows 7、8、8.1、または 10
+- NTFSパーティションに約10GB の空き容量 (MSYS2インストールに約2GB、リポジトリに約3GB、ccacheに約5GB)
+- 64ビット版の MSYS2
 
-**Note:** Windows XP is unsupported!
+**注釈:** Windows XP はサポートされていません。
 
-## Installation:
+## インストール:
 
-1. Go to the [MSYS2 homepage](http://www.msys2.org/) and download the installer.
+1. [MSYS2 ホームページ](http://www.msys2.org/)にアクセスし、インストーラーをダウンロードします。
 
-2. Run the installer. It is suggested that you install to a dev-specific folder (C:\dev\msys64\ or
-   similar), but it's not strictly necessary.
+2. インストーラーを実行します。開発専用のフォルダ (C:\dev\msys64\など)にインストールすることを推奨しますが、必須ではありません。
 
-3. After installation, run MSYS2 64bit now.
+3. インストール後、MSYS2 64bit を起動します。
 
-## Configuration:
+## 環境設定:
 
-1. Update the package database and core system packages:
+1. パッケージデータベースとコアシステムパッケージを更新します。
 
 ```bash
 pacman -Syyu
 ```
 
-2. MSYS may inform you of a cygheap base mismatch and inform you a forked process died unexpectedly;
-   these errors appear to be due to the nature of `pacman`'s upgrades and _may be safely ignored._
-   You will be prompted to close the terminal window; do so, then re-start using the MSYS2 MinGW
-   64-bit menu item.
+2. MSYS2は、cygheap base mismatch の情報や、フォークされたプロセスが予期せず死亡したといったエラーを通知する場合があります。これらのエラーは `pacman`のアップグレードの性質に起因するものと思われ、安全に無視できる可能性があります。ターミナルウィンドウを閉じるように促されますので、閉じた後、MSYS2 MinGW 64-bit メニュー項目を使用して再起動します。
 
-3. Update remaining packages:
+3. 残りのパッケージを更新します。
 
 ```bash
 pacman -Su
 ```
 
-4. Install packages required for compilation:
+4. コンパイルに必要なパッケージをインストールします。
 
 ```bash
 pacman -S git make mingw-w64-x86_64-{astyle,ccache,gcc,libmad,libwebp,pkg-config,SDL2} mingw-w64-x86_64-SDL2_{image,mixer,ttf}
 ```
 
-5. Close MSYS2.
+5. MSYS2を閉じます。
 
-6. Update path variables in the system-wide profile file (e.g. `C:\dev\msys64\etc\profile`) as
-   following:
+6. システム全体の設定ファイル (例:`C:\dev\msys64\etc\profile`) のパス変数を以下のように更新します。
 
-- find lines:
+- 以下の行を見つけます。
 
 ```
 MSYS2_PATH="/usr/local/bin:/usr/bin:/bin"
@@ -74,13 +65,13 @@ MANPATH='/usr/local/man:/usr/share/man:/usr/man:/share/man'
 INFOPATH='/usr/local/info:/usr/share/info:/usr/info:/share/info'
 ```
 
-and
+および
 
 ```
 PKG_CONFIG_PATH="/usr/lib/pkgconfig:/usr/share/pkgconfig:/lib/pkgconfig"
 ```
 
-- and replace them with:
+- そして、それらを以下に置き換えます:
 
 ```
 MSYS2_PATH="/usr/local/bin:/usr/bin:/bin:/mingw64/bin"
@@ -88,15 +79,15 @@ MANPATH='/usr/local/man:/usr/share/man:/usr/man:/share/man:/mingw64/share/man'
 INFOPATH='/usr/local/info:/usr/share/info:/usr/info:/share/info:/mingw64/share/man'
 ```
 
-and
+および
 
 ```
 PKG_CONFIG_PATH="/usr/lib/pkgconfig:/usr/share/pkgconfig:/lib/pkgconfig:/mingw64/lib/pkgconfig:/mingw64/share/pkgconfig"
 ```
 
-## Cloning and compilation:
+## クローンとコンパイル:
 
-1. Open MSYS2 and clone the Cataclysm-BN repository:
+1. MSYS2を起動し、Cataclysm-BNリポジトリをクローンします。
 
 ```bash
 cd /c/dev/
@@ -104,30 +95,24 @@ git clone https://github.com/cataclysmbnteam/Cataclysm-BN.git
 cd Cataclysm-BN
 ```
 
-**Note:** This will download the entire CBN repository and all of its history (3GB). If you're just
-testing, you should probably add `--depth=1` (~350MB).
+**注釈:** これにより、CBNリポジトリ全体とその全履歴 (3GB)がダウンロードされます。テスト目的のみの場合は、 `--depth=1` (~350MB)を追加することを推奨します。
 
-2. Compile with following command line:
+2. 以下のコマンドラインでコンパイルします。
 
 ```bash
 make -j$((`nproc`+0)) CCACHE=1 RELEASE=1 MSYS2=1 DYNAMIC_LINKING=1 SDL=1 TILES=1 SOUND=1 LANGUAGES=all LINTJSON=0 ASTYLE=0 RUNTESTS=0
 ```
 
-You will receive warnings about unterminated character constants; they do not impact the compilation
-as far as this writer is aware.
+「終了していない文字列型の定数です」 (unterminated character constants) に関する警告が表示されますが、この文書の筆者が知る限り、コンパイルには影響しません。
 
-**Note**: This will compile a release version with Sound and Tiles support and all localization
-languages, skipping checks and tests, and using ccache for build acceleration. You can use other
-switches, but `MSYS2=1` and `DYNAMIC_LINKING=1` are required to compile without issues.
+**注釈**: これにより、サウンドとタイル（グラフィック）サポート、および全てのローカライゼーション言語を含むリリースバージョンが、チェックとテストをスキップし、ビルド高速化のために ccache を使用してコンパイルされます。他のスイッチも使用できますが、`MSYS2=1` と `DYNAMIC_LINKING=1` は問題なくコンパイルするために必須です。
 
-## Running:
+## 実行:
 
-1. Run inside MSYS2 from Cataclysm's directory with the following command:
+1. MSYS2内で、Cataclysmのディレクトリから以下のコマンドで実行します。
 
 ```bash
 ./cataclysm-bn-tiles
 ```
 
-**Note:** If you want to run the compiled executable outside of MSYS2, you will also need to update
-your user or system `PATH` variable with the path to MSYS2's runtime binaries (e.g.
-`C:\dev\msys64\mingw64\bin`).
+**注釈:** コンパイルされた実行可能ファイルをMSYS2の外部で実行したい場合は、MSYS2のランタイムバイナリへのパス (例:`C:\dev\msys64\mingw64\bin`) を、ユーザーまたはシステムの `PATH` 変数に追加する必要があります。
