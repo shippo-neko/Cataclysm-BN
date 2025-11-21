@@ -1,9 +1,9 @@
-# Items Cookbook
+# アイテム クックブック
 
-Here are some common tasks that you might want to do with items.
-[For more on item(game objects), check here.](../explanation/game_objects.md)
+ここでは、アイテムを使って実行したい一般的なタスクをいくつか紹介します。
+[アイテム(ゲームオブジェクト)の詳細については、こちらを確認してください](../explanation/game_objects.md)。
 
-## Moving items from one tripoint to another
+## あるtripointから別のtripointへのアイテムの移動
 
 ```cpp
 auto move_item( map &here, const tripoint &src, const tripoint &dest ) -> void
