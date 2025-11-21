@@ -1,35 +1,17 @@
-# How it all started
+# すべてはどのように始まったのか
 
 > [!CAUTION]
 >
-> #### spoiler alert
+> #### ネタバレ注意
 >
-> spoilers below!
+> 以下、ネタバレを含みます！
 
-### Cataclysm
+### カタクリズム
 
-Many humans will remember the Cataclysm as a singular event, when the dead came to life and
-unimaginable horrors took to the streets to pour death and carnage onto the Earth. However, it was
-actually a fairly gradual process. Dimensional research, both by the United States and various other
-nations, slowly weakened the dimensional walls separating our reality from the Nethereum, at least
-on Earth. The effect of this was fairly gradual at first, with mutations becoming easier over time,
-revivication near portals becoming faster and stronger, so slowly over the years that few even
-noticed.
+多くの人間は、大災厄を、死者が蘇り、想像を絶する恐怖が街に繰り出して地球に死と殺戮をもたらした単一の出来事として記憶しているでしょう。しかし、実際には、それはかなり漸進的なプロセスでした。米国および他の様々な国々による次元研究は、我々の現実とネセリウムを隔てる次元の壁を、少なくとも地球上では徐々に弱めていきました。この影響は最初はかなり緩やかであり、時間の経過とともに変異が容易になり、ポータル付近での蘇生がより速く強くなりましたが、その進展はあまりに緩慢であったため、気づく人はほとんどいませんでした。
 
-The tipping point however, was when XEDRA decided to open one of the largest portals of ever devised
-by their minds in New England. This weakened the dimensional walls enough for it to shatter, letting
-a deluge of both XE037 and it's associated energies into our reality. The proceeding event is what
-is now known as the Cataclysm, as horrific portal storms and all the worst nightmares of a few dozen
-realities flooded onto our world for several days. By the time the tides settled, the Nethereum and
-ours finally reaching an equilibrium, the world had been devastated, governments had collapsed and
-civilization as we knew it was destroyed.
+しかし、決定的な転換点は、XEDRA がニューイングランドで彼らの知能によって考案された史上最大のポータルの1つを開くことを決定した時でした。これにより次元の壁が十分に弱まり、壁は崩壊し、XE037 とそれに関連するエネルギーの豪雨が我々の現実に流れ込みました。この後に続く出来事が、現在大災厄として知られているものです。恐ろしいポータルストームと、数十の現実における最悪の悪夢が数日間、我々の世界に押し寄せました。その大波が収束し、ネセリウムと我々の世界が最終的に平衡状態に達したときまでに、世界は荒廃し、政府は崩壊し、我々が知っていた文明は破壊されました。
 
-The various portals throughout the world keep ours and the Nethereum connected, but this is not a
-truly stable equilibrium. If the walls between our dimensions are not repaired, if not enough
-portals are closed or stabilized, eventually the Earth will suffer a local dimensional collapse,
-folding into itself like a used bandage to quarantine us and protect both the rest of our reality
-and the Nethereum from further dimensional destruction. (Timeline unknown because if it's within a
-lifetime I guarantee you some player will wait until that date just to make a bug report that
-nothing happened.)
+世界中に存在する様々なポータルは、我々の世界とネセリウムとを結びつけていますが、これは真に安定した平衡ではありません。次元間の壁が修復されず、十分な数のポータルが閉じられるか安定化されない場合、最終的に地球は局所的な次元崩壊に見舞われ、使用済みの包帯のようにそれ自体の中に折りたたまれて、我々を隔離し、我々の残りの現実とネセリウムの両方をさらなる次元破壊から保護することになります。（タイムラインは不明です。なぜなら、それが生存期間内であれば、何も起こらなかったというバグ報告をするためだけに、間違いなくプレイヤーがその日付まで待つことになるからです。）
 
-## More expansion to follow.
+## さらなる拡張が続く予定です。
