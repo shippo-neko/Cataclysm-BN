@@ -1,43 +1,26 @@
-# Frequently Asked Questions
+# よくある質問
 
-# Adding stuff
+# コンテンツの追加
 
-## Adding a monster
+## モンスターの追加
 
-1. Edit `data/json/monsters.json` or create a new json file and insert the definition of your new
-   monster there (probably copy an existing entry).
-2. Make sure the id value is unique among all other monster types.
-3. Your monster type is now valid, but won't be spawned. If you want it to be spawned among similar
-   monsters, edit monstergroups.json. Find the appropriate array, and insert the identifier for your
-   monster (e.g, `mon_zombie`). `cost_multiplier`, makes it more expensive to spawn. The higher the
-   cost, the more 'slots' it takes up, and freq is how frequent they spawn. See `mongroupdef.cpp`
-4. If you want your monster to drop items, edit `monster_drops.json`. Make a new array for your
-   monster type with all the map item groups it may carry, and a chance value for each.
-5. Your monster may have a special attack, a `monattack::function` reference. Edit `monattack.h` and
-   include the function in the class definition; edit `monstergenerator.cpp` and add the
-   translation, then edit `monattack.cpp` and define your function. Functions may be shared among
-   different monster types. Be aware that the function should contain a statement that the monster
-   uses to decide whether or not to use the attack, and if they do, should reset the monster's
-   attack timer.
-6. Just like attacks, some monsters may have a special function called when they die. This works the
-   same as attacks, but the relevant files are `mondeath.h` and `mondeath.cpp`.
-7. If you add flags, document them in `json_flags.md`, and `mtype.h`. Please. Or we will replace
-   your blood with acid in the night.
+1. `data/json/monsters.json`を編集するか、新しい JSON ファイルを作成し、そこに新しいモンスターの定義を挿入します（おそらく既存のエントリをコピーします）。
+2. 他のすべてのモンスタータイプとは重複しない固有IDであることを確認します。
+3. これでモンスタータイプは有効になりますが、出現はしません。類似のモンスターの中に出現させたい場合は、monstergroups.json. を編集してください。適切な配列を見つけ、そこにモンスターの識別子 (例: `mon_zombie`)を挿入します。`cost_multiplier`は、出現コストを高くします。コストが高いほど、占有する「スロット」が多くなります。freq は、出現頻度です。`mongroupdef.cpp` を参照してください。
+4. モンスターにアイテムをドロップさせたい場合は、`monster_drops.json`を編集します。そのモンスタータイプ用の新しい配列を作成し、モンスターが運ぶ可能性のあるすべてのマップアイテムグループと、それぞれの出現確率を定義します。
+5. モンスターは、特別な攻撃、すなわち `monattack::function`参照を持つ場合があります。 `monattack.h` を編集し、その関数をクラス定義に含めます。 `monstergenerator.cpp` を編集して翻訳を追加し、次に `monattack.cpp` を編集して関数を定義します。関数は異なるモンスタータイプ間で共有される場合があります。モンスターが攻撃を使用するかどうかを決定するためのステートメントを含める必要があり、使用する場合は、モンスターの攻撃タイマーをリセットする必要があることに注意してください。
+6. 攻撃と同様に、一部のモンスターは死亡時に特別な関数が呼び出される場合があります。これは攻撃と同じ仕組みですが、関連ファイルは `mondeath.h` と `mondeath.cpp`です。
+7. フラグを追加する場合は、`json_flags.md`と `mtype.h`にそれらを文書化してください。お願いします。さもないと、夜中にあなたの血液を酸に置き換えます。
 
-## Adding structures to the map
+## マップへの建造物の追加
 
-Most "regular" buildings are spawned in cities (large clusters of buildings which are located rather
-close to each other).
+ほとんどの「通常の」建造物は、都市（互いに比較的近くに位置する建造物の大きなクラスター）に出現します。
 
-In file `omdata.h` in the enum `oter_id` structure define names (code identifiers) for your
-building.
+ファイル `omdata.h` の enum `oter_id` 構造体で、建造物の名前（コード識別子）を定義します。
 
-If you want your building to be displayed at overmap in different orientations, you should add 4
-identifiers for each orientation (`south`, `east`, `west` and `north` correspondingly).
+建造物をオーバーマップ上で異なる方向で表示したい場合は、各方向に対応する4つの識別子 (`south`、`east`、`west`、`north`)を追加する必要があります。
 
-In the same file in structure `const oter_t oterlist[num_ter_types]` we should define how these
-buildings will be displayed, how much they obscure vision and which extras set they have. For
-example:
+同じファイル内の構造体 `const oter_t oterlist[num_ter_types]` で、これらの建造物がどのように表示されるか、どの程度視界を遮るか、どのエクストラセットを持つかを定義する必要があります。例:
 
 ```cpp
 {"mil. surplus", '^', c_white, 5, build_extras, false, false},
@@ -46,101 +29,75 @@ example:
 {"mil. surplus", '<', c_white, 5, build_extras, false, false}
 ```
 
-Comments at the beginning of this structure are rather useful. In the file `mapgen.cpp` find the
-subroutine called `draw_map(...);` where you should find a huge variant operator ("switch"). This is
-where you should put your code defining the new building by adding new case-statement.
+この構造体の冒頭にあるコメントは非常に役立ちます。ファイル `mapgen.cpp` のサブルーチン `draw_map(...);` を見つけ、そこに巨大なバリアント演算子（"switch"）があるはずです。ここに新しい case ステートメントを追加して、新しい建造物を定義するコードを配置する必要があります。
 
-It should be mentioned that most buildings are built on the square `SEEX*2 x SEEY*2` tiles.
+ほとんどの建造物は、`SEEX*2 x SEEY*2` タイルの正方形上に構築されることに言及しておくべきです。
 
-If you want your building to be spawned not only in city limits you should refer to structures in
-file `omdata.h` (starting from the line `#define OMSPEC_FREQ 7`).
+建造物を都市の境界内だけでなくスポーンさせたい場合は、ファイル `omdata.h` の構造体 (行 `#define OMSPEC_FREQ 7`から始まる)を参照する必要があります。
 
-These structures are also commented in source code. Add new identifier in enum `omspec_id` structure
-before `NUM_OMSPECS` and then add a record in `const overmap_special overmap_specials[NUM_OMSPECS]`
-array. For example:
+これらの構造体もソースコード内にコメントされています。enum `omspec_id` 構造体内の
+`NUM_OMSPECS` の前に新しい識別子を追加し、次に `const overmap_special overmap_specials[NUM_OMSPECS]`
+配列にレコードを追加します。例:
 
 ```cpp
 {ot_toxic_dump,   0,  5, 15, -1, mcat_null, 0, 0, 0, 0, &omspec_place::wilderness,0}
 ```
 
-The comments given in source code to structure `struct overmap_special` explain the meaning of these
-constants in the example above.
+構造体 `struct overmap_special` に付けられているソースコード内のコメントは、上記の例におけるこれらの定数の意味を説明しています。
 
-## Adding a bionic
+## バイオニックの追加
 
-1. Edit `data/json/bionics.json` and add your bionic near similar types. See `JSON_INFO.md` for a
-   more in-depth review of the individual fields.
-2. If you want the bionic to be available in the game world as an item, add it to
-   `item_groups.json`, and add a bionic item to `data/json/items/bionics.json`.
-3. Manually code in effects into the appropriate files, for activated bionics edit the
-   `player::activate_bionic` function in `bionics.cpp`.
-4. For bionic ranged weapons add the bionic weapon counterparts to `ranged.json`, give them the
-   `BIONIC_WEAPON` flags.
-5. For bionic close combat weapons add the bionic weapon to `data/json/items/melee.json` give them
-   `NON_STUCK`, `NO_UNWIELD` at least.
+1. `data/json/bionics.json` を編集し、類似のタイプに近い場所にバイオニックを追加します。個々のフィールドの詳細については、`JSON_INFO.md` を参照してください。
+2. バイオニックをアイテムとしてゲームワールドで利用可能にしたい場合は、
+   `item_groups.json`に追加し、`data/json/items/bionics.json`にバイオニックアイテムを追加します。
+3. 効果を適切なファイルに手動でコーディングします。起動型バイオニックの場合は、
+   `player::activate_bionic` の `bionics.cpp`関数を編集します。
+4. バイオニックの遠隔武器の場合は、`ranged.json` にバイオニック武器の対応物を追加し、
+   `BIONIC_WEAPON` フラグを与えます。
+5. バイオニックの近接武器の場合は、`data/json/items/melee.json` にバイオニック武器を追加し、少なくとも
+   `NON_STUCK`、`NO_UNWIELD` フラグを与えます。
 
-## How armor protection is calculated
+## アーマー保護の計算方法
 
-1. When the player is hit at a specific body part, armor coverage determines whether the armor is
-   hit, or an uncovered part of the player is hit (roll `1d100` against coverage).
-2. If the above roll fails (ie roll value is above coverage), then the armor does not absorb any
-   damage from the blow, neither does it become damaged.
-3. If the above roll succeeds, the armor is hit, possibly absorbing some damage and possibly getting
-   damaged in the process.
-4. The above steps are repeated for each layer of armor on the body part.
-5. Armor protects against bash and cut damage. These are determined by multiplying the armor
-   thickness by the material bash/cut resistance factor respectively, given in `materials.json`.
-6. If the armor is made from 2 materials types, then it takes a weighted average of the primary
-   material (`66%`) and secondary material (`33%`).
-7. Materials resistance factors are given relative to `PAPER` as a material (this probably needs
-   some fine-tuning for balance).
+1. プレイヤーが特定の身体部位に被弾したとき、アーマー被覆率によって、アーマーが被弾したのか、プレイヤーの覆われていない部分が被弾したのかが決定されます（被覆率に対して `1d100` でロールします）。
+2. 上記のロールが失敗した場合（つまり、ロール値が被覆率を上回った場合）、アーマーはその打撃によるダメージを吸収せず、アーマーは損傷も受けません。
+3. 上記のロールが成功した場合、アーマーが被弾し、ダメージの一部を吸収し、アーマーが損傷を受ける可能性があります。
+4. 上記のステップは、その身体部位のアーマーの層ごとに繰り返されます。
+5. アーマーは、打撃 および 切断ダメージから保護します。`materials.json`で与えられている素材の打撃/切断耐性係数をアーマーの厚さにそれぞれ乗算することによって算出されます。
+6. アーマーが2種類の素材でできている場合、主要素材 (`66%`) と副次素材 (`33%`)の重み付け平均を取ります。
+7. 素材の耐性係数は、`PAPER` を基準とします（バランス調整のために微調整を要する場合があります）。
 
-## Adding an iuse function.
+## iuse 関数の追加
 
-1. Add the new item use code to `iuse.cpp` and `iuse.h`.
-2. Add the new json_flag to your item. And link it to the iuse function in `item_factory.cpp`.
-3. Document the new flag in `json_flags.md`.
+1. 新しいアイテム使用コードを `iuse.cpp` と `iuse.h`に追加します。
+2. 新しい JSON フラグをアイテムに追加します。そして、`item_factory.cpp`でそれを iuse 関数にリンクします。
+3. `json_flags.md` に新しいフラグを文書化します。
 
-## Acid resistance
+## 酸耐性
 
-This determines how items react to acid fields. Item acid resistances are a weighted average of the
-materials acid resistance (see `item::acid_resist`):
+これは、アイテムが酸のフィールドにどのように反応するかを決定します。アイテムの酸耐性は、素材の酸耐性の重み付け平均です (`item::acid_resist`を参照)。
 
-- An item acid resistance of zero means it will get corroded every turn;
-- An item acid resistance above zero means it has a chance of getting corroded every turn;
-- An item acid resistance above 9 means completely acidproof.
+- アイテムの酸耐性がゼロの場合、毎ターン腐食します。
+- アイテムの酸耐性がゼロより大きい場合、毎ターン腐食する可能性があります。
+- アイテムの酸耐性が9より大きい場合、完全に酸性耐性があります（acidproof）。
 
-Acid resistance values are in `materials.json`, and defined as such:
+酸耐性値は `materials.json`にあり、次のように定義されています。
 
-- 0 - zero resistance to acid (metals)
-- 1 - partly resistant to acid
-- 2 - very resistant to acid
-- 3 - complete acid resistance
+- 0 - 酸に対する耐性がゼロ（金属など）
+- 1 - 部分的に酸性耐性がある
+- 2 - 非常に酸性耐性がある
+- 3 - 完全に酸性耐性がある
 
 # FAQ
 
-**Q: How do I prevent an item from showing up in NPC inventory?**
+**Q: アイテムが NPC のインベントリに表示されないようにするにはどうすればよいですか？**
 
-A: Add the `TRADER_AVOID` flag to it.
+A: そのアイテムに `TRADER_AVOID` フラグを追加します。
 
-**Q: What the heck is up with the map objects?**
+**Q: マップオブジェクトって一体何ですか？**
 
-A: The pertinent map objects are submap, mapbuffer, map, and overmap. The submap contains the actual
-map data, in SEEXxSEEY chunks. Vehicles and spawns are stored in vectors because they are relatively
-sparse. Submaps live in the single global mapbuffer, MAPBUFFER. Map encapsulates the area around the
-player that is currently active. It contains an array of MAPSIZE * MAPSIZE submap pointers called
-grid. This is a 2D array, but is mapped to a 1D array for (questionable) indexing purposes. When the
-player moves from one submap to another, `map::shift()` is called. It moves the pointers in grid to
-keep the player centered. The leading edge of grid is populated by `map::load()`. If the submap has
-been visited before, it's loaded from MAPBUFFER. Otherwise a 2x2 chunk of submaps is generated based
-on the corresponding overmap square type. An overmap encapsulates the large-scale structure of a map
-(such as location and layout of cities, forests, rivers, roads, etc...). There are an arbitrary
-number of overmaps. Additional overmaps are generated as the player enters new areas.
+A: 関連するマップオブジェクトは、サブマップ (submap)、マップバッファ (mapbuffer)、マップ (map)、および オーバーマップ (overmap) です。サブマップは、SEEX x SEEY のチャンクで実際のマップデータを含んでいます。乗り物とスポーンは、比較的疎なため、ベクトルに格納されます。サブマップは単一のグローバルなマップバッファ、MAPBUFFER 内に存在します。マップは、現在アクティブなプレイヤー周辺のエリアをカプセル化します。これには、grid と呼ばれる MAPSIZE * MAPSIZE のサブマップポインターの配列が含まれています。これは2D配列ですが、（疑わしい）インデックス作成の目的で1D配列にマッピングされています。プレイヤーがあるサブマップから別のサブマップに移動すると、`map::shift()` が呼び出されます。これは、プレイヤーが中央にくるように grid 内のポインターを移動します。grid の最前線は `map::load()`によって埋められます。サブマップが以前に訪れたことがある場合は、MAPBUFFER からロードされます。そうでない場合は、対応するオーバーマップ地形タイプに基づいて、2x2 チャンクのサブマップが生成されます。オーバーマップは、マップの大規模な構造（都市、森、川、道路などの位置とレイアウト）をカプセル化します。オーバーマップの数は任意です。プレイヤーが新しいエリアに入ると、追加のオーバーマップが生成されます。
 
-**Q: What is the relation of NPCs/Monsters vs maps. How are they stored, where are they stored? Are
-they stored?**
+**Q: NPC/モンスターとマップの関係はどうなっていますか？どこに、どのように格納されていますか？**
 
-A: All npcs are now stored in the overmap. Active npcs only contain the currently active npcs. There
-is a difference between npc active npc coordinates, and overmap coordinates. So these will need to
-be changed when saving the npcs. Or else the npcs will be saved at the wrong location. And yes they
-are stored.
+A: すべての NPC は現在、オーバーマップに格納されています。アクティブな NPC のみ、現在アクティブな NPC を含みます。NPC のアクティブな座標とオーバーマップの座標には違いがあります。そのため、NPC をセーブするときに変更する必要があります。さもないと、NPC は間違った場所にセーブされてしまいます。そして、はい、それらは格納されています。
