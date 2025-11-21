@@ -1,9 +1,8 @@
-# Working with both BN and DDA
+# BN と DDA の両方での作業
 
-Sometimes you may need to port some changes from DDA. It could be done via adding remote and
-cherry-picking.
+DDA から何らかの変更点をポートしたい場合があります。これは、リモートを追加し、チェリーピックを実行することで可能になります。
 
-# tl;dr version
+# tl;dr バージョン
 
 ```
 git remote add dda https://github.com/CleverRaven/Cataclysm-DDA
@@ -12,98 +11,89 @@ git checkout -b ddamaster dda/master
 git checkout ddamaster && git pull
 ```
 
-# Explained version
+# 解説バージョン
 
-## Setting up
+## セットアップ
 
-Assuming you have a directory with BN named `Cataclysm-BN`, open a terminal there.
+BN と名付けられたディレクトリ `Cataclysm-BN`があると仮定して、そこでターミナルを開きます。
 
-Add the remote tracking branch for DDA. Let's name the branch `dda` (doesn't need to be `dda`):
+DDA のリモートトラッキングブランチを追加します。ブランチ名は `dda` としましょう(`dda`である必要はありません)。
 
 ```
 git remote add dda https://github.com/CleverRaven/Cataclysm-DDA
 ```
 
-To download the contents of the new branch, it has to be fetched:
+新しいブランチの内容をダウンロードするには、フェッチする必要があります。
 
 ```
 git fetch dda
 ```
 
-This downloads all the content from the remote tracking branch. It shouldn't take very long, because
-it doesn't download the things common to both repos. Once fetched, you can `merge`, `pull`,
-`checkout` etc. the branches on the remote, but you have to prepend them with `dda/`, for example
-`dda/master`. It's useful to have a local branch pointing to the remote tracking one:
+Tこれにより、リモートトラッキングブランチからすべてのコンテンツがダウンロードされます。両方のリポジトリに共通するものはダウンロードされないため、それほど時間はかかりません。フェッチが完了すると、リモート上のブランチを`merge`、`pull`、
+`checkout` などできますが、それらの前に`dda/`を付ける必要があります
+(例:`dda/master`)。 リモートトラッキングブランチを指すローカルブランチを持つと便利です。
 
 ```
 git checkout -b ddamaster dda/master
 ```
 
-This creates an `ddamaster` branch, which is basically DDA's `master` branch. You can take other
-name instead of `ddamaster`.
+これにより、基本的に DDA の `master` ブランチである `ddamaster` ブランチが作成されます。`ddamaster` の代わりに別の名前を使用しても構いません。
 
-## Updating
+## 更新
 
-The simplest way is:
+最も簡単な方法は次のとおりです。
 
 ```
 git checkout ddamaster 
 git pull
 ```
 
-This shouldn't result in any conflicts. If it did, you probably committed changes to the main
-branch. In this case you may want to back them up:
+これでコンフリクトが発生することはないはずです。もし発生した場合、メインブランチに変更をコミットした可能性があります。この場合は、変更をバックアップしたい場合があります。
 
 ```
 git checkout -b temp-branch-name
 ```
 
-And reset the main branch to the remote:
+そして、メインブランチをリモートにリセットします。
 
 ```
 git branch -f ddamaster dda/master
 ```
 
-## Contributing
+## 貢献
 
 ```
-# Switch to BN branch
+# BN ブランチに切り替え
 git checkout main
-# Update local content
+# ローカルコンテンツを更新
 git pull
-# Create new branch for your changes
+# 変更用の新しいブランチを作成
 git checkout -b chainsaw-toothbrush-rebalance
-# [do stuff with files]
+# [ファイルを操作]
 ...
-# Commit the changes
+# 変更をコミット
 git commit -a
-# Upload your changes to your fork of Cataclysm (assuming its branch is named origin)
+# Cataclysm のフォークに自分の変更をアップロード（ブランチ名が origin だと仮定）
 git push -u origin chainsaw-toothbrush-rebalance
-# Go to BN's github and make a pull request
+# BN の GitHub に移動してプルリクエストを作成
 ```
 
-# Porting
+# ポート
 
-Porting is done with `git cherry-pick`. First, you need to find the hash of the merge commit, or the
-first and the last of the commits from the range you want to port. On github, those are on the right
-side of commit descriptions in a PR. You can use the full hash or the shortened version. In the
-examples, `fafafaf` is the merge commit, while `a0a0a0a` and `b1b1b1b` are the first and last commit
-from a range (order is important). Then, from a branch you are porting to, cherry-pick the merge
-commit or the range of commits:
+ポートは `git cherry-pick`で行われます。まず、マージコミットのハッシュ、またはポートしたいコミット範囲の最初と最後のコミットのハッシュを見つける必要があります。GitHub では、それらは PR のコミット説明の右側にあります。完全なハッシュまたは短縮バージョンを使用できます。以下の例では
+`fafafaf` がマージコミットであり、 `a0a0a0a` と `b1b1b1b` が範囲の最初と最後のコミットです（順序が重要です）。次に、ポート先のブランチから、マージコミットまたはコミットの範囲をチェリーピックします。
 
 ```
-# Merge commit
+# マージコミット
 git cherry-pick fafafaf
-# Commit range
+# コミット範囲
 git cherry-pick a0a0a0a..b1b1b1b
 ```
 
-Resolve the conflicts (there will be many for non-trivial PRs and you'll have to resolve most of
-them manually):
+コンフリクトを解決します（非自明な PR の場合は多数発生し、ほとんどを手動で解決する必要があります）。
 
 ```
 git mergetool
 ```
 
-The above may require setting up a merge conflict resolving tool (TODO: describe how to do that).
-Then commit and push, as usual.
+上記を実行するには、マージコンフリクト解決ツールのセットアップが必要な場合があります（TODO: その方法を記述する）。その後、通常どおりコミットし、プッシュします。
