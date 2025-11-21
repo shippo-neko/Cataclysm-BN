@@ -1,45 +1,35 @@
-# Visual Studio + vcpkg
+# Visual Studio + vcpkg を用いたビルド手順
 
-This guide contains steps required to allow compilation of Cataclysm-BN on Windows using Visual
-Studio and vcpkg.
+このガイドには、Visual Studio と vcpkg を使用して Windows 上で Cataclysm-BN をコンパイルするために必要な手順が含まれています。
 
-Steps from current guide were tested on Windows 10 and 11 (64 bit), Visual Studio 2019 and 2022 (64
-bit), but should as well work with slight modifications for other versions of Windows and Visual
-Studio.
+このガイドの手順は Windows 10 および 11（64ビット）、Visual Studio 2019 および 2022（64ビット）でテストされていますが、他のバージョンの Windows および Visual Studio でもわずかな変更で同様に機能するはずです。
 
-## Prerequisites:
+## 前提条件:
 
-- Computer with modern Windows operating system installed (Windows 10 or 11), Windows 7 and 8.1 are
-  not guaranteed to work;
-- NTFS partition with ~15 Gb free space (~10 Gb for Visual Studio, ~1 Gb for vcpkg installation, ~3
-  Gb for repository and ~1 Gb for build cache);
-- Git for Windows (installer can be downloaded from [Git homepage](https://git-scm.com/));
+- モダンな Windows OS がインストールされたコンピューター（Windows 10 または 11）。Windows 7 および 8.1 での動作は保証されていません。
+- NTFSパーティションに約 15GB の空き容量 (Visual Studioに約 10GB、vcpkgインストールに約 1GB、リポジトリに約 3GB、ビルドキャッシュに約 1GB)。
+- Git for Windows (インストーラーは [Git ホームページ](https://git-scm.com/)からダウンロード可能)。
 - Visual Studio 2019 or 2022
-  - **Note**: If you are using Visual Studio 2022, you must install the Visual Studio 2019 compilers
-    to work around a vcpkg bug. In the Visual Studio Installer, select the 'Individual components'
-    tab and search for / select the component that looks like 'MSVC v142 - VS 2019 C++ x64/x86 Build
-    Tools'. See https://github.com/microsoft/vcpkg/issues/22287.
-- Latest version of vcpkg (see instructions on
-  [vcpkg homepage](https://github.com/Microsoft/vcpkg)).
-- If you plan on contributing your changes to Bright Nights, you'll also have to install a code
-  formatter, see [Code style](#code-style) section for more info.
+  - **注釈**: Visual Studio 2022 を使用している場合、vcpkg のバグを回避するために Visual Studio 2019 のコンパイラをインストールする必要があります。Visual Studio Installer で「個別のコンポーネント」タブを選択し、「MSVC v142 - VS 2019 C++ x64/x86 ビルドツール」のように見えるコンポーネントを検索/選択してください。詳細は https://github.com/microsoft/vcpkg/issues/22287を参照してください。
+- 最新バージョンの vcpkg (手順は
+  [vcpkg ホームページ](https://github.com/Microsoft/vcpkg)を参照)。
+- 変更点を Bright Nights へ貢献する予定がある場合は、コードフォーマッターもインストールする必要があります。詳細については [コードスタイル](#code-style) のセクションを参照してください。
 
-**Note:** Windows XP is unsupported!
+**注釈:** Windows XP はサポートされていません。
 
-## Installation and configuration:
+## インストールと環境設定:
 
-1. Install `Visual Studio` (installer can be downloaded from
-   [Visual Studio homepage](https://visualstudio.microsoft.com/)).
+1. `Visual Studio` をインストールします (インストーラーは
+   [Visual Studio ホームページ](https://visualstudio.microsoft.com/)からダウンロード可能)。
 
-- Select the "Desktop development with C++" and "Game development with C++" workloads.
+- 「C++によるデスクトップ開発」と「C++によるゲーム開発」のワークロードを選択してください。
 
-2. Install `Git for Windows` (installer can be downloaded from
-   [Git homepage](https://git-scm.com/)).
+2. `Git for Windows` をインストールします (インストーラーは
+   [Git ホームページ](https://git-scm.com/)からダウンロード可能)。
 
-3. Install and configure latest `vcpkg`:
+3. 最新の `vcpkg`をインストールし、設定します。
 
-_**WARNING: It is important that, wherever you decide to clone this repo, the path does not include
-whitespace. That is, `C:/dev/vcpkg` is acceptable, but `C:/dev test/vcpkg` is not.**_
+_**警告: このリポジトリをクローンする場所は、パスに空白を含まないことが重要です。つまり、`C:/dev/vcpkg` は許容されますが、 `C:/dev test/vcpkg`は許容されません。**_
 
 ```cmd
 git clone https://github.com/Microsoft/vcpkg.git
@@ -48,105 +38,77 @@ bootstrap-vcpkg.bat -disableMetrics
 vcpkg integrate install
 ```
 
-## Cloning and compilation:
+## クローンとコンパイル
 
-1. Clone Cataclysm-BN repository with following command line:
+1. 以下のコマンドラインで Cataclysm-BN リポジトリをクローンします。
 
-**Note:** This will download the entire CBN repository; 3+ GB of data. If you're just testing you
-should probably add `--depth=1`.
+**注釈:** これにより、CBNリポジトリ全体、つまり 3GB 以上のデータがダウンロードされます。テスト目的のみの場合は、`--depth=1`を追加することを推奨します。
 
 ```cmd
 git clone https://github.com/cataclysmbnteam/Cataclysm-BN.git
 cd Cataclysm-BN
 ```
 
-2. Open the provided solution (`msvc-full-features\Cataclysm-vcpkg-static.sln`) in `Visual Studio`,
-   select configuration (`Release` is advised if you just want to compile, `Debug` is if you're
-   planning on editing code) and platform (`x64` or `x86`) and build it. All necessary dependencies
-   will be built and cached for future use by vcpkg automatically.
+2. 提供されているソリューション (`msvc-full-features\Cataclysm-vcpkg-static.sln`) を`Visual Studio`で開きます。構成 (コンパイルのみが目的の場合は`Release` 、コード編集を計画している場合は `Debug`が推奨) とプラットフォーム (`x64` または `x86`) を選択し、ビルドします。必要なすべての依存関係は、vcpkg によって自動的にビルドされ、将来のためにキャッシュされます。
 
-3. Open the `Build > Configuration Manager` menu and adjust `Active solution configuration` and
-   `Active solution platform` to match your intended target.
+3. `ビルド > 構成マネージャー` メニューを開き、 `アクティブなソリューション構成` および
+   `アクティブ ソリューション プラットフォーム` を目的と一致するように設定します。
 
-This will configure Visual Studio to compile the release version, with support for Sound, Tiles, and
-Localization (note, however, that language files themselves are not automatically compiled; this
-will be done later).
+これにより、Visual Studio は、サウンド、タイル、およびローカライゼーションのサポートを含むリリースバージョンをコンパイルするように設定されます（ただし、言語ファイル自体は自動的にはコンパイルされないことに注意してください。これは後で実行します）。
 
-4. Start the build process by selecting either `Build > Build Solution` or
-   `Build > Build > Cataclysm-vcpkg-static`. The process may take a long period of time, so you'd
-   better prepare a cup of coffee and some books in front of your computer :) The first build of
-   each architecture will also download and install dependencies through vcpkg, which can take an
-   especially long time.
+4. `ビルド > ソリューションのビルド` または
+   `ビルド > ビルド > Cataclysm-vcpkg-static`のいずれかを選択して、ビルドプロセスを開始します。このプロセスには長い時間がかかる場合があるため、コンピューターの前にコーヒーと本を用意しておくことをお勧めします: 各アーキテクチャの最初のビルドでは、vcpkg を介して依存関係のダウンロードとインストールも行われ、特に時間がかかる場合があります。
 
-5. If you want to launch the game directly from Visual Studio, make sure you have specified correct
-   working directory as explained below. Otherwise, you'll only be able to launch the game from the
-   file explorer.
+5. Visual Studio から直接ゲームを起動したい場合は、以下で説明するように、正しい作業ディレクトリを指定していることを確認してください。そうしないと、ファイルエクスプローラーからしかゲームを起動できません。
 
-6. If you need localization support, execute the bash script `lang/compile_mo.sh` inside Git Bash
-   GUI just like on a UNIX-like system. This will compile the language files that were not
-   automatically compiled in step 2 above.
+6. ローカライゼーションサポートが必要な場合は、Git Bash GUI 内で UNIX系システムと同様に bash スクリプト `lang/compile_mo.sh` を実行します。これにより、上記のステップ 2 で自動的にコンパイルされなかった言語ファイルがコンパイルされます。
 
-### Running from Visual Studio and debugging
+### Visual Studio からの実行とデバッグ
 
-1. Ensure that the Cataclysm game binary project (`Cataclysm-vcpkg-static`) is the selected startup
-   project (right click on it in Solution Explorer -> `Set as Startup Project`)
+1. Cataclysm ゲームバイナリプロジェクト (`Cataclysm-vcpkg-static`) がスタートアッププロジェクトとして選択されていることを確認します (ソリューションエクスプローラーで右クリック -> `スタートアップ プロジェクトに設定`)
 
-2. Configure the working directory in the project properties to `$(ProjectDir)..` (right click on it
-   in Solution Explorer -> `Properties` -> select `All Configurations` and `All Platforms` at the
-   top -> `Debugging` -> `Working Directory`)
+2. プロジェクトのプロパティで作業ディレクトリを `$(ProjectDir)..` に設定します (ソリューションエクスプローラーで右クリック-> `プロパティ` -> 上部で `すべての構成` と `すべてのプラットフォーム` を選択
+   -> `デバッグ` -> `作業ディレクトリ`)。
 
-3. Press the debug button (green right-facing triangle near the top, or use the appropriate
-   shortcut, e.g. F5)
+3. デバッグボタン（上部付近にある緑色の右向きの三角形、または適切なショートカット、例: F5）を押します。
 
-If you discover that after pressing the debug button in Visual Studio, Cataclysm just exits after
-launch with return code 1, that is because of the wrong working directory.
+Visual Studio でデバッグボタンを押した後、Cataclysm が起動直後にリターンコード 1 で終了する場合、それは作業ディレクトリが間違っていることが原因です。
 
-### Debug vs Release builds
+### Debug ビルドと Release ビルド
 
-`Debug` builds run significantly slower than `Release` builds, but provide additional safety checks.
+`Debug` ビルドは `Release` ビルドよりも著しく実行速度が遅くなりますが、追加の安全チェックを提供します。
 
-If you just want to build the executable and play the game, `Release` is advised.
+単に実行可能ファイルをビルドしてゲームをプレイしたい場合は、`Release` が推奨されます。
 
-If you plan on editing the code, `Debug` is advised.
+コードを編集する予定がある場合は、`Debug` が推奨されます。
 
-If you have enough experience with C++ to know:
+C++ に関して十分な経験があり、以下のことを把握している場合:
 
-- under-the-hood differences between `Debug` and `Release`
-- how `Release` optimizations may affect the debugger
-- how to avoid undefined behavior in code
+- `Debug` と `Release` の内部的な違い
+- `Release` の最適化がデバッガーにどのように影響するか
+- コード内の未定義の動作を回避する方法
 
-Then you might want to use `Release` build all the time to speed up dev process, and disable
-optimizations on a file-by-file basis by adding
+この場合、開発プロセスを高速化するために常に `Release` ビルドを使用し、ファイルの先頭に
 
 ```cpp
 #pragma optimize("", off)
 ```
 
-line at the top of the file.
+行を追加することで、ファイルごとの最適化を無効にすることができます。
 
-### Running unit tests
+### ユニットテストの実行
 
-Ensure that the Cataclysm test binary project (`Cataclysm-test-vcpkg-static`) is the selected
-startup project, configure the working directory in the project properties to `$(ProjectDir)..`, and
-then press the debug button (or use the appropriate shortcut, e.g. F5). This will run all of the
-unit tests. Additional command line arguments may be configured in the project's command line
-arguments setting, or if you are using a compatible unit test runner (e.g. Resharper) you can run or
-debug individual tests from the unit test sessions.
+Cataclysm テストバイナリプロジェクト (`Cataclysm-test-vcpkg-static`) がスタートアッププロジェクトとして選択されていることを確認し、プロジェクトのプロパティで作業ディレクトリを `$(ProjectDir)..`に設定してから、デバッグボタンを押します（または適切なショートカット、例: F5を使用します）。これにより、すべてのユニットテストが実行されます。追加のコマンドライン引数は、プロジェクトのコマンドライン引数設定で構成できます。互換性のあるユニットテストランナー（例: Resharper）を使用している場合は、ユニットテストセッションから個々のテストを実行またはデバッグできます。
 
-### Code style
+### コードスタイル
 
-We use `Artistic Style` source code formatter to keep the style of our C++ code consistent. While
-it's available as pre-built Windows executables, which you could install and run or configure to
-automatically format the code before commit, a much more convenient option for Visual Studio users
-is to install a specific extension, see
+私たちは、C++ コードのスタイルの一貫性を保つために `Artistic Style` ソースコードフォーマッターを使用しています。これはビルド済みの Windows 実行可能ファイルとしても利用可能で、インストールして実行したり、コミット前にコードを自動的にフォーマットするように設定したりできますが、Visual Studio ユーザーにとってさらに便利なオプションは、特定の拡張機能をインストールすることです。詳細については、ツール関連のドキュメントにある
 ["Astyle extensions for Visual Studio" in tooling](../../reference/tooling.md#astyle-extensions-for-visual-studio)
-for more info.
+を参照してください。
 
-As of October 2022, the code style check is run automatically on each PR on GitHub, so if you forgot
-to style your changes you'll see the corresponsing check failing.
+2022年10月現在、コードスタイルチェックは GitHub の各プルリクエスト (PR) で自動的に実行されるため、変更のスタイル設定を忘れた場合、対応するチェックが失敗するのを確認できます。
 
-### Make a distribution
+### ディストリビューションの作成
 
-There is a batch script in `msvc-full-features` folder `distribute.bat`. It will create a sub folder
-`distribution` and copy all required files(eg. `data/`, `Cataclysm.exe` and dlls) into that folder.
-Then you can zip it and share the archive on the Internet.
+`msvc-full-features` フォルダ内にバッチスクリプト `distribute.bat`があります。これは、サブフォルダ
+`distribution` を作成し、必要なすべてのファイル(例: `data/`、`Cataclysm.exe` 、および dll など)をそのフォルダにコピーします。その後、圧縮してインターネット上でアーカイブとして共有できます。
