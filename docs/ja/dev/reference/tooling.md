@@ -1,34 +1,31 @@
-# Developer Tooling
+# 開発者向けツール
 
-## Code style (astyle)
+## コードスタイル (astyle)
 
-Automatic formatting of the source code is performed by
-[Artistic Style](http://astyle.sourceforge.net/), or `astyle` for short.
+ソースコードの自動フォーマットは、
+[Artistic Style](http://astyle.sourceforge.net/)（略して astyle）によって実行されます。
 
-There are multiple ways to invoke it on the codebase, depending on your system or personal
-preferences.
+システムまたは個人の好みに応じて、コードベースでこれを呼び出す方法は複数あります。
 
-### Invoking astyle directly
+### astyle を直接呼び出す
 
-If you only have `astyle` installed, use:
+`astyle` のみがインストールされている場合は、以下を使用します。
 
 ```sh
 astyle --options=.astylerc --recursive src/*.cpp,*.h tests/*.cpp,*.h tools/*.cpp,*.h
 ```
 
-### Invoking astyle through make
+### make を介して astyle を呼び出す
 
-If you have both `make` and `astyle` installed, use:
+`make` と `astyle` の両方がインストールされている場合は、以下を使用します。
 
 ```sh
 make astyle
 ```
 
-### Invoking astyle via pre-commit hook
+### pre-commit hook を介して astyle を呼び出す
 
-If you have all the relevant tools installed, you can have git automatically check the style of code
-and json by adding these commands to your git pre-commit hook (typically at
-`.git/hooks/pre-commit`):
+関連するすべてのツールがインストールされている場合は、これらのコマンドを Git の pre-commit フック（通常は `.git/hooks/pre-commit`）に追加することで、Git にコードと JSON のスタイルのチェックを自動的に実行させることができます。
 
 ```sh
 git diff --cached --name-only -z HEAD | grep -z 'data/.*\.json' | \
@@ -37,97 +34,82 @@ git diff --cached --name-only -z HEAD | grep -z 'data/.*\.json' | \
 make astyle-check || exit 1
 ```
 
-### Astyle extensions for Visual Studio
+### Visual Studio 向け Astyle 拡張機能
 
-There are astyle extensions in the Visual Studio Marketplace, but none of them have been confirmed
-(yet) to correctly work for our purposes on VS2019 or VS2022.
+Visual Studio Marketplace に astyle 拡張機能はありますが、VS2019 または VS2022 で私たちの目的に対して正しく機能することが確認されているものは（まだ）ありません。
 
 #### Visual Studio 2022
 
-Head over to <https://github.com/olanti-p/BN_Astyle> and follow instructions in the
-[README.md](https://github.com/olanti-p/BN_Astyle/blob/master/README.md). You may compile and
-install the extension from source, or take advantage of the pre-built version in
-[releases section](https://github.com/olanti-p/BN_Astyle/releases).
+<https://github.com/olanti-p/BN_Astyle> にアクセスし、
+[README.md](https://github.com/olanti-p/BN_Astyle/blob/master/README.md)の手順に従ってください。ソースから拡張機能をコンパイルおよびインストールすることも、
+[リリースセクション](https://github.com/olanti-p/BN_Astyle/releases)にあるプリビルドバージョンを利用することもできます。
 
 #### Visual Studio 2019
 
-Extensions's source code lives over at https://github.com/lukamicoder/astyle-extension. To install
-and compile it:
+拡張機能のソースコードは https://github.com/lukamicoder/astyle-extensionにあります。これをインストールおよびコンパイルするには：
 
-1. Add the `Visual Studio extension development` workload through Visual Studio installer to your
-   VS2019
-2. Download and extract the source code, or clone the repository (a simple
-   `git clone --depth 1 https://github.com/lukamicoder/astyle-extension.git` should do).
-3. From the root folder, open `astyle-extension/AStyleExtension2017.sln`
-4. Select `Release` build configuration (most likely VS will select `Debug` configuration by
-   default)
-5. Build the solution
-6. If the build succeeded, you'll see the compiled extension in `AStyleExtension\bin\Release`.
-   Double click it to install.
-7. Configure the extension according to
-   [Configuration instructions (Visual Studio 2019 or older)](#configuration-instructions-visual-studio-2019-or-older)
-   section.
+1. Visual Studio インストーラーを介して、`Visual Studio 拡張機能開発`ワークロードを VS2019 に追加します。
+2. ソースコードをダウンロードして抽出するか、リポジトリをクローンします (単純に
+   `git clone --depth 1 https://github.com/lukamicoder/astyle-extension.git` で十分です)。
+3. ルートフォルダーから `astyle-extension/AStyleExtension2017.sln` を開きます。
+4. `Release` ビルド構成を選択します (VS はデフォルトで `Debug` 構成を選択する可能性が高いです)。
+5. ソリューションをビルドします。
+6. ビルドが成功すると、コンパイルされた拡張機能が `AStyleExtension\bin\Release`に表示されます。
+   ダブルクリックしてインストールします。
+7. [設定手順 (Visual Studio 2019 以前)](#configuration-instructions-visual-studio-2019-or-older)
+   セクションに従って拡張機能を設定します。
 
-#### Visual Studio 2017 or earlier
+#### Visual Studio 2017 以前
 
-You may follow the steps for VS2019 to compile from source, but there are pre-built versions
-[available](https://marketplace.visualstudio.com/items?itemName=Lukamicoder.AStyleExtension2017) on
-Visual Studio Marketplace, you should be able to install the extension through VS's extension
-manager and then configure it the same way.
+VS2019 の手順に従ってソースからコンパイルすることもできますが、Visual Studio Marketplace でプリビルドバージョンが[利用可能](https://marketplace.visualstudio.com/items?itemName=Lukamicoder.AStyleExtension2017) です。VS の拡張機能マネージャーを介して拡張機能をインストールし、同じ方法で設定できるはずです。
 
-#### Configuration instructions (Visual Studio 2019 or older):
+#### 設定手順 (Visual Studio 2019 以前):
 
-1. Go to `Tools` - `Options` - `AStyle Formatter` - `General`.
+1. `ツール` - `オプション` - `AStyle Formatter` - `全般`.
 
-2. Import
-   `https://github.com/cataclysmbnteam/Cataclysm-BN/blob/main/msvc-full-features/AStyleExtension-Cataclysm-BN.cfg`
-   on `Export/Import` tab using `Import` button:
+2. `エクスポート/インポート` タブで `インポート` ボタンを使用して、
+   `https://github.com/cataclysmbnteam/Cataclysm-BN/blob/main/msvc-full-features/AStyleExtension-Cataclysm-BN.cfg`をインポートします。
 
 ![image](./img/VS_Astyle_Step_1.png)
 
-3. After import is successful you can see imported rules on `C/C++` tab:
+3. インポートが成功すると、`C/C++` タブでインポートされたルールを確認できます。
 
 ![image](./img/VS_Astyle_Step_2.png)
 
-4. Close `Options` menu, open file to be astyled and use `Format Document (Astyle)` or
-   `Format Selection (Astyle)` commands from `Edit` - `Advanced` menu.
+4. `オプション` メニューを閉じ、astyle 処理をしたいファイルを開き、`編集` - `アドバンス` メニューから
+   `Format Document (Astyle)` または`Format Selection (Astyle)` コマンドを使用します。
 
 ![image](./img/VS_Astyle_Step_3.png)
 
-_Note:_ You can also configure keybindings for aforementioned commands in `Tools` - `Options` -
-`Environment` - `Keybindings` menu:
+注釈: `ツール` - `オプション` - `環境` - `キーボード` メニューで、上記のコマンドのキーバインドを設定
+することもできます。
 
 ![image](./img/VS_Astyle_Step_4.png)
 
-## JSON style
+## JSON スタイル
 
-See the [JSON style guide](../../mod/json/explanation/json_style).
+[JSON スタイルガイド](../../mod/json/explanation/json_style)を参照してください。
 
 ## ctags
 
-In addition to the usual means of creating a `tags` file via e.g.
-[`ctags`](http://ctags.sourceforge.net/), we provide `tools/json_tools/cddatags.py` to augment a
-`tags` file with locations of definitions taken from CDDA JSON data. `cddatags.py` is designed to
-safely update a tags file containing source code tags, so if you want both types of tag in your
-`tags` file then you can run `ctags -R . && tools/json_tools/cddatags.py`. Alternatively, there is a
-rule in the `Makefile` to do this for you; just run `make ctags` or `make etags`.
+[`ctags`](http://ctags.sourceforge.net/)などによる`tags` ファイル作成の通常の方法に加えて、CDDA の JSON データから取得した定義の位置で `tags` ファイルを拡張するために `tools/json_tools/cddatags.py`を提供しています。
+`cddatags.py` は、ソースコードタグを含むタグファイルを安全に更新するように設計されているため、
+両方のタイプのタグを `tags` ファイルに含めたい場合は、
+`ctags -R . && tools/json_tools/cddatags.py`を実行できます。あるいは、これを実行するためのルールが `Makefile` にあるため、`make ctags` または `make etags`を実行するだけでも構いません。
 
 ## clang-tidy
 
-Cataclysm has a
-[clang-tidy configuration file](https://github.com/cataclysmbnteam/Cataclysm-BN/blob/main/.clang-tidy)
-and if you have `clang-tidy` available you can run it to perform static analysis of the codebase. We
-test with `clang-tidy` from LLVM 18 with CI, so for the most consistent results, you might want to
-use that version.
+Cataclysm には
+[clang-tidy 設定ファイル](https://github.com/cataclysmbnteam/Cataclysm-BN/blob/main/.clang-tidy)
+があり、`clang-tidy` が利用可能であれば、コードベースの静的解析を実行するためにそれを実行できます。CI では LLVM 18 の `clang-tidy` でテストを行っているため、最も一貫した結果を得るには、そのバージョンを使用することをお勧めします。
 
-To run it, you have a few options.
+これを実行するには、いくつかのオプションがあります。
 
-- `clang-tidy` ships with a wrapper script `run-clang-tidy.py`.
+- `clang-tidy` にはラッパースクリプト `run-clang-tidy.py` が同梱されています。
 
-- Use CMake's built-in support by adding `-DCMAKE_CXX_CLANG_TIDY=clang-tidy` or similar, pointing it
-  to your chosen clang-tidy version.
+- CMake の組み込みサポートを使用します。 `-DCMAKE_CXX_CLANG_TIDY=clang-tidy` または類似のフラグを追加し、選択した `clang-tidy` のバージョンを指すようにします。
 
-- To run `clang-tidy` directly try something like
+- `clang-tidy` を直接実行するには、次のようなものを試してください。
 
 ```sh
 grep '"file": "' build/compile_commands.json | \
@@ -136,50 +118,47 @@ grep '"file": "' build/compile_commands.json | \
     xargs -P 9 -n 1 clang-tidy -quiet
 ```
 
-To focus on a subset of files add their names into the `egrep` regex in the middle of the
-command-line.
+ファイルのサブセットに焦点を当てるには、コマンドラインの中央にある `egrep` 正規表現にファイル名を追加します。
 
-## Custom clang-tidy plugin
+## カスタム clang-tidy プラグイン
 
-We have written our own clang-tidy checks in a custom plugin. refer to
-[clang-tidy.yml](https://github.com/cataclysmbnteam/Cataclysm-BN/blob/main/.github/workflows/clang-tidy.yml)
-for the exact steps to build the plugin on ubuntu 24.04.
+独自の clang-tidy チェックをカスタムプラグインとして記述しました。ubuntu 24.04 でプラグインをビルドするための正確な手順については、
+[clang-tidy.yml](https://github.com/cataclysmbnteam/Cataclysm-BN/blob/main/.github/workflows/clang-tidy.yml)を参照してください。
 
-### Build plugin on Ubuntu 24.04
+### Ubuntu 24.04 でのプラグインのビルド
 
-Follow exact steps in [cmake guide](../../dev/guides/building/cmake.md) with following changes:
+[cmake guide](../../dev/guides/building/cmake.md) の正確な手順に従い、以下の変更を加えます。
 
-Also install these additional dependencies:
+さらに、以下の依存関係をインストールします。
 
 ```sh
 sudo apt-get install \
   clang-18 libclang-18-dev llvm-18 llvm-18-dev clang-tidy-18
 ```
 
-add `CATA_CLANG_TIDY_PLUGIN=ON` to cmake flags when configuring the build.
+ビルドを設定する際に、cmake フラグに `CATA_CLANG_TIDY_PLUGIN=ON` を追加します。
 
-### Build plugin on Fedora 40
+### Fedora 40 でのプラグインのビルド
 
-Follow exact steps in [atomic cmake guide](../../dev/guides/building/atomic_cmake.md) with following
-changes:
+[atomic cmake guide](../../dev/guides/building/atomic_cmake.md) の正確な手順に従い、以下の変更を加えます。
 
-Also install these additional dependencies:
+さらに、以下の依存関係をインストールします。
 
 ```sh
 sudo dnf install clang-devel llvm-devel clang-tools-extra-devel
 ```
 
-add `CATA_CLANG_TIDY_PLUGIN=ON` to cmake flags when configuring the build.
+ビルドを設定する際に、cmake フラグに `CATA_CLANG_TIDY_PLUGIN=ON` を追加します。
 
-### Using the plugin
+### プラグインの使用
 
-To run the plugin on a single file, run following command on project root:
+単一のファイルでプラグインを実行するには、プロジェクトルートで以下のコマンドを実行します。
 
 ```sh
 $ ./build-scripts/clang-tidy-wrapper.sh -fix src/achievement.cpp
 ```
 
-To run the plugin on multiple files, use [GNU parallel](https://www.gnu.org/software/parallel/):
+複数のファイルでプラグインを実行するには、[GNU parallel](https://www.gnu.org/software/parallel/)を使用します。
 
 ```sh
 $ parallel ./build-scripts/clang-tidy-wrapper.sh -fix ::: src/*.cpp
@@ -187,60 +166,40 @@ $ parallel ./build-scripts/clang-tidy-wrapper.sh -fix ::: src/*.cpp
 
 ## include-what-you-use
 
-[include-what-you-use](https://github.com/include-what-you-use/include-what-you-use) (IWYU) is a
-project intended to optimise includes. It will calculate the required headers and add and remove
-includes as appropriate.
+[include-what-you-use](https://github.com/include-what-you-use/include-what-you-use) (IWYU) は、インクルードを最適化することを目的としたプロジェクトです。必要なヘッダーを計算し、適切にインクルードを追加および削除します。
 
-Running on this codebase revealed some issues. You will need a version of IWYU where the following
-PR has been merged (which has not yet happened at time of writing, but with luck might make it into
-the clang-10 release of IWYU):
+このコードベースで実行すると、いくつかの問題が明らかになりました。以下の PR がマージされているバージョンの IWYU が必要になります（執筆時点ではまだ行われていませんが、うまくいけば clang-10 リリースの IWYU に含まれる可能性があります）。
 
 - https://github.com/include-what-you-use/include-what-you-use/pull/775
 
-Once you have IWYU built, build the codebase using cmake, with `CMAKE_EXPORT_COMPILE_COMMANDS=ON` on
-to create a compilation database (Look for `compile_commands.json` in the build dir to see whether
-that worked).
+IWYU をビルドしたら、`CMAKE_EXPORT_COMPILE_COMMANDS=ON` をオンにして cmake を使用してコードベースをビルドし、コンパイルデータベースを作成します（ビルドディレクトリで `compile_commands.json` を探して、それが機能したかどうかを確認してください）。
 
-Then run:
+次に、以下を実行します。
 
 ```sh
 iwyu_tool.py -p $CMAKE_BUILD_DIR/compile_commands.json -- -Xiwyu --mapping_file=$PWD/tools/iwyu/cata.imp | fix_includes.py --nosafe_headers --reorder
 ```
 
-IWYU will sometimes add C-style library headers which clang-tidy doesn't like, so you might need to
-run clang-tidy (as described above) and then re-run IWYU a second time.
+IWYU は clang-tidy が好まない C スタイルのライブラリヘッダーを追加することがあるため、clang-tidy（上記で説明）を実行し、IWYU を2回目に再実行する必要がある場合があります。
 
-There are mapping files in `tools/iwyu` intended to help IWYU pick the right headers. Mostly they
-should be fairly obvious, but the SDL mappings might warrant further explanation. We want to force
-most SDL includes to go via `sdl_wrappers.h`, because that handles the platform-dependence issues
-(the include paths are different on Windows). There are a couple of exceptions (`SDL_version.h` and
-`SDL_mixer.h`). The former is because `main.cpp` can't include all SDL headers, because they
-`#define WinMain`. All the mappings in `sdl.imp` are designed to make this happen.
+`tools/iwyu` には、IWYU が適切なヘッダーを選択するのに役立つマッピングファイルがあります。ほとんどは非常に明白であるはずですが、SDL マッピングについてはさらなる説明が必要かもしれません。プラットフォーム依存の問題（Windows ではインクルードパスが異なる）を処理するため、ほとんどの SDL インクルードを `sdl_wrappers.h`, 経由で強制的に行うようにしたいと考えています。いくつかの例外があります (`SDL_version.h` and
+`SDL_mixer.h`)。前者は、`main.cpp` がすべての SDL ヘッダーをインクルードできないためです。これらは
+`#define WinMain`を定義します。`sdl.imp` のすべてのマッピングは、これを実現するように設計されています。
 
-We have to use IWYU pragmas in some situations. Some of the reasons are:
+私たちは、いくつかの状況で IWYU プラグマを使用する必要があります。理由の一部は次のとおりです。
 
-- IWYU has a concept of
-  [associated headers](https://github.com/include-what-you-use/include-what-you-use/blob/master/docs/IWYUPragmas.md#iwyu-pragma-associated),
-  where each cpp file can have some number of such headers. The cpp file is expected to define the
-  things declared in those headers. In Cata, the mapping between headers and cpp files is not nearly
-  so simple, so there are files with multiple associated headers, and files with none. Headers that
-  are not the associated header of any cpp file will not get their includes updated, which could
-  lead to broken builds, so ideally all headers would be associated to some cpp file. You can use
-  the following command to get a list of headers which are not currently associated to any cpp file
-  (requires GNU sed):
+- IWYU には
+  [関連ヘッダー](https://github.com/include-what-you-use/include-what-you-use/blob/master/docs/IWYUPragmas.md#iwyu-pragma-associated)の概念があり、各 cpp ファイルには任意の数の関連ヘッダーを含めることができます。cpp ファイルは、それらのヘッダーで宣言されたものを定義することが期待されます。Cata では、ヘッダーと cpp ファイル間のマッピングはそれほど単純ではないため、複数の関連ヘッダーを持つファイルと、関連ヘッダーを持たないファイルがあります。どの cpp ファイルにも関連付けられていないヘッダーは、そのインクルードが更新されないため、ビルドが壊れる可能性があり、理想的にはすべてのヘッダーが何らかの cpp ファイルに関連付けられるべきです。次のコマンドを使用すると、現在どの cpp ファイルにも関連付けられていないヘッダーのリストを取得できます（GNU sed が必要です）。
 
 ```sh
 diff <(ls src/*.h | sed 's!.*/!!') <(for i in src/*.cpp; do echo $i; sed -n '/^#include/{p; :loop n; p; /^$/q; b loop}' $i; done | grep 'e "' | grep -o '"[^"]*"' | sort -u | tr -d '"')
 ```
 
-- Due to a [clang bug](https://bugs.llvm.org/show_bug.cgi?id=20666), uses in template arguments to
-  explicit instantiations are not counted, which leads to some need for `IWYU pragma: keep`.
+- [clang のバグ](https://bugs.llvm.org/show_bug.cgi?id=20666)のため、明示的なインスタンス化のテンプレート引数での使用はカウントされず、`IWYU pragma: keep`が必要になる場合があります。
 
-- Due to
-  [these](https://github.com/include-what-you-use/include-what-you-use/blob/4909f206b46809775e9b5381f852eda62cbf4bf7/iwyu.cc#L1617)
-  [missing](https://github.com/include-what-you-use/include-what-you-use/blob/4909f206b46809775e9b5381f852eda62cbf4bf7/iwyu.cc#L1629)
-  features of IWYU, it does not count uses in template arguments to return types, which leads to
-  other requirements for `IWYU pragma: keep`.
+- IWYU の
+  [これらの](https://github.com/include-what-you-use/include-what-you-use/blob/4909f206b46809775e9b5381f852eda62cbf4bf7/iwyu.cc#L1617)
+  [欠落している](https://github.com/include-what-you-use/include-what-you-use/blob/4909f206b46809775e9b5381f852eda62cbf4bf7/iwyu.cc#L1629)
+  機能のため、戻り値の型のテンプレート引数での使用はカウントされず、他の `IWYU pragma: keep`の要件につながります。
 
-- IWYU seems to have particular trouble with types used in maps. Have not looked into this in
-  detail, but again worked around it with pragmas.
+- IWYU は、マップで使用される型に特に問題を抱えているようです。詳細には調査していませんが、ここでもプラグマで回避しました。
