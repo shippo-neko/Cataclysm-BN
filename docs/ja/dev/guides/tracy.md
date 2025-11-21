@@ -1,81 +1,74 @@
-# Profiling with tracy
+# Tracy を用いたプロファイリング
 
-[Tracy](https://github.com/wolfpld/tracy) is a realtime profiler which you can use to analyze
-performance bottleneck. It consists of two parts: client and profiler. The client integrated in BN
-sends profiling data to the profiler. As the client is opt-in, you need to build BN with tracy
-client in order to start profiling.
+[Tracy](https://github.com/wolfpld/tracy) は、パフォーマンス上のボトルネックを分析するために使用できるリアルタイムプロファイラです。これは、クライアントとプロファイラの2つの部分で構成されています。BN に統合されたクライアントは、プロファイリングデータをプロファイラに送信します。クライアントはオプトインであるため、プロファイリングを開始するには、tracy クライアントを含めて BN をビルドする必要があります。
 
-## Install Tracy Profiler
+## Tracy Profiler のインストール
 
 > [!CAUTION]
 >
-> Both the game and profiler have to be built with same version of tracy to work properly. Due to
-> [numerous issues](https://github.com/cataclysmbnteam/Cataclysm-BN/pull/3253#discussion_r1545267113),
-> The windows version uses [`v0.10`](https://github.com/wolfpld/tracy/releases/tag/v0.10) wheras the
-> linux version uses
-> [`6d1deb5640ed11da01995fb1791115cfebe54dbf`](https://github.com/wolfpld/tracy/commit/6d1deb5640ed11da01995fb1791115cfebe54dbf).
+> 適切に機能するためには、ゲームとプロファイラの両方が同じバージョンの tracy でビルドされている必要があります。
+> [多数の問題](https://github.com/cataclysmbnteam/Cataclysm-BN/pull/3253#discussion_r1545267113)のため、Windows バージョンは [`v0.10`](https://github.com/wolfpld/tracy/releases/tag/v0.10)を使用してい
+> ますが、Linux バージョンは
+> [`6d1deb5640ed11da01995fb1791115cfebe54dbf`](https://github.com/wolfpld/tracy/commit/6d1deb5640ed11da01995fb1791115cfebe54dbf)を使用しています。
 
 ### Linux
 
 ```sh
 $ git clone https://github.com/wolfpld/tracy
 $ cd tracy
-$ git checkout 6d1deb5640ed11da01995fb1791115cfebe54dbf # the commit used by BN tracy client
+$ git checkout 6d1deb5640ed11da01995fb1791115cfebe54dbf # BN tracy クライアントが使用するコミット
 ```
 
-1. Clone <https://github.com/wolfpld/tracy>.
+1. https://github.com/wolfpld/tracy をクローンします。
 
 ```sh
-# for ubuntu (X11)
+# ubuntu の場合 (X11)
 $ sudo apt install cmake clang git libcapstone-dev xorg-dev dbus libgtk-3-dev
 
-# for ubuntu (wayland)
+# ubuntu の場合 (wayland)
 $ sudo apt install libglfw-dev libgtk-3-dev libfreetype6-dev libtbb-dev debuginfod libwayland-dev dbus libxkbcommon-dev libglvnd-dev meson cmake git wayland-protocols
 
-# for arch, copied from https://github.com/wolfpld/tracy/blob/master/.github/workflows/linux.yml#L16C12-L16C163
+# arch の場合、https://github.com/wolfpld/tracy/blob/master/.github/workflows/linux.yml#L16C12-L16C163
 $ pacman -Syu --noconfirm && pacman -S --noconfirm --needed freetype2 tbb debuginfod wayland dbus libxkbcommon libglvnd meson cmake git wayland-protocols
 ```
 
-2. Install dependencies.
+2. 依存関係をインストールします。
 
 ```sh
-$ cmake -B profiler/build -S profiler # if you're using wayland
+$ cmake -B profiler/build -S profiler # wayland を使用している場合
 ```
 
-3. Set up cmake. By default tracy uses wayland, if you want to use X11, you need to add `LEGACY=1`
-   flag.
+3. cmake を設定します。tracy はデフォルトで wayland を使用します。X11 を使用したい場合は、`LEGACY=1` フラグを追加する必要があります。
 
 > [!NOTE]
 >
-> #### for X11
+> #### X11 の場合
 >
 > ```sh
-> $ cmake -DLEGACY=ON -B profiler/build -S profiler # if you're using X11
+> $ cmake -DLEGACY=ON -B profiler/build -S profiler # X11 を使用している場合
 > ```
 >
-> tracy uses wayland by default, if you want to use X11, you need to add `LEGACY=1` flag.
+> ctracy はデフォルトで wayland を使用します。X11 を使用したい場合は、LEGACY=1 フラグを追加する必要があります。
 
 > [!NOTE]
 >
-> #### fileselector fixes
+> #### fileselector の修正
 >
 > ```sh
 > $ cmake -DGTK_FILESELECTOR=ON -B profiler/build -S profiler
 > ```
 >
-> Due to issues with [default fileselector (xdg-portal)](https://github.com/wolfpld/tracy/issues/764),
-> tracy may fail to open or save trace history. As an workaround, add `GTK_FILESELECTOR=ON` in compile
-> flags to use gtk fileselector.
+> [デフォルトのファイルセレクター (xdg-portal)](https://github.com/wolfpld/tracy/issues/764)の問題により、tracy はトレース履歴の開閉に失敗する場合があります。回避策として、`GTK_FILESELECTOR=ON` をコンパイルフラグに追加して gtk ファイルセレクターを使用します。
 
 ```sh
 $ cmake --build profiler/build --config Release --parallel $(nproc)
 ```
 
-4. Build the binary. It will be available on `./profiler/build/tracy-profiler`.
+4. バイナリをビルドします。ビルドされたバイナリは `./profiler/build/tracy-profiler`で利用可能になります。
 
 > [!TIP]
 >
-> #### Adding desktop entry
+> #### デスクトップエントリの追加
 >
 > ```
 > [Desktop Entry]
@@ -96,30 +89,29 @@ $ cmake --build profiler/build --config Release --parallel $(nproc)
 > X-Desktop-File-Install-Version=0.26
 > ```
 >
-> To make the profiler available in app runner, create `$HOME/.local/share/applications/tracy.desktop`
-> file with the following content. Make sure to replace `<THE_PATH_WHERE_YOU_INSTALLED_TRACY>` with
-> the path where you installed tracy!
+> アプリランチャーでプロファイラを利用可能にするには、上記の内容で `$HOME/.local/share/applications/tracy.desktop`
+> ファイルを作成します。`<THE_PATH_WHERE_YOU_INSTALLED_TRACY>`
+> を tracy をインストールしたパスに置き換えることを忘れないでください！
 
 ### Windows
 
 ![image](https://github.com/cataclysmbnteam/Cataclysm-BN/assets/54838975/b6f73c09-969c-4305-b8fb-070d14fb834a)
 
-Download pre-compiled executable from <https://github.com/wolfpld/tracy/releases>.
+<https://github.com/wolfpld/tracy/releases>から、プリコンパイルされた実行可能ファイルをダウンロードしてください。
 
-## Build BN with Tracy Client
+## Tracy クライアントを含めた BN のビルド
 
-Build on [cmake](../guides/building/cmake.md) with `-D USE_TRACY=ON` flag. For example,
+[cmake](../guides/building/cmake.md) を用いて `-D USE_TRACY=ON` フラグを付けてビルドします。例:
 
 ```sh
 $ cmake -B build -DUSE_TRACY=ON ...other flags...
 ```
 
-See [CMake options](building/cmake.md#cataclysmbn-specific-options) for more information.
+詳細については、[CMake オプション](building/cmake.md#cataclysmbn-specific-options) を参照してください。
 
-## Mark zone to profile
+## プロファイルするゾーンのマーク付け
 
-Mark `ZoneScoped` in the function you'd like to profile. It will be displayed in the tracy GUI. For
-example,
+プロファイルしたい関数に `ZoneScoped` をマークします。これは tracy GUI に表示されます。例:
 
 ```cpp
 bool game::do_turn()
@@ -130,20 +122,20 @@ bool game::do_turn()
 }
 ```
 
-There are also more complex profiling macros available. Check following links for more:
+他にもより複雑なプロファイリングマクロが利用可能です。詳細については、以下のリンクを確認してください。
 
 - <https://github.com/wolfpld/tracy>
 - <https://luxeengine.com/integrating-tracy-profiler-in-cpp/>
 - [An Introduction to Tracy Profiler in C++ - Marcos Slomp - CppCon 2023](https://www.youtube.com/watch?v=ghXk3Bk5F2U)
 
-## Use Tracy Profiler
+## Tracy Profiler の使用
 
-1. Start BN (built with `USE_TRACY=ON`), and run the tracy profiler.
+1. BN (`USE_TRACY=ON`でビルドしたもの)を起動し、tracy プロファイラを実行します。
 
 ![](../../../../../assets/img/tracy/main.png)
 
-2. Click `connect` button to connect to the game.
+2. `connect` ボタンをクリックしてゲームに接続します。
 
 ![](../../../../../assets/img/tracy/stats.png)
 
-3. Profiling data will be displayed in the GUI.
+3. プロファイリングデータが GUI に表示されます。
