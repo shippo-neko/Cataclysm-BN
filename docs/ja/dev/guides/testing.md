@@ -1,29 +1,20 @@
-# Testing Cataclysm
+# Cataclysm のテスト
 
-When you `make` Cataclysm from source, an executable `tests/cata_test` is built from test cases
-found in the `tests/` directory. These tests are written in the
-[Catch2 framework](https://github.com/catchorg/Catch2).
+ソースから Cataclysm を `make` すると、 `tests/` ディレクトリにあるテストケースから実行可能ファイル `tests/cata_test` がビルドされます。これらのテストは、
+[Catch2 フレームワーク](https://github.com/catchorg/Catch2)で記述されています。
 
-Run `tests/cata_test --help` to see the available command-line options, and/or consult the
-[Catch2 tutorial](https://github.com/catchorg/Catch2/blob/devel/docs/tutorial.md) for a more
-thorough introduction.
+利用可能なコマンドラインオプションを確認するには `tests/cata_test --help` を実行するか、より詳細な入門については
+[Catch2 チュートリアル](https://github.com/catchorg/Catch2/blob/devel/docs/tutorial.md) を参照してください。
 
-## Guidelines
+## ガイドライン
 
-When creating tests, ensure that all objects used (directly or indirectly) are fully reset before
-testing. Several tests have been rendered flaky by properties of randomly generated objects or
-interactions between tests via global objects (often the player object). As a general guideline,
-test cases should be standalone (one test should not rely on the output of another).
+テストを作成する際は、使用されるすべてのオブジェクト（直接的または間接的）が、テストの前に完全にリセットされていることを確認してください。ランダムに生成されたオブジェクトのプロパティや、グローバルオブジェクト（多くの場合プレイヤーオブジェクト）を介したテスト間の相互作用により、不安定なテストになる事例がいくつか発生しています。一般的なガイドラインとして、テストケースはスタンドアロンであるべきです（あるテストが別のテストの出力に依存すべきではありません）。
 
-When generating objects with json definitions, use REQUIRE statements to assert the properties of
-the objects that the test needs. This protects the test from shifting json definitions by making it
-apparent what about the object changed to cause the test to break.
+JSON定義を使用してオブジェクトを生成する場合、テストが必要とするオブジェクトのプロパティをアサートするために REQUIRE ステートメントを使用してください。これにより、オブジェクトの何が変更されてテストが壊れたのかを明確にすることで、JSON定義の変更からテストを保護できます。
 
-## Writing test cases
+## テストケースの記述
 
-You can choose several ways to organize and express your tests, but the basic unit is a `TEST_CASE`.
-Each test `.cpp` file should define at least one test case, with a name, and optional (but strongly
-encouraged) list of tags:
+テストを構成し、表現する方法はいくつか選択できますが、基本的な単位は `TEST_CASE` です。各テスト `.cpp` ファイルは、名前とオプションの（強く推奨される）タグのリストを持つ、少なくとも1つのテストケースを定義する必要があります。
 
 ```cpp
 TEST_CASE( "sweet junk food", "[food][junk][sweet]" )
@@ -32,11 +23,9 @@ TEST_CASE( "sweet junk food", "[food][junk][sweet]" )
 }
 ```
 
-Within the `TEST_CASE`, the Catch2 framework allows a number of different macros for logically
-grouping related parts of the test together. One approach that encourages a high level of
-readability is the [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development)
-(behavior-driven-development) style using `GIVEN`, `WHEN`, and `THEN` sections. Here's an outline of
-what a test might look like using those:
+`TEST_CASE`内では、Catch2 フレームワークは、テストの関連する部分を論理的にグループ化するための多数の異なるマクロを許可しています。高い可読性を促進するアプローチの1つとして、`GIVEN`、`WHEN`、および `THEN` セクションを使用する
+[BDD](https://en.wikipedia.org/wiki/Behavior-driven_development)
+(振る舞い駆動開発) スタイルです。それらを使用したテストのアウトラインは次のようになります。
 
 ```cpp
     TEST_CASE( "sweet junk food", "[food][junk][sweet]" )
@@ -52,12 +41,9 @@ what a test might look like using those:
     }
 ```
 
-Thinking in these terms may help you understand the logical progression from setting up the test and
-initializing the test data (usually expressed by the `GIVEN` part), performing some operation that
-generates a result you want to test (often contained in the `WHEN` part), and verifying this result
-meets your expectations (the `THEN` part, naturally).
+これらの用語で考えることは、テストのセットアップとテストデータの初期化（通常、`GIVEN` 部分で表現されます）、テストしたい結果を生成する操作の実行（多くの場合、`WHEN` 部分に含まれます）、およびこの結果が期待を満たしていることの検証（当然ながら、`THEN` 部分）という論理的な進行を理解するのに役立つかもしれません。
 
-Filling in the above with actual test code might look like this:
+上記の例を実際のテストコードで埋めると、次のようになります。
 
 ```cpp
     TEST_CASE( "sweet junk food", "[food][junk][sweet]" )
@@ -80,47 +66,32 @@ Filling in the above with actual test code might look like this:
     }
 ```
 
-Let's look at each part in turn to see what's going on. First, we declare an `avatar`, representing
-the character or player. This test is going to check the player's morale, so we clear it to ensure a
-clean slate:
+何が起こっているかを見るために、各部分を順番に見ていきましょう。まず、キャラクターまたはプレイヤーを表す `avatar`を宣言します。このテストはプレイヤーの士気 をチェックするため、クリーンな状態を確実にするためにクリアします。
 
 ```cpp
 avatar dummy;
 dummy.clear_morale();
 ```
 
-Inside the `GIVEN`, we want some code that implements what the `GIVEN` is saying - that the
-character has a sweet tooth. In the game's code, this is represented with the `PROJUNK` trait, so we
-can set that using `toggle_trait`:
+`GIVEN` の内部では、`GIVEN` が述べている内容（キャラクターが甘いものが好きであること）を実装するコードが必要です。ゲームのコードでは、これは `PROJUNK` 特性で表されるため、`toggle_trait` を使用して設定できます。
 
 ```cpp
 GIVEN( "character has a sweet tooth" ) {
     dummy.toggle_trait( trait_PROJUNK );
 ```
 
-Now, notice we are nested inside the `GIVEN` - for the rest of the scope of that `GIVEN`, the
-`dummy` will have this trait. For this simple test it will only affect a couple more lines, but when
-your tests become larger and more complex (which they will), you will need to be aware of these
-nested scopes and how you can use them to avoid cross-pollution between your tests.
+ここで、`GIVEN` の内部にネストされていることに注意してください。`GIVEN` の残りのスコープでは、`dummy` はこの特性を持ちます。この単純なテストでは、さらに数行にしか影響しませんが、テストがより大きく複雑になるにつれて（そうなります）、ネストされたスコープと、これらをどのように使用してテスト間の相互汚染 (cross-pollution) を回避できるかを認識する必要があります。
 
-Anyway, now that our `dummy` has a sweet tooth, we want them to eat something sweet, so we can spawn
-the `neccowafers` item and tell them to eat some:
+さて、`dummy` が甘いものが好きになったので、何か甘いものを食べさせたいので、`neccowafers` アイテムをスポーンさせ、それを食べるように指示できます。
 
 ```cpp
 WHEN( "they eat some junk food" ) {
     dummy.eat( item( "neccowafers" ) );
 ```
 
-The function(s) you invoke at this point are often the focus of your testing; the goal is to
-exercise some pathway through those function(s) in such a way that your code will be reached, and
-thus covered by the test. The `eat` function is used as an example here, but that is quite a
-high-level, complex function itself, with many behaviors and sub-behaviors. Since this test case is
-only interested in the morale effect, a better test would invoke a lower-level function that `eat`
-invokes, such as `modify_morale`.
+この時点で呼び出す関数は、テストの焦点となることがよくあります。目標は、コードが到達し、テストによってカバーされるように、関数を通過する何らかのパスを実行することです。ここでは `eat` 関数が例として使用されていますが、`eat`関数自体が非常に高レベルで複雑な関数であり、多くの振る舞いとサブ振る舞いがあります。このテストケースは士気への影響のみに関心があるため、より良いテストでは、`eat` が呼び出す `modify_morale` などのより低レベルな関数を呼び出すでしょう。
 
-Our `dummy` has eaten the `neccowafers`, but did it do anything? Because they have a sweet tooth,
-they should get a specific morale bonus known as `MORALE_SWEETTOOTH`, and it should be at least `5`
-in magnitude:
+`dummy` は `neccowafers` を食べましたが、何か効果があったでしょうか？甘いものが好きなので、`MORALE_SWEETTOOTH` として知られる特定の士気ボーナスを得るはずであり、その大きさは少なくとも `5` でなければなりません。
 
 ```cpp
 THEN( "they get a morale bonus from its sweetness" ) {
@@ -128,22 +99,16 @@ THEN( "they get a morale bonus from its sweetness" ) {
 }
 ```
 
-This `CHECK` macro takes a boolean expression, failing the test if the expression is false.
-Likewise, you can use `CHECK_FALSE`, which will fail if the expression is true.
+この `CHECK` マクロはブール式を取り、式が偽である場合にテストを失敗させます。同様に、`CHECK_FALSE` を使用することもでき、これは式が真である場合に失敗します。
 
-## Requiring or Checking
+## 要求と確認
 
-While the `CHECK` and `CHECK_FALSE` macros make assertions about the truth or falsity of
-expressions, they still allow the test to continue, even when they fail. This lets you do several
-`CHECK`s, and be informed if one _or more_ of them do not meet your expectations.
+`CHECK` および `CHECK_FALSE` マクロは、式の真偽についてアサーションを行いますが、失敗した場合でもテストの続行を許可します。これにより、複数の `CHECK` を実行でき、そのうちの1つ以上が期待を満たさない場合に通知されます。
 
-Another kind of assertion is the `REQUIRE` (and its counterpart `REQUIRE_FALSE`). Unlike the `CHECK`
-assertions, `REQUIRE` will not continue if it fails - this assertion is considered essential for the
-test to continue.
+もう1つのアサーションは `REQUIRE` (およびその対応物 `REQUIRE_FALSE`)です。`CHECK`
+アサーションとは異なり、`REQUIRE` 失敗した場合に続行しません。このアサーションは、テストが続行するために不可欠であると見なされます。
 
-A `REQUIRE` is useful when you wish to double-check your assumptions after making some change to the
-system state. For example, here are a couple of `REQUIRE`s added to the sweet-tooth test, to ensure
-our `dummy` really has the desired trait, and that the `neccowafers` really are junk food:
+`REQUIRE`は、システムの状態に何らかの変更を加えた後で、仮定を再確認したい場合に役立ちます。例えば、`dummy` が本当に望ましい特性を持っていること、そして `neccowafers` が本当にジャンクフードであることを確認するために、スイートトゥースのテストに追加されたいくつかの `REQUIRE` は次のとおりです。
 
 ```cpp
     GIVEN( "character has a sweet tooth" ) {
@@ -163,10 +128,6 @@ our `dummy` really has the desired trait, and that the `neccowafers` really are 
     }
 ```
 
-We use `REQUIRE` here, because there is no reason to continue the test if these fail. If our
-assumptions are wrong, nothing that follows is valid. Clearly, if `toggle_trait` failed to give the
-character the `PROJUNK` trait, or if the `neccowafers` turn out not to be made of sugar after all,
-then our test of the morale bonus is meaningless.
+ここで `REQUIRE` を使用するのは、これらが失敗した場合、テストを続行する理由がないからです。我々の仮定が間違っている場合、それに続くものは無効になります。明らかに、`toggle_trait` がキャラクターに `PROJUNK` 特性を与えるのに失敗した場合、または `neccowafers` が結局砂糖でできていないことが判明した場合、士気ボーナスのテストは無意味です。
 
-You can think of `REQUIRE` as being a prerequisite for the test, while `CHECK` is looking at the
-results of the test.
+`REQUIRE` はテストの前提条件であると考え、`CHECK`はテストの結果を見ていると考えることができます。
