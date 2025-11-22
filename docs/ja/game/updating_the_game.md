@@ -1,27 +1,22 @@
-# Updating the game
+# ゲームのアップデート
 
-# Do
+# 実行すべきこと
 
-0. Get the game from https://github.com/cataclysmbnteam/Cataclysm-BN/releases
-1. Unpack the game
-2. Copy `save` and `config` from old game directory to the new directory
-3. (Optional) Copy the `mods` from the old game dir
+0. https://github.com/cataclysmbnteam/Cataclysm-BN/releases からゲームを入手する
+1. ゲームを展開する
+2. 古いゲームディレクトリから新しいディレクトリへ `save` と `config` フォルダをコピーする
+3. (オプション) 古いゲームディレクトリから `mods` フォルダをコピーする
 
-# Don't
+# 実行すべきではないこと
 
-### Unpack the new game over old directory
+### 古いディレクトリの上に新しいゲームを展開する
 
-Unpacking the game over old directory can cause duplicate JSON entry errors. If you really want to
-do it, make sure to delete the old `data` directory before unpacking the new version.
+古いディレクトリの上にゲームファイルをそのまま展開すると、JSONエントリーの重複エラーが発生する可能性があります。もし、どうしても上書きでインストールしたい場合は、新しいバージョンを展開する前に、必ず古い `data` ディレクトリを削除するようにしてください。
 
-Sometimes data files are deleted in the core. New version of the game will not have those files, but
-unpacking an archive doesn't delete the old files. Old files will still be read and loaded, which
-can overwrite new entries.
+新しいバージョンのゲームでは、コアファイル内のデータファイルが削除されることがあります。しかし、アーカイブをしても、以前のバージョンの古いファイルは自動では削除されずに残ってしまいます。その古いファイルは引き続き読み込まれ、ロードされる際に新しいエントリーを上書きしてしまう可能性があるのです。
 
-### Have custom mods in `data/mods` directory
+### `data/mods` ディレクトリにカスタムMODを配置する
 
-Put them directly into `mods` directory, on the same level as `data`. This directory doesn't exist
-by default, but the game will read it if it's present.
+それらのファイルを、`data` ディレクトリと同じ階層にある `mods` ディレクトリに直接配置してください。このディレクトリは初期状態では存在しませんが、作成しておけばゲームがその内容を読み込みます。
 
-This will allow you to copy the mods between game versions, while still allowing the "core mods" to
-update properly.
+このようにすることで、「コアMOD」が適切にアップデートされることを妨げずに済み、さらにゲームのバージョンが更新された際にも、MODの移行が容易になります。
