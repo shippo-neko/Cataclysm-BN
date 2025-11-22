@@ -1,186 +1,160 @@
-# Timeline
+# タイムライン
 
 > [!CAUTION]
 >
-> #### spoiler alert
+> #### 警告：ネタバレ注意
 >
-> spoilers below! Heavily to be revised for lore changes in Factions.
+> 以下に重大なネタバレを含みます。今後のFactions（勢力）の伝承変更に合わせて、大幅に改訂される予定です。
+> 訳注：このタイムラインはアウトブレイク(ゾンビの爆発的増殖が殲滅数を超過した常体)を起点としています。
 
-## Timeline
+## タイムライン
 
-### T-6 Years
+### 6年前
 
-Drones (eyebots) used in police work.
+ドローン（アイボット）が警察業務に利用され始める。
 
-### T-4 Years
+### 4年前
 
-Personal bionics become commonplace for the wealthy, and for those withhigh-demand government
-positions.
+個人用バイオニクスが、富裕層や需要の高い政府の役職者にとって一般的なものとなる。
 
-### T-3 Years
+### 3年前
 
-Escalations in China and DPRK lead to a “Cold War,” with both sides highly prioritizing defense
-research.
+中国と北朝鮮の間で緊張が高まり「冷戦」が勃発。双方が防衛研究を最優先事項とする。
 
-### T-3 Years
+### 3年前
 
-Transposition along 4th axis discovered by DARPA researchers.
+DARPA（国防高等研究計画局）の研究者により、第4軸に沿った転置が発見される。
 
-### T-3 Years
+### 3年前
 
-Robotic police officers enter service in limited areas.
+ロボット警察官が限定された地域で運用を開始する。
 
-### T-30 Months
+### 2年6ヶ月前
 
-4th dimensional topology mapped out. It’s found that certain areas are "lower" along the 4th axis,
-allowing for relatively low-energy transposition into areas of interest.
+第4次元のトポロジーがマッピングされる。特定の領域が第4軸に沿って「低い」ことが判明し、比較的低エネルギーで目的の領域へ転置することが可能になる。
 
-### T-28 Months
+### 2年4ヶ月前
 
-Collection of materials along 4th axis commences. First contamination occurs but is confined to the
-two research labs with transposition equipment, and is in amounts so tiny (a few dozen molecules)
-that it is not remarked upon.
+第4軸に沿った物質の収集が開始される。最初の汚染が発生するが、転置装置を備えた2つの研究施設内に留まり、その量が非常に微量（数十分子程度）であったため、特に注目されることはなかった。
 
-### T-25 Months
+### 2年1ヶ月前
 
-Gun control laws greatly relaxed as a result of perceived increase in public safety.
+公衆の安全が向上したとの認識から、銃規制法が大幅に緩和される。
 
-### T-20 Months
+### 1年8ヶ月前
 
-Robotic police officers are used in 95% of police precincts.
+ロボット警察官が警察署の95%で使用されるようになる。
 
-### T-18 Months
+### 1年6ヶ月前
 
-A new federal agency, the Xenophysical Energy Defense Research Agency (XEDRA), is created to oversee
-the construction and operation of 12 new 4th axis research labs, scattered across the midwest.
+中西部全域に分散された12の新しい第4軸研究施設の建設と運営を監督するため、新しい連邦機関である異種物理エネルギー防衛研究庁（XEDRA）が創設される。
 
-Other agency names:
+その他の機関名:
 
-- HYDRA (HYperdimensional Defense Research Agency)
-- ATMAR (Agency for Transitional Mechanics & Activity Research)
-- APRA (Abnormal Phenomena Research Agency)
+- HYDRA (HYperdimensional Defense Research Agency/超次元防衛研究庁)
+- ATMAR (Agency for Transitional Mechanics & Activity Research/転移力学・活動研究庁)
+- APRA (Abnormal Phenomena Research Agency/異常現象研究庁)
 
-### T-16 Months
+### 1年4ヶ月前
 
-Plasma weapons developed in response to rising threat in China, DPRK
+中国、DPRK（北朝鮮）における高まる脅威に対応してプラズマ兵器が開発される。
 
-### T-15 Months
+### 1年3ヶ月前
 
-Increases in extradimensional research leads to collection of living samples. This notably includes
-XE037 (blob). As time continues, larger and larger sub-prime monsters are retrieved.
+異次元研究の増加に伴い、生体サンプルの収集が始まる。これには特に XE037（ブロブ）が含まれる。時間が経過するにつれて、より大型で未分化なモンスターが回収されるようになる。
 
-### T-15 Months to 5 Months
+### 15ヶ月から 5ヶ月前
 
-XEDRA becomes increasingly internally politicized, with different divisions competing for research
-dollars, and oversight staff conflicting in their opinions regarding the direction and goals of
-research.
+XEDRAの内部で政治化が進み、異なる部門間で研究資金を巡る競争が起こる。また、監督スタッフは研究の方向性や目標に関して意見が対立する。
 
-### T-13 Months
+### 1年1ヶ月前
 
-Short-range teleportation becomes a reality using fixed laboratory equipment.
+固定された実験室の機器を使用し、短距離テレポートが実現する。
 
-### T-12 Months to 6 Months
+### 12ヶ月から 6ヶ月前
 
-XEDRA begins storing sub-prime lifeforms, particularly XE037, and researching their potential as a
-possible super-weapon.
+XEDRAは未分化な生命体、特にXE037を保管し始め、超兵器としての可能性を研究する。
 
-### T-10 Months
+### 10ヶ月前
 
-Massive troop movements in China and DPRK provoke deployment by USAF. For the first time in history,
-a peacetime draft is instated.
+中国とDPRKにおける大規模な部隊移動が、USAF（アメリカ空軍）の展開を促す。史上初めて、平時の徴兵制が施行される。
 
-### T-10 Months
+### 10ヶ月前
 
-The successes of XEDRA lead to a greatly increased budgets and the construction of hundres of new
-research & production facilities in appropriate areas.
+XEDRAの成功により、予算が大幅に増加し、適切な地域に数百の新しい研究・生産施設が建設される。
 
-### T-9 Months
+### 9ヶ月前
 
-Civil unrest regarding the drafts is widespread.
+徴兵制に関する市民の不安が広範にわたる。
 
-### T-7 Months
+### 7ヶ月前
 
-Troops begin deploying with cutting-edge bionics systems. They are, according to intelligence,
-outpaced by Chinese developments.
+最先端のバイオニクス・システムを備えた部隊が展開を開始する。諜報機関によると、これらの進展は中国の開発ペースに追い抜かれつつある。
 
-### T-6 Months
+### 6ヶ月前
 
-XEDRA gains increasingly unrestricted powers. Convicts with death sentences are used as subjects.
-Later, convicts with life sentences are used as well.
+XEDRAはますます制限のない権限を獲得する。死刑判決を受けた囚人が被験者として使用され、後に終身刑の囚人も同様に使用されるようになる。
 
-### T-5 Months
+### 5ヶ月前
 
-Zombifying effect of XE037 discovered.
+XE037のゾンビ化効果が発見される。
 
-### T-3 Months to T+0
+### 3ヶ月から当日まで
 
-Civil unrest progresses into wide-scale riots. Limited martial law instated in several areas.
-Deployment of robotic police is increased to maintain order.
+市民の不安が大規模な暴動へと発展する。いくつかの地域で限定的な戒厳令が施行され、秩序維持のためロボット警察の展開が増加する。
 
-### T-4 Months to 1 Month
+### 4ヶ月から 1ヶ月前まで
 
-Corruption in XEDRA runs rampant and the legality of actions is frequently ignored. Due to the
-perceived importance of XEDRA, and the extenuating circumstances of public unrest and riots, these
-oversteps are mostly ignored.
+XEDRAにおける腐敗が蔓延し、行為の合法性が頻繁に無視される。XEDRAの重要性が認識されていること、および市民の不安と暴動というやむを得ない状況により、これらの越権行為はほとんど無視される。
 
-### T-30 Days
+### 30日前
 
-DPRK troop movements indicate an imminent attack. Missile launches batter South Korean port cities
-and act as a show of force. In response, US troop deployment is vastly increased, resulting in a
-much smaller military presence in mainland USA.
+DPRK軍の移動が差し迫った攻撃を示唆する。ミサイル発射が韓国の港湾都市を攻撃し、武力誇示として機能する。これに対応して、米軍の展開が大幅に増加し、米国本土での軍事プレゼンスが大幅に縮小する。
 
-### T-15 Days
+### 15日前
 
-XE037 surge occurs. XE037, a kind of sanguine hive mind, is responding to XEDRA’s probes. The surge
-occurs in all teleportation facilities simultaneously. During this event, XE037 contaminates the
-ground water and establishes “colonies” (slime pits). It is unknown whether Chinese/DPRK facilities
-experience this surge, as it is unknown whether they possess the equipment to perform transposition
-experiments.
+XE037の急増が発生する。一種の血に飢えたハイブマインドであるXE037が、XEDRAの探査に反応して急増している。この急増は、すべてのテレポート施設で同時に発生する。このイベント中に、XE037は地下水を汚染し、「コロニー」（スライムピット）を確立する。中国やDPRKの施設が転置実験用の機器を保有しているか不明なため、これらの施設でこの急増が発生したかどうかは不明である。
 
-### T-15 Days to 5 Days
+### 15日から 5 日前
 
-The first zombification incidents outside of labs occur. These are sometimes covered up by XEDRA;
-but often they aren’t even noticed, and the zombie is dismissed as a violent rioter and re-killed.
+研究所外で最初のゾンビ化事件が発生する。これらはXEDRAによって隠蔽されることもあるが、多くの場合、気づかれることすらなく、そのゾンビは暴力的な暴徒として処理され、再殺される。
 
-### T-3 Days
+### 3日前
 
-Merging of XE037 and insect life occurs, resulting in rapid transformations.
+XE037と昆虫生命との融合が発生し、急速な変異をもたらす。
 
-### T-3 Days to T+0
+### ３日前からアウトブレイク
 
-A series of terrorist attacks, including dirty bombs and biological weapons, is unleashed across the
-United States. NPRK & Chinese sleeper cells are expected.
+ダーティボムや生物兵器を含む一連のテロ攻撃が全米で仕掛けられる。NPRKと中国の潜伏工作員が関与していると予想される。
 
-### T+0
+### 現時点(アウトブレイク)
 
-Zombie outbreaks become widespread and critical mass is achieved; a zombie population which grows
-faster than it can be contained/killed.
+ゾンビの発生が広範囲に及び、臨界質量（Critical Mass）に達する。これは、封じ込めや殺害ができる速度よりも速く増加するゾンビ個体群を意味する。
 
-### T+18 Hours
+### 18時間後
 
-Panic sets in; deaths are rapid and widespread.
+パニックが広がり、死者は急速かつ広範囲にわたる。
 
-### T+36 Hours
+### 36時間後
 
-50% zombification or death.
+50%がゾンビ化または死亡。
 
-### T+48 Hours
+### 48時間後
 
-90% zombification or death.
+90%がゾンビ化または死亡。
 
-### T+56 Hours
+### 56時間後
 
-Bombing of large US cities by an unknown aggressor commences. A crippled defense infrastructure is
-largely unable to respond.
+未知の攻撃者による大規模な米国都市の爆撃が開始される。機能不全に陥った防衛インフラは、ほとんど対応できない。
 
-### T+60 Hours
+### 60時間後
 
-A largely-defeated national guard retreats to fortified bunkers and air strips.
+ほぼ敗北した州兵が、要塞化された掩蔽壕や飛行場へと撤退する。
 
-### T+72 Hours
+### 72時間後
 
-99% zombification or death.
+99%がゾンビ化または死亡。
 
-### T+5 Days
+### 5日後
 
-The game begins. Now you're on your own.
+ゲームが始まる。 ここからあなたは一人である。
