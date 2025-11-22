@@ -1,117 +1,108 @@
-# first week
+# 最初の1週間ガイド
 
 > [!TIP]
 >
-> In order to maximize your ability to learn and chances of survival, Evac shelter is recommended and
-> expected.
+> 学習能力と生存の可能性を最大化するため、避難シェルターを選ぶことが
+> が推奨されており、前提とされています。
 
-While daunting, the game is a lot easier than some might think. You can do a great deal to prepare
-yourself for combat, but remember the zombies always get tougher thanks to evolution. It only gets
-more dangerous.
+このゲームは気が遠くなるように感じるかもしれませんが、一部の人が考えているよりもずっとシンプルです。戦闘に向けて事前に多くの準備が可能ですが、ゾンビは進化によって常にタフになるということを忘れないでください。時間が経つにつれて、危険度は増す一方です。
 
-## First steps
+## 最初の一歩
 
-### Makeshift crowbar
+### 急造バール
 
-If you've started in the evac shelter, grab a rock outside and smash a locker and a bench. A
-makeshift crowbar will help you open doors quietly and just takes a pipe and a tool with hammering.
+避難シェルターから開始する場合は、まず外で石を拾い、シェルター内のロッカーとベンチを破壊します。
+破壊した素材を使って急造バールを、パイプとハンマーがあれば作成できます。このバールは、建物のドアを静かに開けるのに役立ちます。
 
-### Cudgel (or other weapons)
+### 棍棒 (またはその他の武器)
 
-You need a good weapon, this is usually the cudgel in the early game. If you didn't start with a
-knife, you can always make a stone knife with no skills. the makeshift crowbar lacks the hit bonus
-the cudgel has, which is why I recommend it. Optionally you can get a wooden spear but it takes some
-character skills and a fire. A self bow and crude arrows is weak but is not a bad opener to combat,
-any damage helps.
+初期段階で優れた武器となるのは、通常は棍棒です。
 
-### Clothes
+- 間に合わせのバールも利用可能ですが、棍棒には命中ボーナスがあるため、戦闘での信頼性が高く推奨されます。
+- ゲーム開始時にナイフを持っていない場合でも、スキルなしで石のナイフをいつでも作成できます。
+- オプションとして、木の槍を入手することもできますが、これにはキャラクターの特定のスキルと火が必要です。
+- 簡易弓と粗末な矢は威力は低いですが、遠距離からの戦闘のきっかけとしては悪くありません。どんなわずかなダメ
+  ージでも、生存には役立ちます。
 
-You likely won't start with the perfect insulation from the weather, so you need to manage your
-temperature as slowdown penalties from the heat or cold will kill you quickly via slowing you down
-in combat. If its too hot this is easy you just take off layers. If it's too cold you'll need to
-craft what clothes you can or loot what you can but don't waste too much time on this. You'll likely
-find the clothes you need.
+### 服装
 
-> [!NOTE]
->
-> You want to minimize how many enemies you take on at once until you learn the game and the limits of
-> your character, usually 1 enemy at a time is ideal
-
-## Going into town
-
-### Tools
-
-You can't do anything without tools. Go for an anvil, metal sawing, wood sawing, welding, and
-soldering. The rest can be crafted fairly easily if you have to. The anvil is easy if you get a
-hacksaw or toolbox and a car for spare frames.
-
-### Weapons
-
-Guns will keep you safe from the zombies through the entire game, and looting a gunstore is the
-easiest way to get geared. Otherwise, better melee weapons. You want fast hitting melee weapons and
-ideally a good to hit bonus unless your combat skills high enough to not worry about hitting.
-
-### Backpack
-
-You can't carry anything without a backpack, tailoring is the easiest way to just make one, but
-otherwise keep looking for any non-encumbering container.
-
-### Books
-
-Books make the game a lot easier but are mainly needed for recipes. Find ones for medieval crafting,
-guns, electronics, chemistry, and skills that can't be trained with crafting such as speaking or
-computers.
-
-## Cars
-
-### Finding one
-
-It's safe to say, you need to find a good car sooner rather than later. It will make the game a lot
-easier and you will carry more loot with you. Rather than finding a broken down one, go for high
-condition with relatively few destroyed parts. You may get lucky and find one fully functional. You
-can find cars anywhere there is roads. You'll get most of your tools from a mechanics garage or
-hardware store. Some homes may have garage tools.
-
-### Welding
-
-You can't do much with cars without a welder. Acetylene torches work for early game but look out for
-arc welders. An electric welder is the most important longterm solution, and attaching it to your
-car with a single solar panel provides unlimited welding potential. Weld before a break happens and
-you won't take meaningful car damage.
-
-### Hacksaw
-
-Without a hacksaw you can't remove most parts. This means adding parts will be just as hard.
-
-### Fuel
-
-Without fuel you won't be going anywhere. Gas stations come to mind, but you can actually craft
-diesel with the right book and cooking level. You can also opt for a solar car but it won't go far
-and you need a lot of panels and the electric motors.
+- ペナルティの危険性:ゲーム開始時に完璧な断熱性を持つことはほとんどないため、プレイヤーは体温を適切に管理す
+  る必要があります。
+- 暑すぎる場合: 対処法は簡単です。衣服のレイヤーを脱ぐだけで、体温を下げることができます。
+- 寒すぎる場合: クラフトできる服を作成するか、あるいは略奪できる服を見つける必要があります。ただし、これに
+  あまり時間をかけすぎないでください。サバイバルに必要な衣服は、探索を通じて見つけられる可能性が高いです。
 
 > [!NOTE]
 >
-> Your first week was a success if you lived long enough to loot a gun store, find a working car, and
-> have otherwise kept up with your survival needs.
+> ゲームの仕様やキャラクターの限界を把握するまでは、一度に相手にする敵の数を最小限に抑える必要があります。
+> 通常、敵は1体ずつ対処するのが最も理想的です。
 
-## Bonus Tasks
+## 街へ向かう
 
-### Electric grid
+### 道具
 
-If you made it this far you may want to set up a functioning electric grid at an evac shelter, or
-just install more things onto your car. The evac shelter has a mounted battery and solar panel it
-just needs an oven, electric forge, welder, soldering iron, etc. You can add wind turbines via a
-vehicle on the roof connected with a jumper cable connector for even more power.
+このゲームでは、道具なしでは何もできません。
+最初に目指すべき道具として、金床、金属切断、木材切断、溶接、はんだ付けの機能を持つものを探しましょう。
+残りの道具は、必要になった際に比較的簡単に製作できます。
+特に金床は、弓鋸または工具箱を入手し、予備のフレームのために車を入手できれば、比較的容易に入手可能です。
 
-### Helicopter
+### 武器
 
-Geting a helicopter isn't easy but if you stumble onto the parts you can install them on any
-vehicle. Gyrocopter is a fabrication 10 option. Finding a crash means ripping apart any still
-functional parts and repairing it so it can be attached to a better vehicle.
+銃はゲーム全体を通してゾンビからあなたを守ってくれる重要な装備です。
+銃器店を略奪するのが、最も早く装備を整える方法となります。
+そうでなければ、より優れた近接武器を探しましょう。戦闘スキルが非常に高く、命中を心配する必要がないレベルになるまでは、連打が速い近接武器、そして理想的には高い命中ボーナスを持つものが望ましいです。
 
-### Being brave
+### バックパック
 
-There is a lot of more dangerous locations, monsters, and mods that add more dangerous locations and
-monsters. Labs, military bases, shipwrecks, mines, collapsed towers. You will want to explore, learn
-to take on more challenges. Remember that .50 BMG and being hit by a truck solves most enemy
-problems.
+バックパックがなければ、多くのアイテムを持ち運ぶことはできません。
+裁縫スキルを使うのが、バックパックを最も簡単に作る方法です。
+裁縫ができない場合は、嵩張らないコンテナを積極的に探し続けてください。
+
+### 本
+
+本 (スキルブック)はゲームをはるかに容易にしますが、主に新しいレシピを知るために必要です。
+特に、中世のクラフト、銃器、電子工作、化学に関する本、そして話術やコンピュータのようにクラフトでは訓練できないスキルに関する本を見つけてください。
+
+## 車
+
+### 車を見つける
+
+遅かれ早かれ、良い車を見つける必要が出てきます。車はゲームを遥かに楽にしてくれる上、より多くの戦利品を運ぶことができるからです。壊れた車を探すよりも、比較的破壊された部品が少ない高コンディションの車を目指しましょう。運が良ければ、完全に機能する車を見つけられるかもしれません。車は道路がある場所ならどこでも見つけることができます。車の修理に必要なツールの大半は、自動車整備工場や金物店で手に入りますが、一部の家にあるガレージからもツールが見つかる可能性があります。
+
+### 溶接
+
+溶接機なしでは、車に対してできることはあまりありません。アセチレントーチは初期段階では機能しますが、可能な限りアーク溶接機を探すようにしてください。電気溶接機は最重要で長期的な解決策となり、ソーラーパネルを1枚車に取り付けて接続すれば、無限に溶接作業が可能になります。また、車に深刻なダメージが発生する前に溶接を行うことで、そのダメージを回避することができます。
+
+### 弓鋸
+
+弓鋸がなければ、車のほとんどの部品を取り外すことができません。これは、部品を新しく追加することも同様に難しくなることを意味します。
+
+### 燃料
+
+燃料がなければ、車でどこにも行くことができません。
+燃料源としてガソリンスタンドが思い浮かびますが、適切な本と料理スキルがあれば、実はディーゼル燃料をクラフトすることができます。
+また、ソーラーカーを選ぶという選択肢もありますが、これは遠くまで移動できず、大量のソーラーパネルと電気モーターが必要になります。
+
+> [!NOTE]
+>
+> 銃器店を略奪し、動作する車を見つけ、さらにその他の生存に必要なニーズを満たし続けるのに十分な期
+> 間生き延びた場合、あなたの最初の1週間は成功したと言えるでしょう。
+
+## ボーナスタスク
+
+### 電力網
+
+ここまでの段階にたどり着いたなら、避難シェルターに機能する電力グリッドを構築するか、あるいは車にさらに多くのコンポーネントをインストールしたいと思うかもしれません。
+避難シェルターには、あらかじめバッテリーとソーラーパネルが取り付けられていますので、必要なのはオーブン、電気炉、溶接機、はんだごてなどを設置するだけです。
+さらなる電力を得るためには、ジャンパーケーブルコネクタで接続された車両を屋根に配置することで、風力タービンを追加することもできます。
+
+### ヘリコプター
+
+ヘリコプターを入手するのは簡単ではありませんが、もし部品に出くわした場合、それを任意の車両にインストールすることができます。
+ジャイロコプターは、製作レベル10で製作できるオプションです。
+また、ヘリコプターの墜落現場を見つけた場合、まだ機能している部品をそこから取り外し、それを修理することで、より良い車両に取り付けられるようにすることを意味します。
+
+### 勇敢になる
+
+研究施設、軍事基地、難破船、鉱山、崩壊したタワーなど、より危険な場所やモンスター、そしてさらに危険な要素を追加するMODが多数存在します。
+あなたは、これらの場所を探索し、より多くの課題に取り組むことを学ぶ必要があるでしょう。ほとんどの敵の問題は、50BMG（弾薬）とトラックで轢くという手段で解決できることを覚えておいてください。
