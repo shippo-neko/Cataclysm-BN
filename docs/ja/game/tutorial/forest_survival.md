@@ -1,131 +1,101 @@
-# forest survival
+# 森林サバイバル
 
-Being the most difficult part of Cataclysm, surviving in the woods with nothing is one of the most
-rewarding experiences. This guide will cover a tasklist that should keep you alive. Should you fall
-behind, continue the previous steps before moving onto the next day's tasks. The exception is day 1.
-Day 1 tasks are in order of severity.
+Cataclysmにおいて最も困難な要素でありながら、「何も持たずに森で生き残る」ことは最も大きな達成感をもたらす経験の一つです。
+
+このガイドでは、あなたの生存を確実にするためのタスクリストを解説します。もし作業が遅れてしまった場合は、次の日のタスクに進む前に、前の手順を完了させてください。ただし、例外は1日目です。1日目のタスクは重要度の高い順に並べられています。
 
 > [!CAUTION]
 >
-> This guide ASSUMES you are not playing with mods that changes this too much, specifically changing
-> foraging drops. You'll die if they removed trash from shrubs.
+> このガイドは、採集のドロップアイテムを大きく変更するMODを使用していないことを前提としています。もし低木から「ガラクタ」が削除されている場合、サバイバルは不可能になるでしょう。
 
-## Day 1 requirements
+## 1日目の必要条件
 
-- Fire drill (1 Survival) or any fire starting device
-- Fire ring (20 rocks)
-- A water source & cooking container
-- Improvised shelter (2 survival) or sleep will be hard
+- 火起こし: 火きり棒（サバイバルスキル1）または任意の着火装置
+- かまど: 石20個
+- 水源と調理容器
+- 簡易シェルター (サバイバルスキル2) これがないと睡眠が困難になります。
 
-### Fire
+### 火
 
-The reason you need a fire is you can't see to craft at night, and the cold kills. You can't boil
-water without fire. You don't want to use fire without a fire ring, as it's incredibly annoying.
-Fires outside a container randomly stop and don't tell you how long they will last. You can break
-small boulders with long sticks. You can forage shrubs by activating them, and this will give you
-tons of litter and trash, including containers for liquids. You can find a glass/steel bottle or
-cans. Once you can boil and make fire you've survived short term.
+火が必要な理由は、夜間のクラフト視認性の確保と、寒さによる致命的なダメージの回避です。火がなければ水を沸かすこともできません。
+かまどなしで火を使うのは極めて厄介です。容器外の火はランダムに消滅し、持続時間も表示されません。かまどに必要な小さな岩は、長い棒を使って小さな岩を壊すことで入手できます。
+低木を採集すると、液体用の容器を含む大量のゴミやガラクタが入手できます。ガラスやスチールのボトル、あるいは缶が見つかるかもしれません。水を沸騰させ、火を起こすことができれば、短期的には生き残ったと言えます。
+薪は、若木から得られる長い棒を含め、あらゆる植物や木材を燃やせるため、短期的には問題になりません。長い棒2〜3本で十分な火力を得られます。
 
-Firewood is not an issue in the short term as you can burn any plant or wood, including long sticks
-from young trees. Two or three long sticks will make a good fire.
+簡易シェルターは睡眠を容易にし、必要なのは掘り棒、サバイバルスキル2、そして大量の棒と松の枝葉だけです。体温管理のため、火の近くに設置してください。
 
-An improvised shelter makes sleeping easier and only requires a digging stick, 2 survival, and a lot
-of sticks and pine boughs. Place near a fire for temperature management.
+## 自然資源
 
-## Natural resources
+### 低木、食用の樹木、およびベリーの茂み
 
-### Shrubs, Food trees, and Berry bushes
+低木は、季節ごとに一度だけ「ガラクタ」を採集できます。このガラクタは森における唯一のスチール源となるため、最も価値のある資源です。
+季節にもよりますが、春と夏は木になっているベリーにカロリーと水分を依存することになりますが、低木は後々、多くの食料を提供してくれるでしょう。
 
-Shrubs can be foraged once per season for trash, the most valuable resource of the woods as it is
-your only source of steel. Depending on your season, in spring and summer you will be relying on
-berries in trees for calories and possibly hydration but shrubs will give plenty of food later on.
+### 魚
 
-### Fish
+魚を入手できれば、優秀なカロリー源になります。川と基本的な釣り竿が必要です。
 
-If you can get fish it will be an excellent source of calories. You'll need a river and a basic
-fishing rod.
+### 若木
 
-### Young trees
+若木から長い棒を入手し、これを解体して太い棒そして木片にします。
+クラフトのヒントについては私の「最初の1週間ガイド」を参照してください。一般的な手順は、短い紐、石のナイフ、掘り棒、木のビーズ、木の針、石のつるはし、木の靴、石のシャベル、石の斧と進めることで、サバイバルスキル4、工作スキル4に到達できるでしょう。
 
-Young trees are how you get long sticks which you butcher into heavy sticks and then into splintered
-wood. Follow my first week guide for crafting tips, but in general it goes short cordage, stone
-knife, digging stick, wooden bead, wooden needle, stone adze, wooden clogs, stone shovel, stone axe.
-That will get you to survival of 4 and fabrication of 4.
+### 草地タイルとガマ
 
-### Grass tiles and Cattails
+草地は掘り棒やシャベルで取り除くと、わらの山が得られ、クラフト用の紐を作れます。ガマの植物繊維はボロ布を作るために温存すべきです。
 
-Grass can be removed with a digging stick or shovel to give piles of straw, which can make cordage
-for your crafts, cattail plant fiber should be saved for making rags.
+### 粘土
 
-### Clay
+粘土の地形は建設メニューから採取する必要があります。大きな穴を掘っても稀に見つかりますが、大量に必要となるため、川岸を見つけてください。
 
-Clay terrain must be extracted in the construction menu. It can rarely be found from digging a large
-pit. You will need lots of it so find a river bank.
+## 1週間の必要条件
 
-## Week 1 requirements
+### 食料の保存
 
-### Food preservation
+食料を保存するには、炭焼き窯と燻製ラックが必要です。肉を燻製にするか、栽培した作物を乾燥させます。
+調理スキル2が必要ですが、見つけた色々な食料を茹でたり煮たり（水を沸騰させたり）するうちに、訓練なしで到達する可能性が高いです。
 
-To preserve food you need a charcoal kiln and smoking rack to smoke meat or dehydrate what you farm.
-You need cooking 2 so boil some water and cook the assorted food you find, this will likely come
-without training. The kiln is fabrication 3 and requires you to dig soil but you likely have some if
-you made an improvised shelter. Place wood in the kiln and light it, you'll get tons of charcoal
-once it'sd one.
+炭焼き窯は工作スキル3が必要で、地面を掘る必要がありますが、簡易シェルターを作っていれば土は持っているはずです。窯に木材を入れ火をつけると、完了後に大量の木炭が得られます。
 
-### Water storage
+### 水の貯蔵
 
-Storing lots of water either requires foraging many containers or crafting a lot of clay containers.
-Your easiest option is clay pots but they can't be resealed. This means you can't carry them with
-you while full.
+大量の水を貯蔵するには、多数の容器を採集するか、大量の粘土容器をクラフトする必要があります。最も簡単な選択肢は粘土の壺ですが、これらは再封印できません。つまり、水を入れたまま持ち運ぶことはできません。
 
-### Weapons
+### 武器
 
-A wooden spear is your best early weapon, cudgels are practically free to make and better for when
-you can't use a reach attack. You can upgrade to a quarterstaff if you get leather, with a working
-forge there will be tons of better weapons to make so these are temporary.
+木の槍が最良の初期武器です。棍棒は実質的に無料で作成でき、リーチ攻撃が使えない状況で優れています。革を入手できればクォータースタッフにアップグレードできます。作業可能な鍛冶場があれば、より優れた武器が大量に作れるため、これらは一時的なものです。
 
-### Firewood
+### 薪の調達
 
-Firewood is going to be from chopping trees into logs with a stone axe. You may want to save the
-food-bearing trees.
+薪は、石の斧で木を切り倒して丸太にすることから得られます。食料の採れる木は温存した方が良いかもしれません。
 
-### Clothes
+### 衣類
 
-Clothes are going to be made from rags made of plant fibers. Get knitting needles.
+衣類は植物繊維から作られたボロ布から作ります。編み針を用意してください。
 
-## Longterm goals
+## 長期目標
 
-### Shelter
+### シェルター
 
-Building a house is time consuming, painful, and not rewarding. If you choose to stay in the woods
-forever and not live in a pre-spawned structure or a car then you'll want to do it eventually. With
-a pickaxe you can live in the ground but otherwise you'll want to check a few of the walls and
-floors in the construction menu to see which kind of house to build. Log cabins are fairly sturdy
-and cheap but always at risk of fire. Mortar is not an obtainable item for you, so go with adobe
-mortar which limits you to stone walls or adobe brick.
+家を建てるのは時間がかかり、大変で、割に合いません。しかし、スポーン済みの建造物や車に頼らず、永遠に森に留まることを選択するなら、最終的には必要になります。
+つるはしがあれば地下に住むことも可能ですが、そうでなければ、建設メニューで壁や床の種類を確認し、どのような家を建てるか決める必要があります。ログハウス頑丈で安価ですが、常に火災のリスクがあります。
+モルタルは入手不可能なアイテムですので、アドビ・モルタルを使用することになり、石の壁またはアドビレンガに限定されます。
 
-### Working forge
+### 作業可能な鍛冶場
 
-A forge is critical to get working. Building a rock forge and gaining charcoal from a kiln is easy.
-A clay crucible, metalworking chisel, metal tongs, and a hammer are all easy to make with the right
-requirements. An anvil is incredibly expensive. You'll be searching shrubs forever, if you're
-playing with the city still enabled you can smash a car into bits.
+鍛冶場は動作させることが極めて重要です。岩の鍛冶場を作り、炭焼き窯から木炭を得るのは容易です。
+粘土のるつぼ、金属加工用ノミ、金属製の火箸、ハンマーは、適切な要件を満たせばすべて簡単に作れます。金床は非常に高価です。永遠に低木を探し続けるか、都市がまだ有効なマップで車を粉砕するしかありません。
 
-### Vehicles
+### 車両
 
-Depending on your mapgen you'll either graduate to messing with real cars, or be stuck with wooden
-carts and horse carriages. Starting a vehicle is done in the construction menu. A canoe is a good
-idea, wooden frames take nails and planks, most wooden vehicle parts just need wood and nails.
-You'll be grinding mechanics with wooden vehicle parts.
+マップ生成設定によりますが、本物の車をいじる段階に進むか、木製のカートや馬車に留まるかのどちらかになります。車両の製作は建設メニューで行います。
+カヌーは良いアイデアです。木製フレームには釘と板が必要です。ほとんどの木製車両パーツは木材と釘だけで済みます。木製車両パーツで機械整備スキルを磨くことになります。
 
-### Electronics
+### 電子機器
 
-Electronics is specifically listed as long as you are playing with normal mapgen. If it doesn't
-spawn in your world you're out of luck. See normal gameplay for how to get started, but the jist is
-to deconstruct electronic furniture in town and make any low level craft you can to advance, such as
-flash lights and electric firestarters. If you get a solar panel, mounted battery and oven you'll be
-in a good position.
+通常のマップ生成でプレイしている限り、電子機器は具体的な目標として挙げられます。もしあなたの世界にスポーンしなければ、運が悪かったと諦めるしかありません。
+開始方法は通常のゲームプレイガイドを参照してください。要点は、町で電子機器を含む家具を解体し、懐中電灯や電気着火装置など、作れる低レベルのクラフトでスキルを上げることです。ソーラーパネル、搭載バッテリー、オーブンが手に入れば、有利な状況になるでしょう。
 
 > [!TIP]
 >
-> That's about all you can do without going into the city.
+> これが、都市に入らずにできることのほぼ全てです。
