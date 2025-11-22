@@ -2,48 +2,26 @@
 
 > [!CAUTION]
 >
-> #### spoiler alert
+> #### ネタバレ注意
 >
-> spoilers below! All of this is to be revised to fit new lore introduced in Factions
+> 以下にネタバレを含みます！Factionsで導入された新しい伝承に適合させるために改訂される予定です。
 
-### Note #356-92-XE
+### ノート #356-92-XE
 
-Earlier conjecture that revivification occurred only in humans was premature. Thanks to the discover
-of the substances ability to revivify large canines, the properties of XE-037 in mammalian organisms
-is now far more clear.
+蘇生がヒトでのみ発生するという以前の推測は時期尚早であった。大型のイヌ科動物を蘇生させる物質の能力が発見された結果、哺乳類における XE-037 の特性は現在、より明確になっている。
 
-From what we can tell so far, exposure introduces a persistent, low level infection in mammal
-subjects, regardless of size or nature. The substance seems to multiply within the body until it
-reaches a certain point, and then enters a form of stasis and ceases to grow. It is, as yet, unknown
-why this halting process occurs in mammals, but not in insects - further research is needed. The
-body does not seem to attempt to combat the invader, and in fact no defenses have been noted - the
-body simply ignores the presence of the substance.
+これまでに判明した事実として、暴露は、サイズや性質に関わらず、哺乳類の被験体に持続的な低レベルの感染をもたらす。この物質は体内で一定のポイントに達するまで増殖し、その後、一種の静止状態に入って成長を停止させるようだ。なぜこの停止プロセスが哺乳類で発生し、昆虫では発生しないのかは、現時点では不明であり、さらなる研究が必要である。身体は侵入者と戦おうとする兆候を示さず、実際、防御反応は全く確認されていない。身体は単にこの物質の存在を無視している状態にある。
 
-The spread seems to halt at roughly 1% of body mass, though exact numbers are difficult to determine
-thanks to the risk of mid-autopsy revivification.
+感染の広がりは、およそ体質量の1%で停止するように見えるが、検死中の蘇生リスクがあるため、正確な数値を特定することは困難である。
 
-The reason why earlier reports confined revivification to humans was that the process requires a
-critical amount of XE-037 within the body, not as a percent but as pure weight. Around 250g seems to
-be enough to insure a post-mortem takeover. Animals small enough that 1% of body mass falls below
-this threshold thus fail to revivify, and the infection shrinks and then dies several hours after
-it’s host organism has passed. In larger animals, expiration seems to serve only to raise the cap on
-XE-037 within the body - expiration quickly leads to the XE-037 breaking down many of the now
-inactive bits of it’s host until it makes up almost 4% of body mass. At some point towards the end
-of this process, the host organism revives in the manner we are all, by now, familiar with,
-seemingly under the full control of the substance.
+以前の報告で蘇生がヒトに限定されていた理由は、このプロセスが、割合としてではなく、純粋な重量として、体内に臨界量のXE-037を必要とすることによる。約250グラムが、死後の乗っ取りを確実にするのに十分な量であると推定される。この閾値を下回る体質量1%の動物は蘇生に失敗し、感染は宿主生物が死亡してから数時間後に縮小し、その後死滅する。より大きな動物では、死は体内のXE-037の上限を引き上げる役割しか果たさないようだ。死後、XE-037は宿主の不活性化された多くの部分を急速に分解し始め、体質量のほぼ4%を占めるに至る。このプロセスの終わりに近づくと、宿主生物は、既に周知の方法で蘇生し、物質による完全な支配下にあると見なされる。
 
-### Note #376-92-XE
+### ノート #376-92-XE
 
-Infected subjects that sustain extreme trauma before death seem to exhibit lower growth level in
-internal XE-037, which can be lower than the expected 4%. Revivification of subjects in such cases
-is slower. This lead to the conclusion that XE-037 “prefers” less damaged corpses.\
-Additionally, damage beyond a certain threshold, such as the removal of several internal organs,
-quartering the corpse, or exposure to high explosive or heat, seems to overwhelm the XE-037
-infection, causing the same dwindling and death behaviour seen in smaller organisms.
+死亡前に極度の外傷を負った感染被験体は、体内のXE-037の成長レベルが予想される4%よりも低くなる傾向がある。このような被験体の蘇生はより遅いことから、XE-037は損傷の少ない死体を「好む」という結論に達した。
 
-### Note #377-92-XE
+さらに、内臓の除去、死体の四分割、あるいは高性能爆薬や高熱への曝露といった特定の閾値を超える損傷は、XE-037感染を圧倒するようだ。その結果、小型生物に見られるのと同様の、感染の縮小と死滅の挙動を引き起こす。
 
-Observations that high-trauma revivification subjects are not noticeably different from low-trauma
-subjects have proven to be premature. The 93-XE series of studies has been designated for
-consolidating existing data and performing additional research after the labs have been repaired and
-personnel replaced.
+### ノート #377-92-XE
+
+高外傷による蘇生被験体と、低外傷による蘇生被験体との間に目立った違いがないという以前の観察結果は、時期尚早であったことが証明された。研究室の修理と人員の交代後、既存データの整理と追加研究を行うため、93-XEシリーズの研究が指定された。
