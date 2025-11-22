@@ -43,9 +43,10 @@
 建造物を都市の境界内だけでなく、より広いエリアにスポーンさせたい場合は、ファイル `omdata.h` 内の構造体 ( `#define OMSPEC_FREQ 7`から始まる行) を参照する必要があります。
 
 これらの構造体もソースコード内に詳細にコメントされています。
+
 - `enum omspec_id` 構造体内の `NUM_OMSPECS` の前に、新しい識別子を追加します。
 - 次に、`const overmap_special overmap_specials[NUM_OMSPECS]`
-配列に新しい建造物のレコードを追加します。
+  配列に新しい建造物のレコードを追加します。
 
 ```cpp
 {ot_toxic_dump,   0,  5, 15, -1, mcat_null, 0, 0, 0, 0, &omspec_place::wilderness,0}
