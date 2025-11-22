@@ -1,132 +1,118 @@
-# Game file and save corruption
+# ゲームファイルとセーブデータの破損
 
-Game files and save corruption falls into following categories:
+ゲームファイルやセーブデータの破損は、主に以下のカテゴリに分類されます。
 
-1. Caused by your system
-2. Caused by your launcher
-3. Caused by the game
-4. Caused by improper upgrade procedure
-5. Caused by character death
+1. システムに起因するもの（OSやハードウェアの問題）
+2. ランチャーに起因するもの
+3. ゲーム自体に起因するもの（バグなど）
+4. 不適切なアップグレード手順に起因するもの
+5. キャラクターの死亡に起因するもの（意図的な操作によるものなど）
 
-## Corruption caused by your system
+## システムに起因する破損
 
-### Common symptoms
+### 共通の症状
 
-- Nonsensical error messages when trying to load a save (e.g. "expected comma", or "expected array")
-- Problematic files, when opened with a decent text editor (Notepad++ for you Windows users), are
-  partially filled with zero bytes or some other gibberish
+- セーブデータをロードしようとした際に、「expected comma（コンマが必要です）」
+  や「expected array（配列が必要です）」といった意味不明なエラーメッセージが表示されることがあります。
+- この現象が発生した場合、問題のあるファイルをまともなテキストエディタ（Windows
+  ユーザーの場合はNotepad++などで十分です）で開くと、ファイルの一部がゼロバイトや判読不能な文字で埋め尽くされているのが確認できます。
   ![image](https://user-images.githubusercontent.com/60584843/186019683-36a59d3b-31ce-408c-96ee-42390975171c.png)
 
-### Common causes and ways to avoid
+### 共通の原因と回避策
 
-1. Insufficient disk space (buy a bigger disk)
-2. Faulty disk (buy a new disk)
-3. Saving on a USB stick / external hard drive and pulling it out without "Safe Removal" (don't do
-   this)
-4. Blackout (buy a UPS for your computer)
-5. Power loss due to hardware failure (call for a PC repair crew)
-6. Power loss due to user actions (don't pull the power plug of your PC, don't shut down laptop by
-   long-pressing power button)
-7. Blue screen or a similar unrecoverable OS error (again, call PC repair crew)
+1. ディスク容量の不足（より大きなディスクを購入してください）
+2. ディスクの故障（新しいディスクを購入してください）
+3. USBメモリや外付けHDDにセーブしている状態で、「安全な取り外し」を行わずに引き
+   抜く行為（絶対に行わないでください）
+4. 停電（コンピューター用にUPS（無停電電源装置）を購入してください）
+5. ハードウェア障害による電力損失（PC修理業者に連絡してください）
+6. ユーザーの操作による電力損失（PCの電源プラグを抜かないでください。また、ノー
+   トパソコンの電源ボタンを長押しして強制的にシャットダウンしないでください）
+7. ブルースクリーンまたは同様の回復不能なOSエラー（再度、PC修理業者に連絡してください）
 
-### Fixing corruption
+### 破損の修復
 
-There's nothing we can do about it, but you can try your OS file backup functionality (or game
-launcher backup functionality, if its backups didn't get corrupted as well).
+この問題に関して、私たちにできることは何もありません。しかし、OSのファイルバックアップ機能、あるいは（ランチャーのバックアップ自体も破損していなかった場合に限りますが）ゲームランチャーのバックアップ機能を試すことができます。
 
-## Corruption caused by your launcher
+## ランチャーに起因する破損
 
-### Common symptoms
+### 共通の症状
 
-1. All (or some) saves are suddenly gone
-2. All (or some) of your personal tweaks in `[game root]/data/` are suddenly undone
-3. All (or some) of your mods/soundpacks are suddenly gone
-4. All (or some) settings are reset to defaults
+1. すべて（または一部）のセーブデータが突然消える
+2. `[game root]/data/` フォルダ内にあった個人用の調整ファイルのすべて（または一
+   部）が突然元に戻される。
+3. すべて（または一部）のMOD/サウンドパックが突然消える
+4. すべて（または一部）の設定がデフォルトにリセットされる
 
-### Common causes and ways to avoid
+### 共通の原因と回避策
 
-1. The launcher is buggy. Bug the author(s)/maintainer(s) to fix it, or find a different launcher -
-   maybe one that [tries to avoid touching user data](https://github.com/qrrk/Catapult).
-2. Your mods/soundpacks/personal tweaks were inside `[game root]/data/` folder. That folder is for
-   base game stuff only, so don't get surprised if it gets overwritten/erased/corrupted after an
-   update. Specifically to avoid this situation the game allows placing these files into so-called
-   "user" folders - on Windows, that would be folders named `[game root]/mods/` and
-   `[game root]/sound/`. All personal tweaks should go into a dedicated mod placed into same
-   `[game root]/mods/` folder, and when that's not possible due to limitations of modding system -
-   kept in some backup form, preferably away from `[game root]/` to avoid launcher treating it as
-   junk.
-3. The launcher may have some quirks. For example, one of the recent updates of a popular launcher
-   had a big warning on it that some people decided to ignore. Advice here is similar, bug the
-   author(s)/maintainer(s) to solve these (add migration?) or just be more attentive.
+1. ランチャー自体にバグがある可能性があります。この場合は、作者やメンテナーにバ
+   グを報告して修正してもらうか、あるいは別のランチャー、例えば[ユーザーデータへの干渉を避けるように設計されているものなど](https://github.com/qrrk/Catapult)などを見つけて使用してください。
+2. MOD、サウンドパック、あるいは個人用の調整ファイルを、以前は 
+   `[game root]/data/` フォルダ内に置いていたかもしれません。しかし、このフォルダはベースゲームのファイル専用であるため、アップデート後にファイルが上書きされたり、消去されたり、破損したりしても驚かないでください。この問題を特に避けるため、ゲーム側ではこれらのファイルをいわゆる「ユーザー」フォルダに配置することが推奨されています。Windowsでは、それは `[game root]/mods/` および
+   `[game root]/sound/`という名前のフォルダになります。すべての個人用の調整ファイルは、同じ
+   `[game root]/mods/` フォルダ内に配置した専用のMODに含めるべきです。もしMODシステムに制限があってそれが不可能な場合は、ランチャーが不要なファイル（ジャンク）として扱わないように、できれば `[game root]/` から離れた場所にバックアップとして保管してください。
+3. ランチャー特有の問題が発生する可能性があります。例えば、ある人気ランチャーの
+   最近のアップデートでは、一部のユーザーが無視せざるを得ないような大きな警告が表示された事例があります。この場合の対処法は、前述のアドバイスと同様です。つまり、バグを作者やメンテナーに報告して解決してもらう（ファイルの移行機能を追加してもらうなど）か、あるいはご自身で運用に細心の注意を払うようにしてください。
    ![image](https://user-images.githubusercontent.com/60584843/186022055-0015f2cc-2549-4721-8a0d-8b7047b3d2b1.png)
 
-### Fixing corruption
+### 破損の修復
 
-Not much we can do about this either. Try bugging launcher people for a fix or your OS for the
-backups.
+この件についても、私たちにできることはあまり多くありません。ランチャーの関係者に修正を依頼するか、あるいはOSのバックアップ機能を試すことをおすすめします。
 
-## Corruption caused by the game
+## ゲームに起因する破損
 
-### Common symptoms
+### 共通の症状
 
-1. Whenever you load a save, something weird but non-game-breaking happens (you die, or lose 10kg,
-   or your NPC companion teleports around)
-2. Whenever you load a save, the game screams at your about lost item locations
+1. セーブデータをロードするたびに、ゲームプレイに支障はないものの、奇妙な現象が
+   発生する（例：キャラクターが死亡する、体重が10kg減る、NPCの仲間がテレポートするなど）。
+2. セーブデータをロードするたびに、ゲームが失われたアイテムの場所について警告メ
+   ッセージを表示する。
 
-### Common causes and ways to avoid
+### 共通の原因と回避策
 
-These are game bugs and should be fixed, not avoided. We can't fix what we don't know about, so bugs
-need to be reported - either on GitHub via creating a
-[Bug Report](https://github.com/cataclysmbnteam/Cataclysm-BN/issues/new/choose) (you only need a
-working email address to make a GitHub account, it's not _that_ hard) or by joining
-[our Discord server](https://discord.gg/XW7XhXuZ89) and complaining in `#development` channel -
-you'll most likely get a faster response there. If you know how to fix it (or want to take a stab at
-it) - help is always appreciated.
+これらの問題はゲームのバグであるため、回避するのではなく、本来は修正されるべきものです。しかし、私たち開発者がバグの存在を知らなければ修正することはできません。したがって、バグは必ず報告される必要があります。報告は、以下のいずれかの方法で行えます。
+GitHubで[バグ報告を作成する](https://github.com/cataclysmbnteam/Cataclysm-BN/issues/new/choose) (GitHubアカウントの作成には、有効なメールアドレスが必要なだけで、それほど難しくはありません。) 
+[私たちのDiscordサーバー](https://discord.gg/XW7XhXuZ89) に参加し、 `#development` チャンネルで不具合を報告する。後者の方法のほうが、より迅速な応答が得られる可能性が高いです。もし、あなたが修正方法を知っている（または試してみたい）のであれば、いつでも協力は歓迎されます。
 
-### Fixing corruption
+### 破損の修復
 
-Saves in these cases can usually be fixed, though exact method varies on a case-by-case basis.
+これらのケースで発生したセーブデータは通常、修正が可能ですが、正確な対処法は状況によって異なります。
 
-If the game is showing red-on-black messages that say something about `ACT_XXX lost target item` or
-`item_location lost target during save/load cycle`, try making a backup of the save, then opening
-your character's save file (usually `[game root]/save/[World Name]/#[gibberish].sav`) with any
-decent text editor (Notepad++ for Windows is ok), finding all occurrences of sequences starting with
-`ACT_` (e.g. `ACT_DROP`, or `ACT_WASH`) and replacing them with `ACT_NULL`.
+ゲームが `ACT_XXX lost target item` や
+`item_location lost target during save/load cycle`のような赤地に黒の文字でメッセージを表示している場合、以下の手順を試してください。まず、セーブデータのバックアップを作成し、次にまともなテキストエディタ（WindowsではNotepad++などで十分です）で、キャラクターのセーブファイル (`[game root]/save/[World Name]/#[gibberish].sav`) を開きます。
+そして、ファイル内で `ACT_` から始まるすべてのシーケンス (例:`ACT_DROP` や `ACT_WASH`) を見つけ出し、それらを `ACT_NULL` に置き換えてみてください。
 
-## Corruption caused by improper upgrade procedure
+## 不適切なアップグレード手順に起因する破損
 
-### Common symptoms
+### 共通の症状
 
-1. After a manual update the game is showing weird errors noone you ask knows about, or experiences,
-   even if you're not using any mods.
-2. The errors go away after a clean reinstall of the game.
+1. 手動でアップデートを行った後、MODを全く使用していないにもかかわらず、誰も知
+   らない、あるいは誰も経験したことのないような奇妙なエラーがゲーム画面に表示されることがあります。
+2. この場合、ゲームをクリーンインストール（完全に削除してから再インストール）す
+   ることで、エラーが解消します。
 
-### Common causes and ways to avoid
+### 共通の原因と回避策
 
-You're most likely updating the game by downloading a fresh version and unpacking it over the
-existing installation. **This is not supported and has never been supported.** It is generally a bad
-idea to update programs in such way, unless they explicitly state they can handle this and it's
-allowed. BN can't handle this. The mods you downloaded and upgraded in same way also most likely
-can't handle this.
+おそらく、既存のインストールの上に新しいバージョンをダウンロードして展開することで、ゲームをアップデートしていると思われます。しかし、**この方法は正式にサポートされていませんし、これまでもサポートされていません。**
 
-### Fixing corruption
+プログラム側が明確にこの処理に対応しており、かつ許可していると明示されていない限り、このような方法でソフトウェアをアップデートするのは一般的に推奨されません。BNはこの処理に対応していません。また、同様の方法でダウンロードおよびアップグレードされたMODも、おそらくこれに対応できていないでしょう。
 
-Just do a clean reinstall, or use a launcher.
+### 破損の修復
 
-## Corruption caused by character death
+クリーンインストールを行うか、ランチャーを使用してください。
 
-### Common symptoms
+## キャラクターの死亡に起因する破損
 
-Your character dies - it's a tragedy, and you wish you could turn back time to the good old days.
-And then you realize you can do exactly that by pressing Alt+F4. But when loading the save next
-time, you see your corpse nearby with all items duplicated and your vehicle is nowhere to be seen.
+### 共通の症状
 
-### Common causes and ways to avoid
+キャラクターが死亡します。それは悲劇であり、「古き良き時代」に戻りたいと願うでしょう。そして、Alt+F4を押せば、まさにそれが実現できることに気づきます。しかし、次にセーブデータをロードすると、すべてのアイテムを複製した死体が近くにあり、あなたの乗り物がどこにも見当たらない、という状況に直面することになります。
 
-You tried to cheat death, but failed, and ultimately was forgotten among the billions lost in the
-cataclysm.
+### 共通の原因と回避策
 
-### Fixing corruption
+死をごまかそうと試みましたが、結局は失敗に終わり、最終的には大災厄で命を落とした何十億もの犠牲者の一人として、歴史の中に忘れ去られてしまいました。
 
-You'll have to live with the reminder of your mistakes. Try backing up the save next time.
-Technically it's a bug, but it's also an easy way out, so noone actually cares about fixing it.
+### 破損の修復
+
+あなたは、自分の過ちの証拠（複製された死体など）と共に生き続けなければなりません。次回は、セーブデータをバックアップすることを試みてください。
+技術的にはバグとして扱われますが、これは手軽な逃げ道（抜け道）でもあるため、このバグを修正しようとする人はいません。
