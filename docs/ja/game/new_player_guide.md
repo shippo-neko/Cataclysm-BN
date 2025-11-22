@@ -1,87 +1,76 @@
-# New player guide
+# 新規プレイヤーガイド
 
 > [!TIP]
 >
-> Should you be confused with keybindings at any time, use `?` to check your keybindings in game, or
-> use the main menu to display the keybindings menu.
+> キーバインドに迷った場合は、ゲーム内で `?` を使用してキーバインドを確認するか、メインメニューからキーバインドメニューを表示してください。
 
-## Your first character
+## 最初のキャラクター
 
-Runs can end abruptly. Starting as a default survivor in the evac shelter will allow you to learn
-the game in a fairly stress-free environment. It has solar and a battery so little effort is needed
-to install an oven or fridge. You can utilize the woods for your food and water, and train up your
-skills before you go into town. A wooden spear or some form of ranged attack are fairly safe ways of
-taking out starter zombies. You can be entirely self sufficient via the woods but you are on a race
-to keep up with monster evolution. The guns in an average gun store will suffice if you can survive
-and get into one. When you run into somewhere you can't access, a pickaxe or jackhammer can destroy
-concrete and metal walls and doors, and a hacksaw can cut the bars off windows. Managing stamina is
-important in combat. You run out, you will probably die, especially as a new player.
+突然、ゲームオーバーになる可能性は常にあります。
+まず、避難シェルターを初期開始地点として選択すれば、比較的ストレスなくゲームの基本を学べます。シェルターにはソーラーパネルとバッテリーが備わっているため、オーブンや冷蔵庫の設置に手間はほとんどかかりません。
+食料と水は森で調達でき、本格的に街へ出る前にスキルを磨くことができます。初期のゾンビを倒すには、木の槍や何らかの遠距離攻撃が比較的安全な方法です。
+森だけで完全に自給自足も可能ですが、その場合、モンスターの進化のペースに遅れを取らないよう、常に効率を追求する必要があります。
+生き残り、平均的な銃器店にたどり着くことができれば、そこで手に入る銃はサバイバルに大いに役立つでしょう。
+もし、行く手を阻む場所に遭遇した場合、つるはしや削岩機はコンクリートや金属の壁、ドアを破壊できますし、弓鋸は窓の格子を切断できます。
+戦闘においてはスタミナの管理が非常に重要です。スタミナが切れると、特に初心者プレイヤーは死に直面する危険性が高くなります。
 
-### fabrication
+### 製作
 
-You can work your way through fabrication to smithing medieval equipment, as a melee character it
-will be important. Finding a library in town will let you find the necessary books to read your way
-to this skill level but you'll need the book no matter what for recipes. When zombies are little
-threat either via firearm or melee combat, you will want to look into training other skills, finding
-a working vehicle, and preparing to loot places of greater danger and reward.
+製作スキルを向上させると、鍛冶を通して中世の装備を作成できるようになります。これは近接戦闘を主とするキャラクターにとって非常に重要です。街で図書館を探せば、このスキルレベルを上げるのに必要な本を見つけられますが、装備のレシピ自体も本で習得する必要があります。
+銃器や近接戦闘でゾンビの脅威をある程度抑え込めるようになったら、次は他のスキルを鍛えたり、動く乗り物を見つけたりして、より危険ではあるものの、その分報酬の大きい場所へ略奪に出かける準備に取り掛かると良いでしょう。
 
-### finding CBM's or mutagens
+### CBM または変異原の発見
 
-CBM's will require an autodoc (unless the manual installation mod is active), and to successfully
-install you need high first aid, computers, and electronics. Manual installation requires mechanics
-instead of computers. Some zombies will have CBM's on them, and dissection with a scalpel and high
-first aid will yield these. Without saying too much of the mutation system, you will want to loot
-labs to pursue this route. Turrets are extremely dangerous and can end a run quickly, but that is
-not all you will find. Unless you have a science ID, you'll be hacking or using brute force to get
-in.
+CBMをインストールするには、基本的にオートドックが必要です（手動インストールMODが有効でない場合）。インストールを成功させるためには、応急処置、コンピューター、電子工作のスキルを高いレベルで持っている必要があります。
+手動でのインストールを行う場合は、コンピューターの代わりに機械整備スキルが求められます。一部のゾンビはCBMを所持しており、メスと高い応急処置スキルを用いた解体によって、それらのCBMを入手できます。
+変異システムについてはここでは詳しく触れませんが、このルートを突き詰めるのであれば、研究施設を探索し、物資を略奪したいと考えるでしょう。研究施設のタレットは非常に危険で、即座にサバイバルを終わらせてしまう可能性がありますが、その場所で見つかるのはタレットだけではありません。
+科学者IDカードを持っていない限り、施設への侵入はハッキングするか、あるいは物理的な破壊に頼ることになります。
 
-## Auto actions
+## 自動行動
 
-Auto actions allows you to minimize keystrokes.
+自動行動を活用することで、キー入力の回数を最小限に抑えることができます。
 
-### Auto pickup
+### 自動取得
 
-you can set casings and shotgun hulls to auto pickup. It's important to utilize auto pickup properly
-such as weight and volume limits and alongside safe mode to avoid picking up in combat.
+薬莢やショットガンの弾薬は、自動取得の設定が可能です。しかし、戦闘中に拾うのを避け、スムーズに行動するためには、自動取得を重量や容量の制限、そしてセーフモードと組み合わせて適切に利用することが重要となります。
 
-### Auto pulping
+### 自動破壊
 
-Auto pulping lets you do pulping in combat without pressing smash `(s)` after every kill.
+自動破壊機能を使用すると、敵を倒すたびに`s`キーを押して肉塊化する操作をすることなく、戦闘中に自動で処理を行うことができます。
 
-### Auto forage
+### 自動採集
 
-Auto forage is great for living off the lands but remember to disable it when traveling, and
+自動採集は、その土地から物資を自給自足するのに非常に役立ちますが、移動中は必ず無効にしておくように注意してください。
 
-### Auto mining
+### 自動採掘
 
-Auto mining will let you repetitively move into terrain to mine it. Auto mining is dangerous, you
-may accidentally walk into walls you don't want to mine or if you use a pickaxe as a weapon you can
-very likely destroy your base unintentionally.
+自動採掘を使用すると、同じ地形へ繰り返し移動し、採掘作業を続けることができます。ただし、自動採掘は危険を伴います。意図しない壁に向かって誤って歩き、採掘してしまう可能性があるためです。また、つるはしを武器として使用している場合、誤って自分の拠点を破壊してしまう危険性が非常に高くなります。
 
-## The Zone manager
+## 区域管理
 
-The Zone manager `(Y)` allows you to set sorting zones to auto-sort your loot, deconstruct terrain
-or vehicles automatically, construction blueprints, or farm fish and chop trees. It is a powerful
-tool for minimizing keystrokes.
+区域管理 `(Y)` を使用すると、以下のような様々な操作を自動化でき、キー入力の回数を最小限に抑えるための強力なツールとなります。
 
-### Zone activities
+- ソートゾーンを設定し、戦利品を自動的に整理する。
+- 地形や乗り物を自動的に解体する。
+- 建設の設計図を作成する。
+- 魚を飼育する。
+- 木を伐採する。
 
-Using `(O)` your character can do zone activities once you have at least one zone.
+### 区域作業
 
-### Sorting
+区域作業は全体として一つの機能であり、区域が少なくとも一つ設定されている場合は、`(O)`キーを使ってこの区域作業を実行できます。
 
-You need at least one unsorted loot zone to begin sorting things on the ground. You can set an
-entire house to be an unsorted loot zone and they can overlap. You can use zones on vehicle storage
-tiles but they can't be multiple tiles, and even sort into your vehicle. You ONLY sort within
-unsorted loot zones, not within your inventory. You however use free inventory space to sort loot,
-so keep your bags clear.
+### 整理
 
-## Tips & common questions
+地面に置かれたアイテムの整理を開始するには、未分類の戦利品区域を少なくとも一つ設定する必要があります。
 
-1. You can use `TAB` while in your inventory for selecting an entire category. I.E. using multidrop
-   with d to drop all food at once.
-2. Rebinding keys can improve your ergonomics significantly, especially if you play with WASD.
-3. Use Safe mode. You can ignore monsters and If it bothers you too much then set proximity distance
-   to something reasonable. Safe mod will save you.
-4. If you want to change crafting range, skill training speed, or experimental 3D vision, you can
-   find it in options under the Debug category.
+家全体を未分類の戦利品区域として設定でき、複数の区域が重複しても問題ありません。区域は乗り物のストレージタイルでも利用可能ですが、複数のタイルにまたがることはできず、乗り物内部に区域することもできます。
+
+整理は、未分類の戦利品区域内でのみ実行され、プレイヤーの所持品内では行われません。ただし、戦利品を整理する際に所持品の空きスペースを利用するため、事前にバッグの中を空にしておくことをおすすめします。
+
+## ヒントとよくある質問
+
+1. 所持品画面で`TAB`キーを押すと、アイテムのカテゴリ全体を選択できます。例えば、`d`キーで一括投下機能を使って、すべての食料を一度に地面に置くといった使い方が可能です。
+2. キーを再割り当てすると、特にWASD操作でプレイしている場合の操作性が大幅に向上します。
+3. 必ずセーフモードを利用してください。これを使うとモンスターを無視できるようになりますし、もし動作が煩わしいと感じる場合は、モンスターに反応する近接距離を適切な値に設定しましょう。セーフモードはきっとあなたを危険から守ってくれます。
+4. 製作範囲、スキル訓練速度、あるいは実験的な3D視覚に関する設定を変更したい場合は、オプションメニューのデバッグカテゴリ内から見つけることができます。
