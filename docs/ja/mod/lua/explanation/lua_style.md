@@ -1,22 +1,21 @@
-# Lua Style Guide
+# Lua スタイルガイド
 
-As Lua ecosystem is a new addition to the project, we only have formatting guidelines.
+Luaエコシステムはプロジェクトへの新しい追加であるため、現在はフォーマットのガイドラインのみを定めています。
 
-## Formatting
+## フォーマット
 
-We format Lua files with [dprint-plugin-stylua](https://github.com/RubixDev/dprint-plugin-stylua)
-with default configuration.
+Luaファイルは、[dprint-plugin-stylua](https://github.com/RubixDev/dprint-plugin-stylua)をデフォルト設定で用いてフォーマットします。
 
-To format lua files, run:
+Luaファイルをフォーマットするには、以下を実行します:
 
 ```sh
 deno task dprint fmt
 ```
 
-### Formatting Lua files in VSCode
+### VSCodeでのLuaファイルのフォーマット
 
-1. Install [dprint vscode extension](https://marketplace.visualstudio.com/items?itemName=dprint.dprint).
-2. Add following lines on `.vscode/settings.json`:
+1. [dprint vscode 拡張機能](https://marketplace.visualstudio.com/items?itemName=dprint.dprint)をインストールします。
+2. `.vscode/settings.json`に以下の行を追加します。
 
 ```json
 {
@@ -27,4 +26,4 @@ deno task dprint fmt
 }
 ```
 
-now saving your lua files will also format them.
+これで、Luaファイルを保存する際に自動的にフォーマットが適用されます。
