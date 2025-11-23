@@ -1,46 +1,40 @@
-# C++ Lua integration
+# C++とLuaの統合
 
-This document describes implementation details behind Lua integration in Cataclysm: Bright Nights.
+このドキュメントでは、Cataclysm: Bright NightsにおけるLua統合機能の実装詳細について説明します。
 
-BN uses Lua 5.3.6 to run scripts and relies on sol2 v3.3.0 for bindings on C++ side.
+BNはスクリプト実行にLua 5.3.6を使用し、C++側のバインディングにはsol2 v3.3.0を利用しています。
 
-## C++ layout
+## C++ レイアウト
 
-### Lua source files
+### Lua ソースファイル
 
-To simplify build setup and improve portability we bundle `Lua 5.3.6` source code in `src/lua/`
-directory and have the build systems compile it and link into the game executable and library for
-tests.
+ビルド設定を簡素化し、移植性の向上のため、`Lua 5.3.6` のソースコードを `src/lua/`ディレクトリにバンドルし、ビルドシステムがこれをコンパイルしてゲーム実行ファイルおよびテスト用のライブラリにリンクするようにしています。
 
-### Sol2 source files
+### Sol2 ソースファイル
 
-Sol2 makes it easy to bundle, we have `sol2 v3.3.0` single-header amalgamated version in `src/sol/`
-and just include it as needed. The header is quite large, so the less source files include it the
-better.
+Sol2はバンドルが容易です。`sol2 v3.3.0` のシングルヘッダーを連結したバージョンを `src/sol/`
+に配置し、必要に応じてインクルードしています。このヘッダーは非常に大きいため、インクルードするソースファイルは少ない方が望ましいです。
 
-- `sol/config.hpp` - Configuration header, we have a few options defined there
-- `sol/forward.hpp` - Forward declarations, a lightweight header that should be included in game
-  headers instead of `sol/sol.hpp`
-- `sol/sol.hpp` - Main sol2 header file, quite large, avoid including in game headers
+- `sol/config.hpp` - 設定ヘッダー。ここでいくつかのオプションを定義しています。
+- `sol/forward.hpp` - 前方宣言用。軽量なヘッダーであり、ゲームのヘッダーファイルでは
+  `sol/sol.hpp`の代わりにこちらをインクルードすべきです
+- `sol/sol.hpp` - メインのsol2ヘッダーファイル。非常に大きいため、ゲームのヘッダーファイルでのインクルードは避けてください。
 
-### Game source files
+### ゲーム ソースファイル
 
-All Lua-related game source files have the `catalua` prefix.
+Luaに関連するゲームのソースファイルはすべて `catalua` の接頭辞を持っています。
 
-If you want to add new bindings, consider looking at existing examples in `src/catalua_bindings.cpp`
-and reading relevant part of Sol2 docs.
+新しいバインディングを追加したい場合は、`src/catalua_bindings.cpp`の既存の例を参照し、Sol2のドキュメントの関連セクションを読むことを検討してください。
 
-- `catalua.h` (and `catalua.cpp`) - Main Lua interface. It's the only header most of the codebase
-  will have to include, and it provides a public interface.
-- `catalua_sol.h` and `catalua_sol_fwd.h` - Wrappers for `sol/sol.hpp` and `sol/forward.hpp` with
-  custom pragmas to make them compile.
-- `catalua_bindings*` - Game Lua bindings live here.
-- `catalua_console.h`(`.cpp`) - Ingame Lua console.
-- `catalua_impl.h`(`.cpp`) - Implementation details for `catalua.h`(`.cpp`).
-- `catalua_iuse_actor.h`(`.cpp`) - Lua-driven `iuse_actor`.
-- `catalua_log.h`(`.cpp`) - In-memory logging for the console.
-- `catalua_luna.h` - Usertype registration interface with automatic doc generation, aka `luna`.
-- `catalua_luna_doc.h` - List of types registration through `luna` or exposed to its doc generator.
-- `catalua_readonly.h`(`.cpp`) - Functions for marking Lua tables as read-only.
-- `catalua_serde.h`(`.cpp`) - Lua table to/from JSON (de-)serialization.
-- `catalua_type_operators.h` - Macro that helps with implementing bindings for string_ids
+- `catalua.h` (および `catalua.cpp`) - メインのLuaインターフェース。ほとんどのコードベースがインクルードする必要がある唯一のヘッダーであり、パブリックインターフェースを提供します。
+- `catalua_sol.h` と `catalua_sol_fwd.h` - `sol/sol.hpp` と `sol/forward.hpp` のラッパーであり、コンパイルさせるためのカスタムプラグマが含まれています。
+- `catalua_bindings*` - ゲームのLuaバインディングが格納されます。
+- `catalua_console.h`(`.cpp`) - ゲーム内のLuaコンソール。
+- `catalua_impl.h`(`.cpp`) - `catalua.h`(`.cpp`)の実装詳細。
+- `catalua_iuse_actor.h`(`.cpp`) - Luaによって駆動される `iuse_actor`。
+- `catalua_log.h`(`.cpp`) - コンソール用のインメモリロギング。
+- `catalua_luna.h` - 自動ドキュメント生成機能を備えたユーザー型登録インターフェース。別名 `luna`。
+- `catalua_luna_doc.h` - `luna` を通じて登録された、またはそのドキュメントジェネレータに公開される型のリスト。
+- `catalua_readonly.h`(`.cpp`) - Luaテーブルを読み取り専用としてマークするための関数。
+- `catalua_serde.h`(`.cpp`) - LuaテーブルとJSON間のシリアライズとデシリアライズ（相互変換）。
+- `catalua_type_operators.h` - `string_ids`のバインディング実装を支援するマクロ。
