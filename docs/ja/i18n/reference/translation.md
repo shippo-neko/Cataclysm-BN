@@ -1,55 +1,44 @@
-# Translation API
+# 翻訳API
 
-Cataclysm: BN uses custom runtime library that works similarly to [GNU gettext][gettext] to display
-translated texts.
+Cataclysm: BNは、翻訳されたテキストを表示するために、[GNU gettext][gettext] と同様に機能するカスタムランタイムライブラリを使用しています。
 
-Using `gettext` requires two actions:
+`gettext` を使用するには、以下の2つのアクションが必要です。
 
-- Marking strings that should be translated in the source code.
-- Calling translation functions at run time.
+- ソースコード内で翻訳すべき文字列をマークすること。
+- 実行時に翻訳関数を呼び出すこと。
 
-Marking translatable string allows for their automatic extraction. This process generates a file
-that maps the original string (usually in English) as it appears in the source code to the
-translated string. These mappings are used at run time by the translation functions.
+翻訳可能な文字列をマークすることで、それらの自動抽出が可能になります。このプロセスにより、ソースコード内にあるオリジナルの文字列（通常は英語）と、それに対応する翻訳された文字列をマッピングするファイルが生成されます。これらのマッピングは、実行時に翻訳関数によって使用されます。
 
-Note that only extracted strings can get translated, since the original string is acting as the
-identifier used to request the translation. If a translation function can't find the translation, it
-returns the original string.
+注意点: 翻訳されるのは抽出された文字列のみです。なぜなら、オリジナルの文字列が翻訳を要求するための識別子として機能するからです。翻訳関数が対応する翻訳を見つけられない場合、関数はオリジナルの文字列を返します。
 
-## Translation Functions
+## 翻訳関数
 
-In order to mark a string for translation and to obtain its translation at runtime, you should use
-one of the following functions and classes.
+文字列を翻訳対象としてマークし、実行時にその翻訳を取得するためには、以下の関数またはクラスのいずれかを使用する必要があります。
 
-String _literals_ that are used in any of these functions are automatically extracted. Non-literal
-strings are still translated at run time, but they won't get extracted.
+これらの関数のいずれかで使われている文字列リテラルは、自動的に抽出されます。リテラルではない文字列も実行時に翻訳されますが、抽出の対象にはなりません。
 
 ### `_()`
 
-This function is appropriate for use on simple strings, for example:
+この関数は、以下のような単純な文字列での使用に適しています。
 
 ```cpp
 const char *translated = _( "text marked for translation" )
 ```
 
-It also works directly:
+また、以下のように直接使用することもできます。
 
 ```cpp
 add_msg( _( "You drop the %s." ), the_item_name );
 ```
 
-Strings from the JSON files are extracted by the `lang/extract_json_strings.py` script, and can be
-translated at run time using `_()`. If translation context is desired for a JSON string,
-`class translation` can be used instead, which is documented below.
+JSONファイル内の文字列は、`lang/extract_json_strings.py` スクリプトによって抽出され、実行時に `_()`を使用して翻訳できます。JSON文字列に対して翻訳コンテキストが必要な場合は、代わりに後述の
+`class translation` を使用できます。
 
 ### `pgettext()`
 
-This function is useful when the original string's meaning is ambiguous in isolation. For example,
-the word "blue", which can mean either a color or an emotion.
+この関数は、オリジナルの文字列が単独では意味的に曖昧である場合に役立ちます。例えば、色と感情のどちらも意味し得る「blue」という単語などです。
 
-In addition to the translatable string, `pgettext` receives a context which is provided to the
-translators, but is not part of the translated string itself. This function's first parameter is the
-context, the second is the string to be translated:
+`pgettext` は、翻訳対象の文字列に加えて、コンテキストを受け取ります。このコンテキストは翻訳者には提供されますが、翻訳された文字列の一部にはなりません。この関数の最初のパラメーターがコンテキスト、2番目が翻訳対象の文字列です。
 
 ```cpp
 const char *translated = pgettext( "The color", "blue" );
@@ -57,10 +46,7 @@ const char *translated = pgettext( "The color", "blue" );
 
 ### `vgettext()`
 
-Some languages have complex rules for plural forms. `vgettext` can be used to translate these
-plurals correctly. Its first parameter is the untranslated string in singular form, the second
-parameter is the untranslated string in plural form and the third one is used to determine which one
-of the first two should be used at run time:
+一部の言語では、複数形に関する複雑なルールがあります。`vgettext`は、これらの複数形を正しく翻訳するために使用できます。最初のパラメーターは単数形の未翻訳文字列、2番目のパラメーターは複数形の未翻訳文字列であり、3番目のパラメーターは実行時にどちらの形式を使用するかを決定するために使用されます。
 
 ```cpp
 const char *translated = vgettext( "%d zombie", "%d zombies", num_of_zombies );
@@ -68,7 +54,7 @@ const char *translated = vgettext( "%d zombie", "%d zombies", num_of_zombies );
 
 ### `vpgettext()`
 
-Same as `vgettext`, but allows to specify translation context.
+`vgettext`と同様ですが、翻訳コンテキストを指定できます。
 
 ```cpp
 const char *translated = vpgettext( "water source, not time of year", "%d spring", "%d springs", num_of_springs );
@@ -76,9 +62,8 @@ const char *translated = vpgettext( "water source, not time of year", "%d spring
 
 ## `translation`
 
-There are times when you want to store a string for translation, maybe with translation context;
-Sometimes you may also want to store a string that needs no translation or has plural forms.
-`class translation` in `translations.h|cpp` offers these functionalities in a single wrapper:
+翻訳コンテキストを付けて翻訳のために文字列を格納したい場合や、翻訳が不要な文字列や複数形を持つ文字列を格納したい場合があります。
+`translations.h|cpp`ファイル内の`class translation` は これらの機能を単一のラッパーにまとめて提供します。
 
 ```cpp
 const translation text = to_translation( "Context", "Text" );
@@ -100,50 +85,49 @@ const translation text = pl_translation( "Context", "Singular", "Plural" );
 const translation text = no_translation( "This string will not be translated" );
 ```
 
-The string can then be translated/retrieved with the following code
+文字列は、以下のコードで翻訳/取得できます。
 
 ```cpp
 const std::string translated = text.translated();
 ```
 
 ```cpp
-// this translates the plural form of the text corresponding to the number 2
+// これは、数値 2 に対応するテキストの複数形を翻訳します
 const std::string translated = text.translated( 2 );
 ```
 
-`class translation` can also be read from JSON. The method `translation::deserialize()` handles
-deserialization from a `JsonIn` object, so translations can be read from JSON using the appropriate
-JSON functions. The JSON syntax is as follows:
+`class translation` オブジェクトはJSONから読み込むことも可能です。`translation::deserialize()` メソッドは
+`JsonIn` オブジェクトからの逆シリアル化を処理します。このため、対応するJSON形式を用いて翻訳データをJSONから読み込むことができます。JSON構文には以下の３つの通形式があります。
+
+単純な形式 (文字列として):
 
 ```json
 "name": "bar"
 ```
 
+完全なオブジェクト形式:
+
 ```json
 "name": { "ctxt": "foo", "str": "bar", "str_pl": "baz" }
 ```
 
-or
+簡略化されたオブジェクト形式 (単数形と複数形が同じ場合):
 
 ```json
 "name": { "ctxt": "foo", "str_sp": "foo" }
 ```
 
-In the above code, `"ctxt"` and `"str_pl"` are both optional, whereas `"str_sp"` is equivalent to
-specifying `"str"` and `"str_pl"` with the same string. Additionally, `"str_pl"` and `"str_sp"` will
-only be read if the translation object is constructed using `plural_tag` or `pl_translation()`, or
-converted using `make_plural()`. Here's an example:
+上記のコードにおいて、`"ctxt"` と `"str_pl"` はいずれもオプションですが、 `"str_sp"` は `"str"` と `"str_pl"` に同じ文字列を指定するのと同等です。さらに、`"str_pl"` と `"str_sp"` は、翻訳オブジェクトが `plural_tag` や`pl_translation()` を使用して構築された場合、あるいは
+`make_plural()` を使用して変換された場合にのみ読み込まれます。例は以下の通りです。
 
 ```cpp
 translation name{ translation::plural_tag() };
 jsobj.read( "name", name );
 ```
 
-If neither `"str_pl"` nor `"str_sp"` is specified, the plural form defaults to the singular form +
-"s".
+`"str_pl"` と `"str_sp"` のどちらも指定されていない場合、複数形は単数形に "`s`" を追加したものがデフォルトとなります。
 
-You can also add comments for translators by writing it like below (the order of the entries does
-not matter):
+以下のように記述することで、翻訳者向けのコメントをJSONエントリに追加することも可能です（エントリの順序は問いません）。
 
 ```json
 "name": {
@@ -152,77 +136,76 @@ not matter):
 }
 ```
 
-Do note that currently the JSON syntax is only supported for some JSON values, which are listed
-below. If you want other json strings to use this format, refer to `translations.h|cpp` and migrate
-the corresponding code. Afterwards you may also want to test `update_pot.sh` to ensure that the
-strings are correctly extracted for translation, and run the unit test to fix text styling issues
-reported by the `translation` class.
+現在、このJSON構文がサポートされているのは、以下にリストされている一部のJSON値のみです。
 
-### Supported JSON values
+- 他のJSON文字列でこの形式を使用したい場合は、`translations.h` と `translations.cpp` を参照し、対応するコー
+  ドを移行してください。
+- 移行後、文字列が翻訳のために正しく抽出されていることを確認するため、update_pot.sh をテストしてください。
+- また、`translation` クラスによって報告されるテキストスタイリングの問題を修正するために、ユニットテストを
+  実行することも推奨されます。
 
-- Effect names
-- Item action names
-- Item category names
-- Activity verbs
-- Gate action messages
-- Spell names and descriptions
-- Terrain/furniture descriptions
-- Monster melee attack messages
-- Morale effect descriptions
-- Mutation names/descriptions
-- NPC class names/descriptions
-- Tool quality names
-- Score descriptions
-- Skill names/descriptions
-- Bionic names/descriptions
-- Terrain bash sound descriptions
-- Trap-vehicle collision sound descriptions
-- Vehicle part names/descriptions
-- Skill display type names
-- NPC dialogue u_buy_monster unique names
-- Spell messages and monster spell messages
-- Martial art names and descriptions
-- Mission names and descriptions
-- Fault names and descriptions
-- Plant names in item seed data
-- Transform use action messages and menu text
-- Template NPC names and name suffixes
-- NPC talk response text
-- Relic name overrides
-- Relic recharge messages
-- Speech text
-- Tutorial messages
-- Vitamin names
-- Recipe blueprint names
-- Recipe group recipe descriptions
-- Item names (plural supported) and descriptions
-- Recipe descriptions
-- Inscribe use action verbs/gerunds
-- Monster names (plural supported) and descriptions
-- Snippets
-- Bodypart names
-- Keybinding action names
-- Field level names
+### サポートされているJSON値
+
+- エフェクト名
+- アイテムアクション名
+- アイテムカテゴリ名
+- アクティビティの動詞
+- ゲートアクションメッセージ
+- 呪文名および説明
+- 地形/備品の説明（オーバーマップ地形、設置物）
+- モンスターの近接攻撃メッセージ
+- 士気効果の説明
+- 変異名と説明
+- NPCクラス名/説明
+- 道具の性能名
+- スコアの説明
+- スキル名と説明
+- CBM名と説明
+- 地形の破壊音の説明
+- トラップと車両の衝突音の説明
+- 車両部品名/説明
+- スキル表示タイプ名
+- NPCダイアログのu_buy_monsterユニーク名
+- スペルメッセージおよびモンスターのスペルメッセージ
+- 格闘術名および説明
+- ミッション名および説明
+- 欠陥名および説明
+- 種子データ内の植物名
+- 形態変化使用時の行動メッセージとメニューテキスト
+- テンプレートNPC名と名前の接尾辞
+- NPCの会話応答テキスト
+- レリック名のオーバーライド
+- レリックのリチャージメッセージ
+- スピーチテキスト
+- チュートリアルメッセージ
+- ビタミン名
+- レシピ設計図名
+- レシピグループのレシピ説明
+- アイテム名 (複数形サポート) および説明
+- レシピの説明
+- インスクライブ使用アクションの動詞/動名詞
+- モンスター名 (複数形サポート) および説明
+- スニペット
+- 身体部位名
+- アクション名のキー割当
+- フィールドレベル名
 
 ### Lua
 
-[The 4 translation functions are exposed to the Lua code](../../mod/lua/tutorial/modding.md#translation-functions).
+[4つの翻訳関数はLuaコードに公開されています](../../mod/lua/tutorial/modding.md#translation-functions)。
 
-### Recommendations
+### 推奨事項
 
-In Cataclysm: BN, some classes, like `itype` and `mtype`, provide a wrapper for the translation
-functions, called `nname`.
+Cataclysm: BNでは、`itype`や`mtype`といった一部のクラスが、`nname`と呼ばれる翻訳関数のラッパーを提供しています。
 
-When an empty string is marked for translation, it is always translated into debug information,
-rather than an empty string. On most cases, strings can be considered to be never empty, and thus
-always safe to mark for translation, however, when handling a string that can be empty and _needs_
-to remain empty after translation, the string should be checked for emptiness and only passed to a
-translation function when is non-empty.
+空文字列が翻訳対象としてマークされた場合、それは空文字列ではなく、常にデバッグ情報に翻訳されます。
+ほとんどの場合、文字列が空になることはないと見なせるため、文字列を常に安全に翻訳対象としてマークできます。
+しかし、文字列が空になる可能性があり、かつ翻訳後も空のままである必要がある場合は、文字列が空でないことを確認してから、翻訳関数に渡す必要があります。
 
-Error and debug messages must not be marked for translation. When they appear, the player is
-expected to report them _exactly_ as they are printed by the game.
+エラーメッセージやデバッグメッセージは、翻訳対象としてマークしてはなりません。
+これらのメッセージが表示された場合、プレイヤーはゲームが出力した正確なテキストをそのまま報告することが期待されているためです。
 
-See the [gettext manual][manual] for more information.
+詳細については、 [gettext マニュアル][manual] を参照してください。
 
 [gettext]: https://www.gnu.org/software/gettext/
 [manual]: https://www.gnu.org/software/gettext/manual/index.html
