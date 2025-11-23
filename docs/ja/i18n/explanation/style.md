@@ -1,17 +1,18 @@
-# Language Specific Style Guide
+# 言語別スタイルガイド
 
 > [!NOTE]
 >
-> #### This section is a template.
+> #### 本セクションはテンプレートです。
 >
-> As this page is for language-specific notes, it shouldn't be translated. Instead, it's used as a
-> template. [Check here for examples.](#writing-style-guide-for-your-language)
+> このページは言語固有の注記を記載するためのものであるため、このセクション自体を翻訳すべきではありません。代わりに、このページはテンプレートとして使用されます。
+> [ご自身の言語の記述スタイルガイド例については、こちらを確認してください](#writing-style-guide-for-your-language)。
 
-## How to write one for your language
+## ご自身の言語用のスタイルガイドを作成する方法
 
-1. [Find your language code.](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-2. Create `/docs/{your-language-code}/i18n/explanation/style.md`.
-3. If it doesn't, add your language to `doc/astro.config.ts` file, for example:
+1. [ご自身の言語コードを見つけてください](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)。
+2. `/docs/{your-language-code}/i18n/explanation/style.md`を作成してください。
+3. 言語がまだ設定されていない場合は、`doc/astro.config.ts` ファイルにご自身の言
+   語を追加してください。例：
 
 ```diff
 diff --git a/doc/astro.config.ts b/doc/astro.config.ts
@@ -28,17 +29,17 @@ index da91c2e0014..3dafa248a06 100644
        social: { github, discord },
 ```
 
-In this example, it will allow russian language to be availble in language selector. Check
-[starlight](https://starlight.astro.build/guides/i18n/) for details.
+この例では、ロシア語が言語セレクターで利用可能になります。
+[starlight](https://starlight.astro.build/guides/i18n/) の詳細を確認してください。
 
-## Writing style guide for your language
+## ご自身の言語の記述スタイルガイド
 
-There's no restrictions on how or what to write in this file. For example, you could:
+このファイルに何をどのように記述するかについて、制限はありません。たとえば、以下のような記述が可能です。
 
-- write language specific notes for other translaotrs to read
-- link to external resources or tools
+- 他の翻訳者が読むための、言語固有の注記を記述する。
+- 外部リソースやツールへのリンクを貼る。
 
-You could check out existing style guides for reference:
+参考として、既存のスタイルガイドを確認できます:
 
 - [Deutsch](../../../de/i18n/explanation/style.md)
 - [Russian](../../../ru/i18n/explanation/style.md)
