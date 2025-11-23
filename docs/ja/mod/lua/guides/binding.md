@@ -1,54 +1,47 @@
-# Binding new type
+# 新しい型のバインディング
 
-### Adding new type to the doc generator without binding internals
+### 内部をバインドせずにドキュメントジェネレータに新しい型を追加する
 
-If a C++ type has not been registered in the doc generator, it will show up as
-`<cppval: **gibberish** >`. To mitigate this problem, you can add
-`LUNA_VAL( your_type, "YourType" )` in `catalua_luna_doc.h`, and the generator will use `YourType`
-string for argument type.
+C++型がドキュメントジェネレータに登録されていない場合、その型は
+`<cppval: **gibberish** >`（判読不能な値）として表示されます。この問題を軽減するには、`catalua_luna_doc.h` に `LUNA_VAL( your_type, "YourType" )` を追加します。これにより、ジェネレーターは引数型として `YourType` という文字列を使用するようになります。
 
-### Binding new type to Lua
+### 新しい型をLuaにバインドする
 
-First, we need to register the new type with the bindings system. It needs to be done for many
-reasons, including so that the doc generator understands it, and the runtime can deserialize from
-JSON any Lua table that contains that type. If you don't you'll get a compile error saying
-`Type must implement luna_traits<T>`.
+まず、バインディングシステムに新しい型を登録する必要があります。これは、ドキュメントジェネレータがその型を認識し、実行時にその型を含む任意のLuaテーブルをJSONからデシリアライズできるようにするなど、多くの理由から不可欠です。この登録を行わないと、`Type must implement luna_traits<T>`というコンパイルエラーが発生します。
 
-1. In `catala_luna_doc.h`, add declaration for your type. For example, if we're binding an imaginary
-   `horde` type (which is a `struct`), it will be a single line near the top of the file:
+1. `catala_luna_doc.h`で、バインドしたい型を宣言します。 binding an imaginary
+   例えば、架空の`horde`型 (`struct`)をバインドする場合、ファイルの冒頭付近に次の一行を追加します。
+
    ```cpp
    struct horde;
    ```
-   Complex templated types may need to actually pull in the relevant header, but please avoid it as
-   it heavily impacts compilation times.
+   複雑なテンプレート型は、関連するヘッダーを実際にインクルードする必要があるかもしれませんが、これはコンパイル時間に大きな影響を与えるため、可能な限り避けてください。
 
-2. In the same file, register your type with the doc generator. Continuing with the `horde` example,
-   it's done like this:
+2. 同じファイルで、その型をドキュメントジェネレータに登録します。`horde`の例を
+   続けると、次のように記述します。
+
    ```cpp
    LUNA_VAL( horde, "Horde" );
    ```
-   While C++ types use all kinds of style for their names, on Lua side they all should be in
-   `CamelCase`.
+   C++の型は様々な命名スタイルを使用しますが、Lua側ではすべて`CamelCase`にする必要があります。
 
-Now we can actually get to the details. The bindings are implemented in `catalua_bindings*.cpp`
-files. They are spread out into multiple `.cpp` files to speed up compilation and make it easy to
-navigate, so you can put yours into any existing `catalua_bindings*.cpp` file or make your own
-similar file. They are also spread out into functions, for the same reasons. Let's register our
-`horde` type, and put it in a new file and a new function:
+これで、実際の詳細に進むことができます。バインディングは `catalua_bindings*.cpp`
+ファイル群に実装されています。 これらはコンパイルの高速化とナビゲーションの容易化のために複数の `.cpp` ファイルに分散されているため、既存の `catalua_bindings*.cpp` ファイルのいずれかに配置するか、独自の同様なファイルを作成しても構いません。また、同じ理由で関数にも分散されています。
+`horde` 型を登録し、新しいファイルと新しい関数に配置してみましょう。
 
-1. Add a new function declaration in `catalua_bindings.h`:
+1. `catalua_bindings.h` に新しい関数の宣言を追加します:
    ```cpp
    void reg_horde( sol::state &lua );
    ```
-2. Call the function in `reg_all_bindings` in `catalua_bindings.cpp`:
+2. `catalua_bindings.cpp` の `reg_all_bindings` 内でこの関数を呼び出します:
    ```cpp
    reg_horde( lua );
    ```
-3. Make a new file, `catalua_bindings_horde.cpp`, with the following contents:
+3. 新しいファイル `catalua_bindings_horde.cpp` を作成し、以下の内容を記述します:
    ```cpp
    #include "catalua_bindings.h"
 
-   #include "horde.h" // Replace with the header where your type is defined
+   #include "horde.h" // あなたの型が定義されているヘッダーに置き換えてください
 
    void cata::detail::reg_horde( sol::state &lua )
    {
@@ -57,74 +50,70 @@ similar file. They are also spread out into functions, for the same reasons. Let
                lua,
                luna::no_bases,
                luna::constructors <
-                   // Define your actual constructors here
+                   // 実際のコンストラクタをここで定義します
                    horde(),
                    horde( const point & ),
                    horde( int, int )
                    > ()
                );
        
-       // Register all needed members
+       // 必要なすべてのメンバを登録します
        luna::set( ut, "pos", &horde::pos );
        luna::set( ut, "size", &horde::size );
 
-       // Register all needed methods
+       // 必要なすべてのメソッドを登録します
        luna::set_fx( ut, "move_to", &horde::move_to );
        luna::set_fx( ut, "update", &horde::update );
        luna::set_fx( ut, "get_printable_name", &horde::get_printable_name );
 
-       // Add (de-)serialization functions so we can carry
-       // our horde over the save/load boundary
+       // セーブ/ロードの境界を越えてhordeを保持できるように
+       // シリアライズ関数またはデシリアライズ関数をを追加します
        reg_serde_functions( ut );
 
-       // Add more stuff like arithmetic operators, to_string operator, etc.
+       // 算術演算子、to_string演算子など、さらに多くのものを追加します
    }
    ```
-4. That's it. Your type is now visible in Lua under name `Horde`, and you can use the binded methods
-   and members.
+4. これで完了です。あなたの型はLua内で`Horde`という名前で参照可能になり、バインドされたメソッドとメンバを使
+   用できます。
 
-### Binding new type to Lua (using Neovim's regex)
+### 新しい型をLuaにバインドする（Neovimの正規表現を使用）
 
-Binding classes/structs to Lua by hand can be quite tedious, which is why another way to bind a
-class is by transforming its header file. For the third step of the second part from
-[previously](#binding-new-type-to-lua), it's possible to use Neovim's built-in regex and C++ macros
-to bind the class for us.
+クラス/構造体をLuaに手動でバインドするのは非常に面倒な作業になる可能性があるため、クラスをバインドするもう一つの方法は、そのヘッダーファイルを変換することです。
+[前述の](#binding-new-type-to-lua)の2番目のセクションのステップ3については、Neovimの組み込み正規表現とC++マクロを使用して、クラスを自動的にバインドすることが可能です。
 
-1. Make a copy of the class definition.
-2. Apply both: `%s@class \([^{]\)\+\n*{@private:@` `%s@struct \([^{]\)\+\n*{@public:@`
-3. Manually remove the constructors/unwanted methods at the beginning.
-4. Delete all `private`/`protected` methods: `%s@\(private:\|protected:\)\_.\{-}\(public:\|};\)@\2`
-5. Remove `};` at the end of the class definition.
-6. Delete `public` labels: `%s@ *public:\n@`
-7. Delete comments: `%s@\( *\/\*\_.\{-}\*\/\n\{,1\}\)\|\( *\/\/\_.\{-}\(\n\)\)@\3@g`
-8. Unindent until there is zero base indentation.
-9. Turn method definitions into declarations: `%s@ *{\(}\|\_.\{-}\n^}\)@;`
-10. Push most method declarations into a single line: `%s@\((\|,\)\n *@\1@g`
-11. Remove default values: `%s@ *= *\_.\{-}\( )\|;\|,\)@\1@g`
-12. Remove `overriden`/`static` methods/members and `using`s:
+1. クラス定義のコピーを作成します。
+2. 両方を適用します: `%s@class \([^{]\)\+\n*{@private:@` `%s@struct \([^{]\)\+\n*{@public:@`
+3. 冒頭のコンストラクタ/不要なメソッドを手動で削除します。
+4. すべての `private`/`protected`メソッドを削除します: `%s@\(private:\|protected:\)\_.\{-}\(public:\|};\)@\2`
+5. クラス定義の最後にある `};` を削除します。
+6. `public` ラベルを削除します: `%s@ *public:\n@`
+7. コメントを削除します: `%s@\( *\/\*\_.\{-}\*\/\n\{,1\}\)\|\( *\/\/\_.\{-}\(\n\)\)@\3@g`
+8. ベースインデントがゼロになるまでインデントを解除します。
+9. メソッド定義を宣言に変換します: `%s@ *{\(}\|\_.\{-}\n^}\)@;`
+10. ほとんどのメソッド宣言を一行にまとめます: `%s@\((\|,\)\n *@\1@g`
+11. デフォルト値を削除します: `%s@ *= *\_.\{-}\( )\|;\|,\)@\1@g`
+12. `overriden`/`static` メソッド/メンバ、および `using`を削除します:
     `%s@.*\(override\|static\|using\).*\n@@g`
-13. Remove `template`s: `%s@^template<.*>\n.*\n@@g`
-14. Remove `virtual` tag: `%s@^virtual *@`
-15. Check if all lines end in a semicolon: `%s@\([^;]\)\n@\0@gn`
-16. Count how many functions there are: `%s@\(.*(.*).*\)@@nc`
-17. Push first found function to the end: `%s@\(.*(.*).*\)\n\(\n*\)\(\_.*\)@\3\1\2`
-18. Now you'll want to repeat step 16 for the number of matches in step 15 minus one. For Neovim,
-    input the match count minus one, '@', then ':', e.g. '217@:' repeats the last command 217 times.
-19. Clean up new lines: `%s@\n\{3,}@\r\r`
-20. Wrap methods into a macro: `%s@\(.*\) \+\([^ ]\+\)\((.*\);@SET_FX_T( \2, \1\3 );`
-21. Wrap members into a macro; make sure to select which lines to affect first:
+13. `template`を削除します: `%s@^template<.*>\n.*\n@@g`
+14. `virtual` タグを削除します: `%s@^virtual *@`
+15. すべての行がセミコロンで終わっているか確認します: `%s@\([^;]\)\n@\0@gn`
+16. 関数の数を数えます: `%s@\(.*(.*).*\)@@nc`
+17. 最初に見つかった関数を最後に移動します: `%s@\(.*(.*).*\)\n\(\n*\)\(\_.*\)@\3\1\2`
+18. ステップ15のカウントから1を引いた回数だけステップ16を繰り返します。Neovimでは、マッチ数から1を引いた数を入力し、'@'、次に ':', を入力します (例:'217@:'は最後のコマンドを217回繰り返します)。
+19. 改行をクリーンアップします: `%s@\n\{3,}@\r\r`
+20. メソッドをマクロでラップします: `%s@\(.*\) \+\([^ ]\+\)\((.*\);@SET_FX_T( \2, \1\3 );`
+21. メンバをマクロでラップします。最初に影響を与える行を選択するようにしてください:
     `s@.\{-}\([^ ]\+\);@SET_MEMB( \1 );`
-22. Make the previously multi-line method declarations span multiple lines again:
+22. 以前に複数行だったメソッド宣言を再び複数行に展開します:
     `%s@\(,\)\([^ ]\)@\1\r        \2@g`
 
-Now what's left to do is to take the chunk of text and use it in a Lua binding. Continuing with the
-horde example, this is how the code should look like with these macros:
+これで残りの作業は、このテキストの塊を取得し、Luaバインディングで使用することです。hordeの例を続けると、これらのマクロを使用したコードは次のようになります:
 
 ```cpp
 #include "catalua_bindings.h"
 #include "catalua_bindings_utils.h"
 
-#include "horde.h" // Replace with the header where your type is defined
+#include "horde.h" // あなたの型が定義されているヘッダーに置き換えてください
 
 void cata::detail::reg_horde( sol::state &lua )
 {
@@ -134,42 +123,41 @@ void cata::detail::reg_horde( sol::state &lua )
         lua,
         luna::no_bases,
         luna::constructors <
-            // Define your actual constructors here
+            // 実際のコンストラクタをここで定義します
             UT_TYPE(),
             UT_TYPE( const point & ),
             UT_TYPE( int, int )
             > ()
        );
 
-    // Register all needed members
+    // 必要なすべてのメンバを登録します
     SET_MEMB( pos );
     SET_MEMB( size );
 
-    // Register all needed methods
-    SET_FX_T( move_to, ... ); // Instead of ..., there'd be the type declaration of the method.
+    // 必要なすべてのメソッドを登録します
+    SET_FX_T( move_to, ... ); // ...の代わりに、メソッドの型宣言が入ります。
     SET_FX_T( update, ... );
     SET_FX_T( get_printable_name, ... );
 
-    // Add (de-)serialization functions so we can carry
-    // our horde over the save/load boundary
+    // セーブ/ロードの境界を越えてhordeを保持できるように
+    // シリアライズ関数またはデシリアライズ関数をを追加します
     reg_serde_functions( ut );
 
-    // Add more stuff like arithmetic operators, to_string operator, etc.
+    // 算術演算子、to_string演算子など、さらに多くのものを追加します
     // ...
     #undef UT_TYPE // #define UT_TYPE horde
 }
 ```
 
-This method of binding to Lua lacks template method bindings and may be broken: compiler errors,
-linker freezes, so it's best to assume these bindings will be broken by default, only needing slight
-fixes / manual additions.
+このLuaへのバインディング方法は、テンプレートメソッドのバインディングを欠いており、壊れている可能性があります（コンパイラエラー、リンカーフリーズなど）。したがって、これらのバインディングはデフォルトで壊れていると見なし、わずかな修正/手動での追加のみが必要であると仮定するのが最善です。
 
-### Binding new enum to Lua
+### 新しいenumをLuaにバインドする
 
-Binding enums is similar to binding types. Let's bind an imaginary `horde_type` enum here:
+enumsのバインディングは、型のバインディングと似ています。ここで架空の `horde_type` 列挙型をバインドしてみましょう。
 
-1. If enum does not have an explicitly defined container (the `: type` part after `enum name` in the
-   header where it's defined), you'll have to specify the container first, for example:
+1. enum が明示的に定義されたコンテナ (`: type` それが定義されているヘッダー内の `enum name` の後の`: type`
+   部分)を持っていない場合、最初にコンテナを指定する必要があります。例:
+
    ```diff
      // hordes.h
    - enum class horde_type {
@@ -179,19 +167,19 @@ Binding enums is similar to binding types. Let's bind an imaginary `horde_type` 
        zombies
      }
    ```
-2. Add the declaration to `catalua_luna_doc.h`
+2. `catalua_luna_doc.h`に宣言を追加します:
    ```cpp
    enum horde_type : int;
    ```
-3. Register it in `catalua_luna_doc.h` with
+3. `catalua_luna_doc.h`で以下を使用して登録します:
    ```cpp
    LUNA_ENUM( horde_type, "HordeType" )
    ```
-4. Ensure the enum implements the automatic conversion to/from `std::string`, see
-   `enum_conversions.h` for details. Some enums will already have it, but most won't. Usually it's
-   just a matter of specializing `enum_traits<T>` for your enum `T` in the header, then defining
-   `io::enum_to_string<T>` in the `.cpp` file with enum -> string conversion. Some enums won't have
-   the "last" value required for `enum_traits<T>`. In that case, you'd have to add one:
+4. このenum が `std::string`との自動変換を実装していることを確認します。詳細については
+   `enum_conversions.h` を参照してください。一部のenumはすでに実装していますが、ほとんどはそうではありません。通常、これはヘッダーファイル内であなたのenum`T` に対して
+   `enum_traits<T>` を特殊化し、次に `.cpp`ファイルでenumからstringへの変換を行う
+   `io::enum_to_string<T>` を定義するだけの問題です。一部の `enum` には `enum_traits<T>`に必要な「最後の」値がありません。その場合は、それを追加する必要があります:
+
    ```diff
      enum class horde_type : int {
        animals,
@@ -201,53 +189,48 @@ Binding enums is similar to binding types. Let's bind an imaginary `horde_type` 
    +   num_horde_types
      }
    ```
-   Note that this only works for "monotonic" enums, i.e. ones that start with 0 and don't skip any
-   values. In the example above, `animals` has implicit value of `0`, robots has implicit value of
-   `1` and `zombies` has implicit value of `2`, so we can easily add `num_horde_types`, which will
-   have correct and expected implicit value of `3`.
-5. Bind enum fields in `reg_enums` function in `catalua_bindings.cpp`:
-   ```cpp
-   reg_enum<horde_type>( lua );
-   ```
-   This uses the automatic convertion from step 4, so we have equal names between JSON and Lua.
 
-### Binding new `string_id<T>` or `int_id<T>` to Lua
+これは、「単調な」enums、つまり0から始まり値をスキップしないenumにのみ機能することに注意してください。上記の例では、`animals` は暗黙の値`0`を持ち`robot`は暗黙の値`1`を持ち、
+`zombies` は暗黙の値$2$を持つため、正しく期待される暗黙の値`3`を持つ `num_horde_types`を簡単に追加できます。
+5. `catalua_bindings.cpp` の `reg_enums` 関数内でenumフィールドをバインドします:
 
-Binding these can be done separately from binding `T` itself.
+```cpp
+reg_enum<horde_type>( lua );
+```
 
-1. Register your type `T` with the doc generator if you haven't already (see
-   [relevant docs](#adding-new-type-to-the-doc-generator-without-binding-internals)).
-2. Replace `LUNA_VAL` from step 1 with `LUNA_ID`.
-3. Ensure your type `T` implements operators `<` and `==`. It's usually easy implement them
-   manually, and can be done semi-automatically with macro `LUA_TYPE_OPS` found in
-   `catalua_type_operators.h`.
-4. Ensure your type `T` has a null `string_id`. You can add one if it doesn't exist in
-   `string_id_null_ids.cpp`. Use the `MAKE_CLASS_NULL_ID` macro if `T` is defined as a class,
-   `MAKE_STRUCT_NULL_ID` macro otherwise.
-5. Ensure your type's `T` `string_id` has `obj()` and `is_valid()` methods implemented. These
-   methods are implemented on a case-by-case basis. Checking other `string_id`s as example is
-   recommended.
-6. In `catalua_bindings_ids.cpp`, add the header where your type T is defined:
+これはステップ4の自動変換を使用するため、JSONとLuaの間で同等の名前を持つことになります。
+
+### 新しい `string_id<T>` または `int_id<T>` をLuaにバインドする
+
+これらをバインドすることは、型`T`自体をバインドすることとは別に行うことができます。
+
+1. まだ行っていない場合は、型 `T` をドキュメントジェネレータに登録します (
+   [関連ドキュメント](#adding-new-type-to-the-doc-generator-without-binding-internals)を参照)。
+2. ステップ1の `LUNA_VAL` を `LUNA_ID` に置き換えます。
+3. 型 `T` が演算子 `<` と `==`を実装していることを確認します。これらは通常、手動で実装するのが簡単であり、
+   `catalua_type_operators.h` にあるマクロ `LUA_TYPE_OPS`を使用して半自動的に行うことができます。
+4. 型 `T` がnullの `string_id`を持っていることを確認します。存在しない場合は、
+   `string_id_null_ids.cpp`に追加します。`T`がクラスとして定義されている場合はマクロ`MAKE_CLASS_NULL_ID` を、それ以外の場合はマクロ `MAKE_STRUCT_NULL_ID` を使用してください。
+5. 型 `T` の `string_id` が `obj()` と `is_valid()` メソッドを実装していることを確認します。これらのメソッ
+   ドはケースバイケースで実装されます。他の `string_id`を例として確認することが推奨されます。
+6. `catalua_bindings_ids.cpp`に、型 `T`が定義されているヘッダーを追加します:
    ```cpp
    #include "your_type_definition.h"
    ```
-7. In `reg_game_ids` function, register it like so:
+7. `reg_game_ids` 関数で、以下のように登録します:
    ```cpp
    reg_id<T, true>( lua );
    ```
 
-That `true` can be replaced with `false` if you only want to bind `string_id<T>` and don't care
-about (or can't implement) `int_id<T>`.
+この `true` は、`string_id<T>` のみをバインドし、`int_id<T>` を気にしない（または実装できない）場合は`false` に置き換えることができます。
 
-You may get linker errors at this stage, e.g. about `is_valid()` or `NULL_ID()` methods, which are
-for various reasons not implemented forall string or int ids. In this case, you'll have to define
-these manually, see relevant docs on `string_id` and `int_id` for more info.
+この段階で、リンカエラーが発生する可能性があります。例えば、`is_valid()` や `NULL_ID()` メソッドが、様々な理由ですべての文字列IDまたは整数IDに対して実装されていないことに関するエラーです。この場合、これらのメソッドを手動で定義する必要があります。詳細については、`string_id` および `int_id` に関する関連ドキュメントを参照してください。
 
-And that's it. Now, your type `T` will show up in Lua with `Raw` postfix, `string_id<T>` will have
-`Id` postfix, and `int_id<T>` will have `IntId` postfix. As example, for
-`LUNA_ID( horde, "Horde" )`, we'll get:
+これで完了です。これで、型 `T` はLuaで `Raw` の接尾辞、`string_id<T>` は
+`Id` の接尾辞、 `int_id<T>` は `IntId` の接尾辞を付けて表示されます。例として、
+`LUNA_ID( horde, "Horde" )`の場合、次のようになります:
 
 - `horde` -> `HordeRaw`
 - `string_id<horde>` -> `HordeId`
-- `int_id<horde>` -> `HordeIntId` All type conversions between the 3 are implemented automatically
-  by the system. Actual fields and methods of `T` can be binded to Lua same way as usual.
+- `int_id<horde>` -> `HordeIntId`
+  これら3つの間のすべての型変換は、システムによって自動的に実装されます。型`T`の実際のフィールドとメソッドは、通常と同じ方法でLuaにバインドできます。
