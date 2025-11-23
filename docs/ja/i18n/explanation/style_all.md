@@ -1,17 +1,16 @@
-# General Style Guide
+# 一般的なスタイルガイド
 
-Please follow these conventions when adding or editing in-game text:
+ゲーム内テキストを追加または編集する際は、以下の慣例に従ってください。
 
-1. Use US English spelling.
-2. Use double sentence spacing after periods. This means that a period that ends a sentence should
-   be followed by two spaces. If the sentence is the last in the block of text, there should be no
-   spaces following it.
-3. Use second person point of view (eg. "you").
-4. The names of traits, martial arts, and Compact Bionics Modules (CBM's) should be in title case.
-   This means that each word should be capitalized unless it is an article, preposition or
-   conjunction.
-5. Items and entities with proper noun names should also be in title case.
-6. All other item and entity names should be in all lower-case letters.
-7. Use the serial comma (Oxford comma).
-8. Use ellipsis character (…) instead of three dots (...). Replace instances of three periods with
-   the dedicated Unicode character for ellipsis, namely U+2026.
+1. スペルには米国英語 (US English) を使用すること。
+2. ピリオドの後に二重の文間隔を使用すること。これは、文を終えるピリオドの後には半角スペースを2つ
+   入れる必要があることを意味します。ただし、その文がテキストブロックの最後の文である場合、後
+   に半角スペースは入れないこと。
+3. 二人称の視点（例：「you」/「あなた」）を使用すること。
+4. 特性、格闘術、およびコンパクト・バイオニクス・モジュール（CBM）の名称はタイトルケースとすること。これ
+   は、冠詞、前置詞、または接続詞以外の各単語の頭文字を大文字にすることを意味します。
+5. 固有名詞を持つアイテムおよびエンティティの名称も、タイトルケースとすること。
+6. その他のすべてのアイテムおよびエンティティの名称は、すべて小文字とすること。
+7. シリアルコンマ（またはオックスフォード・コンマ）を使用すること。
+8. 省略記号 (…) の代わりに省略符号文字 (...)を使用すること。3つのピリオドによる表現を、専用のUnicode文字で
+   ある U+2026 の省略符号に置き換えること。
