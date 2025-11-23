@@ -1,11 +1,10 @@
-# Lua scripting cookbook
+# Lua スクリプティング クックブック
 
-Here are some snippets to help you get familiar with Lua APIs and learn how to use them.
-To test these examples, paste the code into the in-game Lua console by pressing the `` ` `` (backtick) key.
+ここでは、Lua APIに慣れ親しみ、その使い方を学ぶのに役立つコードスニペットをいくつか紹介します。 これらの例をテストするには、バックティック `` ` `` キーを押してゲーム内のLuaコンソールを開き、コードを貼り付けてください。
 
-## Items
+## アイテム
 
-### Getting list of all wielded and worn items in your inventory
+### インベントリ内の装備品のリストを取得する
 
 ```lua
 local you = gapi.get_avatar()
@@ -43,9 +42,9 @@ clean water
 
 </details>
 
-## Monsters
+## モンスター
 
-### Spawning a dog near the player
+### プレイヤーの近くに犬をスポーンさせる
 
 ```lua
 local avatar = gapi.get_avatar()
@@ -59,11 +58,11 @@ else
 end
 ```
 
-## Combat
+## 戦闘
 
-### Printing details about a combat technique when it is used
+### 戦闘テクニックが使用されたときにその詳細を出力する
 
-First, define the function.
+まず、関数を定義します。
 
 ```lua
 on_creature_performed_technique = function(params)
@@ -85,7 +84,7 @@ on_creature_performed_technique = function(params)
 end
 ```
 
-Then connect the hook to the function ONLY ONCE.
+次に、このフックを一度だけ関数に接続します。
 
 ```lua
 table.insert(game.hooks.on_creature_performed_technique, function(...) return on_creature_performed_technique(...) end)
