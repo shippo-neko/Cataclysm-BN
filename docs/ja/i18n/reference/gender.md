@@ -1,23 +1,17 @@
-# Grammatical gender
+# 文法上の性別
 
-For NPC dialogue (and potentially other strings) some languages may wish to have alternate
-translations depending on the gender of the conversation participants. This two pieces of initial
-configuration.
+NPCの会話文（および潜在的にその他の文字列）において、一部の言語では、会話参加者の性別に応じて代替の翻訳を持つことを望む場合があります。この機能には、以下の2つの初期設定が必要です。
 
-1. The dialogue must have the relevant genders listed in the json file defining it. See
-   [the NPC docs](../../mod/json/reference/creatures/npcs).
-2. Each language must specify the genders it wishes to use via `genders` list of the language's
-   entry in `data/raw/languages.json`. Don't add genders there until you're sure you will need them,
-   because it will make more work for you. Current choices are: `m` (male), `f` (female), `n`
-   (neuter). If you need different genders than the ones currently supported, see relevant note in
-   `src/language.h`.
+1. ダイアログを定義する JSONファイル内で、関連する性別がリストアップされている
+   必要があります。詳細は
+   [the NPC docs](../../mod/json/reference/creatures/npcs)を参照してください。
+2. 各言語は、`data/raw/languages.json` の当該言語のエントリにある `genders` リ
+   ストを介して、使用したい性別を指定する必要があります。必要であることが確実になるまで性別を追加しないでください。不必要な作業が増えることになるためです。現在選択可能なのは、`m` (男性:male), `f` (女性:female), `n`
+   (中性:neuter)です。現在サポートされている性別以外が必要な場合は、
+   `src/language.h` 内の関連する注記を参照してください。
 
-Having done this, the relevant dialogue lines will appear multiple times for translation, with
-different genders specified in the message context. For example, a context of `npc:m` would indicate
-that the NPC participant in the conversation is male.
+これを行うと、関連するダイアログ行が翻訳のために複数回出現し、メッセージコンテキストで異なる性別が指定されます。たとえば、コンテキストが `npc:m` である場合、会話の NPC 参加者が男性であることを示します。
 
-Because of technical limitations, all supported genders will appear as contexts, but you only need
-to provide translations for the genders listed in the grammatical gender list for your language.
+技術的な制約により、サポートされているすべての性別がコンテキストとして出現しますが、翻訳者はご自身の言語の文法上の性別リストに記載されている性別についてのみ翻訳を提供すれば十分です。
 
-Other parts of the game have various ad hoc solutions to grammatical gender, so don't be surprised
-to see other contexts appearing for other strings.
+ゲームの他の部分では、文法上の性別に対してさまざまなアドホック（場当たり的）な解決策が採用されているため、その他の文字列で別のコンテキストが出現したとしても驚かないでください。
