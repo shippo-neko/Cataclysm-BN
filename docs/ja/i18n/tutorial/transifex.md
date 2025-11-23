@@ -1,80 +1,68 @@
-# Translate BN with transifex
+# Transifexを使ったBNの翻訳
 
-## Supported languages
+## 対応言語
 
-The official location for translating Cataclysm: BN is the
-[Transifex translations project][project].
+Cataclysm: BNの公式な翻訳場所は、
+[Transifex 翻訳プロジェクト][project]です。
 
-[Looking for a way to translate mods not included in game repository?](../guides/mods.md)
+[ゲームリポジトリに含まれないMODの翻訳方法をお探しですか？](../guides/mods.md)
 
-Some of the currently supported languages are:
+現在対応している言語の一部は以下の通りです
 
-- Arabic
-- Bulgarian
-- Chinese (Simplified)
-- Chinese (Traditional)
-- Dutch
-- Esperanto
-- French
-- German
-- Italian (Italy)
-- Japanese
-- Korean
-- Polish
-- Portuguese (Brazil)
-- Russian
-- Serbian
-- Spanish (Argentina)
-- Spanish (Spain)
-- Turkish
+- アラビア語
+- ブルガリア語
+- 中国語 (簡体字)
+- 中国語 (繁体字)
+- オランダ語
+- エスペラント語
+- フランス語
+- ドイツ語
+- イタリア語 (イタリア)
+- 日本語
+- 韓国語
+- ポーランド語
+- ポルトガル語 (ブラジル)
+- ロシア語
+- セルビア語
+- スペイン語 (アルゼンチン)
+- スペイン語 (スペイン)
+- トルコ語
 
-Don't see your language in the list above? You can add it into the project at Transifex!
+上記のリストにあなたの言語が見当たらない場合は、Transifexでプロジェクトに追加できます！
 
-## Join the BN team
+## BNチームへの参加
 
-To begin translating, head over the [translation project][project] and click on the
-`Help Translate Cataclysm: BN` button. This should take you to a page where you can either create a
-free account on Transifex, or login using GitHub, Google+ or LinkedIn.
+翻訳を開始するには、[翻訳プロジェクト][project] にアクセスし、
+`Help Translate Cataclysm: BN` ボタンをクリックしてください。これにより、Transifexで無料アカウントを作成するか、GitHub、Google+、またはLinkedInを使用してログインできるページに移動します。
 
 ![Start translating](./img/start.png)
 
-After you've created your account, return to the [translation project][project] and click on the
-"Join team" button. This will open a window where you can choose the language you are interested on
-translating, so pick one and click the "Join" button.
+アカウントを作成した後、[翻訳プロジェクト][project] に戻り、「Join team」（チームに参加）ボタンをクリックしてください。これにより、興味のある翻訳対象言語を選択するウィンドウが開くので、一つ選んで「Join」（参加）ボタンをクリックしてください。
 
 ![Join project](./img/join.png)
 
-## Choose a language
+## 言語の選択
 
-After this, the most straightforward thing to do is to reload the page, which should redirect you to
-the translation project's dashboard. Here, you can click the "Languages" link on the sidebar to see
-the list of supported languages and the current progress of the translation effort.
+この後、ページをリロードするのが最も簡単な方法です。これにより、翻訳プロジェクトのダッシュボードにリダイレクトされます。ここで、サイドバーにある「Languages」（言語）リンクをクリックすると、対応言語のリストと現在の翻訳進捗状況を確認できます。
 
-Note that you can request for the inclusion of additional languages, if the one you are interested
-in is not available on the list.
+興味のある言語がリストにない場合は、追加の言語を含めるようリクエストできることに注意してください。
 
 ![Language list](./img/languages.png)
 
-From this list, you can click on the language of your choice, and then click on the "Translate" to
-get started right away. Otherwise, you can click on any other language and click on the "Join team"
-button, if you are interested in translating for that language as well.
+このリストから、選択した言語をクリックし、さらに「Translate」（翻訳）をクリックすると、すぐに開始できます。あるいは、他の言語をクリックし、「Join team」（チームに参加）ボタンをクリックすると、その言語の翻訳にも参加できます。
 
-After clicking on the "Translate" button, you will be taken to the web editor. To begin, you need to
-choose a resource to translate. Most of the in-game text is contained in the
-`cataclysm-bright-nights` resource, so click on it to start.
+「Translate」ボタンをクリックすると、ウェブエディターに移動します。開始するには、翻訳するリソースを選択する必要があります。ゲーム内のテキストのほとんどは
+`cataclysm-bright-nights` リソースに含まれているため、これをクリックして開始してください。
 
 ![Choose a resource](./img/resource.png)
 
-## Using the editor
+## エディターの使用
 
-At this point, the editor should show you the list of text available for translation, now you only
-need to click on the string you want to translate and type your translation on the translation area
-on the right side of the screen. Click on the "Save" button when you are satisfied with your
-translation.
+この時点で、エディターには翻訳可能なテキストのリストが表示されているはずです。翻訳したい文字列をクリックし、画面右側の翻訳エリアにあなたの訳文を入力するだけです。訳文に納得したら、「Save」（保存）ボタンをクリックしてください。
 
 ![Web editor](./img/editor.png)
 
-See [Transifex's documentation][docs] for more information.
+詳細については、[Transifexのドキュメント][docs] を参照してください。
 
 [project]: https://app.transifex.com/bn-team/cataclysm-bright-nights
 [docs]: https://docs.transifex.com/
