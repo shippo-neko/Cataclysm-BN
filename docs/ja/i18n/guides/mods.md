@@ -1,108 +1,96 @@
-# Translate third-party mods
+# サードパーティ製MODの翻訳
 
-## Intro
+## 導入
 
-This document aims to give a brief explanation on how to set up and operate mod translation workflow
-for Cataclysm: Bright Nights.
+この文書は、Cataclysm: Bright Nights (C:BN) におけるMODの翻訳ワークフローを設定し、運用する方法について簡単に説明することを目的としています。
 
-For mod localization the game uses custom localization system that is similar to
-[GNU gettext](https://www.gnu.org/software/gettext/) and is compatible with GNU gettext MO files.
+MODのローカライゼーションには、ゲームは
+[GNU gettext](https://www.gnu.org/software/gettext/)に類似したカスタムのローカライゼーションシステムを使用しており、GNU gettext の MOファイルと互換性があります。
 
-While it's possible to use Transifex or any other platform or software that supports gettext, this
-document only gives examples on how to work with [Poedit](https://poedit.net/) and command-line
-[GNU gettext utilities](https://www.gnu.org/software/gettext/).
+Transifex や、gettext をサポートするその他のプラットフォームやソフトウェアを使用することも可能ですが、この文書では [Poedit](https://poedit.net/) およびコマンドラインの
+[GNU gettext utilities](https://www.gnu.org/software/gettext/)を使用した作業例のみを記載します。
 
-If you desire an in-depth explanation on PO/POT/MO files or how to work with them using GNU gettext
-utilities, see [GNU gettext manual](https://www.gnu.org/software/gettext/manual/gettext.html).
+PO/POT/MOファイルや、GNU gettext ユーティリティを使用した作業方法についてさらに詳細な説明が必要な場合は、[GNU gettext manual](https://www.gnu.org/software/gettext/manual/gettext.html)を参照してください。
 
-To get some generic tips on translating strings for Cataclysm: Bright Nights and its mods, see
-[translation API](../reference/translation).
+Cataclysm: Bright Nights およびそのMODの文字列を翻訳するための一般的なヒントについては、
+[translation API](../reference/translation)を参照してください。
 
-## A short glossary
+## 簡単な用語集
 
-### POT file
+### POT ファイル
 
-Portable Object Template file (`.pot`).
+Portable Object Template ファイル (`.pot`)。
 
-This is a text file that contains original (English) strings extracted from mod's JSON and Lua
-source files. The POT file is a template used for creating empty or updating existing PO files of
-any language.
+MODの JSON および Lua ソースファイルから抽出された元の英語の文字列を含むテキストファイルです。POTファイルは、任意の言語の空の POファイルを作成したり、既存の POファイルを更新したりするために使用されるテンプレートです。
 
-### PO file
+### PO ファイル
 
-Portable Object file (`.po`).
+Portable Object ファイル (`.po`)。
 
-This is a text file that contains translated strings for one language. The PO files are what
-translators work with, and what will be compiled into a MO file.
+単一の言語に対応する翻訳済み文字列を含むテキストファイルです。POファイルは、翻訳者が作業する対象であり、MOファイルにコンパイルされるものです。
 
-### MO file
+### MO ファイル
 
-Machine Object file (`.mo`).
+Machine Object ファイル (`.mo`).
 
-This is a binary file that contains translated strings for one language. The MO files are what the
-game loads, and where it gets translated strings from.
+単一の言語に対応する翻訳済み文字列を含むバイナリファイルです。MOファイルは、ゲームがロードする対象であり、翻訳済み文字列を取得する場所です。
 
-## Workflow overview
+## ワークフローの概要
 
-The first translation workflow is as follows:
+最初の翻訳ワークフローは以下のとおりです。
 
-1. Extract strings from mod JSON and Lua source files into a POT file
-2. Create PO file for target language from this POT
-3. Fill the PO file with translated strings
-4. Compile PO into MO
-5. Put the MO into your mod files
+1. MODの JSON および Lua ソースファイルから文字列を抽出し、POTファイルを作成する
+2. この POTファイルから、対象言語の POファイルを作成する
+3. POファイルを翻訳済み文字列で埋める
+4. POファイルを MOファイルにコンパイルする
+5. MOファイルを MODファイル内に配置する
 
-As the mod changes with time, so may change its strings. Updating existing translations is done as
-follows:
+MODは時間の経過とともに変更され、それに伴い文字列も変更される可能性があります。既存の翻訳を更新する手順は以下のとおりです。
 
-1. Extract strings from mod JSON and Lua source files into a new POT file
-2. Update existing PO file from the new POT file
-3. Add new or edit existing translated strings in the PO file
-4. Compile PO into MO
-5. Replace old MO in the mod files with new version
+1. MODの JSON および Lua ソースファイルから文字列を抽出し、新しい POTファイルを作成する
+2. 新しい POTファイルを使用して、既存の POファイルを更新する
+3. POファイル内で、新しい翻訳済み文字列を追加または既存の翻訳済み文字列を編集する
+4. POファイルを MOファイルにコンパイルする
+5. 古い MOファイルを新しいバージョンに置き換える
 
-Step 1 in both workflows requires you to set up environment for string extraction (see below).
+どちらのワークフローでも、ステップ1を実行するには、文字列抽出のための環境をセットアップする必要があります（下記参照）。
 
-Steps 2-4 can be done using translation software either by the mod author/maintainer, or by the
-translator.
+ステップ2〜4は、MODの作者、保守担当者、または翻訳者のいずれかによって、翻訳ソフトウェアを使用して実行できます。
 
-## Setting up environment for string extraction
+## 文字列抽出のための環境のセットアップ
 
-You'll need Python 3 with `polib` and `luaparser` modules installed (available via `pip`).
+`polib` および `luaparser` モジュールがインストールされた Python 3 が必要です (`pip` を介して利用可能)。
 
-Scripts for string extraction can be found in the `lang` subdirectory of the repository:
+文字列抽出用スクリプトは、リポジトリの `lang` サブディレクトリにあります。
 
-- `extract_json_strings.py` - main string extraction routines
-- `dedup_pot_file.py` - fixes errors in POT file produces by the 1st script
-- `extract_mod_strings.bat` (`extract_mod_strings.sh` for Linux/MacOS) - to automate the other 2
-  scripts
+- `extract_json_strings.py` - 主な文字列抽出ルーチン
+- `dedup_pot_file.py` - 最初のスクリプトによって生成された POTファイルのエラーを修正
+- `extract_mod_strings.bat` (Linux/MacOS の場合は `extract_mod_strings.sh` ) - 他の2つのスクリプトを自動化
 
-## Extracting strings
+## 文字列の抽出
 
-Copy these 3 scripts into the mod's folder and:
+これら3つのスクリプトを MODのフォルダにコピーし、以下の手順を実行します。
 
-- on Windows, double-click `extract_mod_strings.bat`
-- on Linux/MacOS, open terminal and run `./extract_mod_strings.sh`
+- Windows の場合、`extract_mod_strings.bat` をダブルクリック
+- Linux/MacOS の場合、ターミナルを開き `./extract_mod_strings.sh` を実行
 
-If the process completed without errors, you'll see a new `lang` folder with `extracted_strings.pot`
-file inside.
+プロセスがエラーなしで完了した場合、MODフォルダ内に `extracted_strings.pot` ファイルを含む新しい `lang` フォルダが表示されます。
 
-## Creating new PO
+## 新しい POファイルの作成
 
-Before creating PO file, you need to choose language id.
+POファイルを作成する前に、言語 ID を選択する必要があります。
 
-Open `data/raw/languages.json` to see the list of languages supported by the game.
+`data/raw/languages.json` を開いて、ゲームがサポートしている言語のリストを確認してください。
 
-In this list, each entry has its own id in form of `ln_LN`, where `ln` determines language and
-`LN` - dialect. You can either use full `ln_LN` for exact language+dialect match, or `ln` if you
-want the game to use your MO regardless of dialect.
+このリストでは、各エントリが `ln_LN` の形式で独自の ID を持っています。ここで `ln` は言語を、
+`LN` はダイアレクト（方言）を決定します。正確な言語とダイアレクトの一致には完全な `ln_LN` を使用するか、ダイアレクトに関係なくゲームに MOファイルを使用させたい場合は `ln` を使用できます。
 
 ### Poedit
 
-1. Open the POT file with Poedit
-2. Press "Create new translation" button (should show up near the bottom)
-3. In language selection dialog, enter language id you chose
-4. Save the file as `path/to/mod/lang/LANG.po` where `LANG` is the same language id
+1. Poedit で POTファイルを開く
+2. 「新しい翻訳を作成」ボタン（下部に表示されるはず）を押す
+3. 言語選択ダイアログで、選択した言語 ID を入力する
+4. ファイルを `path/to/mod/lang/LANG.po` として保存します。ここで `LANG` は選択した言語 ID と同じです。
 
 ### msginit
 
@@ -110,15 +98,15 @@ want the game to use your MO regardless of dialect.
 msginit -i lang/index.pot -o lang/LANG.po -l LANG.UTF-8 --no-translator
 ```
 
-Where `LANG` is the language id you chose
+ここで `LANG` は選択した言語 ID です。
 
-## Updating existing PO
+## 既存の POファイルの更新
 
 ### Poedit
 
-1. Open the PO file with Poedit
-2. Choose `Catalog->Update from POT file...` and select the new POT file
-3. Save the file
+1. Poedit で POファイルを開く
+2. `翻訳->POTファイルから更新...` を選択し、新しい POTファイルを選択
+3. ファイルを保存
 
 ### msgmerge
 
@@ -126,15 +114,14 @@ Where `LANG` is the language id you chose
 msgmerge lang/LANG.po lang/index.pot
 ```
 
-## Compiling PO into MO
+## POファイルの MOファイルへのコンパイル
 
 ### Poedit
 
-1. Open the PO file with Poedit
-2. Make sure MO file will be encoded using UTF-8 (it should do so by default, you can double check
-   in `Catalog->Properties->"Translation properties" tab->Charset`).
-3. By default, each time PO file is saved Poedit automatically compiles it into MO, but the same can
-   also be done explicitly via `File->Compile to MO...`
+1. Poedit で POファイルを開く
+2. MOファイルが UTF-8 を使用してエンコードされていることを確認します (デフォルトでそうなっているはずですが、
+   `翻訳->プロパティ->"翻訳プロパティ" タブ->文字符号化法`で再確認できます)。
+3. デフォルトでは、POファイルが保存されるたびに Poedit は自動的に MOファイルにコンパイルしますが、`ファイル>MOにコンパイル...` を介して明示的に実行することもできます。
 
 ### msgfmt
 
@@ -142,9 +129,9 @@ msgmerge lang/LANG.po lang/index.pot
 msgfmt -o lang/LANG.mo lang/LANG.po
 ```
 
-## Adding MO file to the mod
+## MOファイルを MODに追加
 
-Create `lang` directory in the mod files directory and put MOs there:
+MODファイルディレクトリ内に `lang` ディレクトリを作成し、そこに MOファイルを配置します。
 
 ```
 mods/
@@ -156,8 +143,7 @@ mods/
             zh_CN.mo
 ```
 
-**Note:** Storing your POT/PO files in the same `lang` subdirectory may make it easier to keep track
-of them. The game ignores these files, and your mod folder structure will look like this:
+**注釈:** POT/POファイルを同じ `lang` サブディレクトリに保存すると、管理が容易になる場合があります。ゲームはこれらのファイルを無視するため、MODフォルダ構造は次のようになります。
 
 ```
 mods/
@@ -173,75 +159,64 @@ mods/
             zh_CN.mo
 ```
 
-## Miscellaneous notes
+## その他の注釈
 
-### Is it possible to use arbitrary location or names for MO files, like with JSONs?
+### JSONと同様に、MOファイルに任意の場所や名前を使用することはできますか？
 
-No. The game looks for MO files with specific names that are located in the `lang` subdirectory of
-the mod's `path` directory specified in `modinfo.json` (if not specified, `path` matches the mod's
-directory).
+できません。ゲームは、`modinfo.json` で指定された MODの `path` ディレクトリ（指定されていない場合、`path` は MODのディレクトリと一致します）の `lang` サブディレクトリ内にある特定の名前を持つ MOファイルを探します。
 
-However, any mod will automatically try to use any other mod's translation files to translate its
-strings. This makes it possible to create mods that are purely "translation packs" for other mods
-(or mod collections).
+ただし、どのMODでも、他のMODの翻訳ファイルを自動的に使用してその文字列を翻訳しようとします。これにより、他の MOD（または MODコレクション）専用の「翻訳パック」MODを作成することが可能になります。
 
-### Reloading translations in a running game
+### 実行中のゲームでの翻訳のリロード
 
-Open debug menu and select `Info...->Reload translations`, and the game will reload all MO files
-from disk.
+デバッグメニューを開き、`情報...->翻訳をリロード`を選択すると、ゲームはディスクからすべての MOファイルをリロードします。
 
-This makes it easy to see how translated string looks in game, provided the translator has a way to
-compile MO files.
+これにより、翻訳者が MOファイルをコンパイルする手段を持っていれば、翻訳された文字列がゲーム内でどのように見えるかを簡単に確認できます。
 
-Example workflow with Poedit:
+Poedit を使用したワークフローの例:
 
-1. Translate a string
-2. Hit Ctrl+S
-3. Alt+Tab into the game
-4. Reload translation files via debug menu
-5. The game now displays translated string
+1. 文字列を翻訳する
+2. Ctrl+S を押す
+3. Alt+Tab でゲームに切り替える
+4. デバッグメニューを介して翻訳ファイルをリロードする
+5. ゲームが翻訳された文字列を表示する
 
-### MO load order
+### MOファイルのロード順序
 
-MO load order is as follows:
+MOファイルのロード順序は次のとおりです。
 
-1. First and always goes base game's MO file, which contains translation strings for UI, hardcoded
-   functionality, base "mod" (`data/json/`) and in-repo mods.
-2. Then MO files of mods are loaded, in same order as the mod load order.
+1. 最初に、そして常に、UI、ハードコードされた機能、ベース「MOD」（`data/json/`）、およびリポジトリ内の MODの翻訳文字列を含むベースゲームの MOファイルがロードされます。
+2. 次に、MODの MOファイルが MODのロード順序と同じ順序でロードされます。
 
-### Dialects
+### ダイアレクト（方言）
 
-When loading MO files, the game first looks for the file with exact language and dialect match in
-its name. If such file is absent, then it looks for a file with no dialect.
+MOファイルをロードするとき、ゲームはまず、名前が正確な言語とダイアレクトに一致するファイルを探します。そのようなファイルが存在しない場合は、ダイアレクトのないファイルを探します。
 
-For example, when using `Español (España)` the selection order is
+たとえば、`Español (España)` を使用している場合、選択順序は次のとおりです。
 
 1. `es_ES.mo`
 2. `es.mo`
 
-And when using `Español (Argentina)` the selection order is
+また、`Español (Argentina)` を使用している場合、選択順序は次のとおりです。
 
 1. `es_AR.mo`
 2. `es.mo`
 
-Thus, `es.mo` would be loaded for either dialect of Spanish if the exact translation files are not
-present.
+したがって、正確な翻訳ファイルが存在しない場合、`es.mo` はスペイン語のどちらのダイアレクトでもロードされます。
 
-### What if 2 or more mods provide different translations for same string?
+### 2つ以上の MODが同じ文字列に対して異なる翻訳を提供している場合はどうなりますか？
 
-Then the game selects which one to use according to this set of rules:
+その場合、ゲームは次のルールセットに従って使用する翻訳を選択します。
 
-1. If string A's translation has plural forms, but string B's translation does not, then translation
-   A is used for both single and plural forms.
-2. If both translation A and B have (or both don't have) plural forms, then the first loaded
-   translation is used (see MO load order).
+1. 文字列 A の翻訳に複数形があるが、文字列 B の翻訳に複数形がない場合、翻訳 A
+   が単数形と複数形の両方に使用されます。
+2. 翻訳 A と B の両方に複数形がある場合（または両方にない場合）、最初にロードさ
+   れた翻訳が使用されます（MOロード順序を参照）。
 
-If you want a different translation from the one in the base game, or don't want it to conflict with
-a string from some other mod, add a translation context to the string in the corresponding JSON
-object (see [here](../reference/translation) for which fields support translation context).
+ベースゲームのものとは異なる翻訳を使用したい場合、または他のMODからの文字列と競合させたくない場合は、対応する JSONオブジェクト内の文字列に翻訳コンテキストを追加してください (どのフィールドが翻訳コンテキストをサポートしているかについては [こちら](../reference/translation)を参照してください)。
 
-### PR that implements mod translations, for reference
+### 参考となる、MOD翻訳を実装したプルリクエスト
 
 https://github.com/cataclysmbnteam/Cataclysm-BN/pull/505
 
-### [Example of the mod translation](https://github.com/Kenan2000/Bright-Nights-Kenan-Mod-Pack/pull/36)
+### [Mod翻訳の例](https://github.com/Kenan2000/Bright-Nights-Kenan-Mod-Pack/pull/36)
