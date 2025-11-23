@@ -1,24 +1,18 @@
-# Translation file format (.po)
+# 翻訳ファイル形式 (.po)
 
-Translations are stored in [`".po"` files (Portable Object)][po], named with a language code
-specific to each language and country. So for example the translations for the Spanish spoken in
-Spain would be found in `es_ES.po` and for Spanish spoken in Mexico would be found in `es_MX.po`.
+翻訳データは、各言語および国固有の言語コードで命名された [`".po"` ファイル (Portable Object)][po]に格納されます。例えば、スペインで話されるスペイン語の翻訳は `es_ES.po` に、メキシコで話されるスペイン語の翻訳は `es_MX.po` に格納されます。
 
 [po]: https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html
 
-It is a plain-text filetype, so you can edit it however you choose, but translators often prefer to
-use purpose-built translation editors (such as [Poedit](https://poedit.net)), or web-based
-translation tools (such as <https://translations.launchpad.net>).
+このファイルはプレーンテキスト形式のため、任意の方法で編集することが可能です。しかし、翻訳者の方々は、[Poedit](https://poedit.net)などの専用の翻訳エディタやや、 ウェブベースの翻訳ツール (例: <https://translations.launchpad.net>)を好んで使用することがよくあります。
 
-The format of `".po"` files is a list of entries, with the english phrase to be translated, followed
-by the local translation. The english phrase is on the line or lines beginning with `msgid`, and the
-translated phrase goes on the line or lines beginning with `msgstr`.
+`".po"` ファイルの形式はエントリーのリストで構成されており、翻訳対象の英語のフレーズと、それに続くローカライズされた翻訳がセットになっています。英語のフレーズは `msgid`で始まる行、または複数行に記述されます。翻訳されたフレーズは `msgstr` で始まる行、または複数行に記述されます。
 
-Before the `msgid` line there will be a comment line indicating where in the source code the word or
-phrase came from. This can often help when the meaning of the english is not obvious. There may also
-be comments left by the developers to make translation easier.
+`msgid` 行の前には、その単語やフレーズがソースコード内のどこから来たかを示すコメント行が存在します。
+これは、英語の意味が不明瞭な場合に非常に役立つことが多いです。
+また、翻訳を容易にするために開発者によって残されたコメントが含まれることもあります。
 
-Most entries will look something like this:
+ほとんどのエントリーは次のような形式になります。
 
 ```
 #: action.cpp:421
@@ -26,9 +20,9 @@ msgid "Construct Terrain"
 msgstr "niarreT tcurtsnoC"
 ```
 
-The english phrase here is "Construct Terrain", and it comes from line 421 of the file "action.cpp".
-The example translation is just a reversal of the english letters. With this, in stead of "Construct
-Terrain", the game will display "niarreT tcurtsnoC".
+ここでの英語のフレーズは「Construct Terrain」であり、これはaction.cppファイルの421行目から来ています。この例の翻訳は、単に英語の文字を逆にしたものです。この設定により、ゲームは「Construct Terrain」の代わりに「niarreT tcurtsnoC」と表示することになります。
+
+もう一つの例を以下に示します。
 
 Another exmple is:
 
@@ -38,66 +32,65 @@ msgid "Sleep"
 msgstr "pleeS"
 ```
 
-This is similar to the last example, except it is a more common phrase. It is used in the files
-action.cpp, defense.cpp (twice) and npcmove.cpp. The translation will replace every usage.
+これは前の例と似ていますが、より一般的に使われるフレーズである点が異なります。
+このフレーズは、`action.cpp`、`defense.cpp`（2回）、および`npcmove.cpp`のファイルで使用されています。
+翻訳は、これらすべての使用箇所を置き換えることになります。
 
-## File Header
+## ファイルヘッダー
 
-The header at the top of the `".po"` file is the only part that differs from the
-comment/msgid/msgstr format.
+`".po"` ファイルの冒頭にあるヘッダーは、comment/msgid/msgstr の形式と異なる唯一の部分です。
 
-If you are working on an already established translation you will not have to modify it.
+既に確立されている翻訳に取り組んでいる場合は、これを変更する必要はありません。
 
-For a new translation, it should be mostly set up for you, either by the editor you are using or by
-the `msginit` program which is the recommended way of initializing a translation (see
-TRANSLATING.md).
+新規の翻訳を始める場合、ヘッダーの大部分は、ご使用のエディタ、または翻訳の初期化に推奨されているプログラムである`msginit`（詳細はTRANSLATING.mdをご覧ください）によって自動的に設定されるはずです。
 
-If you are starting from another translation file however, you might need to change a few things.
-Just fill it in as best you are able.
+ただし、他の翻訳ファイルから開始する場合は、いくつかの項目を変更する必要があるかもしれません。可能な限り適切に記入するようにしてください。
 
-The header will look something like:
+ヘッダーは次のようになります。
 
 ```
-# French translations for Cataclysm-DDA package.
-# Copyright (C) 2013 CleverRaven and Cataclysm-DDA contributors.
-# This file is distributed under the same license as the Cataclysm-DDA package.
-# Administrator <EMAIL@ADDRESS>, 2013.
+#
+# Translators:
+# くりやまたいせい, 2023
+# Olanti <olanti-p@yandex.ru>, 2023
+# O M, 2024
+# pigmentblue15, 2025
+# やまねこ, 2025
+# Coolthulhu <Coolthulhu@gmail.com>, 2025
+# jacli mouber, 2025
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.7-git\n"
-"Report-Msgid-Bugs-To: http://github.com/CleverRaven/Cataclysm-DDA\n"
-"POT-Creation-Date: 2013-08-01 13:44+0800\n"
-"PO-Revision-Date: 2013-08-01 14:02+0800\n"
+"Project-Id-Version: cataclysm-bn\n"
+"POT-Creation-Date: 2025-10-27 01:44+0000\n"
+"PO-Revision-Date: \n"
 "Last-Translator: YOUR NAME <your@email.address>\n"
-"Language-Team: French\n"
-"Language: fr\n"
+"Language-Team: Japanese (https://app.transifex.com/bn-team/teams/113585/"
+"ja/)\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.7\n"
 ```
 
-If you are starting a new translation, or you are in charge of the existing translation, it is
-helpful if you include your name and e-mail address so that you can be contacted with any questions
-or issues regarding the translation.
+新規の翻訳を開始する場合、または既存の翻訳の担当者である場合は、翻訳に関する質問や問題が発生した際に連絡が取れるよう、氏名とメールアドレスを含めることが推奨されます。
 
-The only important part that cannot be easily filled out manually is the `Plural-Forms` section. It
-determines how different numbers of things are handled in your language. More on that later.
+手動で簡単に記入できない唯一の重要な部分は、`Plural-Forms` セクションです。これは、あなたの言語において異なる数の物事 (例:単数形、複数形) がどのように扱われるかを決定するものです。これについては、後ほど詳しく説明いたします。
 
-## Format strings and newlines
+## フォーマット文字列と改行
 
-Some strings will have special terms such as `%s`, `%2$d` and `\n`.
+一部の文字列には、`%s`、`%2$d`、`\n` などの特殊な用語が含まれています。
 
-`\n` represents a linebreak. Mostly these are unnecessary as the code wraps lines where it can, but
-sometimes these are used for placing things on different lines. Just use `\n` in your translation
-wherever a new line should go.
+`\n` は改行を表します。\
+コードは可能な限り自動的に行を折り返すため、ほとんどの場合は不要です。
+しかし、要素を意図的に異なる行に配置したい場合などに使用されることがあります。
+改行を入れるべき場所では、翻訳にも必ず`\n`を使用してください。
 
-`%s` and other similar terms are replaced with something else when the game is running. You might
-need to move them around, depending on the translation. It is important that every term beginning
-with `%` is kept in the translation.
+`%s` およびその他類似の用語（例：`%d`, `%2$d`）は、ゲーム実行時に他の値に置き換えられます。翻訳に応じて、これらの位置を移動する必要があるかもしれません。`%` で始まるすべての用語を翻訳内に保持することが重要です。これらを削除したり変更したりすると、ゲーム内で正しく値が表示されなくなります。
 
-Here is an example which replaces a `%d` with a number:
+以下は、`%d`が数値に置き換えられる例です。
 
 ```
 #: addiction.cpp:224
@@ -110,27 +103,22 @@ msgstr ""
 ".gnitimoV  .sgnivarc tneuqerF  .eerged emos ot niap lacisyhp dna noisserpeD"
 ```
 
-Here it is important that the `%d` was not reversed, and that the `\n` remained at the end of the
-line. In this case, `%d` will be replaced with the character's strength modifier when the message is
-displayed.
+ここで重要なのは、`%d` が逆順にされず、`\n` が行の末尾に残っていることです。このケースでは、メッセージが表示される際に、`%d`はキャラクターの筋力修正値に置き換えられます。
 
-In some cases it might be necessary to change the order of terms. This can confuse the game. If the
-order of the `%` terms changes, you must add numbers to all of them, so that the game knows which
-was which. Some strings will already have these numbers, but some might not.
+場合によっては、用語の順序を変更する必要があるかもしれません。これを行うと、ゲームが値を正しく認識できず混乱する可能性があります。
+`%`用語の順序が変わる場合、ゲームがどの値がどれに対応するかを認識できるように、すべての用語に番号を追加する必要があります。一部の文字列には既にこれらの番号が付いていますが、付いていないものもあります。
 
-As an example, if there is a string with `%s shoots %s!`, it might change in translation. Perhaps it
-will become something like `%s is shot by %s!`. But now it is the wrong way around, the shooter has
-swapped with the shootee.
+例として、`%s shoots %s!` という文字列があるとします。翻訳によって、`%s is shot by %s!` のように語順が変更されるかもしれません。しかし、これでは射手と被射体（撃たれる側）の順序が逆転してしまいます。
 
-In this case, each `%s` should be numbered with a digit (1-9) then a dollar sign ($) between the `%`
-and the `s`. For example `%1$s shoots %2$s!` would be equivalent to `%s shoots %s!`. So the example
-translation above could be `%2$s is shot by %1$s!`, and this would work correctly.
+この場合、各 `%s` は、`%`と`s`の間に数字 (1〜9) とドル記号 ($) を付けて番号付けする必要があります。
+例えば、`%s shoots %s!` は `%1$s shoots %2$s!` と同等になります。
+したがって、上記の翻訳の例は、`%2$s is shot by %1$s!` とすることで、正しく機能します。
 
-The game can figure out these `%1$s` `%2$s` parameters automatically, but you must make sure that
-(A): all of the `%` terms in the translation are numbered; and (B): the numbers are correct in terms
-of the original ordering in the english text.
+ゲームはこれらの `%1$s`、`%2$s` といったパラメーターを自動的に解釈できますが、翻訳を行う際には次のことを確認する必要があります。
+(A): 翻訳内のすべての %用語に番号が振られていること。
+(B): その番号が、元の英語テキストでの出現順序に対して正しいこと。
 
-For example:
+例えば:
 
 ```
 #: map.cpp:680
@@ -139,19 +127,15 @@ msgid "%s loses control of the %s."
 msgstr "%2$s eht fo lortnoc sesol %1$s"
 ```
 
-would be displayed in-game as `kcurt eht fo lortnoc sesol liagibA`, assuming `Abigail` was driving a
-`truck`.
+この例は、もし`Abigail`が`truck`を運転していると仮定した場合、ゲーム内では `kcurt eht fo lortnoc sesol liagibA`として表示されます。
 
-## Special tags in strings
+## 文字列内の特殊タグ
 
-Some strings in the translation may have special tags in front of or inside them. These tags should
-be left as-is, and only the rest of the string translated.
+翻訳内のいくつかの文字列には、前または内部に特殊なタグが付いている場合があります。これらのタグはそのまま残し、文字列の残りの部分のみを翻訳する必要があります。
+例えば、`data/raw/names.json`にあるNPC名や都市名は、単語（例：素材としての`Wood`と、姓としての`Wood`）との衝突を避けるために`<name>`という接頭辞が付いています。
+これらについては、`<name>`の部分を残しておく必要があります。
 
-For example, the NPC and city names from "data/raw/names.json" are prefixed with `<name>` so as to
-avoid conflicts with words (such as `Wood` the material, and `Wood` the last name). For these, the
-`<name>` part should be left in.
-
-For example:
+例:
 
 ```
 #. ~ proper name; gender=female; usage=given
@@ -160,18 +144,17 @@ msgid "<name>Abigail"
 msgstr "<name>liagibA"
 ```
 
-Names also have a comment above them, indicating what the name is used for in-game. In this case,
-`Abigail` is a possible first name for a female NPC.
+名前には、その名前がゲーム内で何に使用されるかを示すコメントも上部に付いています。
+この場合、`Abigail`は女性NPCの「名前（`given name`）」として使用される可能性があります。
 
-## Plural forms
+## 複数形
 
-Many languages use different terms for things depending on how many of them there are. These are
-supported using plural forms, defined by the `Plural-Form` line in the `".po"` file header.
+多くの言語では、数（単数、複数など）によって異なる用語を使用します。
+これらは、`.po`ファイルのヘッダーにある`Plural-Forms`行で定義された複数形のルールを使用してサポートされます。
+このような場合、数に応じて異なる形式に対応するために、複数の `msgstr` 行が存在します。
+ゲームは、数の値に応じて正しい形式を自動的に選択します。
 
-For these, there will be multiple `msgstr` lines, intended for the different forms depending on
-number. The game will automatically choose the correct form depending on the number of things.
-
-For example:
+例:
 
 ```
 #: melee.cpp:913
@@ -182,5 +165,5 @@ msgstr[0] "!tih ymene %d"
 msgstr[1] "!tih seimene %d"
 ```
 
-Here the first entry is for when there is only one `enemy`, the second is for when there are more
-than one `enemies`. The rules differ wildly between languages.
+ここで、最初のエントリーは `enemy`が1つの場合に、2番目のエントリーは `enemies`が複数の場合に対応します。
+この規則は言語によって大きく異なる点にご注意ください。
