@@ -1,33 +1,26 @@
-# Merging and managing translations for maintainers
+# 保守担当者向け：翻訳の統合と管理
 
-Several steps need to be done in the correct order to correctly merge and maintain the translation
-files.
+翻訳ファイルを正しく統合し、管理するためには、いくつかの手順を正しい順序で実行する必要があります。
 
-There are scripts available for these, so usually the process will be as follows:
+これらの作業には利用可能なスクリプトが存在するため、通常の手順は以下のようになります。
 
-1. Download the translations in `.po` format.
-2. Put them in `lang/incoming/`, ensuring they are named consistently with the files in `lang/po/`.
-3. Run `lang/update_pot.sh` to update `lang/po/cataclysm-BN.pot` (requires python with `polib` and
-   `luaparser` modules installed).
-4. Run `lang/merge_po.sh` to update `lang/po/*.po`. (This is only used to test translations locally
-   as the project now uses Transifex for translation)
+1. 翻訳ファイルを `.po` 形式でダウンロードします。
+2. ダウンロードしたファイルを `lang/incoming/`に配置します。この際、`lang/po/`内のファイルと一貫した命名規則であることを確認してください。
+3. `lang/update_pot.sh` を実行して、`lang/po/cataclysm-BN.pot` を更新します (これには `polib` および
+   `luaparser` モジュールがインストールされたPythonが必要です)。
+4. `lang/merge_po.sh` を実行して、`lang/po/*.po` を更新します。 (現在、プロジェクトは翻訳に Transifex を使用しているため、これは通常、翻訳をローカルでテストするためだけに使用されます)
 
-   This will also merge the translations from `lang/incoming/`.
+   これにより、`lang/incoming/` からの翻訳も統合されます。
 
-These steps should be enough to keep the translation files up-to-date.
+これらの手順で、翻訳ファイルを最新の状態にできるはずです。
 
-To compile the .po files into `.mo` files for use, run `lang/compile_mo.sh`. It will create a
-directory in `lang/mo/` for each language found.
+`.po` ファイルを使用可能にするために `.mo` ファイルへコンパイルするには、`lang/compile_mo.sh`を実行します。実行後、検出された各言語ごとに `lang/mo/` 内にディレクトリが作成されます。
 
-Also note that both `lang/merge_po.sh` and `lang/compile_mo.sh` accept arguments specifying which
-languages to merge or compile. So to compile only the translation for, say, Traditional Chinese
-(zh_TW), one would run `lang/compile_mo.sh zh_TW`.
+また、`lang/merge_po.sh` と `lang/compile_mo.sh` の両方とも、どの言語を統合またはコンパイルするかを指定する引数を受け付けます。したがって、たとえば、繁体字中国語（zh_TW）の翻訳のみをコンパイルするには、 `lang/compile_mo.sh zh_TW` を実行します。
 
-After compiling the appropriate .mo file, if the language has been selected in game settings, the
-translations will be automatically used when you run cataclysm.
+`.mo` ファイルがコンパイルされた後、ゲーム設定でその言語が選択されていれば、Cataclysm を実行する際に翻訳が自動的に使用されます。
 
-When `System language` is selected in settings, the game tries to use language that matches system
-language based on language definitions file `data/raw/languages.json`.
+設定で `システム言語` が選択されている場合、ゲームは言語定義ファイル
+`data/raw/languages.json` に基づき、システム言語に一致する言語を使用しようと試みます。
 
-If you're testing translations for a new language, or the language does not show up in settings,
-make sure it has its own entry in the definitions file.
+新しい言語の翻訳をテストしている場合、またはその言語が設定に表示されない場合は、定義ファイルにその言語専用の項目があることを確認してください。
