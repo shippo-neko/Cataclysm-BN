@@ -1,16 +1,13 @@
-# Loading Order
+# データのロード順序
 
-All files here in data/json are read eventually, but the order in which they're read can be
-important for objects with dependencies on other kinds of objects (e.g. recipes depend on skills).
-Ensuring the proper loading order will prevent surprises that, most often, manifest as
-crash-to-desktop with segfault (a very bad thing).
+data/jsonディレクトリ内のすべてのファイルは最終的に読み込まれますが、それらが読み込まれる順序は非常に重要です。特定のオブジェクト（例：レシピ）が、他の種類のオブジェクト（例：そのレシピで必要とされるスキル）に依存している場合、依存されている側のオブジェクトが先にロードされている必要があります。
+もし依存関係が満たされないまま（例：スキルがロードされる前に、そのスキルに依存するレシピをロードしようとする）オブジェクトを処理しようとすると、プログラムが未定義のメモリ領域にアクセスしようとするなどの予期せぬ事態が発生します。
 
-The way Cataclysm finds and loads json files is by running a breadth-first search in the tree
-data/json/. This means `data/json/whatever.json` will **always** be read before
-`data/json/subdir/whatever.json`. This tells us how to ensure dependency loading order.
+この問題は、多くの場合、セグメンテーション違反として現れ、プログラムが強制終了します。これはユーザー体験を著しく損なう「非常に悪いこと」であり、適切なロード順序を確保することが、この種の強制終了を防ぐ鍵となります。
 
-For instance, if you have scenarios that depend on professions that depend on skills, you'll want a
-directory structure such as the following:
+CataclysmがJSONファイルを検索およびロードする方法は、ディレクトリツリーdata/json/内で幅優先探索（Breadth-First Search, BFS）を実行することです。これは、`data/json/whatever.json`が`data/json/subdir/whatever.json`よりも必ず先に読み込まれることを意味します。この動作は、依存関係のロード順序を確保する方法を示しています。
+
+たとえば、シナリオが職業に依存し、その職業がスキルに依存している場合、以下のようなディレクトリ構造にすることが推奨されます。
 
 ```
 data/json/
@@ -21,12 +18,9 @@ data/json/
       scenarios.json
 ```
 
-Which results in a loading order of: `skills.json` then `professions.json` and then
-`scenarios.json`.
+これにより、ロード順序は `skills.json`、次に`professions.json`、そして
+`scenarios.json`となります。
 
-## Same-depth loading order
+## 同一階層でのロード順序
 
-Note that, when files (or directories) are at the same depth (i.e. all in `data/json/`), they will
-be read in lexical order, which is more or less equivalent to alphabetical order for file names that
-use only ascii characters. For UTF-8 or otherwise non-ascii file names, the names will be ordered by
-codepoint.
+ファイル（またはディレクトリ）が同一階層にある場合（つまり、すべて`data/json/`内にある場合など）、それらは辞書的順序で読み込まれることに注意してください。これは、ASCII文字のみを使用するファイル名にとっては、ほぼアルファベット順に相当します。UTF-8またはその他の非ASCIIファイル名の場合、ファイル名はコードポイントによって順序付けられます。
