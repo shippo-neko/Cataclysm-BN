@@ -1,25 +1,23 @@
-# Edge cases
+# 特殊な事例
 
-There are issues specific to Cataclysm: BN which translators should be aware of. For example:
+Cataclysm: BN には、翻訳者が留意すべき固有の問題がいくつかあります。たとえば、以下の点に注意してください。
 
-## Special Symbols
+## 特殊なシンボル
 
-Some translation texts will have special symbols or formatting, such as
+一部の翻訳テキストには、以下のような特殊なシンボルまたはフォーマットが含まれます。
 
-- [`%s` and `%3$d` (should be leave them as they are)](../explanation/file_format.md#format-strings-and-newlines)
-- [`<name>` (shouldn't be translated)](../explanation/file_format.md#special-tags-in-strings)
+- [`%s` および `%3$d` (これらはそのまま残すべきです)](../explanation/file_format.md#format-strings-and-newlines)
+- [`<name>` (これは翻訳してはいけません](../explanation/file_format.md#special-tags-in-strings)
 
-To learn more, please read the [file format explanation](../explanation/file_format.md).
+詳細については、[ファイル形式の説明](../explanation/file_format.md)をお読みください。
 
-## Language Specific Guidelines
+## 言語固有のガイドライン
 
-Check the following files for specific guidelines:
+具体的なガイドラインについては、以下のファイルを確認してください。
 
-- [General notes for all translators (mostly english)](../explanation/style_all.md)
-- [Notes specific to a language](../explanation/style.md)
+- [全ての翻訳者向け一般注釈 (主に英語)](../explanation/style_all.md)
+- [言語固有の注釈](../explanation/style.md)
 
-Cataclysm: BN has more than 46,000 translatable strings (last updated at 2023-09-22 [^1]), but don't
-be discouraged. The more translators there are, the easier it becomes!
+Cataclysm: BN には、48,000 を超える翻訳可能な文字列があります (最終更新日：2025-11-23 [^1])。しかし、落胆しないでください。翻訳者が多ければ多いほど、作業は容易になります！
 
-[^1]: Transifex API does not expose a public endpoint (at least without bearer token), so we were
-    unable to update the number automatically.)
+[^1]: Transifex API は公開エンドポイントを公開していないため（少なくともベアラートークンなしでは）、自動的にこの数値を更新することができませんでした。
