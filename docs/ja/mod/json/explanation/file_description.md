@@ -1,130 +1,129 @@
-# File descriptions
+# ファイル記述
 
-Here's a quick summary of what each of the JSON files contain, broken down by folder. This list is
-not comprehensive, but covers the broad strokes.
+ここでは、各JSONファイルが含む内容をフォルダ別に概説します。このリストは網羅的ではありませんが、広範な内容をカバーしています。
 
 ## `data/json/`
 
-| Filename                   | Description                                                           |
-| -------------------------- | --------------------------------------------------------------------- |
-| achievements.json          | achievements                                                          |
-| anatomy.json               | a listing of player body parts - do not edit                          |
-| ascii_arts.json            | ascii arts for item descriptions                                      |
-| bionics.json               | bionics, does NOT include bionic effects                              |
-| body_parts.json            | an expansion of anatomy.json - do not edit                            |
-| clothing_mods.json         | definition of clothing mods                                           |
-| construction.json          | definition of construction menu tasks                                 |
-| default_blacklist.json     | a standard blacklist of joke monsters                                 |
-| doll_speech.json           | talk doll speech messages                                             |
-| dreams.json                | dream text and linked mutation categories                             |
-| disease.json               | disease definitions                                                   |
-| effects.json               | common effects and their effects                                      |
-| emit.json                  | smoke and gas emissions                                               |
-| flags.json                 | common flags and their descriptions                                   |
-| furniture.json             | furniture, and features treated like furniture                        |
-| game_balance.json          | various options to tweak game balance                                 |
-| gates.json                 | gate terrain definitions                                              |
-| harvest.json               | item drops for butchering corpses                                     |
-| health_msgs.json           | messages displayed when the player wakes                              |
-| item_actions.json          | descriptions of standard item actions                                 |
-| item_category.json         | item categories and their default sort                                |
-| item_groups.json           | item spawn groups                                                     |
-| lab_notes.json             | lab computer messages                                                 |
-| martialarts.json           | martial arts styles and buffs                                         |
-| materials.json             | material types                                                        |
-| monster_attacks.json       | monster attacks                                                       |
-| monster_drops.json         | monster item drops on death                                           |
-| monster_factions.json      | monster factions                                                      |
-| monstergroups.json         | monster spawn groups                                                  |
-| monstergroups_egg.json     | monster spawn groups from eggs                                        |
-| monsters.json              | monster descriptions, mostly zombies                                  |
-| morale_types.json          | morale modifier messages                                              |
-| mutation_category.json     | messages for mutation categories                                      |
-| mutation_ordering.json     | draw order for mutation and CBM overlays in tiles mode                |
-| mutations.json             | traits/mutations                                                      |
-| names.json                 | names used for NPC/player name generation                             |
-| overmap_connections.json   | connections for roads and tunnels in the overmap                      |
-| overmap_terrain.json       | overmap terrain                                                       |
-| player_activities.json     | player activities                                                     |
-| professions.json           | profession definitions                                                |
-| recipes.json               | crafting/disassembly recipes                                          |
-| regional_map_settings.json | settings for the entire map generation                                |
-| road_vehicles.json         | vehicle spawn information for roads                                   |
-| rotatable_symbols.json     | rotatable symbols - do not edit                                       |
-| scent_types.json           | type of scent available                                               |
-| scores.json                | scores                                                                |
-| skills.json                | skill descriptions and ID's                                           |
-| snippets.json              | flier/poster descriptions                                             |
-| species.json               | monster species                                                       |
-| speech.json                | monster vocalizations                                                 |
-| statistics.json            | statistics and transformations used to define scores and achievements |
-| start_locations.json       | starting locations for scenarios                                      |
-| techniques.json            | generic for items and martial arts                                    |
-| terrain.json               | terrain types and definitions                                         |
-| test_regions.json          | test regions                                                          |
-| tips.json                  | tips of the day                                                       |
-| tool_qualities.json        | standard tool qualities and their actions                             |
-| traps.json                 | standard traps                                                        |
-| tutorial.json              | messages for the tutorial (that is out of date)                       |
-| vehicle_groups.json        | vehicle spawn groups                                                  |
-| vehicle_parts.json         | vehicle parts, does NOT affect flag effects                           |
-| vitamin.json               | vitamins and their deficiencies                                       |
+| ファイル名                 | 説明                                                             |
+| -------------------------- | ---------------------------------------------------------------- |
+| achievements.json          | アチーブメント（実績）の定義。                                   |
+| anatomy.json               | プレイヤーの身体部位のリスト。編集不可。                         |
+| ascii_arts.json            | アイテムの説明に使用されるアスキーアート。                       |
+| bionics.json               | バイオニック。ただし、バイオニックの効果は含まない。             |
+| body_parts.json            | anatomy.jsonの拡張。編集不可。                                   |
+| clothing_mods.json         | 衣類MODの定義。                                                  |
+| construction.json          | 建設メニューのタスク定義。                                       |
+| default_blacklist.json     | ジョークモンスターの標準的なブラックリスト。                     |
+| doll_speech.json           | お喋り人形の会話メッセージ。                                     |
+| dreams.json                | 夢のテキストとリンクされた変異カテゴリ。                         |
+| disease.json               | 病気の定義。                                                     |
+| effects.json               | 一般的なエフェクトとその効果。                                   |
+| emit.json                  | 煙やガスの放出の定義。                                           |
+| flags.json                 | 一般的なフラグとその記述。                                       |
+| furniture.json             | 家具および備品として扱われる設置物。                             |
+| game_balance.json          | ゲームバランスを微調整するための各種オプション。                 |
+| gates.json                 | ゲート地形の定義。                                               |
+| harvest.json               | 死体を解体した際のアイテムドロップ。                             |
+| health_msgs.json           | プレイヤーが目覚めた際に表示されるメッセージ。                   |
+| item_actions.json          | 標準的なアイテムアクションの記述。                               |
+| item_category.json         | アイテムカテゴリとそれらのデフォルトのソート順。                 |
+| item_groups.json           | アイテムの出現グループ。                                         |
+| lab_notes.json             | 研究所のコンピュータのメッセージ。                               |
+| martialarts.json           | 格闘術スタイルとバフ効果。                                       |
+| materials.json             | 素材のタイプ。                                                   |
+| monster_attacks.json       | モンスターの攻撃。                                               |
+| monster_drops.json         | モンスターが死亡時にドロップするアイテム。                       |
+| monster_factions.json      | モンスターの派閥。                                               |
+| monstergroups.json         | モンスターの出現グループ。                                       |
+| monstergroups_egg.json     | 卵から出現するモンスターグループ。                               |
+| monsters.json              | モンスターの記述(主にゾンビ)。                                   |
+| morale_types.json          | 士気に関する修正メッセージ。                                     |
+| mutation_category.json     | 変異カテゴリに関するメッセージ。                                 |
+| mutation_ordering.json     | タイルモードにおける変異およびCBMオーバーレイの描画順序。        |
+| mutations.json             | 特性、変異                                                       |
+| names.json                 | NPC、プレイヤー名の生成に使用される名前。                        |
+| overmap_connections.json   | オーバーマップにおける道路やトンネルの接続。                     |
+| overmap_terrain.json       | オーバーマップ地形の定義。                                       |
+| player_activities.json     | プレイヤーの行動。                                               |
+| professions.json           | 職業の定義。                                                     |
+| recipes.json               | 製作および分解レシピ。                                           |
+| regional_map_settings.json | マップ生成全体の設定。                                           |
+| road_vehicles.json         | 道路での車両生成情報。                                           |
+| rotatable_symbols.json     | 回転可能なシンボル。編集不可。                                   |
+| scent_types.json           | 利用可能な匂いのタイプ。                                         |
+| scores.json                | スコア。                                                         |
+| skills.json                | スキルの記述とID。                                               |
+| snippets.json              | チラシ/ポスターの記述。メッセージはここに定義。                  |
+| species.json               | モンスターの種族                                                 |
+| speech.json                | モンスターの音声表現                                             |
+| statistics.json            | スコアとアチーブメントを定義するために使用される統計情報と変換。 |
+| start_locations.json       | シナリオの開始場所。                                             |
+| techniques.json            | アイテムと格闘術のための汎用テクニック。                         |
+| terrain.json               | 地形のタイプと定義。                                             |
+| test_regions.json          | テストリージョン。                                               |
+| tips.json                  | 今日のヒント。                                                   |
+| tool_qualities.json        | 標準的なツールの品質とそのアクション。                           |
+| traps.json                 | 標準的な罠。                                                     |
+| tutorial.json              | チュートリアル（古い）のメッセージ。                             |
+| vehicle_groups.json        | 車両の出現グループ。                                             |
+| vehicle_parts.json         | 車両部品。フラグ効果には影響しない。                             |
+| vitamin.json               | ビタミンとその欠乏症。                                           |
 
-selected subfolders
+サブフォルダ
 
 ## `data/json/items/`
 
-See below for specifics on the various items
+さまざまなアイテムの詳細については以下を参照してください。
 
-| Filename                     | Description                                                        |
+| ファイル名                   | 説明                                                               |
 | ---------------------------- | ------------------------------------------------------------------ |
-| ammo.json                    | common base components like batteries and marbles                  |
-| ammo_types.json              | standard ammo types by gun                                         |
-| archery.json                 | bows and arrows                                                    |
-| armor.json                   | armor and clothing                                                 |
-| bionics.json                 | Compact Bionic Modules (CBMs)                                      |
-| biosignatures.json           | animal waste                                                       |
-| books.json                   | books                                                              |
-| chemicals_and_resources.json | chemical precursors                                                |
-| comestibles.json             | food/drinks                                                        |
-| containers.json              | containers                                                         |
-| crossbows.json               | crossbows and bolts                                                |
-| fake.json                    | fake items for bionics or mutations                                |
-| fuel.json                    | liquid fuels                                                       |
-| grenades.json                | grenades and throwable explosives                                  |
-| handloaded_bullets.json      | random ammo                                                        |
-| melee.json                   | anything that doesn't go in the other item jsons, melee weapons    |
-| migration.json               | conversions of non-existent items from save games to current items |
-| newspaper.json               | flyers, newspapers, and survivor notes. snippets.json for messages |
-| obsolete.json                | items being removed from the game                                  |
-| ranged.json                  | guns                                                               |
-| software.json                | software for SD-cards and USB sticks                               |
-| tool_armor.json              | clothes and armor that can be (a)ctivated                          |
-| toolmod.json                 | modifications of tools                                             |
-| tools.json                   | tools and items that can be (a)ctivated                            |
-| vehicle_parts.json           | components of vehicles when they aren't on the vehicle             |
+| ammo.json                    | バッテリーやビー玉などの一般的な基本コンポーネント。               |
+| ammo_types.json              | 銃器別の標準的な弾薬タイプ。                                       |
+| archery.json                 | 弓と矢。                                                           |
+| armor.json                   | アーマーと衣類。                                                   |
+| bionics.json                 | コンパクト・バイオニック・モジュール(CBM)。                        |
+| biosignatures.json           | 動物の排泄物。                                                     |
+| books.json                   | 書籍。                                                             |
+| chemicals_and_resources.json | 化学物質と資源。                                                   |
+| comestibles.json             | 食料/飲料 (消耗品)。                                               |
+| containers.json              | コンテナ (容器)。                                                  |
+| crossbows.json               | クロスボウとボルト。                                               |
+| fake.json                    | バイオニックや変異のための偽のアイテム。                           |
+| fuel.json                    | 液体燃料。                                                         |
+| grenades.json                | 手榴弾と投擲可能な爆発物。                                         |
+| handloaded_bullets.json      | ランダムな弾薬。                                                   |
+| melee.json                   | 他のアイテムJSONに含まれないすべてのもの、主に近接武器。           |
+| migration.json               | 存在しないアイテムをセーブゲームから現在のアイテムへ変換するもの。 |
+| newspaper.json               | チラシ、新聞、サバイバーのメモ。メッセージはsnippets.jsonを参照。  |
+| obsolete.json                | ゲームから削除されつつあるアイテム。                               |
+| ranged.json                  | 銃器                                                               |
+| software.json                | SDカードおよびUSBスティック用のソフトウェア。                      |
+| tool_armor.json              | 使用できる衣類とアーマー。                                         |
+| toolmod.json                 | 道具の改造。                                                       |
+| tools.json                   | 使用できる道具およびアイテム。                                     |
+| vehicle_parts.json           | 車両に取り付けられていない場合の車両の部品。                       |
 
 ### `data/json/items/comestibles`
 
 ## `data/json/requirements/`
 
-Standard components and tools for crafting
+製作のための標準的なコンポーネントと道具:
 
-| Filename                  | Description                               |
-| ------------------------- | ----------------------------------------- |
-| ammo.json                 | ammo components                           |
-| cooking_components.json   | common ingredient sets                    |
-| cooking_requirements.json | cooking tools and heat sources            |
-| materials.json            | thread, fabric, and other basic materials |
-| toolsets.json             | sets of tools commonly used together      |
-| uncraft.json              | common results of taking stuff apart      |
-| vehicle.json              | tools to work on vehicles                 |
+| ファイル名                | 説明                             |
+| ------------------------- | -------------------------------- |
+| ammo.json                 | 弾薬コンポーネント。             |
+| cooking_components.json   | 一般的な材料セット。             |
+| cooking_requirements.json | 調理器具と熱源。                 |
+| materials.json            | 糸、布地、その他の基本的な素材。 |
+| toolsets.json             | 一緒に使用される道具類のセット。 |
+| uncraft.json              | アイテムの分解結果。             |
+| vehicle.json              | 車両作業用のツール。             |
 
 ## `data/json/vehicles/`
 
-Groups of vehicle definitions with self-explanatory names of files:
+自己説明的なファイル名を持つ車両定義のグループ:
 
-| Filename             |
+| ファイル名           |
 | -------------------- |
 | bikes.json           |
 | boats.json           |
