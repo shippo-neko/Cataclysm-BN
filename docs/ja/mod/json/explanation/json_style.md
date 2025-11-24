@@ -6,22 +6,18 @@ sidebar:
     variant: caution
 ---
 
-Like in [C++ Code Style](../../../dev/explanation/code_style.md), the JSON styling policy is to
-update JSON as it is added or edited, and in relatively small chunks otherwise in order to prevent
-undue disruption to development.
+[C++ コードスタイル](../../../dev/explanation/code_style.md)と同様に、JSONのスタイリングポリシーは、開発への不当な混乱を防ぐため、JSONが追加または編集される際は、比較的小さなまとまり単位で、JSONを更新することです。
 
-## Why do we have a homegrown JSON formatter?
+## なぜ独自のJSONフォーマッタがあるのか？
 
-DDA wrote their own JSON parser. It lives in `tools/format/format.cpp` and it leverages
-`src/json.cpp`to parse and emit JSON.
+DDA は独自のJSONパーサーを記述しました。それは `tools/format/format.cpp` に存在し、
+`src/json.cpp`を利用してJSONをパースし、出力します。
 
-This isn't optimal solution as it makes using existing JSON formatters (e.g `deno fmt`) impossible,
-but [last attempt](https://github.com/cataclysmbnteam/Cataclysm-BN/pull/3118) proved that the
-disadvantages outweighed possible benefits.
+これは、既存のJSONフォーマッタ (例: `deno fmt`) の使用を不可能にするため、最適な解決策ではありませんが、[前回の試み](https://github.com/cataclysmbnteam/Cataclysm-BN/pull/3118)では、不利益が利益を上回ることが証明されました。
 
-## JSON Example
+## JSONの記述例
 
-This example outlines most of the styling features:
+この例は、スタイリング機能のほとんどを概説しています。
 
 ```json
 [
@@ -51,43 +47,36 @@ This example outlines most of the styling features:
 ]
 ```
 
-Indention is two spaces. All JSON delimiters except comma and colon are surrounded by whitespace
-(either a space or a newline). Comma and colon are followed by whitespace. Object entries are always
-newline-separated. Array entries are newline-separated if the resulting array would exceed 120
-characters otherwise (including indention). Line breaks occur after open brackets, close brackets,
-or entries.
+インデントは2スペースです。カンマとコロンを除くすべてのJSON区切り文字は、空白(スペースまたは改行) で囲まれます。カンマとコロンの後ろには空白が続きます。
+オブジェクト内のエントリは、常に改行で区切られます。配列内のエントリは、結果の行が120文字(インデントを含む)を超過する場合に、改行で区切られます。改行は、開き角括弧、閉じ角括弧、またはエントリの後ろで発生します。
 
-## Formatting tool
+## 整形ツール
 
-The formatting tool can be invoked via the Makefile, directly as `tools/format/json_formatter.cgi`
-(built via `make style-json`), or via cgi at http://dev.narc.ro/cataclysm/format.html
+整形ツールは、Makefileを介して、または (`make style-json`でビルドされた)
+`tools/format/json_formatter.cgi`として直接、あるいはCGIとして
+http://dev.narc.ro/cataclysm/format.html から呼び出すことができます。
 
-If you're using the Visual Studio solution, you can configure Visual Studio with commands to format
-all of the JSON in the project.
+Visual Studioソリューションを使用している場合、プロジェクト内のすべてのJSONを整形するためのコマンドをVisual Studioに設定できます。
 
-1. Build the JsonFormatter project by either building the entire solution or just that project. This
-   will create a `tools/format/json_formatter.exe` binary.
-2. Add a new external tool entry ( `Tools` > `External Tools..` > `Add` ) and configure it as
-   follows:
-   - Title: `Lint All JSON`
-   - Command: `C:\windows\system32\windowspowershell\v1.0\powershell.exe`
-   - Arguments: `-file $(SolutionDir)\style-json.ps1`
-   - Initial Directory: `$(SolutionDir)`
-   - Use Output window: _checked_
+1. ソリューション全体またはJsonFormatterプロジェクトのみをビルドして、
+   JsonFormatterプロジェクトをビルドします。これにより、
+   `tools/format/json_formatter.exe` バイナリが作成されます。
+2. 新規の外部ツールエントリ ( `ツール` > `外部ツール..` > `追加` ) を追加し、以下
+   のように設定します。
+   - タイトル: `Lint All JSON`
+   - コマンド: `C:\windows\system32\windowspowershell\v1.0\powershell.exe`
+   - 引数: `-file $(SolutionDir)\style-json.ps1`
+   - 初期ディレクトリ: `$(SolutionDir)`
+   - 出力ウィンドウの使用: チェックを入れる
 
-At this point, you can use the menu ( `Tools` > `Lint All JSON` ) to invoke the command and can look
-in the Output Window for the output of running it. Additionally, you can configure a keybinding for
-this command by navigating to `Tools` > `Options` > `Environment` > `Keyboard`, searching for
-commands containing `Tools.ExternalCommand` and pick the one that corresponds to the position of
-your command in the list (e.g. `Tools.ExternalCommand1` if it's the top item in the list) and then
-assign shortcut keys to it.
+この時点で、メニュー ( `ツール` > `Lint All JSON` ) を使用してコマンドを呼び出すことができ、実行結果を出力ウィンドウで確認できます。さらに、 `ツール` > `オプション` > `環境` > `キーボード`に移動し、
+`Tools.ExternalCommand`を含むコマンドを検索し、リスト内でのコマンドの位置に対応するもの (例:リストの最上位であれば`Tools.ExternalCommand1`) を選択することで、このコマンドにキーバインドを設定できます。
 
-### For Single file
+### 単一ファイルの場合
 
-To style one JSON file you can run `json_formatter.exe path/to/file.json`. This will style that one
-file. If it prints "needs linting", the file wasn't styled, but now should be. You can use
-drag&drop: drag the json file onto the `json_formatter` icon, then wait a few seconds.
+一つのJSONファイルを整形するには、`json_formatter.exe path/to/file.json`を実行します。これにより、そのファイルが整形されます。「needs linting」と表示された場合、そのファイルは整形されていませんでしたが、現在は整形されているはずです。
+ドラッグ&ドロップを使用することも可能です。JSONファイルを `json_formatter` のアイコンにドラッグし、数秒間待ちます。
 
-### On *nix
+### *nix環境の場合
 
-Run `make style-json` in main repo directory.
+メインのリポジトリディレクトリで `make style-json` を実行します。
