@@ -8,102 +8,73 @@ sidebar:
 
 > [!CAUTION]
 >
-> Current guideline is in favor of removing
-> [in-repo mods](https://github.com/cataclysmbnteam/Cataclysm-BN/pull/3026). This page is kept for
-> historical purposes.
+> 現在のガイドラインでは、
+> [リポジトリ内 MOD](https://github.com/cataclysmbnteam/Cataclysm-BN/pull/3026)の削除が推奨されています。
+> このページは歴史的な目的のために残されています。
 
-BN is not only moddable, but ships with a number of mods available for users to select from even
-without having to obtain mods from a third party source.
+BNはMOD導入が可能であるだけでなく、サードパーティのソースから MOD を入手しなくても、ユーザーが選択できる多数の MOD を同梱しています。
 
-## Why have in-repo mods?
+## なぜリポジトリ内にMODを持つのか？
 
-The benefits of having mods in the repository include:
+リポジトリ内にMODを持つことの利点は以下の通りです。
 
-- Visibility to a large number of users and potential contributors
-- The ability to use the BN issue tracker to report problems, as well as manage pull requests for
-  adding to or fixing mods in the repository
-- Mods in the BN repository that demonstrate usage of a game feature which exists only for mods
-  (i.e. not used by the core DDA game itself) help ensure that feature stays present in the game.
+- 多数のユーザーと潜在的な貢献者に対する可視性の向上。
+- BBN の課題追跡（Issue Tracker）を使用して問題を報告できること、およびリポジトリ内の MOD の追加や修正に関する
+  プルリクエスト（PR）を管理できること。
+- MOD専用に存在するゲーム機能（コアのDDAゲーム自体では使用されない機能）の使用例を示すBNリポジトリ内のMODは、
+  その機能がゲーム内に存続することを保証する一助となること。
 
-There are however things that might be expected but are not guaranteed:
+ただし、期待されるかもしれませんが、保証されていない事項もあります。
 
-- Guarantee of maintenance of content -- core devs are mostly focused on the main game itself;
-  although some might pick up mods as a side task, people who continue working on the core game tend
-  to like the feel of the core game.
-- Guarantee of maintenance of used features -- over the course of development it may become
-  impossible to keep a feature, due to performance needs or maintenance burden.
-- Guarantee of sole authorship -- once in the repository, the mod is considered community content.
-  While the developers might defer to an active curator of a mod, if they become inactive anyone
-  else can step forward.
+- コンテンツのメンテナンス保証 — コア開発者は主にメインゲーム自体に注力しており、一部の開発者がサイドタスクと
+  してMODを担当するかもしれませんが、コアゲームに取り組み続ける人々はコアゲームの感触を好む傾向にあります。
+- 使用されている機能のメンテナンス保証 — 開発過程において、パフォーマンス上の必要性やメンテナンスの負担によ
+  り、ある機能を維持することが不可能になる場合があります。
+- 単独著作権の保証 — 一度リポジトリに取り込まれたMODは、コミュニティコンテンツと見なされます。開発者はMODの
+  アクティブな管理者に裁量を委ねるかもしれませんが、その管理者が非アクティブになった場合、他の誰でも管理を引き継ぐことができます。
 
-## What kind of mods can be in the BN repository?
+## BNリポジトリにはどのような種類のMODを含めることができるか？
 
-There are three primary categories of mods:
+MOD には主に 3 つのカテゴリがあります。
 
-- Content mods, which provide some kind of distinct experience from the core BN game. This could be
-  a change to lore, a change to a specific part of gameplay.
-- User Experience (UX) mods, which alter the look and feel of the game interface itself.
-- Development mods, which aren't "mods" in the typical sense but are instead there to ease the
-  transition between "incomplete feature" and "complete feature", when a feature in the core game is
-  sufficiently incomplete that the developers believe it needs to be optional to minimize disruption
-  to players.
+- コンテンツ MOD：コアのBNゲームとは異なる体験を提供するMOD。これには、設定（Lore）の変更や、特定のゲームプレ
+  イ部分の変更が含まれる場合があります。
+- ユーザー体験（UX）MOD：ゲームインターフェース自体の外観や操作感を変更するMOD。
+- 開発MOD：典型的な意味での「MOD」ではなく、コアゲームの機能が十分に未完成であり、プレイヤーへの混乱を最小限に
+  抑えるために開発者がオプションにする必要があると判断した場合、「不完全な機能」から「完成した機能」への移行を容易にするために存在するものです。
 
-## What is necessary for a mod to be included in the repository?
+## リポジトリにMODを含めるために必要な要件は何か？
 
-The most crucial criteria for a mod to be in the BN repository is that it has someone acting as a
-curator. This ensures that there is someone who is keeping an eye out for possible problems with the
-mod, and helping steer its development so that it continues to develop in accordance with its design
-purpose.
+MODがBNリポジトリに含まれるための最も重要な基準は、Mod管理責任者として行動する人物がいることです。これにより、MODに起こりうる問題に目を光らせ、その設計目的に従って開発が継続されるように舵取りを助ける人物が存在することが保証されます。
 
-Furthermore, there are additional criteria:
+さらに、以下の追加基準があります。
 
-- Content mods need to be providing some kind of curated experience. Either they introduce a set of
-  locations, encounters, equipment, or progression mechanisms that do not fit the style of the core
-  game, or they in some fashion modify the game according to some well-defined concept.
--
-  - Mods which do not qualify as curated experiences: Grab bag mods with no defined purpose (i.e.
-    adding a bunch of random guns), "settings" mods that just turn off a possibly undesired but
-    working feature (acid ants).
-- Development mods need to have an associated work-in-progress feature that they exist to mitigate.
+- コンテンツMODは、何らかのキュレーションされた体験を提供する必要があります。つまり、コアゲームのスタイルに合
+  わないロケーション、遭遇、装備、または進行メカニズムのセットを導入するか、何らかの形で明確に定義されたコンセプトに従ってゲームを変更するかのいずれかです。
+- キュレーションされた体験として適格でないMODの例：明確な目的がない寄せ集めのMOD (例：ランダムな銃を大量に追加
+  するだけ)、望ましくないが動作している機能を単にオフにするだけの「設定」MOD (例：酸アリなど)。
+- 開発MODは、その存在理由として、緩和すべき開発中の機能を持っている必要があります。
 
-## What are the responsibilities of a mod curator?
+## MOD管理者の責任とは何か？
 
-A mod curator's role is to curate additions to mods and ensure they fit the concept of the mod.
-Curators are also responsible for at least acknowledging bug reports related to the mod: while
-curators don't have to personally manage every bugfix, if a bug is reported, the curator should be
-around to comment and help to find someone to fix it.
+Mod管理責任者の役割は、MOD への追加を精査し、それがMODのコンセプトに適合していることを保証することです。また、Mod管理責任者は MODに関連するバグ報告を少なくとも認識する責任も負います。Mod管理責任者がすべてのバグ修正を個人的に管理する必要はありませんが、バグが報告された場合、コメントを残し、それを修正する人物を見つける手助けをするために対応できる状態にあるべきです。
 
-It's important to understand that if a mod is in the repository, it is expected that people other
-than the curator are going to contribute to it, as with anything. On github, mod curators should
-Approve or Request Changes on PRs to the mod. If the curator has approved it, developers with merge
-permissions will treat that as a request to merge the changes.
+MOD がリポジトリにある場合、他のコンテンツと同様に、人物が貢献することが期待されるという点を理解することが重要です。GitHub上では、Mod管理責任者は MOD への PR を承認するか、変更を要求する必要があります。Mod管理責任者が承認した場合、マージ権限を持つ開発者はそれを変更のマージ要求として扱います。
 
-## When do mods get removed?
+## MODはいつ削除されるのか？
 
-Mods that have no curator or have proven to be consistently some type of maintenance burden are
-potentially subject to removal. Additionally, mods which had a purpose which is no longer relevant
-(development mods whose accompanying feature has been finished) will generally be removed once
-they're no longer deemed necessary. If a curator can't be reached for comment on a bugfix or review
-on a PR'd change for about a month, and hasn't left any indication of when they'll be back,
-developers will assume they've left the project, and the mod is orphaned.
+Mod管理責任者がいないMOD、または一貫して何らかのメンテナンスの負担になっていることが証明されたMODは、削除の対象となる可能性があります。さらに、もはや関連性のない目的を持っていたMOD（付随する機能が完了した開発MODなど）は、もはや必要ないと見なされ次第、通常は削除されます。バグ修正やPRの変更レビューに関するコメントを約1ヶ月間求めることができず、いつ戻るかについての示唆も残されていない場合、開発者は彼らがプロジェクトを離れたとみなし、そのMODは孤立したと見なされます。
 
-Whenever a stable release occurs, mods which no longer qualify for inclusion will be marked
-'obsolete'. This doesn't remove them from the repository, but it does prevent it from being used in
-new worlds (barring additional effort on the part of the player).
+安定版リリースが行われるたびに、包含基準を満たさなくなったMODは「廃止予定（obsolete）」とマークされます。これはリポジトリから削除するものではありませんが、（プレイヤーが追加の労力をかけない限り）新しい世界での使用を防ぎます。
 
-## Why do mods get removed?
+## なぜMODは削除されるのか？
 
-While it may be counterintuitive, simply having a mod in the repository increases maintenance burden
-for the team, even for the people who don't use the mods itself.
+直感に反するかもしれませんが、単にリポジトリ内にMODが存在するだけで、MODを使用しない人々にとっても、チーム全体のメンテナンスの負担が増加します。
 
-Furthermore, mods which are shipped with the game but are not working correctly for whatever reason
-reflect poorly on the project on the whole. While it might seem 'easy' to fix a mod, the development
-team is mostly focused on the core game itself. This is why mod curators are necessary.
+さらに、ゲームに同梱されているにもかかわらず、何らかの理由で正しく動作していないMODは、プロジェクト全体に悪影響を与えます。MODの修正は「簡単」に見えるかもしれませんが、開発チームは主にコアゲーム自体に注力しています。これがMODキュレーターが必要な理由です。
 
-## How can mods be rescued from removal?
+## MODを削除から救う方法はあるか？
 
-If the mod otherwise meets inclusion criteria but lacks a curator (ie. has been declared orphaned),
-it's as simple as having someone else step forward as the new curator.
+そのMODが、Mod管理責任者を欠いている（すなわち、孤立したと宣言されている）ことを除いて、その他の包含基準を満たしている場合、新しいMod管理責任者として別の誰かが名乗り出るだけで救済されます。
 
-Otherwise, it needs to either be made to meet the criteria, or it simply isn't going to be staying
-in the BN repository.
+そうでなければ、包含基準を満たすように修正される必要があり、そうでなければBNリポジトリには留まることはありません。
