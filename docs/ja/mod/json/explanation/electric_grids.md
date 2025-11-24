@@ -1,52 +1,43 @@
-# Electric grids
+# 電力網
 
-Electric grids are electric connections within a building, similar to how all parts of a vehicle
-share battery power.
+電力網とは、車両の各部品がバッテリー電力を共有する方法と同様に、建物内における電力的な接続を指します。
 
-# Features
+# 特徴
 
-Currently, only the following furniture interacts with an electric grid:
+現在、以下の備品のみが電力網と連動します。
 
-- Mounted solar panel (like the one on top of the Evac Center) produces energy
-- Mounted battery stores energy - when examining it, you receive information about power in a given
-  battery and in the whole grid.
-- Battery charger works like vehicle battery charger/recharging station. Place rechargeable
-  batteries or items containing them into the recharger and power will be drained from mounted
-  batteries to recharge those.
-- You can use voltmeter to
-  - tell electric grid connections
-  - check amount of energy stored
-  - extend electric grid connections
-- Ovens work like hotplates, but with charges equal to charges of the grid
-- Jumper cable connector connects a vehicle to an electric grid. To use, connect the jumper cable to
-  the vehicle and then to the connector. Once connected, the vehicle and the grid will share power
-  for most purposes, but will usually charge/discharge their own batteries before sending them
-  through the connector
-- Fridges
-- Floor lamp
-- Electric Kiln
-- Food Dehydrator
-- Food Processor
-- Vaccuum Sealer
-- Arc Welder
-- Electric Forge
-- Electrolysis Kit
+- 設置型ソーラーパネル: (避難センターの上部にあるものなど) エネルギーを生成します。
+- 設置型バッテリー : エネルギーを蓄えます。これを調査すると、特定のバッテリー内および電力網全体の電力情報が表
+  示されます。
+- バッテリー充電器:車両の充電器/充電ステーションと同様に機能します。充電式バッテリーやそれを含むアイテムを充電
+  器に配置すると、設置型バッテリーの電力が消費され、代わりに設置したアイテムとバッテリーに充電されます。
+- 電圧計を使用して以下を行うことができます。
+  - 電力網の接続を確認する。
+  - 蓄積しているエネルギー量を確認する。
+  - 電力網の接続を延長する。
+- オーブン : ホットプレートと同様に機能します。電力網の蓄電量に等しい電力を持ちます。
+- ジャンパーケーブルコネクタ : 車両を電力網に接続します。使用するには、ジャンパーケーブルを車両に接続した後、このコネクタに接続します。接続されると、車両と電力網は総電力を共有します。通常はコネクタを通じて送電する前に、各自のバッテリーを充電または放電します。
+- 冷蔵庫
+- フロアランプ
+- 電気窯
+- 食品乾燥機
+- フードプロセッサー
+- 真空シーラー
+- アーク溶接機
+- 電気鍛冶場
+- 電気分解キット
 
-# Grid size
+# 電力網のサイズ
 
-For the purposes of an electric grid, a building is made out of overmap tiles (the tiles you see on
-the map opened with 'M' key, on the local map they are 24x24 tiles). Most city buildings have
-individual electric grids. For example, a house with a roof and a basement, with a solar panel on
-the roof, oven on the floor and a battery in the basement, will allow using the oven with the energy
-from the battery charged by the panel. Overmap tiles without buildings only have grids within their
-own overmap tile. There is currently no way of connecting grids together, other than by use of two
-connectors, two jumper cables, and a vehicle.
+電力網は、建物のオーバーマップタイル ('M'キーで開くマップに表示されるタイル。ローカルマップには24x24タイル) で構成されます。ほとんどの都市の建物は、固有の電力網を持っています。例えば、屋根と地下室を持つ家は、屋根にソーラーパネル、フロアにオーブン、地下室にバッテリーがある場合、ソーラーパネルで発電された電気をバッテリーに充電し、そのエネルギーを使ってオーブンを使用できます。
 
-# Modding
+建物がないオーバーマップタイルは、そのオーバーマップタイル内でのみ電力網を持ちます。現在、2つのコネクタ、2本のジャンパーケーブル、および車両を使用する以外の方法で電力網同士を接続する方法はありません。
 
-To create a furniture that uses the grid to power a fake item, create the fake item with a flag
-`"USES_GRID_POWER"` and then set furniture's `"crafting_pseudo_item"` to that item's ID. For
-example, the oven item is:
+# MOD制作
+
+電力網を使用して偽のアイテム (fake item)に電力を供給する備品を作成するには、まずその偽のアイテムに`"USES_GRID_POWER"`フラグを設定し、次に備品の`"crafting_pseudo_item"`をそのアイテムのIDに設定します。
+
+例として、オーブンアイテムの定義は以下の通りです。
 
 ```json
 {
@@ -60,34 +51,33 @@ example, the oven item is:
 }
 ```
 
-And the oven furniture uses it as:
+そして、オーブンは、以下のように使用します。
 
 ```json
 "crafting_pseudo_item": "fake_oven"
 ```
 
-Currently, the grid can only power fake items used as a part of a furniture.
+現在、電力網は備品の一部として使用される偽のアイテムにのみ電力を供給します。
 
-# Manually Adding Grids (for map design)
+# 電力網の手動追加 (マップデザイン向け)
 
-**Warning: it is for map design. You can built grid in game without editing files. You just have to
-build the solars and battery. Jumper cable and connector can connect grid with vehicles.** If you
-build a new house, you'll find the new house doesn't have any electric grid. To use electric grid in
-your new house, you should get and edit the overmap file, which is stored in your game's save
-folder. It's name is o.0.1 or similar. What you need is:
+警告: これはマップデザイン向けです。ファイルを編集せずにゲーム内で電力網を構築することができます。
+ソーラーパネルとバッテリーを構築するだけです。ジャンパーケーブルとコネクタは、電力網を車両と接続できます。
+
+新しく家を建てた場合、その家には電力網がないことに気づくでしょう。新しい家で電力網を使用するには、ゲームのセーブフォルダに格納されているオーバーマップファイル（o.0.1などの名前）を取得して編集する必要があります。
+
+必要な記述は次の通りです。
 
 ```json
 "electric_grid_connections":[[[0,0,0]], ... ... ... ]}
 ```
 
-Add your coordinate in this place. If your home is at `0'113, 2'56`, then your overmap file is
-`o.0.2` and your coordinate to add is `[113,56,0]` (or your z-coordinate) To connect different
-floors, add coordinate as like this:
+この場所にあなたの座標を追加します。あなたの家がオーバーマップ座標 `0'113, 2'56`にある場合、対応するオーバーマップファイルは`o.0.2` であり、追加する座標は `[113,56,0]` です（またはあなたのZ座標）。
+
+異なる階層を接続するには、以下のように座標を追加します。
 
 ```json
 "electric_grid_connections":[[[113,56,0],[0,0,1]],[[113,56,1],[0,0,-1]]... ... ... ]}
 ```
 
-`[0,0,1]` means this coordinate shares electricity with the upper stair, and `[0,0,-1]` means the
-opposite one. If your house is as big as an office tower or city hall, `[0,1,0]` or `[1,0,0]` will
-also work. It's actually how the large building's electric grid works.
+`[0,0,1]` は、この座標が上の階の階段と電力を共有することを意味し、`[0,0,-1]` は下の階を意味します。あなたの家がオフィスビルや市庁舎ほどの大きさである場合、`[0,1,0]` や `[1,0,0]` も機能します。これは実際に大規模な建物の電力網が機能する方法です。
