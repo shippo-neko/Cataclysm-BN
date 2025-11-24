@@ -7,33 +7,43 @@ Cataclysm: BNの公式な翻訳場所は、
 
 [ゲームリポジトリに含まれないMODの翻訳方法をお探しですか？](../guides/mods.md)
 
-現在対応している言語の一部は以下の通りです
+現在対応している言語は２５言語であり、以下の通りとなります。
 
-- アラビア語
-- ブルガリア語
-- 中国語 (簡体字)
-- 中国語 (繁体字)
-- オランダ語
-- エスペラント語
-- フランス語
-- ドイツ語
-- イタリア語 (イタリア)
-- 日本語
-- 韓国語
-- ポーランド語
-- ポルトガル語 (ブラジル)
-- ロシア語
-- セルビア語
-- スペイン語 (アルゼンチン)
-- スペイン語 (スペイン)
-- トルコ語
+- アラビア語 / Arabic
+- アイスランド語 / Icelandic
+- イタリア語(イタリア) / Italian (Italy)
+- インドネシア語 / Indonesian
+- ウクライナ語 / Ukrainian
+- ウクライナ語（ウクライナ）/ Ukrainian (Ukraine)
+- オランダ語 / Dutch
+- 韓国語 / Korean
+- ギリシャ語 / Greek
+- セルビア語 / Serbian
+- スペイン語 (アルゼンチン) / Spanish (Argentina)
+- スペイン語 (スペイン) / Spanish (Spain)
+- スロバキア語（スロバキア）/ Slovak (Slovakia)
+- 中国語（台湾）/ Chinese (Taiwan)
+- 中国語（中国）/ Chinese (China)
+- デンマーク語 / Danish
+- ドイツ語 / German
+- トルコ語 / Turkish
+- 日本語 / Japanese
+- ノルウェー語（ブークモール）/ Norwegian Bokmål
+- ハンガリー語 / Hungarian
+- フランス語 / French
+- ポルトガル語（ブラジル）/ Portuguese (Brazil)
+- ポーランド語（ポーランド）/ Polish (Poland)
+- ロシア語（ロシア）/ Russian (Russia)
 
 上記のリストにあなたの言語が見当たらない場合は、Transifexでプロジェクトに追加できます！
 
 ## BNチームへの参加
 
 翻訳を開始するには、[翻訳プロジェクト][project] にアクセスし、
-`Help Translate Cataclysm: BN` ボタンをクリックしてください。これにより、Transifexで無料アカウントを作成するか、GitHub、Google+、またはLinkedInを使用してログインできるページに移動します。
+`Help Translate Cataclysm: BN` ボタンをクリックしてください。これにより、Transifexで無料アカウントを作成するか、GitHub、Google(Buisiness)を使用してログインできるページに移動します。
+
+訳注: Transifexの無料アカウントはいわゆるビジネスe-mailが必要であり、フリーメールの類では登録できない。
+Google(Buisiness)は文字通りビジネスe-mailそのものです。Githubはフリーメールで登録が可能なので、GitHub経由でアクセスするほうが、良いです。
 
 ![Start translating](./img/start.png)
 
