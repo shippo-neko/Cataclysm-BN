@@ -1,83 +1,73 @@
-# File location for Comestibles
+# 食料品のファイル配置
 
-There are a large number of files in `json/items/comestibles`, and this guide will help you decide
-where to put your new comestible!
+`json/items/comestibles`ディレクトリには非常に多くのファイルが存在するため、本ガイドでは、新しい食料品をどこに配置すべきかを判断する手助けをします。
 
-## List of special comestibles:
+## 特別な食料品のリスト:
 
-`med.json` -- comestible that has an addiction effect besides alcohol and caffeine, plus bandages
-and antiseptic type items.
+`med.json` -- アルコールやカフェイン以外の中毒効果を持つ食料品、および包帯や消毒液タイプのアイテム。
 
-`mre.json` -- items and comestibles related to MREs
+`mre.json` -- MRE（Meal, Ready-to-Eat：戦闘糧食）に関連するアイテムおよび食料品。
 
-`mutagen.json` -- comestible that has any mutagen effect
+`mutagen.json` -- 突然変異効果（Mutagen effect）を持つ食料品。
 
-`carnivore.json` -- item that would normally be butchered from an animal or monster, and their
-cooked versions. examples: chunks of meat, tainted bones, boiled stomach
+`carnivore.json` -- 通常、動物やモンスターから解体されるアイテム、およびそれらを調理したもの。例: 肉の塊、汚染された骨、茹でた胃袋。
 
-`protein.json` -- comestibles based on protein powder
+`protein.json` -- プロテインパウダーを主成分とする食料品。
 
-`spice.json` -- comestibles that normally do not have nutrients, but are used to flavor a dish.
-examples: salt, thyme, black pepper
+`spice.json` -- 通常、栄養分を持たず、料理の風味付けに使用される食料品。例: 塩、タイム、黒コショウ。
 
-`frozen.json` -- comestibles best eaten frozen
+`frozen.json` -- 冷凍状態で食べるのが最適な食料品。
 
-`brewing.json` -- items used in the brewing process
+`brewing.json` -- 醸造プロセスに使用されるアイテム。
 
-## List of normal comestibles, in order of priority:
+## 通常の食料品のリスト(優先度順):
 
-When you have a comestible you want to add to the files, just go down this list, and the first
-filename you see in the list that matches the criteria is your choice!
+追加したい食料品がある場合は、このリストを上から順に確認し、基準に一致する最初のファイル名を選択してください。それがあなたの選択すべきファイルです。
 
-### Liquid
+### 液体
 
-`alcohol.json` -- "Drink" comestible with alcohol addiction
+`alcohol.json` -- アルコール中毒効果を持つ「飲み物」の食料品。
 
-`soup.json` -- "Drink" comestible which is a soup. This is more of a "food" than a drink - you
-primarily want the calories from this
+`soup.json` -- スープである「飲み物」の食料品。これは飲み物というよりも「食べ物」であり、主にカロリー摂取を目的とします。
 
-`drink.json` -- "Drink" comestible. This is your drink of choice when you're thirsty! examples: tea,
-juice, water
+`drink.json` -- 「飲み物」の食料品。喉が渇いたときに飲むことが目的となる飲料。例: 紅茶、ジュース、水。
 
-`drink_other.json` -- "Drink" comestible that does not fit any other criteria. example: vinegar,
-mustard
+`drink_other.json` -- 他のどの基準にも当てはまらない「飲み物」の食料品。例: 酢、マスタード。
 
-### Solid
+### 固体
 
-`junkfood.json` -- comestible with the "junk" material. examples: cake, sugary cereal, nachos
+`junkfood.json` -- 「ジャンク」素材を持つ食料品。例: ケーキ、砂糖入りシリアル、ナチョス。
 
-`sandwich.json` -- a "sandwich" is generally two slices of "bread" with something in between.
-examples: BLT, PB&J sandwich, fish sandwich
+`sandwich.json` -- 一般的に、2枚の「パン」の間に何かを挟んだもの。例: BLT、ピーナッツバター＆ジェリーサンドイッチ、魚のサンドイッチ。
 
-`offal_dishes.json` -- comestible made of various offals. the offal types are: liver, brain, kidney,
-sweetbread, stomach. This must be the primary part of the dish.
+`offal_dishes.json` -- 様々な内臓で作られた食料品。内臓の種類: 肝臓、脳、腎臓、膵臓、胃袋。これらが料理の主要な素材の必要があります。
 
-`seed.json` -- seeds
+`seed.json` -- 種子。
 
-`meat_dishes_human.json` -- comestible made of human flesh. examples: hobo helper, tio taco
+`meat_dishes_human.json` -- 人肉で作られた食料品。例: ホーボー・ヘルパー、ティオ・タコ。
 
-`meat_dishes.json` -- comestible made with meat.
+`meat_dishes.json` -- 肉を使用して作られた食料品。
 
-`raw_veggy.json` -- comestible that is a vegetable in its raw form.
+`raw_veggy.json` -- 生野菜の食料品。
 
-`irradiated_veggy.json` -- comestible that is an irradiated vegetable. has an indefinite shelf life.
+`irradiated_veggy.json` -- 放射線照射された野菜の食料品。保存期間が無限です。
 
-`raw_fruit.json` -- comestible that is a fruit in its raw form.
+`raw_fruit.json` -- 生果物の食料品。
 
-`irradiated_fruit.json` -- comestible that is an irradiated fruit. has an indefinite shelf life.
+`irradiated_fruit.json` -- 放射線照射された果物の食料品。保存期間が無限です。
 
-`veggy_dishes.json` -- comestible made of vegetables.
+`veggy_dishes.json` -- 野菜で作られた食料品。
 
-`bread.json` -- comestible that is either a bread starter, or a cooked bread.
+`bread.json` -- パン種であるか、調理されたパンの食料品。
 
-`wheat.json` -- either raw wheat, or made of wheat
+`wheat.json` -- 生麦、または小麦から作られたもの。
 
-`egg.json` -- either an egg, or made of egg
+`egg.json` -- 卵、または卵から作られたもの。
 
-`dairy.json` -- made of milk
+`dairy.json` -- 牛乳から作られたもの。
 
-`mushroom.json` -- a mushroom or made of mushrooms
+`mushroom.json` -- キノコ、またはキノコから作られたもの。
 
-`nuts.json` -- a nut or made of nuts
+`nuts.json` -- ナッツ、またはナッツから作られたもの。
 
-`other.json` -- if you made it here, your comestible doesn't fit any other category!
+`other.json` -- ここまで来た場合、食料品は他のどのカテゴリにも当てはまりません。
