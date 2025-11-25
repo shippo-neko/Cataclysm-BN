@@ -1,140 +1,106 @@
-# Melee balance spreadsheet
+# 近接武器のバランス調整スプレッドシート
 
-![spreadsheet](https://github.com/cataclysmbnteam/Cataclysm-BN/assets/54838975/1fa4f7ec-2965-4247-a592-94f246b13662)
+![スプレッドシード](https://github.com/cataclysmbnteam/Cataclysm-BN/assets/54838975/1fa4f7ec-2965-4247-a592-94f246b13662)
 
-This is documentation for the 'Melee Weapons Evaluation.ods' spreadsheet. This is the spreadsheet
-that drove the 0.E experimental melee weapon rebalance project. The original spreadsheet is
-available as a
-[google doc](https://docs.google.com/spreadsheets/d/14eQIe4AO_f6OxCt1XcB4NLAs6-5R1wQW-ydZG0orYdY/edit#gid=1787713396)
-but the static copy is preserved in case stuff moves.
+これは、「`Melee Weapons Evaluation.ods`」(近接武器評価) スプレッドシートに関するドキュメンテーションです。このスプレッドシートは、0.E 開発版の近接武器のバランス調整プロジェクトです。オリジナルのスプレッドシートは
+[google doc](https://docs.google.com/spreadsheets/d/14eQIe4AO_f6OxCt1XcB4NLAs6-5R1wQW-ydZG0orYdY/edit#gid=1787713396)として利用可能ですが、内容が移動する事態に備えて静的コピーが保存されています。
 
-This is a complicated spreadsheet, with a lot of moving parts. The following are the tabs and the
-data flow:
+これは多くの可動要素を持つ複雑なスプレッドシートです。以下に、各タブとデータの流れを説明します。
 
-### Raw
+### 生データ (Raw)
 
-Raw was the initial data dump, taken from some October 2019 version of the 0.D experimental using
-mlangsdorf's usual mods (hence all the Blazemod stuff). Raw was slightly annoyed with some extra
-categories:
+生データは、mlangsdorf氏のMOD群を用いた 2019年10月頃の 0.D 開発版から取得された初期データでした。
+（そのため、Blazemod 関連の要素が含まれています）。タブには、以下の追加カテゴリーが設けられています。
 
-- Weapon Class - this is a simple numeric rating. 0 is not a weapon, 1 is an explosive device, 2 is
-  a ranged weapon or gun, 3 is a tool that makes a poor weapon like a cooking pot, 4 is a helmet, 5
-  is a tool that makes a good weapon like a sledgehammer, 6 is an improvised or fake weapon, and 7
-  is an actual dedicated weapon
-- Category - this is a categorization of items as weapons, to make it easier to compare similar
-  weapons. Melee weapon categories are Ax, Ax2, Club, Club2, Flail, Flail2, Knife, Polearm, Spear,
-  Staff, Shortsword, Sword, and Sword2. Categories that end with 2 are two-handed weapons.
-- Acc - this is a recaluclation of weapon accuracy based on the accuracy factors below, because
-  review of the data showed that a lot of weapons have accuracy values that are not supported by the
-  criteria in GAME_BALANCE.md.
-- Grip - the item's grip, as described in GAME_BALANCE.md
-- Leng - the item's leng, as described in GAME_BALANCE.md
-- Surf - the item's striking surface, as described in GAME_BALANCE.md.
-- Bal - the item's balance, as described in GAME_BALANCE.md. Additional categories beyond Clumsy
-  were added and assigned by eye.
+- Weapon Class(武器ランク) - 数値評価です。0は武器ではない、1は爆発装置、2は投擲武器または銃器、3は
+  調理鍋のような粗悪な武器となるツール、4はヘルメット、5はスレッジハンマーのような良好な武器となるツール、6は即席または偽造された武器、そして7は専用の武器を意味します。
+- Category(カテゴリ) - 類似の武器を比較しやすくするために、アイテムを武器として分類したものです。近接武器
+  のカテゴリーには、Ax(斧)、Ax2(両手斧)、Club(棍棒)、Club2(両手棍棒)、Flail(フレイル)、Flail2(両手フレイル)、Knife(ナイフ)、Polearm(ポールアーム)、Spear(槍)
+  Staff(杖)、Shortsword(短剣)、Sword(片手剣)、Sword2(両手剣)があります。 末尾に 2 が付くカテゴリは両手持ち武器です。
+- Acc (命中精度) - 以下の命中精度係数に基づき再計算した武器の命中精度です。これは、データのレビューによ
+  り、多くの武器の命中精度が GAME_BALANCE.mdの基準の裏付けがないことが判明したためです。
+- Grip (グリップ)- GAME_BALANCE.md に記載されているアイテムの「グリップ」です。
+- Leng (長さ)- GAME_BALANCE.mdに記載されているアイテムの「長さ」です。
+- Surf (打撃面)- GAME_BALANCE.mdに記載されているアイテムの「打撃面」です。
+- Bal (バランス)- GAME_BALANCE.mdに記載されているアイテムの「バランス」です
+  不器用(Clumsy)に加えて追加のカテゴリーが追加され、目視で割り当てられました。
 
-### Filter
+### フィルター (Filter)
 
-Filter takes the initial data from raw and a weapon class (in cell B1) and filters out items with a
-lower weapon class to make further analysis easier.
+Filterタブは、Rawから初期データを取得し、（セルB1で指定された）武器分類をもとに、それより低い武器分類のアイテムを除外することで、さらなる分析を容易にします。
 
-### New Formula
+### 新評価式 (New Formula)
 
-This calculates the new weapon evaluation formaula on the inital stats. This is complicated.
+このタブでは、初期のステータスに基づいて新しい武器評価式を計算します。この計算は複雑です。
 
-The first 7 rows have some header data. The bulk of the calculation starts on row 8.
+最初の7行はヘッダーデータです。計算の大部分は8行目から開始されます。
 
-The weapons were evaluated using a Strength 10, Dexterity 10, Perception 10 survivor with skill 4 in
-all weapons. The base hit, stat crit, skill crit, bash mult, cut mult, and stab mult values are
-derived from the relevant bits of src/melee.cpp.
+武器は、筋力 10、器用 10、知覚 10、および全ての武器スキル4のサバイバーを使用して評価されました。基本命中率、能力によるクリティカル、スキルによるクリティカル、打撃倍率、切断倍率、刺突倍率の値は、`src/melee.cpp` の関連部分から抽出されています。
 
-- Columnn A "Average" is the new weapon evaluation value for the weapon, on the edge of the sheet
-  for easy reference.
-- Columns B-J are the weapon's original stats, taken from the Raw tab via the Filter tab.
-- Column K "roll_hit" is sum of the evaluator's base_hit and the weapon's acc.
-- Column L "Wpn Crit" is weapon's contribution to critical hits.
-- Columns M-N "3 Crit" and "2 Crit" are the chances of a triple and double critical hit occuring,
-  based on skill, accuracy, and stats.
-- Columns O-Q "Average Non-Crit" damage are the weapon's calculated average damage before armor for
-  non-critical hits in each of the 3 categories.
+- 列A 「Average」(平均) は、武器の新しい評価値であり、参照しやすいようにシートの端に配置されています。
+- 列B-J は、Filterタブを介して Rawタブから取得された武器の元のステータスです。
+- 列K 「roll_hit」(命中率) は、評価者の base_hit と accの合計です。
+- 列L 「Wpn Crit」(武器クリティカル) は、武器によるクリティカルヒット率です。
+- 列M-N 「3 Crit」と「2 Crit」は、スキル、命中精度、およびステータスに基づいて発生するトリプルクリティカ
+  ルとダブルクリティカルの確率です。
+- 列O-Q 「Average Non-Crit」(非クリティカル平均ダメージ) は、3つのカテゴリー (打撃、切断、刺突)の、装甲を
+  考慮せずに計算された非クリティカルヒットによる平均ダメージです。
 
-All that is pretty straightforward. The next three blocks are where it gets complicated. Columns S-Z
-are repeated as AB-AI and AK-AR with different monster stats.
+ここまでは比較的単純です。次の3つのブロックが複雑な部分です。列 S〜Zは、異なるモンスターのステータスを用いて AB～AI、AK～AR として繰り返されます。
 
-- Row S "Hits" is the expected number of hits per 1000 attacks, calculated against a normal
-  distribution with a mean value of 5 * ( roll_hit - monster Dodge ) and a standard deviation of 25.
-- Row T "Crit %s" is the percentage of those hits that should be critical hits.
-- Row U "Dmg" is the average expected damage past armor. This is simply the sum of max( 0, damage
-  type - armor amount ) for each of the 3 damage types.
-- Row V "Crit" is the average expected critical damage past armor. This is the sum of the critical
-  damage - armor amount for each of the three damage amounts, but the formula is substantially more
-  complicated because the 3 damage types have different critical damage multipliers and reduce
-  effective armor by different amounts on a critical.
-- Rows W-Y repeat damage and critical damage, but for rapid strikes where the base damage is
-  multiplied by 2/3rds.
-- Row Z "Dmg/Turn" is either: ** 100 * ( Dmg * ( Hits - num crits ) + Crit Dmg * ( num hits ) ) / (
-  1000 * Moves ) - ie, sum of damage per hit for each normal hit + crit damage for each critical hit
-  divided by the number of moves in 1000 attacks, multiplied by 100 moves/second, OR ** 100 * (
+- 行 S「Hits」(命中数) は 5 ✕ ( roll_hit - monster Dodge ) 平均値と、25の標準偏差を持つ正規分布に対して計
+  算された、1000回の攻撃あたりの予想命中数です。
+- 行 T「Crit %s」(クリティカル率) は、命中数のうち、クリティカルヒットであるべき割合です。
+- 行 U「Dmg」(ダメージ) は、アーマーを通過した予想平均ダメージです。これは、3つのダメージタイプそれぞれに
+  ついて max(0,damage type - armor amount) を合計したものです。
+- 行 V「Crit」(クリティカルダメージ) は、アーマーを通過した予想平均クリティカルダメージです。これは、3つ
+  のダメージ量それぞれについてクリティカルダメージ - 装甲値を合計したものです。
+  3つのダメージタイプは異なるクリティカルダメージ乗数を持つため、またクリティカル時に有効装甲値を異なる量で減少させるため、その計算式は実質的により複雑になります。
+- 行 W-Y は、ラピッドストライク（連撃）の場合のダメージとクリティカルダメージを繰り返しますが、この場合、基本ダメージは 2/3倍されます。
+- 行 Z「Dmg/Turn」(ターンあたりのダメージ) は、以下のいずれかです。
+  100 * ( Dmg * ( Hits - num crits ) + Crit Dmg * ( num hits ) ) / (
+  1000 * Moves ) - 非クリティカルヒットごとのダメージ + クリティカルヒットごとのクリティカルダメージ
+  の合計を1000回の攻撃に必要なムーブ数で割った値に、100 moves/秒を掛けたもの。 100 * (
   Dmg * ( Hits - num crits ) / 2 + Crit Dmg * ( num hits ) / 2 + rapid strike Dmg * ( Hits - num
   crits ) / 2 + rapid strike Crit Dmg * ( num hits ) / 2 ) / ( 1000 - ( hits / 2 ) * Moves + Hits *
-  0.33 * Moves ) - same as above, but accounting for rapid strike reduced damage and movement cost.
+  0.33 * Moves ) - 上記と同じですが、連撃によるダメージの減少と行動コストを考慮に入れています。
 
-Finally,
+最後に、
 
-- Column AT "Weapon" is a repeat of the weapon name for refernce
-- Column Au "Value" is the average of columns Z, AI, and AR, multiplied by 1.5 for Reach 2 weapons
-  and 1.75 for Reach 3 weapons.
+- 列 AT 「Weapon」(武器) は、参照用の武器名の繰り返しです。
+- 列 Au 「Value」(値) は、列 Z、AI、AR、の平均であり、リーチ2の武器では1.5倍、リーチ3の武器では 1.75倍されています。
 
-### New Formula Sorted
+### 新評価式ソート (New Formula Sorted)
 
-This compares the old weapon values versus the values from the new formula, and sorts weapons by
-decreasing new value by weapon category to make it easier to spot weapons that are unsually good
-(I'm looking at you, broadsword) or bad for their category.
+このタブでは、古い武器の評価値と新評価式からの値を比較し、武器を武器カテゴリ別に新しい評価値の降順でソートします。これにより、そのカテゴリにしては異常に優れている（ブロードソード、あなたのことですよ）または劣っている武器を簡単に見つけられるようになります。
 
-### Proposed Values
+### 提案値
 
-This repeats the New Formula tab, except that Columns C-J were copied over and pasted as values, and
-then adjusted to make the numbers nice.
+このタブは New Formulaタブを繰り返していますが、列C-Jのデータがコピーされ値として貼り付けられ、その後、数値を見栄え良くするために調整されています。
 
-- Accuracy was adjusted to the new values based on grip, length, striking surface, and balance from
-  the Raw tab. That means a bunch of previously accurate weapons like bionic claws got a nerf, and
-  inappropriately inaccurate weapons like katanas got a buff.
-- Weapons in the same category were generally adjusted to have roughly the same evaluation, though
-  with different values. In general, European weapons get more of their damage from bash and less
-  from cut, and are often heavier and slower, than Asian weapons. This is a little arbitrary and not
-  entirely realistic, but everyone seems to expect it. As a case in point, the Japanese two-handed
-  sword "nodachi" has 164 attack speed, bash 6, and cut 47, while the European two-handed sword
-  zweihander has 169 attack speed, base 18, cut 39. They both have values of about 26.
-- Inferior weapons got a 1 step penalty in balance compared to the real weapon, and half of the
-  cut/pierce damage is moved to bash, and the cut/pierce damage is 1/4th's the real weapons. Ie, an
-  inferior pike does Bash 30, Stab 11 to a pike's Bash 8, Stab 44.
-- Fake weapons are as badly balanced as the inferior version of a weapon, but are basically blunt so
-  the striking surface usually got upgraded to "every", ironically making them as accurate or more
-  accurate than the real version of the weapon. Bash damage was halved from the inferior version,
-  and cut/pierce damage was again reduced to 1/4th of the inferior version, which is 1/16th the real
-  version. A fake pike does Bash 15, Stab 3.
-- A lot of weapons got damage boosts to bring up their evaluated value. A lot of low damage weapons
-  with rapid strike were being drastically overvalued, but the damage past armor tests showed that
-  rapid strike often just lets you bounce off armor twice as fast.
-- Spears got some rough formula for pierce damage based on weight that I can't recover anymore, but
-  in general the differences between spears are more minor than they used to be.
-- Polearms got the same rough damage as Ax2 at range 2, but got a separate balance line at range 1
-  with the raw damage reduced by 0.7. This makes polearms very impressive at range, but slightly
-  worse than quarterstaffs against adjacent targets.
+- 命中精度は、Raw タブのグリップ、長さ、打撃面、およびバランスに基づいた新しい値に調整されました。これに
+  より、以前は高命中だったバイオニック・クローのような多くの武器が弱体化され、不適切に低命中だったカタナのような武器が強化されました。
+- 同じカテゴリ内の武器は、値は異なるものの、全体としてほぼ同じ評価になるように調整されました。一般に、ヨ
+  ーロッパ系武器はダメージの多くが打撃から来て、切断からは少なく、アジア系武器よりも重く遅い傾向があります。これは少し恣意的で完全に現実的ではありませんが、皆がそれを期待しているようです。例として、日本の両手剣「野太刀 (nodachi)」は、攻撃速度164、打撃6、切断47 であるのに対し、ヨーロッパの両手剣「ツヴァイヘンダー (zweihander)」は、攻撃速度169、打撃18、切断39 です。どちらも評価値は約26 です。
+- 劣化武器は、本物の武器と比較してバランスに 1 ステップのペナルティを受け、切断/刺突ダメージの半分が
+  打撃に移動し、残りの切断/刺突ダメージは本物の武器の 1/4 です。すなわち、劣化したパイクは、本物のパイク(打撃8、刺突44)に対して、打撃30、刺突11 になります。
+- 偽造武器 (Fake weapons) は、武器の劣化版と同じくらいバランスが悪く設定されていますが、基本的に鈍器であ
+  るため、皮肉なことに打撃面が通常「(すべて)」にアップグレードされ、本物の武器と同じかそれ以上の精度になります。打撃ダメージは劣化版の半分にされ、切断/刺突ダメージは劣化版のさらに 1/4 (本物の武器の 1/16) に減らされました。偽造パイクは、打撃15、刺突3 になります。
+- 多くの武器が、評価値を引き上げるためにダメージブーストを受けました。連撃を持つ多くの低ダメージ武器が大
+  幅に過大評価されていましたが、装甲を通過するダメージテストの結果、連撃は装甲に2倍の速さで跳ね返されるだけに過ぎないことが判明しました。
+- 槍には、重量に基づいた刺突ダメージのざっくりとした評価式が適用されましたが、詳細な式はもう再現できませ
+  ん。しかし、全体として槍同士の差異は以前よりもマイナーになっています。
+- ポールアームは、リーチ2では Ax2 と同じくらいのざっくりとしたダメージが与えられましたが、リーチ1では生
+  のダメージを0.7倍に減らした別個のバランスラインが適用されました。これにより、ポールアームは間接攻撃こそ印象的ですが、隣接するターゲットに対してはクォータースタッフよりもわずかに劣るようになります。
 
-### Poposed Values Sorted
+### 提案値ソート済み (Poposed Values Sorted)
 
-This is another comparison tab like New Formula Sorted, but used the data from Proposed Values.
+これは New Formula Sortedと同様の比較タブですが、Proposed Valuesのデータを使用しています。
 
-### Comparison
+### 比較 (Comparison)
 
-This is a summary tab.
+これは要約タブです。
 
-In columns A-P, each weapon from the filter tab gets it's current and proposed stats, it's original
-value, value under the new formula, and value under the new formula using the proposed values. For
-proposed values, values that improved are highlighted in green and those that got worse are in red.
-Ideally, this will make it easy to compare changes and catch mistakes.
+列 A-Pでは、filter タブからの各武器について、現在のステータスと提案されたステータス、元の評価値、新評価式での評価値、および提案値を使用した新評価式での評価値が表示されます。提案値については、改善された値は緑色、悪化した値は赤色でハイライトされています。これにより、変更点を簡単に比較し、ミスを発見できるようになることが理想です。
 
-Columns S-AH repeat the process, but cells S1, T1, U1, and V1 can be used to specify category names,
-and then the subtotal shows a selected subset of weapons that match those categories. This
-simplifies comparing things.
+例 S-AH はこのプロセスを繰り返しますが、セル S1、T1、U1、および V1 を使用してカテゴリ名を指定でき、小計としてそれらのカテゴリに一致する選択した武器のサブセットが表示されます。これは比較を簡素化します。
