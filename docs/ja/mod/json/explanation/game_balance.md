@@ -1,455 +1,367 @@
-# Stat system scaling
+# 能力値のスケーリング
 
-Minimum stat: 0 (should only happen due to penalties, instant failure in most scenarios)
+最小ステータス: 0 (ペナルティによってのみ発生すべき値であり、ほとんどのシナリオで即時失敗を意味します)
 
-Nominal stat: 8 ("average" person)
+標準ステータス: 8 (「平均的」な人間)
 
-Very high stat: 14 (realistic world class human, maximum cost-effective in chargen)
+非常に高いステータス: 14 (現実世界で一流の人間。キャラクター生成において最大の費用対効果を発揮します)
 
-Maximal stat: 20 (higher may be achievable, but we're not worried about balancing at that point.)
+最大ステータス: 20 (これ以上も達成可能かもしれませんが、この時点でのバランス調整は考慮していません)
 
-# Skill system scaling:
+# スキルのスケーリング:
 
-Minimum skill: 0 (no training)
+最低スキル: 0 (訓練なし)
 
-Maximum skill: 10 (requires regular training to maintain, "professional" level)
+最大スキル: 10 (維持する為に定期的な訓練が必要。「プロフェッショナル」レベル)
 
-# Monster melee skill scaling:
+# モンスターの近接スキルスケーリング:
 
-Minimum skill: 0 (no melee potential; turret, fungal wall)
+最低スキル: 0 (近接戦闘の潜在能力なし。タレット、菌類壁など)
 
-Nominal skill: 4 (average critter; most zeds & giant insects)
+標準スキル: 4 (平均的な生物。ほとんどのゾンビや巨大昆虫)
 
-Notable skill: 6 (competent/carnivore; bear, wolf, police/survivor zeds)
+顕著なスキル: 6 (有能な/肉食動物。クマ、オオカミ、警察/サバイバーゾンビ)
 
-Very high skill: 8 (dangerous opponent; dark wyrm, vinebeast)
+非常に高いスキル: 8 (危険な敵対者。ダークワーム、ヴァインビーストなど)
 
-Maximal skill: 10 (highest for balance purposes; jabberwock, tribot, shoggoth, gracken)
+最大スキル: 10 (バランスにおいて最高値。ジャバウォック、トライボット、ショゴス、グラッケンなど)
 
-# Speeds:
+# 速度 (Speeds):
 
-Zombies are a bit faster than "shambling". Zombified versions of fast critters will remain fast, but
-in general the process slows the undead version. Further, under no circumstances should a zed be
-more than 50% faster than base character speed. Currently, this means "capped at 150".
+ゾンビは「よろめき歩く」よりも少し速く設定されています。素早い生物のゾンビ化バージョンは速いままですが、一般的にゾンビ化のプロセスはアンデッドの速度を低下させます。さらに、いかなる状況下でも、ゾンビは基本キャラクターの速度よりも50%以上速くなってはなりません。現在、これは「150に制限される」ことを意味します。
 
-# Dodge System assumptions:
+# 回避システムの前提:
 
-Dodge chance is based on attacker's melee skill and target's dex stat and dodge skill.
+回避チャンスは、攻撃者の近接スキルと対象の器用さ、および回避スキルに基づいて計算されます。
 
-Successful dodges negate the attack and impose a cumulative penalty on dodges within the same turn.
+回避が成功すると、その攻撃は無効化され、同一ターン内の以降の回避に対して累積ペナルティが課されます。
 
-## Dodge Use Cases:
+## 回避のユースケース:
 
-An individual with no skill and nominal stats in ideal circumstances against a basic opponent should
-occasionally be able to dodge.
+スキルを持たず、標準ステータスを持つ個人が、理想的な状況で、基本的な敵と対峙した場合、時折回避に成功するはずです。
 
-An individual with no skill and nominal stats in ideal circumstances against a skilled opponent
-should rarely if ever be able to dodge.
+スキルを持たず、標準ステータスを持つ個人が、理想的な状況で、熟練した敵と対峙した場合、回避に成功することは稀であるか、全くないはずです。
 
-An individual with world-class dodging ability, in ideal circumstances against a basic opponent
-should have a negligible chance of failure.
+世界クラスの回避能力を持つ個人が、理想的な状況で、基本的な敵と対峙した場合、失敗の確率は無視できるほど低いはずです。
 
-An individual with world-class dodging ability, in ideal circumstances against a skilled opponent
-should have a moderate chance of failure.
+世界クラスの回避能力を持つ個人が、理想的な状況で、熟練した敵と対峙した場合、失敗の確率は中程度にあるはずです。
 
-The effect of increasing dodge skill has a growth rate with diminishing returns that accelerates
-sharply at the point where you move beyond the dodge a "regular" character is likely to achieve (7
-and above)
+回避スキルの増加効果は、逓減的な成長率を持ちますが、「通常の」キャラクターが達成しそうな回避レベル（7以上）を超えると、その成長率は急激に加速します。
 
-The balance of melee versus dodge should favor dodge which, after all, isn't effective against a
-wide variety of other types of attacks.
+近接戦闘と回避のバランスは、回避を有利にするべきです。回避は、結局のところ、他の多種多様な攻撃タイプに対しては効果がないためです。
 
-Even a world class dodger should not be able to dodge continuously when attacked many times a turn.
+世界クラスの回避能力を持つ者であっても、1ターンに何度も攻撃された場合、連続して回避することはできないはずです。
 
-# MELEE WEAPONS:
+# 近接武器 (MELEE WEAPONS):
 
-## To-Hit Bonuses
+## 命中ボーナス (To-Hit Bonuses)
 
-To-hit bonuses start at '-2' and are modified as follows for weapons that have the following
-properties:
+命中ボーナスは初期値「-2」から始まり、以下の特性を持つ武器に対して修正が加えられます。
 
-### Grip
+### グリップ (Grip)
 
-Grip is a measure of how well you can control the weapon to quickly respond to situational changes.
+グリップは、状況の変化に素早く対応するために武器をどれだけうまく制御できるかの尺度です。
 
--1 - Particularly hard to grip items, (especially those that are innately slipper or very rounded
-with no obvious gripping edge) such as basketballs and barrels, or which are dangerous to hold
-because of very sharp edges, like scrap metal and broken glass.
+-1 - 特に握りにくいアイテム (本質的に滑りやすいもの、または明らかな握り部分のない非常に丸いもの。)、またはスクラップメタルや割れたガラスのように鋭利な縁のために保持するのが危険なもの。例:バスケットボール、樽、スクラップメタル、割れたガラス。
 
-+0 - Any object that doesn't fall into one of the categories below. Examples include 2x4s, computer
-monitors, wires, stingers and clothing. Basically, anything that has a grippable component, but
-which is too thick, too thin, or too flimsy to grab comfortably in a way that can reliably control
-the object.
++0 - 以下のカテゴリのいずれにも該当しないオブジェクト。握れる要素はあるが、快適に握って信頼性をもって制御するには厚すぎる、薄すぎる、または脆すぎるもの。
+例:2x4材、コンピュータモニター、ワイヤー、スティング、衣類。
 
-+1 - A weapon with a fairly solid grip, like a pipe, a rock, guitar neck, pool cue or a heavy stick.
++1 -かなりしっかりしたグリップを持つ武器。
+例:パイプ、石、ギターネック、ビリヤードのキュー、重い棒。
 
-+2 - A weapon with a dedicated grip shaped to the hand, like a sword, axe, knife, or police baton,
-or that is strapped to the body (or is a piece of the body). Fists would get a +2 bonus here,
-bringing them to "0" total, since none of the others would apply.
++2 - 手の形に合わせて設計された専用のグリップを持つ武器。例：剣、斧、ナイフ、警察の警棒。または身体に固定されるもの（あるいは身体の一部であるもの）。素手はここで +2 のボーナスを得て、合計が「0」になります（他のどのボーナスも適用されないため）。
 
-### Length
+### 長さ (Length)
 
-Length allows more surface area for potential contact, and reduces the need to control the
-positioning of the body to guarantee a hit. It also allows the player to strike from a safer
-distance, allowing them to worry more about trying to hit without being hit in return, and allows
-for swings with larger arcs, making dodging such a strike more difficult.
+長さは、接触する可能性のある表面積を増やし、ヒットを保証するために体の位置を制御する必要性を軽減します。また、プレイヤーがより安全な距離から攻撃できるようにし、反撃を受けずに命中させることに集中できるようにします。さらに、より大きな円弧を描くスイングを可能にし、その攻撃を回避することをより困難にします。
 
-+0 - Any object without a length bonus.
++0 - 長さボーナスがないオブジェクト。
 
-+1 - Objects that, when held, extend over a foot (1/3 of a meter) in length from the hand. A normal
-American 12inch ruler is the handy boundary guide for when an item should switch over to a +1 bonus
-(the ruler, losing several inches when held, does not get one - unless you added a handle to it!).
++1 - 装備した手から1フィート（約3分の1メートル）以上の長さがあるオブジェクト。通常の12インチ定規は、アイテムが+1ボーナスに切り替わる際の便利な境界ガイドとなります（定規は、保持すると数インチの長さが失われるため、ボーナスは得られません。ただし、ハンドルを追加した場合は別です）。
 
-+2 - An object that is over 3 feet in length from the point where it is held. Includes swords,
-spears, quarterstaffs, poles, and a lot of other stuff.
++2 - 装備者から3フィート以上の長さがあるオブジェクト。剣、槍、クォータースタッフ、ポール、その他多くのアイテムが含まれます。
 
-### Striking Surface
+### 打撃面 (Striking Surface)
 
-Some weapons need to strike in a certain way to be effective. Others are more difficult to use
-"incorrectly".
+一部の武器は効果的に使いこなすには特定の打ち方をする必要があります。他の武器は「不正確な」使用がより困難です。
 
--2 - Single-Point weapons - Picks, spears, syringes. Any weapon that has a single point that must
-contact the enemy in a specific way in order to deal a decent amount of damage. Also, weapons with
-difficult attack angles, like scythes, where the damaging part of the weapon is faced away from the
-enemy.
+-2 - 単一点武器：つるはし、槍、注射器。まともなダメージを与えるために特定の当たり方をしなければならない単一の点を持つ武器。また、鎌のように、武器のダメージを与える部分が敵から離れた方向を向いてしまう、攻撃角度が難しい武器も該当します。
 
--1 - Line of damage weapons - Swords, knives, and other weapons that require a solid strike along a
-particular piece of the weapon, where the weapon can be said to have an attack angle, fall here.
-Weapons that have point attacks but are still effective without any solid hit, such as a nailboard,
-would also fall here.
+-1 - 線状ダメージ武器：剣、ナイフ、および武器の特定の部分に沿った確実な打撃が必要な武器で、攻撃角度があると言えるもの。釘打ち板のように点攻撃を持つが、確実な命中がなくても効果的な武器もここに分類されます。
 
-+0 - attack-anywhere weapons - Clubs, pipes, maces, etc, where the weapon will be dealing full
-damage with a solid blow no matter how it is angled, because every surface is a striking surface.
++0 - どこでも攻撃武器：棍棒、パイプ、メイスなど。どの角度で当たっても確実な一撃で最大ダメージを与える武器。すべての表面が打撃面であるため。
 
-+1 - Weapons that can still do significant damage even with glancing blows would fall here. Jagged
-tearing weapons and electric weapons like a stun baton would fall here.
++1 - かすり傷でも重大なダメージを与えられる武器。ギザギザに引き裂く武器や、スタン警棒のような電気武器がここに分類されます。
 
-### Balance
+### バランス (Balance)
 
-A measure of how well-suited the item is for being swung/thrust/etc. This factors in overall balance
-of the weapon, weight is accounted for separately.
+アイテムが振る/突き刺すなどの動作にどれだけ適しているかの尺度です。これは武器の全体的なバランスを考慮しており、重さは別に計算されます。
 
--2 - Very clumsy or lopsided items ill-suited for swinging or thrusting. Characterized by requiring
-effort just to hold steady. frying pan or pot, chainsaw, chair, vacuum cleaner.
+-2 - 非常に不器用またはアンバランスで、振る/突く動作に不向きなアイテム。ただ持ちこたえているだけでも労力を要するのが特徴です。
+例:フライパンや鍋、チェーンソー、椅子、掃除機。
 
--1 - Balance of the object is uneven, but in a way that at least doesn't interfere with swinging.
-axes, sledgehammer, rifle, scythe, most polearms.
+-1 - オブジェクトのバランスが不均一だが、少なくともスイングの邪魔にならない程度。
+例:斧、スレッジハンマー、ライフル、鎌、ほとんどのポールアーム。
 
-+0 - Neutral balance, neither well nor poorly weighted for the typical use. Heavy stick, rock, pool
-stick, kitchen knives, claw hammer, metal pipe, crowbar, handguns.
++0 - 中立的なバランス。一般的な使用において重さが適切でも不適切でもない。
+例:重い棒、岩、ビリヤードのキュー、キッチンナイフ、クローハンマー、金属パイプ、バール、ハンドガン。
 
-+1 - Well-balanced for swinging or stabbing. Baseball bat, golf club, swords, quarterstaff, knives.
++1 - 振るまたは刺す動作のためにバランスが良いもの。
+例:野球バット、ゴルフクラブ、剣、クォータースタッフ、ナイフ。
 
-## Damage
+## ダメージ (Damage)
 
-Weapon's relative strength is based on an approximate formula involving its damage, to-hit,
-techniques and few other factors.
+武器の相対的な強度は、ダメージ、命中ボーナス、テクニック、およびいくつかの他の要因を含む公式に基づいて算出されます。
 
-### Damage per second
+### 秒間ダメージ (DPS)
 
-A melee's weapon damage per second (dps) is calculated past armor against a sample group of monsters
-with a range of dodge and armor values: a soldier zombie (low dodge, high bash and cut armor), a
-survivor zombie (medium dodge, some bash and cut armor), and a smoker zombie (high dodge, no armor).
-This should correctly weigh accuracy, criticals, and damage without over valuing any of them.
+近接武器のDPSは、サンプルモンスター群（低回避・高打撃/切断装甲の兵士ゾンビ、中回避・中打撃/切断装甲のサバイバーゾンビ、高回避・装甲なしの煙幕ゾンビ）に対して、装甲を貫通した上で計算されます。これにより、命中精度、クリティカル、ダメージのいずれかを過大評価することなく、それらを適切に評価するはずです。
 
-In code, this is calculated using the item::effective_dps() function, which takes a character and a
-monster. It calculates the relative accuracy of the character and weapon against the monster's
-defenses and determines the hit rate from a table lookup. It also determines the number of critical
-hits. Number of hits is hit rate * 10,000, and number of misses is 10,000 - number of hits.
+コードでは、これは item::effective_dps() 関数を使用して計算されます。この関数は、キャラクターとモンスターを受け取ります。キャラクターと武器がモンスターの防御に対して持つ相対的な命中精度を計算し、ヒット率をテーブル参照から決定します。また、クリティカルヒットの回数も決定します。
 
-For both critical and non-critical hits, average damage is calculated based on the weapon's stats
-and the user's skill. Monster armor absorbs the damage, and then the damage is multiplied by the
-number of hits: either critical hits for the critical hit case, or total hits - critical hits for
-the non critical hit case. If the weapon has the rapid strike technique, the total damage is halved,
-and then the average damage is recalculated, multiplied by 0.66, and absorbed by monster armor again
-to account for rapid strikes.
+ヒット数は命中率 ✕ 10,000であり、 ミス数は 10,000 - ヒット数です。
 
-Number of moves is calculated as attack speed * ( number of misses + number of non-critical hits +
-number of critical hits ) for weapons without rapid strike, or attack speed * ( number of misses +
-number of non-critical hits / 2 + number of critical hits / 2 ) + attack speed / 2 * ( number of
-non-critical hits / 2 + number of critical hits / 2 ) for weapons without rapid strikes.
+クリティカルヒットと非クリティカルヒットの両方について、武器のステータスとユーザーのスキルに基づいて平均ダメージが計算されます。
 
-Damage per second against a particular monster is total damage * 100 / number of moves (100 for the
-100 moves/second). Overall dps is the average of the dps against the three reference monsters.
+モンスターの装甲がダメージを吸収した後、ダメージはヒット数 (クリティカルヒット数、または合計ヒット数 - クリティカルヒット数) で乗算されます。
 
-### Critical hits
+武器が連撃性能を持っている場合、合計ダメージは半分にされます。平均ダメージが再計算され、0.66 を乗算し、モンスターアーマーによって再度吸収されます（連撃性能を考慮するため）。
 
-A double critical can occcur when a second hit roll is made against 1.5 * the monster's dodge.
-Double critical hits have a higher chance of occurring than normal critical hits. For each hit, the
-chance of achieving either a double critical hit or a normal critical hit is calculated, and then if
-a random number is less than the critical chance, the critical occurs. Both double and normal
-critical hits have the same effect, but the chance of them occurring is different.
+攻撃回数は、武器の攻撃速度と、ミス、非クリティカルヒット、クリティカルヒットの回数から計算されます。
 
-**Note** The critical hit system is stupid and complicated and produces weird results. Double
-critical hits should have a chance of occuring when the original hit roll is more than 1 standard
-deviation above the mean, which is simple and faster to calculate than the current system.
+1.連撃をもたない武器の場合：
+攻撃速度 ✕ ( ミス数 + 非クリティカルヒット数 + クリティカルヒット)
 
-### Other factors
+2.連撃をもつ武器の場合:
+[攻撃速度 ✕ ( ミス数 + (非クリティカルヒット数/2) + (クリティカルヒット数/2))] +
+[攻撃速度/2 ✕ (非クリティカルヒット/2 + クリティカルヒット数/2)]
 
-Reach is worth +20% at reach 2, +35% at reach 3.
+(100は１秒で100ムーブを表します)。全体のDPSは、この3体の参照モンスターに対するDPSの平均です。
 
-A weapon that is usuable by a known martial art is worth +50%.
+### クリティカルヒット (Critical hits)
 
-### Weapon tiers
+ダブルクリティカルは、モンスターの回避の 1.5 倍に対して二度目の命中判定が行われた場合に発生する可能性があります。ダブルクリティカルヒットは、通常のクリティカルヒットよりも高い確率で発生します。各ヒットについて、ダブルクリティカルヒットまたは通常のクリティカルヒットのいずれかを達成する確率が計算され、その後、ランダムな数値がクリティカル確率未満であれば、クリティカルが発生します。ダブルクリティカルヒットと通常のクリティカルヒットは両方とも同じ効果を持ちますが、それらが発生する確率は異なります。
 
-Relative value should put the weapon into one of those categories:
+注記 クリティカルヒットシステムは複雑で煩雑であり、奇妙な結果を生み出します。ダブルクリティカルヒットは、元の命中判定が平均より1標準偏差以上であった場合に発生する機会を持つべきであり、これは現在のシステムよりもシンプルかつ迅速に計算できます。
 
-<2 - Not weapons. Those items may be pressed into service, but are unlikely to be better than fists.
-Plastic bottles, rocks, boots.
+### その他の要因 (Other factors)
 
-2-5 - Tools not meant to strike and improvised weapons. Two-by-fours, pointy sticks, pipes, hammers.
+リーチ: リーチ2では+20%の価値、リーチ3では+35%の価値があります。
+既知のマーシャルアーツで使用可能な武器は、+50%の価値があります。
 
-6-11 - Dangerous tools or crude dedicated weapons. Golf clubs, two-by-swords, wooden spears, knife
-spears, hatchets, switchblades, tonfas, quarterstaves.
+### 武器ティア (Weapon tiers)
 
-12-15 - Good dedicated weapons or the most dangerous of tools. Wood and fire axes, steel spears,
-electric carvers, kukris, bokken, machetes, barbed wire bats.
+相対的な価値は、武器を以下のカテゴリのいずれかに分類するべきです:
 
-20-35 - Weapons of war, well designed to kill humans. Wakizashis, katanas, broadswords, zweihanders,
-combat knifes, battle axes, war hammers, maces, morningstars.
+<2 - 武器ではないもの。使用に駆り出される可能性はあるが、拳よりも優れている可能性は低い。プラスチックボトル、石、ブーツ。
 
-35+ - Sci-fi stuff. Diamond katanas, monomolecular blades, lightsabers and chainswords.
+2-5 - 打撃を目的としないツールと即席武器。 2x4材、尖った棒、パイプ、ハンマー。
 
-Specific weapon balancing points: 20 - combat knifes 22 - short blades 24 - long blades, short axes,
-and short flails 26 - two handed blades, long axes, most spears 28 - two handed axes and polearms
-30 - combat spears
+6-11 - 危険なツールまたは粗製の専用武器。 ゴルフクラブ、2x4ソード、木製槍、ナイフスピア、手斧、飛び出しナイフ、トンファー、クォータースタッフ。
 
-Improvised weapons generally have about 75% of the value of a real weapon.
+12-15 - 優れた専用武器または最も危険なツール。 消防斧、鋼鉄槍、電気カーバー、ククリ、木刀、マチェーテ、有刺鉄線バット。
 
-## Other melee balancing factors
+20-35 - 戦闘用武器、人間を殺すために設計されたもの。 脇差、カタナ、ブロードソード、ツヴァイヘンダー、コンバットナイフ、バトルアックス、ウォーハンマー、メイス、モーニングスター。
 
-### Attack speed
+35+ - SF的なもの。 ダイヤモンドカタナ、モノ分子ブレード、、ライトセーバー、チェーンソード。
 
-Out of two weapons with same dpt, the faster one is generally better. Faster weapons allow more
-damage granularity (less overkill), make it less likely to miss a turn (and thus dodge/block
-recharges) and make positioning easier. Slower weapons will pierce armor better, but currently most
-enemies are very lightly armored.
+特定の武器のバランス調整点:
+20 - コンバットナイフ
+22 - ショートブレード
+24 - ロングブレード、ショートアックス、ショートフレイル
+26 - 両手持ちブレード、ロングアックス、ほとんどの槍
+28 - 両手持ちアックスとポールアーム
+30 - コンバットスピア
 
-### Damage type
+即席武器は一般に、本物の武器の価値の約 75% を持つべきです。
 
-At low skill, piercing damage suffers from scaling and bashing damage from damage limit due to low
-strength and skill. Cutting damage is not affected. At high skill, bashing damage is generally the
-strongest, but still suffers from the damage limit. Exotic damage types (currently only fire) do not
-scale with skills or crits.
+## その他の近接バランス要因
 
-# RANGE WEAPONS
+### 攻撃速度
 
-## Automatic Fire
+ターンあたりのダメージ（DPT）が同じ2つの武器であれば、より速い（攻撃頻度の高い）方が優れています。
+より速い武器は、より高いダメージの粒度 (オーバーキルの減少) をもたらし、ターンを無駄にする (ひいては回避または防御の回復を妨げる)可能性を低減し、位置取りを容易にします。
+より遅い武器は装甲をより良く貫通しますが、現状、ほとんどの敵は装甲が非常に軽度です。
 
-Guns with automatic fire are balanced around 1-second of cyclic fire, unless the cyclic or practical
-fire rate is less than 1 every second. Rates of fire less than 1 shot every second are increased
-to 2.
+### ダメージの種類
 
-## Magazines
+低スキル時の、貫通ダメージはスケーリングの影響を受け、打撃ダメージは低い筋力とスキルによりダメージ上限の影響を受けます。切断ダメージは影響を受けません。
+高スキル時の、打撃ダメージは最も強力ですが、依然としてダメージ上限の影響を受けます。特殊なダメージタイプ（現状では火炎のみ）は、スキルやクリティカルによるスケーリングを受けません。
 
-### Reload times
+# 遠距離武器
 
-The overall balance is that magazines themselves are slow to reload whereas changing a magazine
-should be fast. For standard box magazines a default `reload_time` of 100 (per round) is appropriate
-with this value increasing for poor quality or extended magazines. Guns themselves should also
-specify `reload` of 100 (per magazine) unless their magazines are particularly awkward to reload
-(eg. ammo belts). The game logic intrinsically handles higher volume magazines consuming more time
-to attach to a gun so you need not consider this.
+## 自動射撃
 
-### Weight
+オート射撃を備えた銃は、1秒間のサイクル射撃に基づいてバランス調整されます。ただし、サイクル射撃速度または実用的な発射速度が1秒あたり1発未満の場合は除きます。
+1秒あたり1発未満の発射速度は、2発に引き上げられます。
 
-Increases proportional to capacity and should have a comparable ratio to similar magazines. Consider
-the base item to be a 10-round .223 factory specification box magazine which has a capacity:weight
-of 1:10. Increase the ratio markedly for poor quality magazines or more slightly for extended
-magazines. Smaller calibers should use a lower ratio. The `material` should have some effect, with
-plastic magazines weighing less.
+## マガジン
 
-### Volume
+### リロード時間
 
-Scaled based upon the capacity relative to the `stack_size` of the ammo. For example 223 has a
-`stack size` of 20 so for 10 and 30 round magazines the volume would be 1 and 2. Extended magazine
-should always have larger volume than the standard type and for very large drum magazines consider
-applying an extra penalty. By default most handgun magazines should be volume 1 and most rifle
-magazines volume 2. Ammo belts should not specify volume as this will be determined from their
-length.
+全体的なバランスとしては、マガジン自体はリロードに時間がかかりますが、マガジン交換は迅速であるべきです。
+標準的な箱型マガジンの場合、既定の `reload_time` を(1発あたり)100とすることが適切であり、品質の悪いマガジンや拡張マガジンではこの値を増やします。
+銃自体も、マガジンが特に扱いにくい場合（例：弾帯）を除き、(マガジンあたり)100の `reload` 値を指定すべきです。
+ゲームのロジックは、装填弾数の多いマガジンを銃に取り付ける際により多くの時間を消費する状態を再現するため、これを考慮する必要はありません。
 
-### Reliability
+### 重量
 
-Should be specified first considering the below and then scaled against any equivalent magazines.
-For example if an extended version of a magazine exists place it one rank below the standard
-capacity version. Damaged guns or magazines will further adversely affect reliability.
+容量に比例して増加し、類似のマガジンと比較して同等の比率を持つべきです。基準アイテムとして、容量 10発の .223 工場仕様の箱型マガジンを考えます。これは容量:重量比が 1:10 です。品質の悪いマガジンではこの比率を大幅に増やし、拡張マガジンではわずかに増やします。より小口径の場合は、より低い比率を使用すべきです。素材もいくらか影響を与え、プラスチック製マガジンは軽量になります。
 
-10 - **Perfectly reliable**. Factory specification or milspec only. Never extended magazines. Very
-rare.
+### 体積
 
-9 - **Reliable**. Failures only in burst fire. Factory or milspec magazines only. Never extended
-magazines. Uncommon.
+弾薬の `stack_size` に対する容量の比率に基づいてスケーリングされます。例えば、.223 弾の `stack_size` が 20 であるため、10発と30発のマガジンの体積は 1 と 2 になります。拡張マガジンは、常に標準タイプよりも大きな体積を持つべきであり、非常に大きなドラムマガジンの場合は追加のペナルティを適用することを考慮してください。デフォルトでは、ほとんどのハンドガンマガジンは体積 1 、ほとんどのライフルマガジンは体積 2 であるべきです。弾帯は、その長さから体積が決定されるため、体積を指定すべきではありません。
 
-8 - **Dependable**. Failures infrequently in any fire mode. Highest reliability possible for
-extended magazines and those crafted using gunsmithing tools. Most common.
+### 信頼性
 
-7 - **Serviceable**. Fail infrequently in semi-automatic, more frequently in burst. Includes many
-extended and aftermarket gunsmithing tools. Common.
+まず、以下の基準を考慮して指定し、次に同等のマガジンと比較してスケーリングするべきです。例えば、標準容量バージョンの拡張バージョンが存在する場合、標準バージョンより1ランク下に配置してください。損傷した銃やマガジンは、さらに信頼性に悪影響を及ぼします。
 
-6 - **Acceptable**. Failures can be problematic. Highest reliability possible for magazines crafted
-**without** gunsmithing tools. Includes most ammo belts.
-
-5 - **Usable**. Failures can be problematic and more serious. Mostly poor quality hand-crafted
-magazines.
-
-<4 - **Poor**. Significant risk of catastrophic failure. Not applied by default to any item but can
-be acquired by damage or other factors.
-
-### Rarity
-
-Overall balance is that pistol magazines are twice as common as rifle magazines and that for guns
-that spawn with magazines these are always the standard capacity versions. Consider 9x19mm and .223
-to be the defaults with everything else more rare. Some locations have more specific balance
-requirements:
-
-| Location          | Description                                                | With guns | Damaged   | Example                   |
-| ----------------- | ---------------------------------------------------------- | --------- | --------- | ------------------------- |
-| Military site     | Only source of milspec magazines and ammo belts            | Never     | Never     | LW-56, .223 ammo belt     |
-| Gun store         | Standard and extended capacity magazines                   | Never     | Never     | STANAG-30, Glock extended |
-| Police armory     | Mostly pistol magazines, especially 9x19mm, never extended | Sometimes | Never     | Glock, MP5 magazine       |
-| SWAT truck        | Police or military magazines, occasionally extended        | Sometimes | Rarely    | MP5 extended              |
-| Survivor basement | Anything except milspec weighted towards common types      | Often     | Sometimes | Saiga mag, M1911 extended |
-| Military surplus  | Older military magazines that are not current issue        | Never     | Rarely    | M9 mag, STEN magazine     |
-| Pawn shop         | Anything except milspec weighted towards unusual calibers  | Never     | Rarely    | Makarov mag, AK-74 mag    |
-| Everywhere else   | Predominately 9mm and 223. Always with standard magazine   | Often     | Sometimes | Ruger 223 mag, M1911 mag  |
-
-## Archery damage
-
-Bow damage is based on the momentum achieved in the projectile. Since arrows and bolts have sharp
-cutting surfaces, the penetration and therefore damage achieved is based on the projectile's
-capacity for slicing through tissues. The arrow has a modifier based on construction, material and
-design, most critically centered around the effectiveness of the head. Base damage is calculated
-from momentum by taking momentum in Slug-foot-seconds, multiplying by 150 and subtracting 32. This
-was arrived at by taking well-regarded bowhunting guidelines and determining the damage numbers
-necessary for a kill of various game on a critical hit, see tests/archery_damage_test.cpp for
-details.
-
-## Ammo stats
-
-### Base Damage
-
-The damage (**Dmg**) of firearm ammunition starts with the square root of a round's muzzle energy in
-joules (**Energy, J**) rounded to the nearest integer with an arbitrary increase or decrease to
-account for terminal ballistics. These numbers are modified depending on certain criteria (see
-Adjustment Criteria, below). Damage of handloaded ammo is set to 92% (rounded down) of their factory
-counterparts. A similar system for calculating recoil is planned but not currently being worked on.
-The figures used to calculate stats and any other relevant information are presented in table below.
-
-### Base Barrel Length
-
-Each cartridge also has a Base Barrel Length (**Base Brl**) listed; this determines the damage for
-the connected guns. A firearm has its damage modifier determined by it's real life barrel length;
-for every three inches between it and the listed baseline here, the gun takes a 1 point bonus or
-penalty, rounding to the nearest modifier. For example, a .45 ACP gun with a 7 inch barrel would get
-a +1 bonus (against a baseline of 5 inches).
-
-| Ammo ID                | Description                     | Energy, J | Dmg | Base Brl | Applied Modifiers / Comments                          |
-| ---------------------- | ------------------------------- | --------- | --- | -------- | ----------------------------------------------------- |
-| .22 CB                 | 18gr CB bullet                  | 39        | 6   | 7.87in   |                                                       |
-| .22LR                  | 40gr unjacketed bullet          | 141       | 12  | 6in      |                                                       |
-| .22LR FMJ              | 30gr FMJ bullet                 | 277       | 17  | 6in      |                                                       |
-| .32 ACP                | 60gr JHP bullet                 | 218       | 15  | 4in      |                                                       |
-| 7.62x25mm              | 85gr JHP bullet                 | 544       | 23  | 4.7in    |                                                       |
-| 7.62x25mm Type P       | 120gr bullet                    | 245       | 15  | 9.6in    | Fired from the Type 64 SMG; need more data here       |
-| 9x18mm 57-N-181S       | 93gr FMJ bullet                 | 251       | 16  | 3.8in    |                                                       |
-| 9x18mm SP-7            | 93gr bullet                     | 417       | 20  | 3.8in    |                                                       |
-| 9x18mm RG028           | 93gr hardened steel core bullet | 317       | 18  | 3.8in    | damage reduced by 4                                   |
-| 9x19mm FMJ             | 115gr FMJ bullet                | 420       | 24  | 5.9in    |                                                       |
-| 9x19mm JHP             | 115gr JHP bullet                | 533       | 23  | 5.9in    | damage increased by 3                                 |
-| 9x19mm +P              | 115gr JHP bullet                | 632       | 25  | 5.9in    |                                                       |
-| 9x19mm +P+             | 115gr JHP bullet                | 678       | 26  | 5.9in    |                                                       |
-| .38 Special            | 130gr FMJ bullet                | 256       | 16  | 4in      |                                                       |
-| .38 FMJ                | 130gr FMJ bullet                | 256       | 16  | 4in      |                                                       |
-| .38 Super              | 147gr JHP bullet                | 660       | 26  | 4in      |                                                       |
-| 10mm Auto              | 180gr FMJ bullet                | 960       | 31  | 4in      |                                                       |
-| .40 S&W                | 135gr JHP bullet                | 575       | 24  | 4in      |                                                       |
-| .40 FMJ                | 180gr FMJ bullet                | 598       | 24  | 4in      |                                                       |
-| .44 Magnum             | 240gr JHP bullet                | 1570      | 40  | 7.5in    |                                                       |
-| .45 ACP JHP            | 185gr JHP bullet                | 614       | 25  | 5in      |                                                       |
-| .45 ACP FMJ            | 230gr FMJ bullet                | 447       | 21  | 5in      |                                                       |
-| .45 ACP +P             | 200gr JHP bullet                | 702       | 26  | 5in      |                                                       |
-| .454 Casull            | 300gr JSP bullet                | 2459      | 50  | 7.5in    |                                                       |
-| .45 Colt JHP           | 250gr JHP bullet                | 610       | 25  | 7.5in    |                                                       |
-| .500 S&W Magnum        | 500gr bullet                    | 3056      | 55  | 8.4in    |                                                       |
-| 4.6x30mm               | 31gr copper plated steel bullet | 505       | 22  | 7.1in    | damage reduced by 4                                   |
-| 5.7x28mm SS190         | 31gr AP FMJ bullet              | 534       | 23  | 10.4in   | damage reduced by 3                                   |
-| 7.62x39mm              | 123gr FMJ bullet                | 2179      | 46  | 16.3in   |                                                       |
-| 7.62x39mm 57-N-231     | 121.9gr steel core FMJ bullet   | 2036      | 45  | 16.3in   |                                                       |
-| 7.62x39mm M67          | 123gr FMJ bullet                | 2141      | 46  | 16.3in   | TODO                                                  |
-| 5.45x39mm 7N10         | 56gr FMJ bullet                 | 1402      | 37  | 16.3in   | damage increased by 3                                 |
-| 5.45x39mm 7N22         | 57gr steel core FMJ bullet      | 1461      | 38  | 16.3in   |                                                       |
-| .223 Remington         | 36gr JHP bullet                 | 1524      | 39  | 20in     | Uses 5.56 NATO barrel baseline; damage increased by 5 |
-| 5.56x45mm M855A1       | 62gr copper core FMJBT bullet   | 1843      | 43  | 20in     |                                                       |
-| .300BLK supersonic     | 125gr OTM                       | 1840      | 43  | 16in     |                                                       |
-| ,300BLK subsonic       | 220gr OTM                       | 675       | 26  | 16in     | subsonic                                              |
-| 7.62x54mmR             | 150gr FMJ bullet                | 3629      | 60  | 28in     |                                                       |
-| .308 Winchester        | 168gr hollow point bullet       | 3570      | 60  | 24in     |                                                       |
-| 7.62x51mm NATO M80     | 147gr FMJ bullet                | 3304      | 57  | 24in     |                                                       |
-| 7.62x51mm NATO M62     | 142gr tracer bullet             | 3232      | 57  | 24in     | Belt with 1/5 tracer rounds                           |
-| .270 Winchester        | 130gr soft point bullet         | 3663      | 61  | 24in     |                                                       |
-| .30-06 Springfield     | 165gr soft point bullet         | 3894      | 62  | 24in     | damage increased by 4                                 |
-| .30-06 M2              | 165.7gr AP bullet               | 3676      | 60  | 24in     | damage reduced by 10                                  |
-| .30-06 M14A1           | Incendiary ammunition           | 3894      | 62  | 24in     | damage reduced by 10                                  |
-| .45-70 Govt.           | 300gr soft point bullet         | 3867      | 66  | 24in     | damage increased by 4                                 |
-| .300 Winchester Magnum | 220gr JHP bullet                | 5299      | 73  | 24in     | damage increased by 5                                 |
-| .700 NX                | 1000gr JSP bullet               | 12100     | 110 | 28in     |                                                       |
-| .50 BMG Ball           | 750gr FMJ-BT bullet             | 17083     | 131 | 45in     |                                                       |
-| .50 BMG M33 Ball       | 706.7gr bullet                  | 18013     | 134 | 45in     |                                                       |
-| .50 BMG M903 SLAP      | 355gr tungsten AP bullet        | 17083     | 131 | 45in     | Can't be used with M107A1                             |
-| .410 000 shot          | 5 000 pellets                   | 1530      | 39  | 18in     |                                                       |
-
-###Adjustment Criteria If the resulting base damage is below specific thresholds, apply one of three
-multipliers. If the base damage is less than 20, the multiplier is 1.333. Else, if the base damage
-less than 30, the multiplier is 1.222. Else, if the base damage is less than 40, the multiplier is
-1.111. Ammunition with damage of 40 or higher will generally have no arbitrary multiplier given to
-its basic variant.
-
-For liminal cases where the base damage is 20, 30, or 40 there is room for discretion regarding
-which balance increase to apply, if any. Discretion should be exercised based on which solution
-makes that ammunition distinct from other ammunition of similar power, as having two different
-ammotypes with identical power should be avoided.
-
-As for terminal ballistics, hollowpoints variant should be at least 25% more effective against a
-completely unarmored target, in order for the difference to be considered relevant. Conversely, the
-base FMJ variation should have a combined damage and armor penetration whose total is at least 15%
-greater than the damage of the hollowpoint variant. This recommendation will inform how much armor
-penetration the two variants should have. Armor-piercing variants have seven-eigths the damage of
-the standard FMJ variant, and enough penetration to make the combined value 30% higher than the
-damage of hollowpoint.
-
-The relative combined damage plus armor penetration for each variant can likewise be summarized as
-follows:
-
-1. Hollowpoints are considered to have 100% combined damage (example: 100 damage, 0 arpen)
-2. Standard/FMJ variants are considered to have 115% combined damage, 80% damage and 35% arpen
-   (example: 80 damage, 35 arpen)
-3. AP variants are considered to have 130% combined damage, 70% damage and 60% arpen (example: 70
-   damage, 60 arpen)
-
-## Liquids
-
-Multi-charge items are weighed by the charge/use. If you have an item that contains 40 uses, it'll
-weigh 40x as much (when found in-game) as you entered in the JSON. Liquids are priced by the 250mL
-unit, but handled in containers. This can cause problems if you create something that comes in (say)
-a gallon jug (15 charges) and price it at the cost of a jug's worth: it'll be 15x as expensive as
-intended.
-
-To that end, here's a list of containers with non-one volume. If you have something spawn in 'em,
-divide the "shelf" price by this value to arrive at the correct price to list in the JSON.
-
-- plastic bottle: 2
-
-- glass jar: 2
-
-- glass bottle: 3
-
-- plastic canteen: 6
-
-- 3L glass jar: 12, as expected
-
-- gallon jug: 15
-
-## Diamond weapons
-
-Diamond weapons should be uniform in their CVD machine requirements. Coal requirements are
-`floor((weapon_volume+1)/2)*25`. Hydrogen requirements are `coal_requirements/2.5`.
+10 - **完全に信頼できる** 工場仕様または軍用規格のみ。拡張マガジンは不可。非常に稀。
+
+9 - **信頼できる** バースト射撃でのみ故障。工場または軍用規格マガジンのみ。拡張マガジンは不可。稀ではない。
+
+8 - **頼りになる** いずれの射撃モードでも故障は頻繁ではない。拡張マガジンおよび銃器修理キットを使用して作製されたマガジンで可能な最高の信頼性。最も一般的。
+
+7 - **実用可能** セミオートではめったに故障しないが、バーストではより頻繁に故障。多くの拡張マガジンやアフターマーケット品の銃器修理キットが含まれます。一般的。
+
+6 - **許容可能** 故障による問題を引き起こす可能性があります。銃器修理キットを使用せずに製作されたマガジンで可能な最高の信頼性。ほとんどの弾帯がここに含まれます。
+
+5 - **使用可能** 故障が問題になり、より深刻になる可能性があります。ほとんどが品質の悪い手作りのマガジン。
+
+<4 - **劣悪** 壊滅的なまでに故障による重大リスクがある。既定ではどのアイテムにも適用されませんが、ダメージやその他の要因によって取得する可能性があります。
+
+### 希少性
+
+全体的なバランスとしては、ピストルマガジンはライフルマガジンの2倍一般的であり、銃がマガジンと共に出現する場合、通常は標準容量バージョンであるということです。
+9 ✕ 19mmと.223を既定 (最も一般的) と見なし、それ以外のすべてはより稀であると見なします。特定の場所には、より具体的なバランス要件があります。
+
+| 場所              | 説明                                                           | 銃と一緒   | 損傷状態   | 例                        |
+| ----------------- | -------------------------------------------------------------- | ---------- | ---------- | ------------------------- |
+| Military site     | 軍用規格マガジンと弾帯の唯一の供給源                           | 決してない | 決してない | LW-56, .223 ammo belt     |
+| Gun store         | 標準および拡張容量マガジン                                     | 決してない | 決してない | STANAG-30, Glock extended |
+| Police armory     | 主にピストルマガジン、特に9x19mm、拡張は決してない             | 時々ある   | 決してない | Glock, MP5 magazine       |
+| SWAT truck        | 警察または軍用マガジン、ときおり拡張                           | 時々ある   | 稀に       | MP5 extended              |
+| Survivor basement | 軍用規格を除くあらゆるもの。一般的なタイプに重み付けされている | 頻繁にある | 時々ある   | Saiga mag, M1911 extended |
+| Military surplus  | 現行品ではない古い軍用マガジン                                 | 決してない | 稀に       | M9 mag, STEN magazine     |
+| Pawn shop         | 軍用規格を除くあらゆるもの。珍しい口径に重み付けされている     | 決してない | 稀に       | Makarov mag, AK-74 mag    |
+| Everywhere else   | 主に9mmと.223。常に標準マガジンと一緒                          | 頻繁にある | 時々ある   | Ruger 223 mag, M1911 mag  |
+
+## 弓のダメージ
+
+弓のダメージは、発射体の運動量に基づいています。矢とボルトは鋭い切断面を持つため、貫通力 (ダメージ) は、組織を切断する発射体の能力に基づいています。
+矢は、構造、素材、デザイン、そして最も重要なことに先端の有効性に基づく補正値を持ちます。基本ダメージは、運動量をSlug-foot-secondsで取得し、150を乗算し、32を減算することで計算されます。
+これは、評価の高いボウハンティングガイドラインを参考にし、クリティカルヒット時に様々な獲物を仕留めるために必要なダメージ数を決定することで導き出されました (詳細は tests/archery_damage_test.cpp)。
+
+## 弾薬の能力値
+
+### 基本ダメージ
+
+銃器弾薬のダメージ (**Dmg**) は、弾丸のジュール単位の銃口エネルギー (**Energy, J**) の平方根を最も近い整数に丸めた値から始まり、終端弾道学 (terminal ballistics) を考慮して増減されます。この数値は、特定の基準（下記の「調整基準」を参照）に応じて修正されます。手詰弾薬 (handloaded ammo) のダメージは、工場製の対応品の92%（切り捨て）に設定されます。反動を計算するための同様のシステムが計画されていますが、現在は作業が進められていません。能力値およびその他の関連情報を計算するために使用される数値は、以下の表に示されます。
+
+### 基本銃身長
+
+各弾薬には、基本銃身長(**Base Brl**) もリストされています。これは、関連する銃のダメージを決定します。銃器は、その実生活での銃身の長さによってダメージ補正値が決定されます。この表にリストされている基準線との間で3インチごと（約7.62cmごと）に、銃は1ポイントのボーナスまたはペナルティを受け、最も近い補正値に丸められます。例えば、7インチの銃身を持つ.45 ACP弾の銃は（5インチの基準線に対して）+1のボーナスを得ます。
+
+| Ammo ID                | 説明                            | Energy, J | Dmg | Base Brl | 適用される修正値 / コメント                        |
+| ---------------------- | ------------------------------- | --------- | --- | -------- | -------------------------------------------------- |
+| .22 CB                 | 18gr CB bullet                  | 39        | 6   | 7.87in   |                                                    |
+| .22LR                  | 40gr unjacketed bullet          | 141       | 12  | 6in      |                                                    |
+| .22LR FMJ              | 30gr FMJ bullet                 | 277       | 17  | 6in      |                                                    |
+| .32 ACP                | 60gr JHP bullet                 | 218       | 15  | 4in      |                                                    |
+| 7.62x25mm              | 85gr JHP bullet                 | 544       | 23  | 4.7in    |                                                    |
+| 7.62x25mm Type P       | 120gr bullet                    | 245       | 15  | 9.6in    | Type 64 SMGから発射；さらにデータが必要            |
+| 9x18mm 57-N-181S       | 93gr FMJ bullet                 | 251       | 16  | 3.8in    |                                                    |
+| 9x18mm SP-7            | 93gr bullet                     | 417       | 20  | 3.8in    |                                                    |
+| 9x18mm RG028           | 93gr hardened steel core bullet | 317       | 18  | 3.8in    | ダメージが4ポイント減少                            |
+| 9x19mm FMJ             | 115gr FMJ bullet                | 420       | 24  | 5.9in    |                                                    |
+| 9x19mm JHP             | 115gr JHP bullet                | 533       | 23  | 5.9in    | ダメージが4ポイント増加                            |
+| 9x19mm +P              | 115gr JHP bullet                | 632       | 25  | 5.9in    |                                                    |
+| 9x19mm +P+             | 115gr JHP bullet                | 678       | 26  | 5.9in    |                                                    |
+| .38 Special            | 130gr FMJ bullet                | 256       | 16  | 4in      |                                                    |
+| .38 FMJ                | 130gr FMJ bullet                | 256       | 16  | 4in      |                                                    |
+| .38 Super              | 147gr JHP bullet                | 660       | 26  | 4in      |                                                    |
+| 10mm Auto              | 180gr FMJ bullet                | 960       | 31  | 4in      |                                                    |
+| .40 S&W                | 135gr JHP bullet                | 575       | 24  | 4in      |                                                    |
+| .40 FMJ                | 180gr FMJ bullet                | 598       | 24  | 4in      |                                                    |
+| .44 Magnum             | 240gr JHP bullet                | 1570      | 40  | 7.5in    |                                                    |
+| .45 ACP JHP            | 185gr JHP bullet                | 614       | 25  | 5in      |                                                    |
+| .45 ACP FMJ            | 230gr FMJ bullet                | 447       | 21  | 5in      |                                                    |
+| .45 ACP +P             | 200gr JHP bullet                | 702       | 26  | 5in      |                                                    |
+| .454 Casull            | 300gr JSP bullet                | 2459      | 50  | 7.5in    |                                                    |
+| .45 Colt JHP           | 250gr JHP bullet                | 610       | 25  | 7.5in    |                                                    |
+| .500 S&W Magnum        | 500gr bullet                    | 3056      | 55  | 8.4in    |                                                    |
+| 4.6x30mm               | 31gr copper plated steel bullet | 505       | 22  | 7.1in    | ダメージが4ポイント減少                            |
+| 5.7x28mm SS190         | 31gr AP FMJ bullet              | 534       | 23  | 10.4in   | ダメージが3ポイント減少                            |
+| 7.62x39mm              | 123gr FMJ bullet                | 2179      | 46  | 16.3in   |                                                    |
+| 7.62x39mm 57-N-231     | 121.9gr steel core FMJ bullet   | 2036      | 45  | 16.3in   |                                                    |
+| 7.62x39mm M67          | 123gr FMJ bullet                | 2141      | 46  | 16.3in   | TODO                                               |
+| 5.45x39mm 7N10         | 56gr FMJ bullet                 | 1402      | 37  | 16.3in   | ダメージが3ポイント増加                            |
+| 5.45x39mm 7N22         | 57gr steel core FMJ bullet      | 1461      | 38  | 16.3in   |                                                    |
+| .223 Remington         | 36gr JHP bullet                 | 1524      | 39  | 20in     | 5.56 NATO銃身の基準を使用; ダメージが5ポイント増加 |
+| 5.56x45mm M855A1       | 62gr copper core FMJBT bullet   | 1843      | 43  | 20in     |                                                    |
+| .300BLK supersonic     | 125gr OTM                       | 1840      | 43  | 16in     |                                                    |
+| ,300BLK subsonic       | 220gr OTM                       | 675       | 26  | 16in     | 亜音速                                             |
+| 7.62x54mmR             | 150gr FMJ bullet                | 3629      | 60  | 28in     |                                                    |
+| .308 Winchester        | 168gr hollow point bullet       | 3570      | 60  | 24in     |                                                    |
+| 7.62x51mm NATO M80     | 147gr FMJ bullet                | 3304      | 57  | 24in     |                                                    |
+| 7.62x51mm NATO M62     | 142gr tracer bullet             | 3232      | 57  | 24in     | 5発に1発の曳光弾を含む弾帯                         |
+| .270 Winchester        | 130gr soft point bullet         | 3663      | 61  | 24in     |                                                    |
+| .30-06 Springfield     | 165gr soft point bullet         | 3894      | 62  | 24in     | ダメージが4ポイント増加                            |
+| .30-06 M2              | 165.7gr AP bullet               | 3676      | 60  | 24in     | ダメージが10ポイント減少                           |
+| .30-06 M14A1           | Incendiary ammunition           | 3894      | 62  | 24in     | ダメージが10ポイント減少                           |
+| .45-70 Govt.           | 300gr soft point bullet         | 3867      | 66  | 24in     | ダメージが4ポイント増加                            |
+| .300 Winchester Magnum | 220gr JHP bullet                | 5299      | 73  | 24in     | ダメージが4ポイント増加                            |
+| .700 NX                | 1000gr JSP bullet               | 12100     | 110 | 28in     |                                                    |
+| .50 BMG Ball           | 750gr FMJ-BT bullet             | 17083     | 131 | 45in     |                                                    |
+| .50 BMG M33 Ball       | 706.7gr bullet                  | 18013     | 134 | 45in     |                                                    |
+| .50 BMG M903 SLAP      | 355gr tungsten AP bullet        | 17083     | 131 | 45in     | Can't be used with M107A1                          |
+| .410 000 shot          | 5 000 pellets                   | 1530      | 39  | 18in     |                                                    |
+
+### 調整基準
+
+基本ダメージが特定のしきい値を下回る場合は、次の3つの乗数のいずれかを適用します。
+
+- 基本ダメージが20未満の場合、乗数は1.333。
+- 基本ダメージが30未満の場合、乗数は1.222。
+- 基本ダメージが40未満の場合、乗数は1.111。
+
+ダメージが40以上の弾薬は、その基本バリアントに対して任意の乗数が与えられることはありません。
+
+基本ダメージが20、30、または40の境界ケース(liminal cases)の場合、どのバランス増加を適用するかについて、裁量の余地があります。
+しかし、同じ威力の異なる弾薬が2つあることは避けるべきです。
+
+終端弾道学については、ホローポイントは、完全に非装甲のターゲットに対して少なくとも25%より効果的であるべきです。
+逆に、FMJは、合計値がホローポイントのダメージよりも少なくとも15%大きい複合ダメージと装甲貫通力を持つべきです。
+この推奨事項は、両バリアントがどれだけの装甲貫通力を持つべきか指標となる情報です。
+徹甲弾は、標準FMJの7/8のダメージを持ち、複合値がホローポイントのダメージよりも30%高い十分な貫通力を持ちます。
+
+各バリアントの相対的な複合ダメージと装甲貫通力は、次のように要約できます。
+
+1. ホローポイントは、100%の複合ダメージを持つと見なされます (例：ダメージ100、装甲貫通0)
+2. 標準/FMJは、115%の複合ダメージを持つと見なされます。内訳はダメージ80%、装甲貫通35% (例：ダメー
+   ジ80、装甲貫通35)
+3. A徹甲弾バリアントは、130%の複合ダメージを持つと見なされます。内訳はダメージ70%、装甲貫通60% (例：ダメージ70、装甲貫通60)
+
+## 液体
+
+複数チャージアイテムは、チャージ/使用量によって重量が計算されます。40チャージを持つアイテムがある場合、(ゲーム内で見つかったときに)JSONに入力した重量の40倍の重さになります。液体は250mL単位で価格設定されるが、容器で取り扱われます。これにより、例えばガロンの容器 (約3.78L/15チャージ)に入ったものを作成し、容器分の価格を設定した場合、意図した価格の15倍になるという問題が発生する可能性があります。
+
+このため、容量が1ではない容器のリストを以下に示します。これらのアイテムが出現する場合、JSONに正しい価格を記載するために、「shelf」価格をこの値で割ること。
+
+- ペットボトル (plastic bottle): 2
+
+- ガラス瓶 (glass jar): 2
+
+- ガラスボトル (glass bottle): 3
+
+- プラスチック水筒 (plastic canteen): 6
+
+- 3Lガラス瓶 (3L glass jar): 12 (予想通り)
+
+- ガロンジャグ (gallon jug): 15
+
+## ダイアモンド武器
+
+ダイアモンド武器は、CVD機械の要件において統一されるべきです。石炭の要件は
+`floor((weapon_volume+1)/2)*25`です。 水素の要件は `coal_requirements/2.5`です。
