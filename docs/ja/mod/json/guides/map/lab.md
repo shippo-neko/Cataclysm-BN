@@ -1,62 +1,50 @@
-# Writing Lab JSON
+# 研究所 JSON ドキュメント
 
-Labs are heavily randomized but have very few actual overmap terrain tiles, meaning that variety in
-the maps gets almost entirely using JSON. In particular, labs use place_nested extensively to
-randomly select submaps, such as new lab rooms.
+研究所 (Lab) は非常にランダム化されていますが、実際のオーバーマップ地形（overmap terrain）タイルはほとんど使用されていません。これは、マップの多様性がほぼ完全にJSONを使用して達成されていることを意味します。特に、研究所では `place_nested` が集中的に使用され、新しい研究所の部屋などのサブマップがランダムに選択されます。
 
-## Quick Guide for new lab areas:
+## 研究所エリア作成のクイックガイド:
 
-In lab_floorplans.json add a new mapgen json with om_terrain of lab_4side.
+`lab_floorplans.json` に、`om_terrain` を `lab_4side`とした新しいマップ生成JSONを追加してください。
 
-Keep the middle 2 spaces of each border clear, because that's where doors open out to. Some or all
-of the border spaces will be turned into 1-width walls between lab sections, so make sure the map
-'works' whether or not the outermost spaces are created or not (by keeping them clear, or having
-'disposable' furniture like counters, lockers, broken consoles, etc). Allow rotation.
+各境界の中央 2マスはドアが開く場所となるため、必ず空けておいてください。境界マスは、研究所のセクション間を隔てる 1マス幅の壁に変換されます。そのため、最も外側のマスが作成されるかどうかに関係なくマップが「機能する」ことを確認してください（それらのマスを空けるか、カウンター、ロッカー、壊れたコンソールなどの「使い捨ての備品（furniture）」を配置することで対応します）。マップの回転を許可してください。
 
-To add a lab finale instead, use the om_terrain of lab_finale_1level and put your JSON in
-lab_floorplans_finale1level.json instead.
+代わりに研究所のフィナーレを追加するには、`om_terrain` として `lab_finale_1level`を使用し、JSONを
+`lab_floorplans_finale1level.json` に配置してください。
 
-## Quick Guide for new lab dead-ends:
+## 研究所 行き止まり部屋作成のクイックガイド:
 
-In lab_floorplans_1side.json add a new mapgen json with om_terrain of lab_1side.
+`lab_floorplans_1side.json` に、`om_terrain` を `lab_1side`とした新しいマップ生成JSONを追加してください。
 
-Make the area facing north, keeping the 2 middle spaces of the northern border clear because that's
-where doors open out to. If you want to have a locked area, set the floor to 't_strconc_floor' and
-stairs won't appear there (this floor is ',' in the lab_palette). Use place_nested to place
-'lab_1side_border_doors' at coords `[0, 0]`. Do not allow rotation.
+エリアは北向きにしてください。北側の境界の中央 2マスはドアが開く場所となるため、空けておいてください。施錠されたエリアを設けたい場合は、床を `t_strconc_floor`に設定してください。そうすればそこに階段は出現しません (この床はlab_paletteでは`,`です)。`place_nested` を使用して座標 `[0, 0]` に
+`lab_1side_border_doors` を配置してください。マップの回転は許可しないでください。
 
-## Quick Guide for new lab rooms:
+## 研究所 部屋作成のクイックガイド:
 
-In lab_rooms.json add a new mapgen json with a nested_mapgen_id of lab_room_7x7 or lab_room_9x9 with
-a mapgensize of `[7, 7]` or `[9, 9]`.
+lab_rooms.json に、nested_mapgen_id を lab_room_7x7 または lab_room_9x9 とし、mapgensize を `[7, 7]` または `[9, 9]` とした新しいマップ生成 JSON を追加してください。
 
-In some rare cases the first row or column of terrain may be replaced with a border wall, so prefer
-layouts that look intact even if that occurs.
+ごくまれに、最初の行または列の地形が境界壁に置き換えられる可能性があるため、そのような場合でもそのままに見えるレイアウトを優先してください。
 
-If your layout needs to know where the doors of the room will open up into, instead use a
-nested_mapgen_id of lab_room_7x7_crossdoors and lab_room_9x9_crossdoors which will ensure that doors
-only appear in the exact middle of a wall.
+レイアウトで部屋のドアがどこに開くかを知る必要がある場合は、代わりに
+nested_mapgen_id を lab_room_7x7_crossdoors および lab_room_9x9_crossdoors としてください。これにより、ドアは壁のちょうど中央にのみ出現することが保証されます。
 
-# Lab JSON Full Guide
+# 研究所 JSON 完全ガイド
 
-## How area mapgen json works
+## エリアマップ生成 JSON の仕組み
 
-A lab is mostly made out of overmap tiles of type 'lab', 'lab_stairs', and typically one
-'lab_finale'.
+研究所は、主に 'lab'、'lab_stairs'、そして通常 1つの
+'lab_finale'タイプのオーバーマップタイルで構成されています。
 
-Lab terrain needs special treatment: stairs, border walls, dead-ends, and more, so JSON instead uses
-three 'fake' overmap tile types. Create a JSON mapgen object with om_terrain set to one of these,
-and the code will convert it and place it correctly on the map.
+研究所の地形には、階段、境界壁、行き止まりなど、特別な処理が必要です。そのため、JSON では 3つの「フェイク」オーバーマップ地形タイプを使用します。 om_terrain を以下のいずれかに設定した JSONマップ生成オブジェクトを作成すると、コードがそれを変換し、マップ上に正しく配置します。
 
-- lab_1side - placed when exactly one lab is adjacent, maps should assume a north-facing entrance.
-  Do not allow rotation.
-- lab_finale_1level - placed at the bottom of a lab on terrain types. Rotation optional.
-- lab_4side - all the other maps. Rotation optional.
+- lab_1side - 1つの研究所エリアが隣接している場合に配置されます。
+  マップは北向きのエントランスを前提とする必要があります。回転は許可しないでください。
+- lab_finale_1level - 地形タイプに基づいて研究所の最下層に配置されます。回転
+  は任意です。
+- lab_4side - 他のマップです。回転は任意です。
 
-## Border walls
+## 境界壁
 
-Labs have unusual borders: 1-width walls between lab areas, laid out on the south and east side of
-those tiles, potentially with metal doors in the middle of them, like so:
+研究所には特殊な境界があります。研究所エリア間の 1マス幅の壁であり、そのタイルの南側と東側に配置され、中央に金属製のドアが配置される可能性があります。以下はその例です。
 
 ```
 "                       |",
@@ -85,77 +73,58 @@ those tiles, potentially with metal doors in the middle of them, like so:
 "-----------MM----------|"
 ```
 
-If a north or west neighbor isn't a lab, the entire side gets needs to be overwritten with a wall,
-replacing whatever was normally there. If the east or south neighbor isn't a lab, that door needs to
-be overwritten with a wall.
+北または西の隣接タイルが研究所でない場合、その側全体を、元の地形に代えて壁で上書きする必要があります。
+東または南の隣接タイルが研究所でない場合は、そこにあるドアを壁で置き換えます。
 
-Some JSON maps can start from the above layout, disable rotation, and call place_nested with the
-'lab_border_walls' chunk in JSON. In this case, borders will be perfect and no additional code will
-fire.
+一部の JSON マップでは、上記のレイアウトを基準にし、回転を無効化したうえで、JSON 内で 'lab_border_walls' チャンクを指定して place_nested を呼び出すことができます。
+この場合、境界は正しく生成されるため、追加のコードは実行されません。
 
-But if borders have not been managed (determined by checking for the presence of an east-facing
-door/wall), then the code will create the lab border walls and doors on all four directions.
+一方、境界がまだ処理されていない場合（東側のドア／壁の有無によって判定）、コードは4方向すべてに研究所の境界壁とドアを生成します。
 
-'lab_border_walls' does not work on rotated maps, so rotated maps need to rely on hardcoded border
-wall generation. This is preferable because it creates more variety. So if a map layout is amenable
-to not knowing if the final 1x1 border around it will be placed or not, it is preferable to allow
-rotation and not place 'lab_border_walls'.
+'lab_border_walls'は回転したマップでは機能しません。そのため、回転されたマップはハードコードされた境界壁の生成に頼る必要があります。これは多様性が増すため、むしろ望ましい点でもあります。したがって、マップレイアウトが最終的に 1x1 の境界が配置されるかどうかを気にしなくてもよい場合には、回転を許可し、'lab_border_walls' を配置しない方が好ましいです。
 
-One middle-ground: If just part of the map needs to cares about where the border wall is to look
-correct, put a wall on the east-side of the map and only allow rotation of `[0, 1]`. That will
-ensure the wall gets placed on the east or south side of the map in the final rotation. See the
-"electricity room" floorplan for an example of this.
+折衷案として、マップの一部だけが境界壁の位置に対して正しく見えていればよい場合は、マップの東側に壁を配置し、回転を `[0, 1]` のみに制限してください。
+これにより、最終的な回転後も壁が必ずマップの東側または南側に位置するようになります。
+具体例は「electricity room」フロアプランを参照してください。
 
-## Other hardcoded map generation
+## その他のハードコードされたマップ生成方式の研究所
 
-Labs will have a small chance of randomly getting lights, the central & tower labs will always get
-them. Stairs will be placed on any empty thconc_floor space if the overmap indicated stairs. There's
-also a 10% chance of special effects like flooding, portals, radiation accidents, etc. Ant-infested
-labs will get bashed in.
+ランダムに照明が付く可能性がわずかにありますが、中央研究所 (central lab) とタワー研究所 (tower lab) は必ず照明を得ます。オーバーマップに階段が表示されている場合、その階段は空の t_thconc_floor のスペースに配置されます。また、浸水、ポータル、放射線事故などの特殊効果が 10% の確率で発生します。
+アリの巣に侵食された研究所は破壊された状態になります。
 
-None of these require json changes to enact, but JSON-ideas for lab special effects in rooms can be
-added to the spawn tables in lab_maybe_effects_7x7 and lab_maybe_effects_9x9. Currently this just
-adds spider-infestations.
+これらはいずれも適用に JSON の変更を必要としませんが、研究所の部屋に特殊効果を追加する JSON アイデアは lab_maybe_effects_7x7 および lab_maybe_effects_9x9 のスポーンテーブルに追加できます。
+現在、これにより追加されるのはクモの巣の侵入のみです。
 
-## Room generation
+## 部屋の生成
 
-The most common source of randomness _within_ a map is to create a 7x7 or 9x9 room and give it
-random contents by using place_nested. Don't place rooms directly, instead we use an intermediate
-map chunk called a 'spawn' which encodes more information and randomizes between all the kinds of
-rooms that would satisify those requirements.
+部屋の生成にランダム性を持たせる最も一般的な方法は、7x7 または 9x9 の部屋を作成し、place_nested を使って内容をランダム化することです。部屋を直接配置する代わりに、「スポーン」と呼ばれる中間のマップチャンクを使用します。これはより多くの情報をエンコードし、その条件を満たす部屋の中からランダム化を行う仕組みです。
 
-- lab_spawn_7x7 - a 7x7 room with no guarantees on where the doors are.
-- lab_spawn_7x7_crossdoors - a 7x7 room with doors only in the middle of each border wall.
-- lab_spawn_9x9 - a 9x9 room with no guarantees on where the doors are.
-- lab_spawn_9x9_crossdoors - a 9x9 room with doors only in the middle of each borders wall.
+- lab_spawn_7x7: ドアがどこにあるかの保証がない7x7の部屋。
+- lab_spawn_7x7_crossdoors: ドアが各境界壁の中央にのみある7x7の部屋。
+- lab_spawn_9x9: ドアがどこにあるかの保証がない9x9の部屋。
+- lab_spawn_9x9_crossdoors: ドアが各境界壁の中央にのみある9x9の部屋。
 
-Selecting a spawn will randomize between: `lab_room_[size]` plus the _rare variants, and the
-_crossdoors variants if applicable.
+スポーンを選択すると、`lab_room_[size]` に加えてレアなバリアント、そして該当する場合は
+_crossdoors バリアント間でランダム化されます。
 
-If your room is also amenable to having two of its walls redefined, you can also use these spawns to
-add in more randomized rooms that might modify the walls by adding windows, replacing walls with
-chainlink, or creating multiple doors and interior walls. These templates assume that there are no
-doors on the two walls which are not part of this submap. Note these submaps are sized 8x8 and 10x10
-because they include the walls to be modified.
+部屋の2つの壁が再定義されても差し支えない場合は、スポーンを使用して、窓の追加、壁のチェーンリンクへの置き換え、複数のドアと内部壁の作成など、壁を変更する可能性のあるランダム化された部屋を追加することもできます。これらのテンプレートは、サブマップの一部ではない2つの壁には、ドアがないことを前提としています。これらのサブマップは、変更する壁自体を含むため、サイズが8x8と10x10であることに注意してください。
 
 - lab_spawn_7x7_wall_nw
 - lab_spawn_7x7_wall_sw
 - lab_spawn_9x9_wall_nw
 - lab_spawn_9x9_wall_sw
 
-Use the most specific spawn possible.
+可能な限り最も具体的なスポーンを使用してください。
 
-## Directory
+## ディレクトリ
 
-- lab_central.json - hardcoded maps for the top of central lab.
-- lab_common.json - terrain palette, loot palettes, common json objects.
-- lab_escape.json - maps specifically for lab challenge escape, these are special placed on lvl 4 of
-  a lab.
-- lab_floorplan_cross.json - cross floorplans are unusual for having rock infill when bordering the
-  edge of the lab, with rare vaults.
-- lab_floorplans.json - the main source of lab layouts.
-- lab_floorplans_1side.json - dead-end floor plans.
-- lab_floorplans_finale1level.json - finale floorplans.
-- lab_rooms.json - randomized rooms.
-- lab_rooms_wall.json - randomized rooms which rewrite the wall borders.
-- lab_trains.json - tiles for the lab science train which rarely happens on levels 2 & 4.
+- lab_central.json - 中央研究所の最上部用のハードコードされたマップ。
+- lab_common.json - 地形パレット、戦利品パレット、一般的なJSONオブジェクト。
+- lab_escape.json - 挑戦-研究所 脱出専用マップ。これは研究所のレベル4に特別に配置されます。
+- lab_floorplan_cross.json - クロス・フロアは、研究所の端に隣接するときに岩石に埋め込まれ、レアな保管庫を持つという特徴があります。
+- lab_floorplans.json - 研究所レイアウトの主要なソース。
+- lab_floorplans_1side.json - 行き止まり部屋。
+- lab_floorplans_finale1level.json - 研究所フィナーレ(1階層) 用部屋。
+- lab_rooms.json - ランダム化された部屋。
+- lab_rooms_wall.json - 壁の境界線を書き換えるランダム化された部屋。
+- lab_trains.json - レベル2と4でまれに生成される科学研究所列車基地用のタイル。
