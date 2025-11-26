@@ -1,48 +1,45 @@
-# Adding Json Roof Guide
+# JSONによる屋根の追加ガイド
 
-Adding json roofs to a building involves using a few more files to link the roof and building
-together during mapgen.
+建物にJSONの屋根を追加するには、 マップ生成処理中に屋根と建物を連携させるために、いくつかのファイルを使用する必要があります。
 
-Files that will be edited:
+編集対象のファイル:
 
-`data/json/mapgen/[name of building].json` : the map of the building and roof.
+`data/json/mapgen/[name of building].json` : 建物と屋根のマップ。
 
-`data/json/overmap_terrain.json` : defines the building's overmap characteristics.
+`data/json/overmap_terrain.json` : 建物のオーバーマップ特性を定義します。
 
-`data/json/regional_map_settings.json` : defines the building's overmap spawn settings.
+`data/json/regional_map_settings.json` : 建物のオーバーマップスポーン設定を定義します。
 
-`data/json/overmap/multietile_city_buildings.json` : links the building layers together.
+`data/json/overmap/multietile_city_buildings.json` : 建物のレイヤーを相互にリンクします。
 
-## Making the Roof Map
+## 屋根マップの作成
 
-Refer to [MAPGEN](../reference/map/mapgen) for creating the map if you are new to map creation.
+マップ作成が初めての場合、マップ作成については [MAPGEN](../reference/map/mapgen) を参照してください。
 
-Open the file that contains the map for the building `data/json/mapgen/[name of building].json` Add
-a new entry for the roof. You can copy the building entry since you want the same foundation
-footprint for the roof.
+建物のマップを含むファイル `data/json/mapgen/[name of building].json` を開き、屋根のために新しいエントリを追加します。
+屋根にもメインフロアと同じ基礎のフットプリントが必要なので、建物のエントリをコピーします。
 
-Give the roof a unique om_terrain ID. Below is an example of the main floor and roof om_terrain IDs
+屋根に固有の om_terrain ID を割り当てます。以下はメインフロアと屋根の om_terrain ID の例です。
 
 ```json
 "om_terrain": [ "abstorefront" ],
 "om_terrain": [ "abstorefront_roof" ],
 ```
 
-Note: If you are adding a roof to an existing building that shares a common om_terrain ID with other
-maps, you will need to change the om_terrain ID for the existing floor to be unique.
+注釈: 既存の建物に屋根を追加する場合、その建物が他のマップと共通の om_terrain ID を共有している場合、
+既存のフロアの om_terrain ID を固有のものに変更する必要があります。
 
-Keep the outline of the walls from the original floor, Add `t_open_air` outside the building and a
-`t_flat_roof` over the building's footprint. There are a few flat roof terrains to choose from in
-terrain.json.
+元のフロアの壁の輪郭を維持し、建物の外側には `t_open_air` を、建物のフットプリントの上には `t_flat_roof` を追加します。
+terrain.json には選択できる平らな屋根の地形がいくつかあります。
 
-There are a number of terrains and furniture structures for roofs including gutters, chimneys, and
-roof turbine vents. Browse json/terrain.json and furniture.json for ideas. Consider roof access, you
-can use ladders, stairs and gutters. Some furniture is also climbable.
+屋根には、雨樋、煙突、屋根タービン換気扇など、多くの地形や備品、構造物があります。
+詳細については `json/terrain.json` および `furniture.json` を参照してください。
+屋根へのアクセスを考慮し、はしご、階段、雨樋を設置できます。一部の備品はよじ登ることも可能です。
 
-There is a set of optional nested map chunks at `data/json/mapgen/nested_chunks_roof.json` if you'd
-like to incorporate them. Add any new nested chunks for roofs here as well.
+オプションの入れ子マップチャンクのセットが `data/json/mapgen/nested/roof_nested.json` にあります。
+これらを組み込みたい場合は使用してください。屋根用の入れ子チャンクもここに追加します。
 
-Sample roof entry:
+屋根のエントリ例:
 
 ```json
 {
@@ -107,13 +104,9 @@ Sample roof entry:
 }
 ```
 
-## Linking the main floor and the roof
+## メインフロアと屋根のリンク
 
-Navigate to `json/overmap/multitile_city_buildings.json` or
-`json/overmap/multitile_buildings_terrain.json` for buildings taking up more then one overmap tile
-per z level (schools, mansions). Add an entry for the main floor. The `point` coordinates define to
-the x, y, z positions of the building. The 1 places the roof one z level above the ground floor.
-Append north for rotating buildings to orient the z levels.
+`json/overmap/multitile_city_buildings.json` または、1つのZレベルで複数のオーバーマップタイルを占有する建物（学校、邸宅など）の場合は `json/overmap/multitile_buildings_terrain.json` に移動します。メインフロアのエントリを追加します。 `point` 座標は、建物の x、y、z の位置を定義します。1 は、屋根が地上階よりZレベルで1つ上に配置されることを示します。建物を回転させる場合は、Zレベルの向きを決定するために `north` を付加します。
 
 ```json
 {
@@ -127,13 +120,12 @@ Append north for rotating buildings to orient the z levels.
 }
 ```
 
-## Overmap Specials
+## オーバーマップスペシャル
 
-Overmap specials are handled a little differently. They use `json/overmap/specials.json` for both
-linking z levels and overmap spawning. A special won't need an entry in
-`data/json/regional_map_settings.json`
+オーバーマップスペシャルの扱いは、若干異なります。これらは、Zレベルの関連付けとオーバーマップへのスポーンの両方に `json/overmap/specials.json` を使用します。スペシャルは、
+`data/json/regional_map_settings.json` にエントリを必要としません。
 
-Overmap special example:
+オーバーマップスペシャルの例:
 
 ```json
 {
@@ -156,11 +148,9 @@ Overmap special example:
 }
 ```
 
-## Adding the overmap_terrain entry
+## オーバーマップ地形エントリの追加
 
-Navigate to `data/json/overmap_terrain.json` Every z level gets an entry that defines how it appears
-on the overmap. The name field will determine what is displayed in the in-game overmap. The entries
-should share the same color and symbol.
+`data/json/overmap_terrain.json` へ移動してください。すべてのZレベルに対して、オーバーマップ上でどのように表示されるかを定義するエントリが必要です。nameは、ゲーム内のオーバーマップ画面で表示される名称です。エントリは、同じ色(color)とシンボル(sym)を共有する必要があります。
 
 ```json
   {
@@ -181,18 +171,16 @@ should share the same color and symbol.
 }
 ```
 
-## Adding to regional_map_settings
+## regional_map_settings への追加
 
-Navigate to `data/json/regional_map_settings.json`
+`data/json/regional_map_settings.json`へ移動してください。
 
-This determines the spawn frequency and location of non-special buildings. Find the appropriate
-category for your building and add either the overmap_special ID or the city_building ID and include
-a spawn weight.
+これは、スペシャルではない建物（一般的な建物）のスポーン頻度と位置を決定します。あなたの建物に適切なカテゴリを見つけ、overmap_special ID または city_building ID のいずれかを追加し、スポーン重み（weight）を含めてください。
 
 ```json
 "abandonedwarehouse": 200,
 ```
 
-When testing you can increase the spawn rate if you want to survey your work using natural spawns.
+テスト時には、自然スポーンを利用して作業内容を調査したい場合、スポーン率を増やすことができます。
 
-Finally, always [lint](http://dev.narc.ro/cataclysm/format.html) your additions before submitting.
+最後に、提出する前に、必ず追加した定義を [lint](http://dev.narc.ro/cataclysm/format.html) してください。
