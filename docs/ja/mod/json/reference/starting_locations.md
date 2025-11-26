@@ -1,6 +1,6 @@
-# Starting locations
+# 開始位置
 
-Starting locations are specified as JSON object with "type" member set to "start_location":
+開始位置は、JSONファイル内の "type" に "start_location"を指定することで設定できます。
 
 ```json
 {
@@ -12,25 +12,24 @@ Starting locations are specified as JSON object with "type" member set to "start
 }
 ```
 
-The id member should be the unique id of the location.
+"id" は、開始位置の固有IDを指定する必要があります。
 
-The following properties (mandatory, except if noted otherwise) are supported:
+以下の要素がサポートされています（いずれも特に断りのない限り、必須です）：
 
 ## `name`
 
-(string)
+(文字列)
 
-The in-game name of the location.
+ゲーム内での、この開始位置の表示名です。
 
 ## `target`
 
-(string)
+(文字列)
 
-The id of an overmap terrain type (see overmap_terrain.json) of the starting location. The game will
-chose a random place with that terrain.
+開始位置となるオーバーマップ地形タイプのIDです (overmap_terrain.jsonを参照) 。ゲームは、その地形属性を持つ場所の中からランダムな地点を選択します。
 
 ## `flags`
 
-(optional, array of strings)
+(省略可能, 文字配列)
 
-Arbitrary flags. Mods can modify this via "add:flags" / "remove:flags". TODO: document them.
+任意のフラグを指定します。MODは "add:flags" や "remove:flags"を介してフラグを変更できます。TODO: これらについては文書化が必要です。
