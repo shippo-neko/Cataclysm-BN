@@ -1,97 +1,75 @@
-# Guide for basic mapgen
+# マップ生成の基本ガイド
 
-This guide will cover the basics of mapgen, which files you need to edit, the tags in each file and
-the differences in creating specials or regular city buildings.
+本ガイドでは、マップ生成の基本、編集が必要なファイル、各ファイル内のタグ、そしてスペシャル（特殊な構造物）と通常の都市内建物を作成する際の相違点について解説します。
 
 [For full technical information about mapgen entries, visit here](../../reference/map/mapgen)
 
-First, lets cover some basic concepts and the files you'll add or edit.
+まず、いくつかの基本的な概念と、追加・編集するファイルについて説明します。
 
-## General comments:
+## 一般的なコメント:
 
-CDDA mapgen is surprisingly powerful once you get used to working with it. You can use lots of
-tricks to add variability and interest to your maps. Most advanced mapgen techniques will go into a
-different tutorial. This one covers basic concepts and how to create a basic single OMT (overmap
-terrain tile)sized building. We will touch on palette usage and how to add a roof as well.
+BN のマップ生成は、慣れると驚くほど強力です。多くの工夫を凝らして、マップに多様性と面白さを加えることができます。より高度なマップ生成技術については、別のチュートリアルで扱います。本ガイドでは、基本的な概念と、単一 OMT（オーバーマップ地形タイル）サイズの基本的な建物を生成する方法を扱います。パレットの使用法や、屋根の追加方法についても触れます。
 
-## Specials vs. city buildings:
+## スペシャル vs. 都市内建物:
 
-A special is a building that spawns outside the city and requires additional information to spawn,
-like its distance from cities and valid OMT terrain types. They also used to be the only multi-tile
-buildings in the game until recent changes allowed special type buildings to spawn inside cities.
-Examples of specials are: farms, cabins, LMOE, etc.
+スペシャルは、都市外に出現し、都市からの距離や有効な OMT 地形タイプなどの、追加情報が必要な建物です。最近の変更でスペシャルタイプの建物が都市内にも出現できるようになりました。昔はゲーム内で唯一の複数タイル建物でした。スペシャルの例としては、農場、山小屋、LMOEシェルターなどがあります。
 
-City buildings can be single or multi-tile in size and have their spawns limited to the city
-boundaries. A building can be both a city building and a special but would require both sets of
-entries to spawn for both types. Some motels are examples of this (see: 2fmotel_city & 2fmotel).
+都市内建物は、シングルまたはマルチタイルサイズが可能で、出現は都市の境界内に限定されます。建物は都市内建物とスペシャルの両方として定義できます。両方のタイプで出現させるには、両方のエントリセットが必要です。一部のモーテル (例：2fmotel_city と 2fmotel) がこれに該当します。
 
-Important policy: since the roof project, all buildings are now multi-tile across z levels. All new
-buildings should always get a JSON roof added. Soon, all basements will also be custom fit to the
-ground floor mapgen, so it is good practice to include dedicated downstairs if you want a basement.
+重要な方針: ルーフプロジェクト以降、すべての建物は Z レベルをまたぐマルチタイルとなりました。すべての新しい建物には、必ずJSONファイル内で屋根を追加する必要があります。近いうちに、すべての地下室も地上階のマップ生成に合わせてカスタムフィットされるようになるため、地下室が必要な場合は専用の階下を含めるのが良い慣行です。
 
-## The Files & their purpose:
+## 必須ファイルとその目的:
 
-1. You will add a new mapgen file in:
-   [data/json/mapgen](https://github.com/cataclysmbnteam/Cataclysm-BN/tree/main/data/json/mapgen) or
-   one of its sub-folders. If you are using an existing foundation shape for the building, you may
-   append it to that building's file.
-   - This is the blueprint for the building. It can also hold all the building’s data for adding
-     furniture and loot (see palette for an alternative).
+1. 新しいマップ生成ファイルを次の場所に追加します。
+   [data/json/mapgen](https://github.com/cataclysmbnteam/Cataclysm-BN/tree/main/data/json/mapgen) またはサブフォルダ。既存の建物の基礎形状を使用する場合は、その建物のファイルに追記しても構いません。
+   - 建物の設計図です。家具や戦利品を追加するための建物データも保持できます（代替案としてパレットを参照）。
 
-2. You will add entries for each z level you create in the appropriate overmap_terrain file
-   ([data/json/overmap/overmap_terrain](https://github.com/cataclysmbnteam/Cataclysm-BN/tree/main/data/json/overmap/overmap_terrain)).
-   - These entries will define what your building looks like in the overmap, its symbol, color, and
-     spawn requirements like adding sidewalks, it will also control flags for some mapgen functions.
+2. 作成する Z レベルごとに、オーバーマップ地形ファイル
+   ([data/json/overmap/overmap_terrain](https://github.com/cataclysmbnteam/Cataclysm-BN/tree/main/data/json/overmap/overmap_terrain))にエントリを追加します。
+   - エントリは、オーバーマップ上で建物がどのように見えるか、シンボル、色、および歩道の追加な
+     どの出現要件を定義します。また、一部のマップ生成機能のフラグを制御します。
 
-3. You will add an entry into either specials.json or multitile_city_buildings.json depending on if
-   it is a special or a city building.
-   - For multitile_city_buildings this will link the various z levels &/or multiple OMTs of your
-     building.
-   - For specials, this will link the various z levels or multiple OMTs of your building, define any
-     needed road/subway/etc. connections, and define its spawning parameters.
+3. スペシャル、都市内建物に応じて、specials.json または
+   multitile_city_buildings.json のいずれかにエントリを追加します。
+   - multitile_city_buildings の場合、建物の様々な Z レベルや複数の OMT をリンクします。
+   - スペシャルの場合、建物の様々なZレベルや複数のOMTをリンクし、必要な道路/地下鉄などの接続を定義し、出現
+     パラメータを定義します。
 
-4. Add an entry into regional_settings.json for city buildings. This will allow them to spawn in the
-   world.
+4. 都市内建物については、regional_settings.json にエントリを追加します。世界に出現できるようになります。
 
-5. Optional but recommended for any large project: adding a new palette file into mapgen_palettes
-   folder (you may use any existing palette too).
-   - This is a file that can be shared among several maps that holds a portion of the mapgen file
-     data. It is commonly used for defining terrain and furniture. You can also put in loot,
-     vehicle, monster spawns and any other data that normally goes in the `"object"` tag of the
-     mapgen file.
-   - Please avoid editing existing mapgen palettes because you may affect existing maps using a
-     combination of the palette and the mapgen file.
+5. 省略可能ですが、大規模なプロジェクトでは推奨されます: mapgen_palettes フォルダに新しいパレットファイル
+   を追加します（既存のパレットを使用しても構いません）。
+   - これは、複数のマップ間で共有でき、マップ生成ファイルデータの一部を保持するファイルです。地形と家具の
+     定義に一般的に使用されます。また、戦利品、車両、モンスターのスポーン、および通常マップ生成ファイルの `"object"` タグに入るその他のデータを配置することもできます。
+   - 既存のマップ生成パレットの編集は避けてください。なぜなら、パレットとマップ生成ファイルの組み合わせ
+     を使用している既存のマップに影響を与える可能性があるためです。
 
-## Starting the mapgen entry:
+## マップ生成エントリの開始:
 
-When I start a new map project, I generally will add in all the entries I need for it to spawn in
-game from the outset. This way I can test it as I work on it and adjust it as needed. So, I
-recommend setting up all the needed files when you begin your project.
+私が新しいマッププロジェクトを開始するときは、ゲーム内に出現するために必要なすべてのエントリを最初から追加します。こうすることで、作業を進めながらテストし、必要に応じて調整できます。したがって、プロジェクトを開始する際には必要なすべてのファイルを設定することをお勧めします。
 
-Before beginning you’ll want to make some decisions:
+開始する前に、いくつかの決定を行う必要があります。
 
-1. What size will it be overall (how many OMTs?)
-2. Where will it spawn?
-3. Will I use a palette or put everything in the mapgen file.
-   - If you use a palette, define as much of it as possible from the outset.
+1. 全体のサイズはどのくらいか (OMTの数はいくつになるか？)
+2. どこに出現させるか？
+3. パレットを使用するか、すべてのデータをマップ生成ファイルに直接記述するか。
+   - パレットを使用する場合は、できるだけ多くの部分を最初から定義します。
 
-4. Advanced questions:
-   - Will I use nested maps?
-   - Do I want it to connect to the subways or roads?
-   - Will I be using the mapgen object data in combination with a palette (see the mall 2nd floor if
-     you want a master class in combined usage of both types)?
+4. より高度な質問:
+   - ネストされたマップを使用するか？
+   - 地下鉄や道路に接続させたいか？
+   - パレットと組み合わせてマップ生成オブジェクトデータを使用するか？(両方のタイプを複合させた
+     例については、モールの2階を参照してください)
 
-## The mapgen map:
+## マップ生成マップ:
 
-This covers the mapgen file map flags and what they do in layman’s terms. You can get more extensive
-information from [MAPGEN](../../reference/map/mapgen).
+ここでは、マップ生成ファイル内のマップフラグと、何をするかを説明します。より広範な情報については、[MAPGEN](../../reference/map/mapgen)を参照してください。
 
-the mapgen file has some meta data tags and the `"object"` data which defines everything to make the
-map.
+マップ生成ファイルには、いくつかのメタデータタグと、マップ作成のすべてを定義する `"object"` データが含まれています。
 
-### The metadata:
+### メタデータ:
 
-Sample:
+サンプル:
 
 ```json
 "type": "mapgen",
@@ -100,31 +78,22 @@ Sample:
 "weight": 250,
 ```
 
-1. `"type"` will always be mapgen (we'll cover other map types in future tutorials), the `"method"`
-   will always be JSON. This data tells the program how to treat this file.
+1. `"type"` は mapgen になります (他のマップタイプについては今後のチュートリアルで扱います)。`"method"`
+   は JSONになります。このデータは、プログラムにこのファイルをどのように処理するかを指示します。
 
-2. `"om_terrain"`: this is basically your internal name for the map (not the name that shows up on
-   the overmap). It should usually be unique unless you plan on having multiple variants of the same
-   map which **share the same building foundation shape** (note: I mean the actual shape of the
-   building's foundation).
+2. `"om_terrain"`: マップの内部名です (オーバーマップに表示される名前ではありません)。
+   **同じ建物の基礎形状を共有する** 複数のバリアントを作成する予定がない限り、固有名の必要があります。
 
-3. `"weight"`: This entry is the weight of this particular map compared to others **sharing the same
-   om_terrain name**. So, say you have one version of a house then you make an identical house with
-   different spawns (like a fully furnished house and an abandoned version). This weight will
-   determine how often each spawns in relation to the other. Say the furnished house is at 100, and
-   the abandoned one is at 20. So, it'll spawn 5x less than the furnished house.
+3. `"weight"`: **同じ om_terrain 名を共有する**他のマップと比較した、このマップ自体の重み
+   です。例えば、あるバージョンの家があり、異なる出現を持つ同一の家 (家具が完全に揃っている家と廃墟バージョンのような) を作成するとします。この重みは、それぞれが他のマップに対してどれくらいの頻度で出現するかを決定します。家具付きの家が 100 で、廃墟の家が 20 の場合、廃墟の家は家具付きの家より 5 分の 1 の頻度で出現します。
 
-### The object data:
+### オブジェクトデータ:
 
-This is the section of tags that defines your map, its terrains, furniture, and various spawn types.
-There are several ways to place items (and nested maps). These deserve their own tutorial. For this
-document we'll be using "explicit symbol" placement for loot spawns, the easiest to use. Everything
-in the object section can be placed in a mapgen_palette except rows and fill_ter.
+マップの地形、家具、および様々な出現タイプを定義するタグのセクションです。アイテム（およびネストされたマップ）を配置する方法はいくつかあります。これらは独自のチュートリアルに値します。本ドキュメントでは、戦利品出現に最も使いやすい「明示的なシンボル」配置を使用します。rows と fill_ter を除くオブジェクトセクション内のすべては、mapgen_palette に配置できます。
 
-Sample object segment: everything in the object needs to fall within the object's {} braces or it
-won't be included. If you misplace the end bracket, you probably won't get a loading error.
+オブジェクトのサンプルセグメント：オブジェクト内のすべては、オブジェクトの {} 中括弧内に収まる必要があります。そうでない場合、含まれません。終了中括弧を間違った場所に置いても、ロードエラーは発生しない可能性があります。
 
-Sample:
+サンプル:
 
 ```json
 "object": {
@@ -243,57 +212,45 @@ Sample:
 }
 ```
 
-1. The `"fill_ter"`: this tag defines the default terrain/flooring for use under furniture and for
-   undefined symbols in your rows. Generally, pick the terrain that has the most furniture
-   associated with it.
+1. `"fill_ter"`: 家具の下や row 内で未定義のシンボルに使われている既定の地形または床材を定義します。
+   一般的に、最も多くの家具と関連付けられている地形を選択してください。
 
-2. The `"rows"`: this is the actual blueprint for your building. A standard OMT tile (overmap tile)
-   is 24x24 tiles. Rows begin their x,y coordinates at 0,0 which is the upper left corner of your
-   map.
-   - tip: if you cross stitch or are familiar with cross stitch patterns, this should all look very
-     familiar. You have the map and the "legend" areas.
+2. `"rows"`: 建物の実際の設計図です。標準的な OMT タイル (オーバーマップタイル) は 24x24
+   タイルです。rows は、マップの左上隅である 0,0 から X,Y 座標を開始します。
 
-3. `"terrain"`: this defines what all those letters in the rows mean when they are terrains. A
-   symbol can return a single terrain, or, it can offer a chance to spawn from a selection of
-   terrains. Here are some quick examples:
+   - ヒント: クロスステッチをしている方や、そのパターンに慣れている方には、非常に馴染み深く見えるはずです。マ
+     ップと「凡例」のエリアがあります。
 
-`"*": "t_door_c",`: this will make every * in the rows a closed wooden door.
+3. `"terrain"`: rows 内の全ての文字が地形である場合の意味を定義します。
+   シンボルは単一の地形を返すことも、選択された地形の中から出現するチャンスを提供することもできます。
+   簡単な例をいくつか示します。
+
+`"*": "t_door_c",`: これにより、rows 内のすべての * が閉じた木製ドアになります。
 
 `"*": [ [ "t_door_locked_peep", 2 ], "t_door_locked_alarm", [ "t_door_locked", 10 ], "t_door_c" ],`:
-this array will randomly choose from a selection of doors. Some are weighted to have a higher chance
-to spawn then others. Locked doors will be most common, then peephole doors. Finally closed &
-locked/alarmed have the same basic weight and will spawn the least.
+この配列は、ドアのグループからランダムに選択します。一部のドアは、他のドアよりも出現率が高くなるように重みが付けられています。施錠されたドアが最も確率が高く、次いで覗き穴付きのドアが続きます。最後に、閉じたドアと施錠/警報付きドアは同じ重みを持ち、最も低い確率で出現します。
 
-_Note: in my example, the fill_ter is for floor. So if you have furniture that you want to spawn
-with a different floor, you must use that same symbol that you've given the furniture and also
-define it as a terrain for your new flooring. In the above example, several furniture symbols are
-using white linoleum for their flooring. If you don't do this step, your furniture will end up
-having the wrong flooring which will be especially noticeable if you smash it. I often do a final
-map check where I go around in game and smash furniture to check their terrains before submitting my
-maps. This can be quite cathartic._
+注釈: 例では、fill_ter は床用です。別の床に出現させたい家具がある場合は、その家具に定義したシンボルを使用し、新しい床材の地形として定義する必要があります。上記の例では、複数の家具シンボルが白いリノリウムを床材として使用しています。このステップを省略すると、家具が間違った床材を持つことになり、特にそれを破壊したときに目立ちます。私はしばしば、マップを提出する前に、ゲーム内で家具を破壊して地形をチェックする最終マップチェックを行います。これは非常にカタルシスを得られる作業です。
 
-4. `"furniture"` tag: Like terrain, this is a list of the furniture ID's and their map symbols. It
-   can handle the same sort of arrays as terrain.
+4. `"furniture"` タグ: 地形と同様に、家具IDとマップシンボルの一覧です。地形と同じ種類の配列を扱うこと
+   ができます。
 
-5. `"toilets"` and other specially defined furniture: you'll run into some specially defined common
-   furniture which allows for some easier placement. In our sample map the entry:
-   `"toilets": { ";": {  } },` defines the symbol entry and will also auto-place water in your
-   toilets. There are a few other specialty furniture entries.
+5. `"toilets"` およびその他の特殊な定義を持つ家具: いくつかの特殊な定義を持つ家具に出くわすでしょう。
+   これにより、配置が容易になります。私たちのサンプルマップの
+   `"toilets": { ";": {  } },` というエントリは、シンボルエントリを定義し、トイレに水も自動的に配置します。
+   他にもいくつかの特殊な家具エントリがあります。
 
-The other most common one is:
+他に最も一般的なものは以下です:
 `"vendingmachines": { "D": { "item_group": "vending_drink" }, "V": { "item_group": "vending_food" } }`
-this assigns two symbols for vending machines and makes one for food & one for drinks. _note: you
-can put any item_group into the machines, like those bullet ones_.
+これは、自動販売機に2つのシンボルを割り当て、1つを飲み物用、もう1つを食品用にします。
+(注釈: 弾薬グループなど、任意のアイテムグループを機械に入れることができます)。
 
-6. Item spawns: There are many ways to place items. This tutorial will only cover explicit symbol
-   placement which is the easiest. There is documentation all about loot spawns you can read for
-   further information. See: [ITEM_SPAWN.md](../../reference/items/item_spawn).
+6. アイテム配置: アイテムを配置する方法はたくさんあります。このチュートリアルでは、最も簡単なシンボル配
+   置のみを扱います。さらなる情報については、戦利品配置に関するドキュメント: [ITEM_SPAWN.md](../../reference/items/item_spawn)を参照してください。
 
-our sample uses "items": for its tag. others include: "place_item", "place_items", "place_loot".
-Some of these allow for individual item placement and others groups, or both. This will be covered
-in another tutorial.
+サンプルではタグに "items" を使用しています。他には、"place_item"、"place_items"、"place_loot"があります。一部は個別にアイテム配置し、他はグループ、または両方できます。これについては別のチュートリアルで扱います。
 
-For now lets break this one apart:
+ここでは、このサンプルを分析してみましょう。
 
 ```json
 "items": {
@@ -305,19 +262,11 @@ For now lets break this one apart:
       }
 ```
 
-"a" in this case is a fireplace as defined in its map. So, in the fireplace I want to add the
-stash_wood item_group. By defining the group under "a", every fireplace in my map will get this
-group. This is particularly powerful for common item_groups like in houses where every fridge is
-going to get the same item_group. The chance is its spawn chance and repeat means that it will
-repeat the roll for that chance 2-5 times, so this fireplace can be extra stocked or have a little
-bit or nothing if it fails its chance rolls.
+この場合、`"a"`はマップで定義された暖炉です。暖炉に`stash_wood` アイテムグループを追加したいとします。グループを `"a"` の下に定義することで、マップ内のすべての暖炉がこのグループを受け取ります。すべての冷蔵庫が同じアイテムグループを受け取る家などの一般的なアイテムグループにとって特に強力です。`chance` は出現確率であり、`repeat` はその確率でロールを 2〜5 回繰り返すことを意味します。そのため、この暖炉は薪が満載になることも、少ししかないこと、または確率ロールに失敗すれば何もないこともあります
 
-the "d" entry is a dresser. I wanted the dressers to pull from two possible item groups, one a man's
-selection and the other women’s. So, there is an array `[ ... ]` which encompasses all possible
-item_groups for this symbol.
+`"d"` はドレッサーです。ドレッサーに2つのアイテムグループ、男性用と女性用の選択肢から取得させたいと考えました。したがって、このシンボルのすべてのアイテムグループを包含する配列 `[ ... ]` があります。
 
-You can add as many item_groups to the array as you'd like. This is one of my racks in the generic
-house palette:
+配列には、好きなだけアイテムグループを追加できます。これは、汎用的な家のパレットにある棚の1つです。
 
 ```json
 "q": [
@@ -329,37 +278,28 @@ house palette:
       ],
 ```
 
-_Note: When using explicit symbol placements, remember your group has a chance to spawn in every
-furniture using that symbol, so it can end up being quite generous. If you want two bookcases with
-different item spawns, give each bookcase its own symbol, or, use an alternate item spawn format,
-like the one using x,y coordinates for placement._
+注釈: シンボル配置を使用する場合、グループはそのシンボルを使用しているすべての家具に出現するチャンスがあることを忘れないでください。したがって、非常に寛大になる可能性があります。出現アイテムが異なる 2つの本棚が必要な場合は、それぞれに独自のシンボルを与えるか、配置に X,Y 座標を使用する別のアイテム配置形式を使用してください。
 
-1. Monster spawns: our example has two types of monster spawns listed.
+7. モンスターの配置: 以下の例には、2種類のモンスター配置方法があります。
 
 ```json
 "monsters": { "!": { "monster": "GROUP_COFFEE_SHOP_ZOMBIE", "chance": 1 } },
 "place_monsters": [ { "monster": "GROUP_ZOMBIE", "x": [ 3, 17 ], "y": [ 13, 18 ], "chance": 1 } ],
 ```
 
-The first entry is using that explicit symbol placement technique. The end entry is using a range
-x,y coordinates to place monsters. _Note: We are moving away from putting monsters in the mapgen
-file in favor of overmap_terrain entries, so only use this if you want a specific monster group to
-spawn for specific reasons. See overmap_terrain section for more information._
+最初の `"monsters"`は、シンボル配置を使用しています。
+最後の `"place_monsters"`は、範囲 X,Y 座標を使用してモンスターを配置しています。
+注釈: モンスターをマップ生成ファイルに配置するのではなく、オーバーマップ地形に配置する方向に移行しているため、特別な理由でモンスターグループを出現させたい場合にのみ使用してください。詳細については、`overmap_terrain` セクションを参照してください。
 
-8. Vehicle spawns:
+1. 車両の配置:
 
 ```json
 "vehicles": { "c": { "vehicle": "swivel_chair", "chance": 100, "status": 1 } }
 ```
 
-Our vehicle happens to be a swivel chair using explicit symbol placement.
+車両は、シンボル配置を使用した回転椅子です。
 
-This next example uses vehicle_groups and x,y placement. It also includes rotation and status. The
-rotation is which direction the vehicle will spawn on the map, and that status is its overall
-condition. Fuel is pretty self explanatory. Always test your vehcile spawns in game, they can be
-rather picky in their placement and the rotation doesn't really match what you'd expect the numbers
-to mean. The 0,0 point of vehicles can vary so you'll have to experiment to get the spawns in the
-right spots, especially in tight spaces.
+次の例は、`vehicle_groups` と X,Y 配置を使用しています。また、回転と状態も含まれています。回転はマップ上で車両が配置される方向であり、状態 (`status`) は車両全体の損傷度です。`fuel` は燃料です。車両の配置はゲーム内で必ずテストしてください。車両配置は非常に難しく、回転が予想される数値の意味と実際には一致しません。車両の 0,0 ポイントは異なる場合があるため、特に狭いスペースでは、正しい場所に配置させるために試行錯誤する必要があります。
 
 ```json
 "place_vehicles": [
@@ -374,19 +314,15 @@ right spots, especially in tight spaces.
       ]
 ```
 
-9. Liquids in furniture: this entry is for a standing tank. I've defined the tank in the furniture
-   entry as "g".
+9. 家具内の液体: このエントリは、スタンド式タンク用です。タンクを "g" として定義しました。
 
 `"liquids": { "g": { "liquid": "water_clean", "amount": [ 0, 100 ] } },`
 
-This places clean water in the tank, and a range of amount to spawn.
+これはタンク内に飲料水を配置し、生成量の範囲を定義します。
 
-10. There are other specialty placement techniques that you'll pick up as you look at more maps. One
-    of my favorites is for the new planters:
+10. その他の特殊な配置技術:他にも、より多くのマップを見るにつれて習得できる特殊な配置技術があります。私のお気に入りは、プランターです。
 
-Since the planter is a "sealed item" you define what's going into that container. This example
-places seeds (ready to harvest) in the planters. Note the first one will place a seedling, the
-others are harvest ready. I've given each planter type an explicit symbol for quicker placement.
+プランターは「密閉されたアイテム」であるため、コンテナに入るものを定義します。この例では、プランターに種を配置します。最初のものは苗を配置し、他は収穫期です。迅速な配置のために、各プランタータイプに明示的なシンボルを与えました。
 
 ```json
 "sealed_item": {
@@ -402,23 +338,19 @@ others are harvest ready. I've given each planter type an explicit symbol for qu
     }
 ```
 
-11. Best practices:
+11. 最善の方法:
 
-- If you are making a new house please use this palette: "standard_domestic_palette". The loots are
-  already assigned and it covers a wide range of domestic furniture. This will keep your house in
-  sync with all the other houses for loot spawns.
-- All buildings should also get roof entries.
-- While entry placement for json doesn't really matter, try to keep your mapgen files ordered like
-  the majority existing maps. Be kind to future contributors. Add meta data at the top of the file.
-  Object entry comes second. Within the object entry it is generally: palette, set_points, terrain,
-  furniture, random special entries like toilets, item spawns, vehicle spawns, monster spawns.
-- All buildings should at least get one "t_gutter_downspout" for roof access. Players would love at
-  least 2. if you're adding gutters to a multi-z level building, don't forget the intermediate
-  floors. You'll need to stagger the downspouts to players can climb up (like ladders).
-- If you put things on your roof that would be difficult to get up there, make sure to provide
-  better roof access via ladders and stairs.
-- For your basic grass cover outside please use: `"t_region_groundcover_urban",` to maintain
-  consistency across map boundaries. Here are my standard flora entries for grass, shrubs & trees:
+- 新しい家を作成する場合は、"standard_domestic_palette"を使用してください。戦利品はすでに割り当てられており、幅広い
+  家庭用備品をカバーしています。これにより、戦利品配置に関して、あなたの家が他のすべての家と同期します。
+- すべての建物には屋根エントリも必要です。
+- JSONの配置は実際には重要ではありませんが、既存の大多数のマップと同様に、マップ生成ファイルの順序を保つよ
+  うに努めてください。将来の貢献者に配慮しましょう。ファイルの上部にメタデータを追加します。object エントリが2番目に来ます。object エントリ内では、一般的に次の順序です。パレット、セットポイント、地形、備品、トイレなどのランダムな特殊エントリ、アイテム配置、車両配置、モンスター配置。
+- すべての建物には、屋根に登るために少なくとも 1つの"t_gutter_downspout" が必要です。プレイヤーは少なくと
+  も2つあると喜びます。マルチZレベルの建物に雨樋を追加する場合は、中間階を忘れないでください。プレイヤーが登れるように、縦樋を互い違いに配置する必要があります（梯子のように）。
+- 屋根の上に持っていくのが難しいものを置く場合は、屋根に登るために梯子や階段などの手段を提供していることを確認
+  してください。
+- 外側の草地カバーには、マップの境界を越えても一貫性を保つために`"t_region_groundcover_urban",` を使用してく
+  ださい。以下は、草、低木、木の標準的な植物エントリです。
 
 ```json
 ".": "t_region_groundcover_urban",
@@ -426,25 +358,19 @@ others are harvest ready. I've given each planter type an explicit symbol for qu
 "Z": [ [ "t_region_tree_fruit", 2 ], [ "t_region_tree_nut", 2 ], "t_region_tree_shade" ],
 ```
 
-finally for flowers (which are furniture):
+最後に、花 (備品)の場合:
 
 ```json
 "p": "f_region_flower"
 ```
 
-## Adding the roof!
+## 屋根の追加!
 
-Almost all CDDA buildings are now roof-capable and we'd love to keep it that way. Make sure to
-submit a roof map with your building. This can go into the same file as your ground floor and any
-other floors that share the same building shape/foundation.
+Cataclysm-BN の建物は、ほぼすべて屋根に対応しており、その状態を維持したいと考えています。建物と一緒に屋根マップを提出するようにしてください。これは、地上階および同じ建物の形状/基礎を共有する他の階と同じファイルに入れることができます。
 
-So, this is super easy compared to the building we just went over. It has all the same basic
-components. I recommend you start by using the rows from your ground floor map and converting it to
-the `"roof_palette"` symbol set. Basically your just going to trace the outline in gutters, add a
-t_gutter_drop next to your t_gutter_spout below and toss some infrastructure up there. I used nests
-extensively in commercial building roofs and we'll cover that in advanced mapgen.
+これは、先ほど説明した建物に比べて非常に簡単です。同じ基本コンポーネントをすべて持っています。地上階マップの rows を使用し、`"roof_palette"` シンボルセットに変換することから始めることをお勧めします。基本的には、輪郭を雨樋でなぞり、その下に t_gutter_spout の隣に t_gutter_drop を追加し、いくつかのインフラストラクチャを屋根に配置するだけです。私は商業ビルの屋根に巣（nests）を広範囲に適用しましたが、これについては高度なマップ生成で扱います。
 
-sample roof:
+屋根のサンプル:
 
 ```json
 {
@@ -485,23 +411,23 @@ sample roof:
 }
 ```
 
-1. I always just append `_roof` to the buildings ID.
-2. See how the palette takes the place of all that data from our earlier example. So clean and easy.
-3. There is no `"weight"` entry because this will only spawn with its building (once linked).
-4. My palette uses "t_flat_roof" as its default roof. For houses, I wanted shingles. So, I added the
-   "t_shingle_flat_roof" in this mapgen which will override the palettes entry for
-   `".": "t_flat_roof"`. (more on this in advanced mapgen).
+1. 私は常に建物IDに `_roof` を付加します。
+2. パレットが、先の例すべてのデータの代わりになっている点に注目してください。非常にすっきりしていて簡単です。
+3. `"weight"` はありません。何故ならばリンクされていれば建物と一緒に出現するからです。
+4. 私のパレットは既定の屋根として "t_flat_roof" を使用しています。家の場合、シングル屋根が欲しかったので、この
+   マップ生成に"t_shingle_flat_roof" を追加しました。これにより、パレットの
+   `".": "t_flat_roof"`のエントリが上書きされます (これについては高度なマップ生成で詳しく説明します)。
 
-I have a separate roof document at: [JSON_ROOF_MAPGEN](../json_roof_mapgen.md).
+ほかに、屋根に関するドキュメントもあります:[JSON_ROOF_MAPGEN](../json_roof_mapgen.md)。
 
-## Linking various mapgen maps using multitile_city_buildings.json
+## multitile_city_buildings.json を使用したマップ生成マップのリンク
 
-This file is found at:
-[data/json/overmap/multitile_city_buildings.json](https://github.com/cataclysmbnteam/Cataclysm-BN/blob/main/data/json/overmap/multitile_city_buildings.json).
+このファイルは次の場所にあります:
+[data/json/overmap/multitile_city_buildings.json](https://github.com/cataclysmbnteam/Cataclysm-BN/blob/main/data/json/overmap/multitile_city_buildings.json)。
 
-_Remember this file is for city buildings only, not specials_
+注釈:このファイルは都市内建物のみを対象としており、スペシャル用ではありません。
 
-A standard entry:
+標準的なエントリ:
 
 ```json
 {
@@ -516,42 +442,36 @@ A standard entry:
 },
 ```
 
-1. The `"type"` won't change. It should always be "city_building".
-2. `"id"`: This ID is often the same as your mapgen ID but it doesn't have to be the same. We could
-   use something more generic like "house". This ID will be used in regional settings for spawns, so
-   keep in mind how many buildings are using the ID. I prefer distinct ID's because it makes debug
-   spawning much, much easier.
-3. `"locations"`: defines where this building can be place by overmap terrain type. Land is the
-   default.
-4. `"overmaps"`: this is the bit where you define how the maps fit together, so lets break it up:
-   `{ "point": [ 0, 0, 0 ], "overmap": "house_dogs_north" },` point: its point in relation to the
-   other mapgen files for your building. The coordinates are `[ x, y, z ]`. In this example, x,y are
-   0 because we only have one map per z level. Zero for y means this is the ground level. Note the
-   roof above is at 1 and the basement is -1.
-5. appending `_north` to the ID's:
-   - If your building rotates you need this compass point so the floors can match up correctly. This
-     is the generic basement mapgen group and thus doesn't get `_north` (this will change as we add
-     dedicated stairs to our houses).
+1. `"type"` は変わりません。常に"city_building"である必要があります。
+2. `"id"`: このIDは、マップ生成IDと同じであることが多いですが、同じ必要はあ
+   りません。もっと汎用的な"house"のようなものを使用することもできます。このIDは地域設定の配置で使用されるため、建物がこのIDを使用しているかに留意してください。私は、デバッグ作業がはるかに容易になるため、明確なIDを好みます。
+3. `"locations"`: 建物がオーバーマップ地形タイプによって配置できる場所を定義し
+   ます。既定値はland です。
+4. `"overmaps"`: ここでマップがどのように組み合わされるかを定義します。詳しく見て
+   みましょう。
+   `{ "point": [ 0, 0, 0 ], "overmap": "house_dogs_north" },` point: 建物の他のマップ生成ファイルに対する相対座標です。座標は`[ x, y, z ]`です。この例では、Z レベルごとに1つのマップしかないため、X, Y は0です。Zがゼロということは、これが地上階であることを意味します。屋根(roof)は1、地下室(basement)は-1であることに注意してください。
+5. IDへの `_north` の付加:
+   - 建物が回転する場合、フロアが正しく一致するように、コンパス方位が必要で
+     す。これは汎用的な地下室マップ生成グループであり、専用の階段を追加するにつれて変更されるため、`_north` は付きません。
 
-## Setting overmap spawns using regional_map_settings.json
+## regional_map_settings.json を使用したオーバーマップ配置の設定
 
 [data/json/regional_map_settings.json](https://github.com/cataclysmbnteam/Cataclysm-BN/blob/main/data/json/regional_map_settings.json)
 
-1. For city buildings and houses you'll scroll down to the `"city":` flag.
-2. Find your appropriate subtag, `"houses"` or `"shops"` usually.
-3. Add your ID from the multitile_city_buildings entry. This can also accept the mapgen ID and not
-   complain which is why the are often the same name.
-4. Choose a good weight for your building.
+1. 都市内建物と家の場合、`"city":` フラグまでスクロールします。
+2. 適切なサブタグ (通常は`"houses"` または `"shops"`) を見つけます。
+3. multitile_city_buildings エントリからのIDを追加します。マップ生成IDも受
+   け入れ、文句を言わないため、同じ名前であることが多いです。
+4. 建物に適した重みを選択します。
 
-## Linking and spawning specials:
+## スペシャルのリンクとスポーン:
 
-Put the entry in:
-[data/json/overmap/overmap_special/specials.json](https://github.com/cataclysmbnteam/Cataclysm-BN/blob/main/data/json/overmap/overmap_special/specials.json).
+エントリを次の場所に入れます:
+[data/json/overmap/overmap_special/specials.json](https://github.com/cataclysmbnteam/Cataclysm-BN/blob/main/data/json/overmap/overmap_special/specials.json)。
 
-This entry does the job of both the regional_map_settings and multitile_city_buildings plus other
-fun overmap stuff.
+このエントリは、regional_map_settings と multitile_city_buildings の両方の役割に加え、その他の楽しいオーバーマップ設定も行います。
 
-Example:
+例:
 
 ```json
 {
@@ -580,31 +500,28 @@ Example:
 }
 ```
 
-1. `"type"`: is overmap_special.
-2. `"id"` is your buildings ID for the overmap. It also displays on the overmap in game.
-3. `"overmaps"` this works the same way as it does in the city building entries. Note that the pump
-   station is bigger then 1 OMT on the ground, so the y coordinate changes as well.
-4. `"connections"`: this places road, sewer, subway connections for your map.
-5. `"locations"`: valid OMT types this building can be placed on.
-6. `"city_distance"`, `"city_sizes"` both are parameters for where this spawns in relation to
-   cities.
-7. `"occurrences": [ 0, 1 ],`: Ok so occurrences can mean two things depending on if it uses the
-   "UNIQUE" flag or not. When the flag is absent, this simply translates to how many times this
-   special can spawn PER overmap. So 0 to 1 in this case. If you use the UNIQUE flag, this becomes a
-   percentage so `[ 1, 10 ]` wouldn't be 1 to 10 times per overmap but a 1 in 10% chance to spawn on
-   the overmap. So 10% chance to spawn once per overmap.
-8. `"flags"`: These are flags you can use to further define the special. For a list of flags see:
-   [json_flags](../../reference/json_flags.md).
+1. `"type"`は overmap_special です。
+2. `"id"` はオーバーマップ用の建物ID です。また、ゲーム内のオーバーマップにも表示されます。
+3. `"overmaps"` は、都市内建物のエントリと同じように機能します。ポンプ場は地上で
+   1 OMT よりも大きいため、Y 座標も変化していることに注意してください。
+4. `"connections"`: マップの道路、下水道、地下鉄の接続を配置します。
+5. `"locations"`: この建物を配置できる有効な OMT タイプです。
+6. `"city_distance"`、`"city_sizes"` どちらも、都市との関係でどこに出現するかに関するパラメータです。
+7. `"occurrences": [ 0, 1 ],`: occurrences は、"UNIQUE" フラグを使用するかどうかに応じて 2 つの意味を持つ可能性があ
+   ります。フラグがない場合、オーバーマップごとに、スペシャルを配置できる回数になります。この場合は 0 から 1 回です。
+   UNIQUE フラグを使用する場合、これはパーセンテージになります。したがって、
+   `[ 1, 10 ]` はオーバーマップごとに 1〜10 回ではなく、オーバーマップ上で、10%の確率で1回だけ配置されることになります。
+8. `"flags"` は、スペシャルをさらに定義するために使用できるフラグです。フラグの一覧については、
+   [json_flags](../../reference/json_flags.md)を参照してください。
 
-Read: [OVERMAP](../../reference/map/overmap.md) for more details.
+詳細については、[OVERMAP](../../reference/map/overmap.md) を参照してください。
 
-## Overmap_terrain entries:
+## オーバーマップ地形エントリ:
 
-Choose a file for your building type at:
-[data/json/overmap/overmap_terrain](https://github.com/cataclysmbnteam/Cataclysm-BN/tree/main/data/json/overmap/overmap_terrain).
+建物のタイプに応じて、次の場所でファイルを選択します:
+[data/json/overmap/overmap_terrain](https://github.com/cataclysmbnteam/Cataclysm-BN/tree/main/data/json/overmap/overmap_terrain)。
 
-This set of entries defines how your building will look on the overmap. It supports copy-from.
-Example:
+この一連のエントリは、オーバーマップ上で建物がどのように見えるかを定義します。copy-from をサポートしています。
 
 ```json
 {
@@ -627,47 +544,40 @@ Example:
 }
 ```
 
-You need one entry per mapgen ID:
+マップ生成ID ごとに 1つのエントリが必要です。
 
-1. `"type"` will always be overmap_terrain.
-2. `"id"` will be the same ID you used in your mapgen file.
-3. `"copy-from"` this will copy any data from another entry, excepting what you define here.
-4. `"name"` how the name displays on the overmap.
-5. `"sym"` the symbol displayed on the overmap. If left out, the carrots will be used `v<>^`
-6. `"color"` color for overmap symbol.
-7. `"mondesntiy"` sets the default monster density for this overmap tile. You'll use this for
-   general zombie spawns and reserve the mapgen monster entries for special spanwns for that
-   location (e.g. a pet store's pets).
-8. `"extend"` many of these flags will be used by NPCs in the future for their AI, try to add flags
-   appropriate for your location. Others further define the mapgen, like having sidewalks generate.
+1. `"type"`は常に overmap_terrain になります。
+2. `"id"` は、マップ生成ファイルで使用したのと同じ ID になります。
+3. `"copy-from"` は、ここで定義したものを除き、別のエントリからすべてのデータをコピーします。
+4. `"name"`は、オーバーマップで名前がどのように表示されるかです。
+5. `"sym"` は、オーバーマップに表示されるシンボルです。省略された場合、 `v<>^`のキャレットが使用されます。
+6. `"color"` は、オーバーマップシンボルの色です。
+7. `"mondesntiy"` は、このオーバーマップタイルの既定のモンスター密度を設定します。これはゾンビ出現に使用し、マップ
+   生成モンスターエントリは、特定の配置（例：ペットショップのペット）のために予約します。
+8. `"extend"` フラグの多くは、将来的に NPC の AI によって使用されるため、場所に適したフラグを追加
+   するように努めてください。その他にも、歩道を生成するなど、マップ生成をさらに定義するものがあります。
 
-For further information see:
-[Overmap Terrain section of OVERMAP](../../reference/map/overmap#overmap-terrain).
+詳細については、
+[Overmap Terrain section of OVERMAP](../../reference/map/overmap#overmap-terrain)を参照してください。
 
-## Palettes:
+## パレット(Palettes):
 
-As mentioned earlier, palettes can hold almost all the information that the object entry contains,
-except for `rows` and `fill_ter`. Their main purpose is to reduce the need to add the same basic
-data to related maps and to maintain symbol consistency.
+前述のように、パレットは`rows` と `fill_ter`を除くobject エントリに含まれるほぼすべての情報を保持できます。主な目的は、関連するマップに同じ基本データを追加する必要性を減らし、シンボルの一貫性を維持することです。
 
-Entries that are added to the mapgen file's object will over ride the same symbol used in the
-palette. In this way, you can use a palette and make select alterations to each mapgen as needed.
-This is especially useful for multiple ground terrains like carpets, concrete, etc.
+マップ生成ファイルの object に追加されたエントリは、パレットで使用されている同じシンボルを上書きします。このようにして、パレットを使用し、必要に応じて各マップ生成に選択的な変更を加えることができます。これは、カーペット、コンクリートなどの複数の地面の地形にとって特に有用です。
 
-Terrain works very well when you substitute it via the mapgen file. I've had less success overriding
-furniture but need to test it more to clarify when it works as intended. I have recently noticed
-that if your palette symbol uses an array of values, the mapgen entry can't override it.
+地形は、マップ生成ファイルを介して置き換えると非常にうまく機能します。備品の上書きは成功が少ないですが、意図したとおりに機能するかどうかを明確にするために、さらにテストする必要があります。私は最近、パレットシンボルが値の配列を使用している場合、マップ生成エントリがそれを上書きできないことに気づきました。
 
-Example: Entry for the mapgen file object: `"palettes": [ "roof_palette" ],`
+例：マップ生成ファイル object のエントリ: `"palettes": [ "roof_palette" ],`
 
-The palette metadata:
+パレットのメタデータ:
 
 ```json
 "type": "palette",
 "id": "roof_palette",
 ```
 
-Everything else will look like a series of object entries, for example the roof_palette:
+その他、一連の object エントリのように見えます。例えば、roof_palette の場合:
 
 ```json
 {
@@ -724,28 +634,21 @@ Everything else will look like a series of object entries, for example the roof_
 }
 ```
 
-If you want to look at more complex palettes, the standard_domestic_palette in
-[data/json/mapgen_palettes/house_general_palette.json](https://github.com/cataclysmbnteam/Cataclysm-BN/blob/main/data/json/mapgen_palettes/house_general_palette.json)
-is a good look at a palette designed to work across all CDDA houses. It includes the loot spawns and
-accounts for most furniture that will be used in a house. I also left a list of symbols open to be
-used in the mapgen file for specific location needs.
+より複雑なパレットを確認したい場合は、
+[data/json/mapgen_palettes/house_general_palette.json](https://github.com/cataclysmbnteam/Cataclysm-BN/blob/main/data/json/mapgen_palettes/house_general_palette.json)にある standard_domestic_palette が、すべての BN の家で機能するように設計されたパレットの良い例となります。これには、戦利品の出現定義が含まれており、家で使用されるほとんどの家具をカバーしています。また、特定の場所のニーズに合わせてマップ生成ファイルで使用できるように、一部のシンボルをオープンな状態にして残しました。
 
-Finally, the series of house_w palettes at
-[data/json/mapgen_palettes/house_w_palette.json](https://github.com/cataclysmbnteam/Cataclysm-BN/blob/main/data/json/mapgen_palettes/house_w_palette.json)
-are designed to work together for houses using nested mapgen. There is a palette devoted to the
-foundation, another for the nests, and finally another one I've designed for domestic outdoor nested
-chunks.
+最後に、
+[data/json/mapgen_palettes/house_w_palette.json](https://github.com/cataclysmbnteam/Cataclysm-BN/blob/main/data/json/mapgen_palettes/house_w_palette.json)にある一連の house_w パレットは、ネストされたマップ生成を使用する家のために連携して機能するように設計されています。基礎専用のパレット、ネスト専用のパレット、そして最後に、私が設計した家庭用の屋外ネスト化チャンク専用のパレットがあります。
 
-## Final comments:
+## 最終コメント:
 
-The information here should be enough for you got get around mapgen and start making maps but there
-are a lot of variations that will be covered in focused.
+ここにある情報は、マップ生成を理解し、開始するのに十分なはずです。まだ多くのバリエーションがあります。
 
-Not covered in this document:
+本ドキュメントではカバーされていないトピック:
 
-- Nested maps and their placement.
-- NPC spawns.
-- Advanced terrain tricks for complex floor options.
-- traps, terrain and you.
-- update_mapgen (NPC and player triggered map updates).
-- field emitting furniture.
+- ネストされたマップとその配置。
+- NPC の配置。
+- 複雑な床オプションのための高度な地形トリック。
+- トラップ、地形、およびそれらの相互作用。
+- uupdate_mapgen (NPC およびプレイヤーによってトリガーされるマップの更新)。
+- フィールド放出型の設置物。
