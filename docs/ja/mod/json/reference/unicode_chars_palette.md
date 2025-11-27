@@ -1,6 +1,6 @@
 # Unicode chars palette
 
-## 2460—24FF Enclosed Alphanumerics
+## 2460—24FF 囲み英数字 (Enclosed Alphanumerics)
 
 ```
 ①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
@@ -13,7 +13,7 @@
 ⓵⓶⓷⓸⓹⓺⓻⓼⓽⓾⓿
 ```
 
-## 2500—257F Box Drawing
+## 2500—257F 罫線素片 (Box Drawing)
 
 ```
 ─━│┃┄┅┆┇┈┉┊┋┌┍┎┏┐┑┒┓└┕┖┗┘┙┚┛├┝┞┟
@@ -22,14 +22,14 @@
 ╠╡╢╣╤╥╦╧╨╩╪╫╬╭╮╯╰╱╲╳╴╵╶╷╸╹╺╻╼╽╾╿
 ```
 
-## 2580—259F Block Elements
+## 2580—259F ブロック要素 (Block Elements)
 
 ```
 ▀▁▂▃▄▅▆▇█▉▊▋▌▍▎▏
 ▐░▒▓▔▕▖▗▘▙▚▛▜▝▞▟
 ```
 
-## 25A0—25FF Geometric Shapes
+## 25A0—25FF 幾何学模様 (Geometric Shapes)
 
 ```
 ■□▢▣▤▥▦▧▨▩
@@ -41,13 +41,13 @@
 ◰◱◲◳◴◵◶◷◸◹◺◻◼◽◾◿
 ```
 
-## 2600—26FF Miscellaneous Symbols
+## 2600—26FF 各種記号 (Miscellaneous Symbols)
 
 ```
 ☀☁☂☃☄★☆☇☈☉☊☋☌☍☎☏☐☑☒☓☔☕☖☗☘☙☚☛☜☝☞☟☠☡☢☣☤☥☦☧☨☩☪☫☬☭☮☯☰☱☲☳☴☵☶☷☸☹☺☻☼☽☾☿♀♁♂♃♄♅♆♇♈♉♊♋♌♍♎♏♐♑♒♓♔♕♖♗♘♙♚♛♜♝♞♟♠♡♢♣♤♥♦♧♨♩♪♫♬♭♮♯♰♱♲♳♴♵♶♷♸♹♺♻♼♽♾♿⚀⚁⚂⚃⚄⚅⚆⚇⚈⚉⚊⚋⚌⚍⚎⚏⚐⚑⚒⚓⚔⚕⚖⚗⚘⚙⚚⚛⚜⚝⚞⚟⚠⚡⚢⚣⚤⚥⚦⚧⚨⚩⚪⚫⚬⚭⚮⚯⚰⚱⚲⚳⚴⚵⚶⚷⚸⚹⚺⚻⚼⚽⚾⚿⛀⛁⛂⛃⛄⛅⛆⛇⛈⛉⛊⛋⛌⛍⛎⛏⛐⛑⛒⛓⛔⛕⛖⛗⛘⛙⛚⛛⛜⛝⛞⛟⛠⛡⛢⛣⛤⛥⛦⛧⛨⛩⛪⛫⛬⛭⛮⛯⛰⛱⛲⛳⛴⛵⛶⛷⛸⛹⛺⛻⛼⛽⛾⛿
 ```
 
-## 2700—27BF Dingbats
+## 2700—27BF 装飾記号 (Dingbats)
 
 ```
 ✀✁✂✃✄✅✆✇✈✉✊✋✌✍✎✏✐✑✒
@@ -65,19 +65,19 @@
 ➳➴➵➶➷➸➹➺➻➼➽➾➿
 ```
 
-## 27C0—27EF Miscellaneous Mathematical Symbols-A
+## 27C0—27EF 各種数学記号 (Miscellaneous Mathematical Symbols-A)
 
 ```
 ⟀⟁⟂⟃⟄⟅⟆⟇⟈⟉⟊⟋⟌⟍⟎⟏⟐⟑⟒⟓⟔⟕⟖⟗⟘⟙⟚⟛⟜⟝⟞⟟⟠⟡⟢⟣⟤⟥⟦⟧⟨⟩⟪⟫⟬⟭⟮⟯
 ```
 
-## 27F0—27FF Supplemental Arrows-A
+## 27F0—27FF 補助矢印-A (Supplemental Arrows-A)
 
 ```
 ⟰⟱⟲⟳⟴⟵⟶⟷⟸⟹⟺⟻⟼⟽⟾⟿
 ```
 
-## 2800—28FF Braille Patterns
+## 2800—28FF 点字パターン (Braille Patterns)
 
 ```
 ⠀⠁⠂⠃⠄⠅⠆⠇⠈⠉⠊⠋⠌⠍⠎⠏⠐⠑⠒⠓⠔⠕⠖⠗⠘⠙⠚⠛⠜⠝⠞⠟⠠⠡⠢⠣⠤⠥⠦⠧⠨⠩
@@ -89,7 +89,7 @@
 ⣼⣽⣾⣿
 ```
 
-## 2900—297F Supplemental Arrows-B
+## 2900—297F 補助矢印-B (Supplemental Arrows-B)
 
 ```
 ⤀⤁⤂⤃⤄⤅⤆⤇⤈⤉⤊⤋
@@ -103,13 +103,13 @@
 ⥰⥱⥲⥳⥴⥵⥶⥷⥸⥹⥺⥻⥼⥽⥾⥿
 ```
 
-## 2980—29FF Miscellaneous Mathematical Symbols-B
+## 2980—29FF 各種数学記号-B (Miscellaneous Mathematical Symbols-B)
 
 ```
 ⦀⦁⦂⦃⦄⦅⦆⦇⦈⦉⦊⦋⦌⦍⦎⦏⦐⦑⦒⦓⦔⦕⦖⦗⦘⦙⦚⦛⦜⦝⦞⦟⦠⦡⦢⦣⦤⦥⦦⦧⦨⦩⦪⦫⦬⦭⦮⦯⦰⦱⦲⦳⦴⦵⦶⦷⦸⦹⦺⦻⦼⦽⦾⦿⧀⧁⧂⧃⧄⧅⧆⧇⧈⧉⧊⧋⧌⧍⧎⧏⧐⧑⧒⧓⧔⧕⧖⧗⧘⧙⧚⧛⧜⧝⧞⧟⧠⧡⧢⧣⧤⧥⧦⧧⧨⧩⧪⧫⧬⧭⧮⧯⧰⧱⧲⧳⧴⧵⧶⧷⧸⧹⧺⧻⧼⧽⧾⧿
 ```
 
-## 2A00—2AFF Supplemental Mathematical Operators
+## 2A00—2AFF 補助数学演算子 (Supplemental Mathematical Operators)
 
 ```
 ⨀⨁⨂⨃⨄⨅⨆⨇⨈⨉
@@ -126,7 +126,7 @@
 ⫮⫯⫰⫱⫲⫳⫴⫵⫶⫷⫸⫹⫺⫻⫼⫽⫾⫿
 ```
 
-## 2B00—2BFF Miscellaneous Symbols and Arrows
+## 2B00—2BFF 各種記号及び矢印 (Miscellaneous Symbols and Arrows)
 
 ```
 ⬀⬁⬂⬃⬄⬅⬆⬇⬈⬉⬊⬋⬌⬍
