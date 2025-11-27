@@ -1,6 +1,6 @@
-# Scenarios
+# シナリオ
 
-Scenarios are specified as JSON object with `type` member set to `scenario`.
+シナリオは、`type` メンバーが `scenario`に設定された JSON オブジェクトとして指定されます。
 
 ```json
 {
@@ -10,22 +10,23 @@ Scenarios are specified as JSON object with `type` member set to `scenario`.
 }
 ```
 
-The id member should be the unique id of the scenario.
+id メンバーは、シナリオの固有IDの必要があります。
 
-The following properties (mandatory, except if noted otherwise) are supported:
+以下のプロパティがサポートされています（特に断りのない限り、必須です）。
 
 ## `description`
 
-(string)
+(文字列)
 
-The in-game description.
+ゲーム内でのシナリオの説明です。
 
 ## `name`
 
-(string or object with members "male" and "female")
+(文字列、またはメンバーとして "male" と "female" を持つオブジェクト)
 
-The in-game name, either one gender-neutral string, or an object with gender specific names.
-Example:
+ゲーム内でのシナリオ名です。性別を問わない単一の文字列、または性別固有の名前を持つオブジェクト形式で指定できます。
+
+例:
 
 ```json
 "name": {
@@ -36,19 +37,19 @@ Example:
 
 ## `points`
 
-(integer)
+(整数)
 
-Point cost of scenario. Positive values cost points and negative values grant points.
+シナリオのポイントコストです。正の値はポイントを消費し、負の値はポイントを付与します。
 
 ## `items`
 
-(optional, object with optional members "both", "male" and "female")
+(省略可能、メンバー "both"、"male"、"female"を持つオブジェクト)
 
-Items the player starts with when selecting this scenario. One can specify different items based on
-the gender of the character. Each lists of items should be an array of items ids. Ids may appear
-multiple times, in which case the item is created multiple times.
+プレイヤーがこのシナリオを選択したときに開始時に所持するアイテムを指定します。キャラクターの性別に基づいて異なるアイテムを指定できます。
 
-Example:
+各アイテムリストは、アイテム ID の配列である必要があります。ID は複数回出現してもよく、その場合はアイテムが指定された回数分作成されます。
+
+例:
 
 ```json
 "items": {
@@ -62,12 +63,12 @@ Example:
 }
 ```
 
-This gives the player pants, two rocks and (depending on the gender) briefs or panties.
+これはプレイヤーに、 パンツ(pants), 石 (rocks) が２つ、男性用下着としてブリーフ(briefs)、女性用下着としてパンティー (panties)を与えます。
 
-Mods can modify the lists of an existing scenario via "add:both" / "add:male" / "add:female" and
-"remove:both" / "remove:male" / "remove:female".
+MOD は、既存のシナリオのリストを "add:both" / "add:male" / "add:female" および
+"remove:both" / "remove:male" / "remove:female"を介して変更できます。
 
-Example for mods:
+MOD の変更例:
 
 ```json
 {
@@ -83,78 +84,69 @@ Example for mods:
 
 ## `surround_groups`
 
-(optional, array with group and density number)
+(省略可能、グループIDと密度の数値を含む配列)
 
-This replaces the `SUR_START` flag for scenarios, specifies groups of monsters which spawn in the
-area surrounding the scenario's staritng location.
+シナリオに対する `SUR_START` フラグを置き換えるもので、シナリオの開始地点の周囲に出現するモンスターグループを指定します。
 
 ```json
 "surround_groups": [ [ "GROUP_BLACK_ROAD", 70.0 ] ],
 ```
 
-The string defines the ID of which monstergroup will be spawned in the surrounding area, while the
-number is the density of spawns. 70.0 replicates the value of the original `SUR_START` behavior.
+文字列は、周囲のエリアに配置されるモンスターグループのIDを定義し、数値は出現密度です。 70.0 は、元の `SUR_START` の動作値を再現します。
 
 ## `flags`
 
-(optional, array of strings)
+(省略可能、文字列の配列)
 
-A list of flags. TODO: document those flags here.
+フラグのリストです。 (TODO: これらのフラグについてはここに文書化する必要があります。)
 
 Mods can modify this via "add:flags" and "remove:flags".
 
 ## `cbms`
 
-(optional, array of strings)
+(省略可能, 文字列の配列)
 
-A list of CBM ids that are implanted in the character.
+キャラクターに移植される CBMのIDの一覧です。
 
-Mods can modify this via "add:CBMs" and "remove:CBMs".
+MOD は、"add:CBMs" および "remove:CBMs" を介してこれを変更できます。
 
 ## `traits", "forced_traits", "forbidden_traits`
 
-(optional, array of strings)
+(省略可能、文字列の配列)
 
-Lists of trait/mutation ids. Traits in "forbidden_traits" are forbidden and can't be selected during
-the character creation. Traits in "forced_traits" are automatically added to character. Traits in
-"traits" enables them to be chosen, even if they are not starting traits.
+特性IDの一覧です。 "forbidden_traits"に含まれる特性は禁止され、キャラクター作成時に選択できません。 "forced_traits" に含まれる特性は、キャラクターに自動的に追加されます。
+"traits" に含まれる特性は、初期特性でなくても、選択可能になります。
 
-Mods can modify this via "add:traits" / "add:forced_traits" / "add:forbidden_traits" and
-"remove:traits" / "remove:forced_traits" / "remove:forbidden_traits".
+MOD は、"add:traits" / "add:forced_traits" / "add:forbidden_traits" および
+"remove:traits" / "remove:forced_traits" / "remove:forbidden_traits"を介してこれを変更できます。
 
 ## `allowed_locs`
 
-(optional, array of strings)
+(省略可能、文字列の配列)
 
-A list of starting location ids (see start_locations.json) that can be chosen when using this
-scenario.
+このシナリオを使用する際に選択できる開始位置 ID の一覧です (start_locations.jsonを参照)。
 
 ## `start_name`
 
-(string)
+(文字列)
 
-The name that is shown for the starting location. This is useful if the scenario allows several
-starting locations, but the game can not list them all at once in the scenario description. Example:
-if the scenario allows to start somewhere in the wilderness, the starting locations would contain
-forest and fields, but its "start_name" may simply be "wilderness".
+開始地点として表示される名前です。シナリオが複数の開始地点を許可しているが、シナリオ説明として一覧表示できない場合に役立ちます。例として、シナリオの開始地点として荒野のどこかであった場合、森(forest)と野原(fields)が含まれる可能性があります。 しかし"start_name" は単に荒野となる場合があります。
 
 ## `professions`
 
-(optional, array of strings)
+(省略可能、文字列の配列)
 
-A list of allowed professions that can be chosen when using this scenario. The first entry is the
-default profession. If this is empty, all professions are allowed.
+このシナリオで開始したときに選択できる専門職 (profession)の一覧です。最初の項目が初期設定の専門職となります。設定されていない場合は、すべての専門職が選択可能になります。
 
 ## `map_special`
 
-(optional, string)
+(省略可能、文字列)
 
-Add a map special to the starting location, see json_flags for the possible specials.
+開始位置にマップスペシャルを追加します。可能なスペシャルについては
+[json_flags](json_flags.md) を参照してください。
 
 ## `missions`
 
-(optional, array of strings)
+(省略可能、文字列の配列)
 
-A list of mission ids that will be started and assigned to the player at the start of the game. Only
-missions with the ORIGIN_GAME_START origin are allowed. The last mission in the list will be the
-active mission, if multiple missions are assigned.
+ゲーム開始時のプレイヤーに割り当てられるミッションIDの一覧です。ORIGIN_GAME_START を持つミッションのみが許可されます。複数のミッションが割り当てられた場合、一覧内の最後尾のミッションが有効なミッションとなります。
