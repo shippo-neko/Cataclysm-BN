@@ -1,6 +1,6 @@
-# NPC factions
+# NPC 派閥
 
-An NPC faction looks like this:
+NPC 派閥は次のような形式になります:
 
 ```json
 {
@@ -43,44 +43,43 @@ An NPC faction looks like this:
 },
 ```
 
-| Field                 | Meaning                                                                                                                                                                 |
-| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `"type"`              | string, must be `"faction"`                                                                                                                                             |
-| `"id"`                | string, unique faction id                                                                                                                                               |
-| `"name"`              | string, the faction's common name                                                                                                                                       |
-| `"likes_u"`           | integer, the faction's starting opinion of the player. `"likes_u"` can be increased or decreased in play. If it goes below -10, members of the faction will be hostile. |
-| `"respects_u"`        | integer, the faction's starting opinionof the player. Has no meaningful effect in game and may be removed in the future.                                                |
-| `"known_by_u"`        | boolean, whether the player has met members of the faction. Can be changed in play. Unknown factions will not be displayed in the faction menu.                         |
-| `"size"`              | integer, an approximate count of the members of the faction. Has no effect in play currently.                                                                           |
-| `"power"`             | integer, an approximation of the faction's power. Has no effect in play currently.                                                                                      |
-| `"food_supply"`       | integer, the number of calories available to the faction. Has no effect in play currently.                                                                              |
-| `"wealth"`            | integer, number of post-apocalyptic currency in cents that that faction has to purchase stuff.                                                                          |
-| `"currency"`          | string, the item `"id"` of the faction's preferred currency. Faction shopkeeps will trade faction current at 100% value, for both selling and buying.                   |
-| `"relations"`         | dictionary, a description of how the faction sees other factions. See below                                                                                             |
-| `"mon_faction"`       | string, optional. The monster faction `"name"` of the monster faction that this faction counts as. Defaults to "human" if unspecified.                                  |
-| `"lone_wolf_faction"` | bool, optional. This is a proto/micro faction template that is used to generate 1-person factions for dynamically spawned NPCs, defaults to "false" if unspecified.     |
+| フィールド名          | 意味                                                                                                                                 |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `"type"`              | 文字列。必ず`"faction"`でなければなりません。                                                                                        |
+| `"id"`                | 文字列。派閥の固有IDです。                                                                                                           |
+| `"name"`              | 文字列。派閥の名称です。                                                                                                             |
+| `"likes_u"`           | 整数。プレイヤーに対する派閥の初期評価値。ゲーム中に増減する。`"likes_u"`が-10を下回ると、その派閥のメンバーは敵対的になります。     |
+| `"respects_u"`        | 整数。プレイヤーに対する派閥の初期評価値。ゲーム内で意味のある効果はなく、将来的に削除される可能性があります。                       |
+| `"known_by_u"`        | bool値。プレイヤーがその派閥のメンバーと出会ったことがあるかどうか。ゲーム中に変化し得る。未知の派閥は派閥メニューに表示されません。 |
+| `"size"`              | 整数。派閥のメンバー数のおおよその値。現時点ではゲームプレイに影響はありません。                                                     |
+| `"power"`             | 整数。派閥の勢力を大まかに示す値。現時点ではゲームプレイに影響はありません。                                                         |
+| `"food_supply"`       | 整数。派閥が保有するカロリー量。現時点ではゲームプレイに影響はない。                                                                 |
+| `"wealth"`            | 整数。終末世界における派閥の所持通貨(セント単位)。                                                                                   |
+| `"currency"`          | 文字列。派閥が好んで使う通貨のアイテム `"id"`。派閥の商人は、この通貨を売買の双方で額面価値 100% として扱います。                    |
+| `"relations"`         | 辞書。派閥が他派閥をどう見ているかを表します。詳細は後述。                                                                           |
+| `"mon_faction"`       | 文字列(省略可能)。この派閥が属するとみなされるモンスター派閥の "name"。未指定の場合は `"human"` が既定値になります。                 |
+| `"lone_wolf_faction"` | bool値(省略可能)。動的に生成される NPC 用の1人派閥に使用されるプロト／マイクロ派閥テンプレート。未指定の場合は "false"。             |
 
-## Faction relations
+## 派閥間の関係
 
-Factions can have relations with each other that apply to each member of the faction. Faction
-relationships are not reciprocal: members of the Free Merchants will defend members of the Lobby
-Beggars, but members of the Lobby Beggars will not defend members of the Free Merchants.
+派閥は互いに関係性を持つことができ、その関係性は派閥の各メンバーに適用されます。
+派閥間の関係は相互的ではありません：例えば、自由商人(Free Merchants) のメンバーは ロビーの乞食(Lobby Beggars)のメンバーを守りますが、
+ロビーの乞食 のメンバーは 自由商人 のメンバーを守りません。
 
-Faction relationships are stored in a dictionary, with the dictionary keys being the name of the
-faction and the values being a second dictionary of boolean flags. All flags are optional and
-default to false. The faction with the dictionary is the acting faction and the other faction is the
-object faction.
+派閥間の関係は辞書で管理されます。 辞書のキーは派閥の名前、値はbool値フラグの入った二次辞書です。
+すべてのフラグは省略可能で、省略された場合は false が既定値となります。
+辞書を持つ派閥が 行動派閥(acting faction)、辞書で指定される相手派閥が 対象派閥(object faction)となります。
 
-The flags have the following meanings:
+フラグの意味は次の通りです:
 
-| Flag                   | Meaning                                                                                                                            |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `"kill on sight"`      | Members of the acting faction are always hostile to members of the object faction.                                                 |
-| `"watch your back"`    | Members of the acting faction will treat attacks on members of the object faction as attacks on themselves.                        |
-| `"share my stuff"`     | Members of the acting faction will not object if members of the object faction take items owned by the acting faction.             |
-| `"guard your stuff"`   | Members of the acting faction will object if someone takes items owned by the object faction.                                      |
-| `"lets you in"`        | Members of the acting faction will not object if a member of the object faction enters territory controlled by the acting faction. |
-| `"defends your space"` | Members of the acting faction will become hostile if someone enters territory controlled by the object faction.                    |
-| `"knows your voice"`   | Members of the acting faction will not comment on speech by members of the object faction.                                         |
+| フラグ                 | 意味                                                                                       |
+| ---------------------- | ------------------------------------------------------------------------------------------ |
+| `"kill on sight"`      | 行動派閥のメンバーは、対象派閥のメンバーに対して常に敵対的になります。                     |
+| `"watch your back"`    | 行動派閥のメンバーは、対象派閥のメンバーへの攻撃を自分自身への攻撃と見なします。           |
+| `"share my stuff"`     | 行動派閥のメンバーは、対象派閥のメンバーが行動派閥の所有物を取っても異議を唱えません。     |
+| `"guard your stuff"`   | 行動派閥のメンバーは、誰かが対象派閥の所有物を取ると異議を唱えます。                       |
+| `"lets you in"`        | 行動派閥のメンバーは、対象派閥のメンバーが行動派閥の支配する領域に入っても異議を唱えません |
+| `"defends your space"` | 行動派閥のメンバーは、誰かが対象派閥の支配する領域に入ると敵対的になります。               |
+| `"knows your voice"`   | 行動派閥のメンバーは、対象派閥のメンバーの発言についてコメントしません。                   |
 
-So far, only `"kill on sight"`, `"knows your voice"`, and `"watch your back"` have been implemented.
+現時点で実装されているのは、"kill on sight"、"knows your voice"、および "watch your back" のみです。
