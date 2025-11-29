@@ -1,22 +1,22 @@
-# Spells, enchantments and other custom effects
+# 呪文、エンチャント、およびその他のカスタム効果
 
-# Spells
+# 呪文
 
-In `data/json/debug_spells.json` there is a template spell, copied here for your perusal:
+`data/json/debug_spells.json` にはテンプレート呪文があり、参考のためここにコピーしてあります:
 
 ```json
 {
-  // This spell exists in json as a template for contributors to see the possible values of the spell
-  "id": "example_template", // id of the spell, used internally. not translated
+  // この呪文は JSON 内でテンプレートとして存在しており、貢献者が使用可能な値を確認できるようになっています
+  "id": "example_template", // 呪文のID。内部で使用されます。翻訳不要
   "type": "SPELL",
-  "name": "Template Spell", // name of the spell that shows in game
+  "name": "Template Spell", // ゲーム内に表示される呪文名
   "description": "This is a template to show off all the available values",
-  "blocker_mutations": ["THRESH_RAT"], // list of mutations that will not allow you to cast the spell
-  "valid_targets": ["hostile", "ground", "self", "ally"], // if a valid target is not included, you cannot cast the spell on that target.
-  "effect": "shallow_pit", // effects are coded in C++. A list will be provided below of possible effects that have been coded.
-  "effect_str": "template", // special. see below
-  "extra_effects": [{ "id": "fireball", "hit_self": false, "max_level": 3 }], // this allows you to cast multiple spells with only one spell
-  "melee_dam": ["cut", "elemental"], // the melee damage of these listed types will be added to spell damage. Supports standard damage type strings and also the categories of 'physical' and 'elemental' for convenience
+  "blocker_mutations": ["THRESH_RAT"], // この呪文を唱えることを妨げる変異のリスト
+  "valid_targets": ["hostile", "ground", "self", "ally"], // 有効ターゲットに含まれていない対象には呪文を唱えられません。
+  "effect": "shallow_pit", // 効果は C++ で実装されています。下記に利用可能な効果のリストがあります。
+  "effect_str": "template", // 特別なフィールド。詳細は下記参照のこと
+  "extra_effects": [{ "id": "fireball", "hit_self": false, "max_level": 3 }], // 1つの呪文で複数の効果を発動できます。
+  "melee_dam": ["cut", "elemental"], // 指定されたタイプの近接ダメージが呪文ダメージに加算されます。標準的なダメージタイプ文字列と、利便性のため 'physical' と 'elemental' のカテゴリもサポートしています。
   "affected_body_parts": [
     "HEAD",
     "TORSO",
@@ -29,168 +29,157 @@ In `data/json/debug_spells.json` there is a template spell, copied here for your
     "LEG_L",
     "FOOT_L",
     "FOOT_R"
-  ], // body parts affected by effects
+  ], // 効果が及ぶ体の部位
   "spell_class": "NONE", //
-  "scale_str": true, // The spell will scale off of strength. Also valid: scale_dex, scale_per, scale_int
-  "base_casting_time": 100, // this is the casting time (in moves)
-  "base_energy_cost": 10, // the amount of energy (of the requisite type) to cast the spell
-  "energy_source": "MANA", // the type of energy used to cast the spell. types are: MANA, BIONIC, HP, STAMINA, FATIGUE, NONE (none will not use mana)
-  "components": [requirement_id],                            // an id from a requirement, like the ones you use for crafting. spell components require to cast.
-  "difficulty": 12, // the difficulty to learn/cast the spell
-  "max_level": 10, // maximum level you can achieve in the spell
-  "min_damage": 0, // minimum damage (or "starting" damage)
-  "max_damage": 100, // maximum damage the spell can achieve
-  "damage_increment": 2.5, // to get damage (and any of the other below stats) multiply this by spell's level and add to minimum damage
-  "min_aoe": 0, // area of effect (currently not implemented)
+  "scale_str": true, // 呪文の威力が筋力に依存してスケーリングされます。他に scale_dex, scale_per, scale_int も使用可能です。
+  "base_casting_time": 100, // 呪文の詠唱時間(ムーブ単位)
+  "base_energy_cost": 10, // 呪文を詠唱するために必要なエネルギー量(指定された種類)
+  "energy_source": "MANA", // 呪文を詠唱するために使用するエネルギーの種類。MANA, BIONIC, HP, STAMINA, FATIGUE, NONE (NONE はマナを消費しない)
+  "components": [requirement_id],                            // 呪文の詠唱に必要な構成要素。クラフトで使用するものと同じ形式のID
+  "difficulty": 12, // 呪文の習得/詠唱難易度
+  "max_level": 10, // 呪文の最大レベル
+  "min_damage": 0, // 最低ダメージ(または「初期」ダメージ)
+  "max_damage": 100, // 呪文が到達可能な最大ダメージ
+  "damage_increment": 2.5, // ダメージ(および下記のステータス)を計算する際に、呪文レベルに掛けて最小ダメージに加算する値
+  "min_aoe": 0, // 効果範囲（現在未実装）
   "max_aoe": 5,
   "aoe_increment": 0.1,
-  "min_range": 1, // range of the spell
+  "min_range": 1, // 呪文の射程
   "max_range": 10,
   "range_increment": 2,
-  "min_accuracy": 50, // percentage "accuracy" of the spell. used for determining which body part was hit
+  "min_accuracy": 50, // 呪文の「命中率」(％)。どの体の部位にヒットしたかを判定する際に使用
   "max_accuracy": 70,
   "accuracy_increment": 2,
-  "min_dot": 0, // damage over time (currently not implemented)
+  "min_dot": 0, // 継続ダメージ(Damage over Time)。現在未実装
   "max_dot": 2,
   "dot_increment": 0.1,
-  "min_duration": 0, // duration of spell effect (if the spell has a special effect)
+  "min_duration": 0, // 呪文効果の持続時間(特別な効果がある場合)
   "max_duration": 1000,
   "duration_increment": 4,
-  "min_pierce": 0, // how much of the spell pierces armor (currently not implemented)
+  "min_pierce": 0, // 呪文が防具を貫通する割合(現在未実装)
   "max_pierce": 1,
   "pierce_increment": 0.1,
-  "field_id": "fd_blood", // the string id of the field (currently hardcoded)
-  "field_chance": 100, // one_in( field_chance ) chance of spawning a field per tile in aoe
-  "min_field_intensity": 10, // field intensity of fields generated
-  "max_field_intensity": 10,
+  "field_id": "fd_blood", // 生成するフィールドの文字列 ID(現在は固定)
+  "field_chance": 100, // AoE 内の各タイルでフィールドが生成される確率(1/field_chance)
+  "min_field_intensity": 10, // 生成されるフィールドの強度(最小)
+  "max_field_intensity": 10, // 生成されるフィールドの強度(最大)
   "field_intensity_increment": 1,
-  "field_intensity_variance": 0.1, // the field can range in intensity from -variance as a percent to +variance as a percent i.e. this spell would be 9-11
-  "sound_type": "combat", // the type of sound. possible types are: background, weather, music, movement, speech, activity, destructive_activity, alarm, combat, alert, order
-  "sound_description": "a whoosh", // the sound description. in the form of "You hear %s" by default it is "an explosion"
-  "sound_ambient": true, // whether or not this is treated as an ambient sound or not
-  "sound_id": "misc", // the sound id
-  "sound_variant": "shockwave", // the sound variant
-  "sprite": "fd_electricity", // This changes the spell sprite to any valid field ID. Do not use with NO_EXPLOSION_VFX
-  "learn_spells": { "acid_resistance_greater": 15 } // You learn the specified spell once your level in this spell is greater than or equal to the number shown.
+  "field_intensity_variance": 0.1, // tフィールド強度のばらつき。例：この値なら強度は 9～11 の範囲になります。
+  "sound_type": "combat", // 音の種類。可能なタイプ：background, weather, music, movement, speech, activity, destructive_activity, alarm, combat, alert, order
+  "sound_description": "a whoosh", // 音の説明。既定値は "an explosion"。通常は "You hear %s" の形式で表示します。
+  "sound_ambient": true, // 環境音として扱うかどうか
+  "sound_id": "misc", // 音のID
+  "sound_variant": "shockwave", // 音のバリエーション
+  "sprite": "fd_electricity", // 呪文のスプライトを任意の有効なフィールド ID に変更します。NO_EXPLOSION_VFX とは併用しないこと
+  "learn_spells": { "acid_resistance_greater": 15 } // この呪文レベルが指定値以上になると、指定された呪文を習得します。
 }
 ```
 
-Most of the default values for the above are either 0 or "NONE", so you may leave out most of the
-values if they do not pertain to your spell.
+上記のほとんどの既定値は 0 または "NONE" であるため、呪文に関係ない項目は省略して構いません。
 
-When deciding values for some of these, it is important to note that some of the formulae are not
-linear. For example, this is the formula for spell failure chance:
+一部の値を決める際には、計算式が線形ではないことに注意する必要があります。
+例えば、呪文失敗率の計算式は以下の通りです:
 
 `( ( ( ( spell_level - spell_difficulty ) * 2 + intelligence + spellcraft_skill ) - 30 ) / 30 ) ^ 2`
 
-Meaning a spell with difficulty 0 cast by a player with 8 intelligence, 0 spellcraft, and level 0 in
-the spell will have a 53% spell failure chance. On the other hand, a player with 12 intelligence, 6
-spellcraft, and level 6 in the same spell will have a 0% spell failure chance.
+つまり、難易度 0 の呪文を、知能 8、魔法技能 0、呪文レベル 0 のプレイヤーが詠唱すると、53% の確率で失敗 します。
+一方、知性 12、魔法技能 6、呪文レベル 6 のプレイヤーなら、失敗率は 0% になります。
 
-However, experience gain is a little more complicated to calculate. The formula for how much
-experience you need to get to a level is below:
+ただし、経験値の獲得量の計算はもう少し複雑です。
+レベルアップに必要な経験値の計算式は以下の通りです:
 
 `e ^ ( ( level + 62.5 ) * 0.146661 ) ) - 6200`
 
-#### Currently Implemented Spell Flags
+#### 現在実装されている呪文フラグ
 
-- `PERMANENT` - items or creatures spawned with this spell do not disappear and die as normal
+- `PERMANENT` - この呪文で生成されたアイテムやクリーチャーは通常通り消えたり死んだりしません。
 
-- `IGNORE_WALLS` - spell's aoe goes through walls
+- `IGNORE_WALLS` - 呪文の AoE が壁を貫通します。
 
-- `SWAP_POS` - teleports the caster to the target location when used by a ranged spell, switching
-  places with any creature that might be in the way
+- `SWAP_POS` - 遠距離呪文で使用すると、詠唱者と対象位置の入れ替えを行います。（途中にいるクリーチャーとも位置を交換）
 
-- `HOSTILE_SUMMON` - summon spell always spawns a hostile monster
+- `HOSTILE_SUMMON` - 召喚呪文で常に敵対的なモンスターを召喚します。
 
-- `HOSTILE_50` - summoned monster spawns friendly 50% of the time
+- `HOSTILE_50` - 召喚モンスターは 50% の確率で味方として出現します。
 
-- `SILENT` - spell makes no noise at target
+- `SILENT` - 対象位置で音を出しません。
 
-- `NO_EXPLOSION_VFX` - spell has no visual explosion
+- `NO_EXPLOSION_VFX` - 呪文に爆発エフェクトを表示しません。
 
-- `LOUD` - spell makes extra noise at target
+- `LOUD` - 対象位置で追加の音を出します。
 
-- `VERBAL` - spell makes noise at caster location, mouth encumbrance affects fail %
+- `VERBAL` - 詠唱者の位置で音が鳴ります。口の負荷が失敗率に影響します。
 
-- `SOMATIC` - arm encumbrance affects fail % and casting time (slightly)
+- `SOMATIC` - 腕の負荷が失敗率と詠唱時間にわずかに影響します。
 
-- `NO_HANDS` - hands do not affect spell energy cost
+- `NO_HANDS` - 手の負荷が呪文のエネルギー消費に影響しません。
 
-- `UNSAFE_TELEPORT` - teleport spell risks killing the caster or others
+- `UNSAFE_TELEPORT` - テレポート呪文で詠唱者や他者が死亡するリスクがあります。
 
-- `NO_LEGS` - legs do not affect casting time
+- `NO_LEGS` - 足の負荷が詠唱時間に影響しません。
 
-- `CONCENTRATE` - focus affects spell fail %
+- `CONCENTRATE` - 集中度が呪文の失敗率に影響します。
 
-- `RANDOM_AOE` - picks random number between min+increment\*level and max instead of normal behavior
+- `RANDOM_AOE` - 通常の動作ではなく、min + increment\* level と max の間でランダムな AoE を選びます。
 
-- `RANDOM_DAMAGE` - picks random number between min+increment\*level and max instead of normal
-  behavior
+- `RANDOM_DAMAGE` - 通常の動作ではなく、min + increment\* level と max の間でランダムなダメージを選びます。
 
-- `RANDOM_DURATION` - picks random number between min+increment\*level and max instead of normal
-  behavior
+- `RANDOM_DURATION` - 通常の動作ではなく、min + increment\* level と max の間でランダムな持続時間を選びます。
 
-- `RANDOM_TARGET` - picks a random valid target within your range instead of normal behavior.
+- `RANDOM_TARGET` - 通常の動作ではなく、有効射程内のランダムな対象を選びます。
 
-- `MUTATE_TRAIT` - overrides the mutate spell_effect to use a specific trait_id instead of a
-  category
+- `MUTATE_TRAIT` - 呪文効果を上書きして、カテゴリーではなく特定の trait_id を使用します。
 
-- `WONDER` - instead of casting each of the extra_spells, it picks N of them and casts them (where N
-  is std::min( damage(), number_of_spells ))
+- `WONDER` - extra_spellsのすべてを詠唱する代わりに、N 個を選んで詠唱します。 (N は std::min(damage(), number_of_spells))
 
-- `PAIN_NORESIST` - pain altering spells can't be resisted (like with the deadened trait)
+- `PAIN_NORESIST` - 痛み系呪文が抵抗されません。(deadened trait のように)
 
-- `BRAWL` - Allows characters with the Brawler trait to cast the spell (otherwise they cannot)
+- `BRAWL` - Brawler trait を持つキャラクターが詠唱可能です。 (持たない場合は不可)
 
-- `DUPE_SOUND` - Allows a spell to play multiple of the same sound (i.e. a sound for each target affected)
+- `DUPE_SOUND` - 同じ音を複数回再生可能です。(対象ごとに音を鳴らすなど)
 
-- `ADD_MELEE_DAM` - Adds the highest category of melee damage for your currently wielded item to the spell's damage (LEGACY, only handles Bash Stab and Cut. Please instead use `melee_dam` field)
+- `ADD_MELEE_DAM` - 現在装備している武器の最高カテゴリ近接ダメージを呪文ダメージに加算します。(LEGACY。Bash/Stab/Cut のみ対応。代わりに melee_dam フィールドを使用推奨)
 
-- `PHYSICAL` - Implies BRAWL and also means that Brawlers get a bonus when using the spell. Mostly for "Physical Techniques"
+- `PHYSICAL` - BRAWL を暗黙的に含み、Brawler にボーナスを与えます。主に「物理技術」用
 
-- `MOD_MELEE_MOVES` - The melee move cost of your weapon is added to the "spell"'s cast cost. Special behavior: If the base_casting_time is negative with this flag, the "increment" is instead a multiplier on the melee cost (useful for replicating rapid strike in spell form)
+- `MOD_MELEE_MOVES` - 武器の近接攻撃ムーブコストを呪文の詠唱コストに加算。特殊動作：
+  base_casting_time が負の場合、increment は行動コストの倍率として扱います。(呪文版の 連撃(Rapid Strike)再現に便利)
 
-- `MOD_MEELE_STAM` - Like `MOD_MELEE_MOVES` but for the casting cost of the spell and the stamina cost of your weapon. Primarily meant for stamina techniques. Has the same special behavior involving negative base costs and the increment field.
+- `MOD_MEELE_STAM` - `MOD_MELEE_MOVES` と同様ですが、武器のスタミナ消費に対応。スタミナ技術向
+  け。負の base_cost と increment フィールドに関する特殊動作も同様です。
 
-- `NO_FAIL` - this spell cannot fail when you cast it
+- `NO_FAIL` - この呪文は詠唱時に失敗しません。
 
 #### Currently Implemented Effects and special rules
 
-- `pain_split` - makes all of your limbs' damage even out.
+- `pain_split` - 自分のすべての手足のダメージを均等化します。
 
-- `move_earth` - "digs" at the target location. some terrain is not diggable this way.
+- `move_earth` - 対象地点の地面を「掘る」。一部の地形は掘れません。
 
-- `target_attack` - deals damage to a target (ignores walls). Negative damage heals the target. If
-  "effect_str" is included, it will add that effect (defined elsewhere in json) to the targets if
-  able, to the body parts defined in affected_body_parts. Any aoe will manifest as a circular area
-  centered on the target, and will only deal damage to valid_targets. (aoe does not ignore walls)
+- `target_attack` - 対象にダメージを与えます(壁は無視)。負のダメージは回復になります。
+  effect_str が指定されていれば、その効果(JSON内で定義されたもの)を対象の affected_body_parts に適用します。AoE がある場合は対象を中心とした円形範囲で発動し、有効なターゲットにのみダメージを与えます。（AoE は壁を無視しない）
 
-- `projectile_attack` - similar to target_attack, except the projectile you shoot will stop short at
-  impassable terrain. If "effect_str" is included, it will add that effect (defined elsewhere in
-  json) to the targets if able, to the body parts defined in affected_body_parts.
+- `projectile_attack` - target_attackと似ていますが、発射した弾は通れない地形で停止します。effect_str が指定されていれば対象の affected_body_parts に効果を適用します。
 
-- `cone_attack` - fires a cone toward the target up to your range. The arc of the cone in degrees is
-  aoe. Stops at walls. If "effect_str" is included, it will add that effect (defined elsewhere in
-  json) to the targets if able, to the body parts defined in affected_body_parts.
+- `cone_attack` - 対象に向かって円錐状の範囲で攻撃。範囲の角度は aoe。壁で停止。effect_str が指定されていれば対象の affected_body_parts に効果を適用します。
 
-- `line_attack` - fires a line with width aoe toward the target, being blocked by walls on the way.
-  If "effect_str" is included, it will add that effect (defined elsewhere in json) to the targets if
-  able, to the body parts defined in affected_body_parts.
+- `line_attack` - 対象に向かって幅 aoe の直線攻撃。途中で壁に阻まれます。
+  effect_str が指定されていれば対象の affected_body_parts に効果を適用します。
 
-- `spawn_item` - spawns an item that will disappear at the end of its duration. Default duration
-  is 0. Damage determines quantity.
+- `spawn_item` - 指定したアイテムを生成。持続時間終了後に消えます。既定の持続時間は 0。ダメージ
+  で生成数を決定します。
 
-- `summon_vehicle` - spawns a specified vehicle that should disappear after its duration
+- `summon_vehicle` - 指定した乗り物を生成。持続時間終了後に消えます。
 
-- `summon` - spawns a monster that will disappear at the end of its duration. By default friendly to the player. Damage determines quantity.
+- `summon` - モンスターを生成。持続時間終了後に消えます。既定ではプレイヤーに友好的です。ダメー
+  ジで生成数を決定します。
 
-- `translocate` - teleports the player between registered 'translocators', such as the gates in Magical Nights
+- `translocate` - プレイヤーを登録済みの「転送装置」間で移動します。（例：Magical Nights のゲー
+  ト）
 
-- `teleport_random` - teleports the player randomly range spaces with aoe variation
+- `teleport_random` - プレイヤーをランダムに範囲内へテレポート（AoE 変動あり）
 
-- `recover_energy` - recovers an energy source (defined in the effect_str, shown below) equal to
-  damage of the spell
+- `recover_energy` - 呪文のダメージに相当する量のエネルギー源（effect_str で指定）を回復します。
 
 * "MANA"
 * "STAMINA"
@@ -198,80 +187,65 @@ experience you need to get to a level is below:
 * "PAIN"
 * "BIONIC"
 
-- `ter_transform` - transform the terrain and furniture in an area centered at the target. The
-  chance of any one of the points in the area of effect changing is one_in( damage ). The effect_str
-  is the id of a ter_furn_transform.
+- `ter_transform` - 対象を中心とした範囲内の地形や家具を変化させます。範囲内の各ポイントが変化
+  する確率は one_in(damage)。effect_str は ter_furn_transform の ID
 
-- `vomit` - any creature within its area of effect will instantly vomit, if it's able to do so.
+- `vomit` - 範囲内のクリーチャーは可能であれば即座に嘔吐します。
 
-- `timed_event` - adds a timed event to the player only. valid timed events: "help", "wanted",
+- `timed_event` - プレイヤーにのみタイムドイベントを追加。使用可能なイベント: "help", "wanted",
   "robot_attack", "spawn_wyrms", "amigara", "roots_die", "temple_open", "temple_flood",
-  "temple_spawn", "dim", "artifact_light" NOTE: This was added only for artifact active effects.
-  support is limited, use at your own risk.
+  "temple_spawn", "dim", "artifact_light" ※アーティファクトのアクティブ効果用に追加されたもので、サポートは限定的。使用は自己責任
 
-- `explosion` - an explosion is centered on the target, with power damage() and factor aoe()/10
+- `explosion` - 対象を中心に爆発を発生。威力は damage()、範囲は aoe()/10
 
-- `flashbang` - a flashbang effect is centered on the target, with poewr damage() and factor
-  aoe()/10
+- `flashbang` - 対象を中心にフラッシュバン効果を発生。威力は damage()、範囲は aoe()/10
 
-- `mod_moves` - adds damage() moves to the target. can be negative to "freeze" the target for that
-  amount of time
+- `mod_moves` - 対象の行動ポイントに damage() を加算。負の値で対象を一定時間「凍結」可能です。
 
-- `map` - maps the overmap centered on the player out to a radius of aoe()
+- `map` - プレイヤーを中心にオーバーマップを範囲 aoe() までマッピングします。
 
-- `morale` - gives a morale effect to all npcs or avatar within aoe, with value damage().
-  decay_start is duration() / 10.
+- `morale` - 範囲内の NPC またはアバターに damage() の士気効果を付与します。減衰開始は duration()/10です。
 
-- `charm_monster` - charms a monster that has less hp than damage() for approximately duration()
+- `charm_monster` - HP が damage() 未満のモンスターを約 duration() ターン魅了します。
 
-- `mutate` - mutates the target(s). if effect_str is defined, mutates toward that category instead
-  of picking at random. the "MUTATE_TRAIT" flag allows effect_str to be a specific trait instead of
-  a category. damage() / 100 is the percent chance the mutation will be successful (a value of 10000
-  represents 100.00%)
+- `mutate` - 対象を突然変異させます。effect_str が指定されていれば、そのカテゴリー方向に変異。
+  MUTATE_TRAIT フラグで特定の trait を指定可能です。成功確率は damage()/100（10000 = 100%）です。
 
-- `bash` - bashes the terrain at the target. uses damage() as the strength of the bash.
+- `bash` - 対象の地形を破壊します。破壊力は damage()です。
 
-- `dash` - moves the player to the target tile, can leave behind fields.
+- `dash` - プレイヤーを対象タイルまで移動します。フィールドを残すことも可能です。
 
-- `area_push` - pushes things outwards from a single point
+- `area_push` - 範囲内の対象を一点から外向きに押します。
 
-- `directed_push` pushes things in a single direction away from you.
+- `directed_push` 単方向に対象を押します。
 
-- `noise` makes noise at a loudness equal to the spell's damage.
+- `noise` 呪文の damage() に応じた音量で音を発生します。
 
-- `WONDER` - Unlike the above, this is not an "effect" but a "flag". This alters the behavior of the
-  parent spell drastically: The spell itself doesn't cast, but its damage and range information is
-  used in order to cast the extra_effects. N of the extra_effects will be chosen at random to be
-  cast, where N is the current damage of the spell (stacks with RANDOM_DAMAGE flag) and the message
-  of the spell cast by this spell will also be displayed. If this spell's message is not wanted to
-  be displayed, make sure the message is an empty string.
+- `WONDER` - 上記のものとは異なり、これは「効果」ではなく「フラグ」です。これにより親呪文の動作が大
+  きく変更されます：呪文自体は発動しませんが、そのダメージと範囲の情報が使用されて、追加効果(extra_effects)が発動します。追加効果のうち、N個がランダムに選ばれて発動し、ここでのNは呪文の現在のダメージ(RANDOM_DAMAGEフラグとスタックします)に基づきます。また、この呪文が発動した際のメッセージも表示されます。もし呪文のメッセージを表示したくない場合は、メッセージを空文字列に設定してください。
 
-- `RANDOM_TARGET` - A special spell flag (like wonder) that forces the spell to choose a random
-  valid target within range instead of the caster choosing the target. This also affects
-  extra_effects.
+- `RANDOM_TARGET` - これは、呪文が対象をキャスターではなくランダムに選択するよう強制する特別な呪文
+  フラグです (wonderフラグと同様)。これも追加効果(extra_effects) に影響します。
 
-##### For Spells that have an attack type, these are the available damage types (case-insensitive):
+##### 攻撃タイプを持つ呪文のダメージタイプ (ケースインセンシティブ):
 
-- `fire`
-- `acid`
-- `bash`
-- `bullet`
-- `bio` - internal damage such as poison
-- `cold`
-- `cut`
-- `electric`
-- `light` - used both for actual light, as well as 'holy'
-- `dark`
-- `psi` - psychic
-- `stab`
-- `true` - this damage type goes through armor altogether, and thus is very powerful. It is the
-  default damage type when unspecified.
+- `fire` - 火
+- `acid` - 酸
+- `bash` - 打撃
+- `bullet` - 弾
+- `bio` - 生物的ダメージ、例えば毒など
+- `cold` - 冷気
+- `cut` - 切断
+- `electric` - 電気
+- `light` - 光、実際の光と「聖なる光」にも使用
+- `dark` - 闇
+- `psi` - 精神的ダメージ
+- `stab` - 刺突
+- `true` - このダメージタイプは防具を完全に無視するため非常に強力です。未指定の場合、既定のダメージタイプとなります。
 
-#### Spells that level up
+#### レベルアップする呪文
 
-Spells that change effects as they level up must have a min and max effect and an increment. The min
-effect is what the spell will do at level 0, and the max effect is where it stops growing. The
-increment is how much it changes per level. For example:
+レベルアップに伴って効果が変化する呪文には、最小値と最大値、および増分が必要です。最小値は呪文がレベル0で発動する効果、最大値は呪文の成長が止まる効果で、増分はレベルごとにどれだけ変化するかを示します。例:
 
 ```json
 "min_range": 1,
@@ -279,8 +253,7 @@ increment is how much it changes per level. For example:
 "range_increment": 5,
 ```
 
-Min and max values must always have the same sign, but it can be negative eg. in the case of spells
-that use a negative 'recover' effect to cause pain or stamina damage. For example:
+最小値と最大値は常に同じ符号でなければならないことに注意してください。ただし、負の「回復」効果を持ち、痛みやスタミナダメージを与える呪文のように、負の値を使うことも可能です。例えば:
 
 ```json
 {
@@ -298,13 +271,15 @@ that use a negative 'recover' effect to cause pain or stamina damage. For exampl
 }
 ```
 
-### Learning Spells
+### 呪文の習得方法
 
-There are three ways of granting spells that are implemented: Mutating can grant a spell with the
-"spells_learned" field which also lets you specify the level granted. Certain spells can also teach
-you spells once they reach an appropriate level via the "learn_spells" variable. Finally, You can
-learn a spell from an item through a use_action, which is also the only way to train a spell other
-than using it. Examples of all three are shown below:
+呪文を習得する方法には3つの方法があります:
+
+1. 変異によって呪文を習得。`spells_learned`フィールドを使って、習得した呪文とそのレベルを指定できます。
+2. 特定の呪文は、適切なレベルに達することで他の呪文を教えてくれることがあります(learn_spells変数を使用)。
+3. アイテムを使用することによって呪文を学ぶ。これが呪文を訓練する唯一の方法です(使う以外では訓練できません)。
+
+以下の例は、3つの方法をすべて示しています:
 
 ```json
 {
@@ -318,13 +293,12 @@ than using it. Examples of all three are shown below:
   "color": "magenta",
   "use_action": {
     "type": "learn_spell",
-    "spells": [ "debug_hp", "debug_stamina", "example_template", "debug_bionic", "pain_split", "fireball" ] // this is a list of spells you can learn from the item
+    "spells": [ "debug_hp", "debug_stamina", "example_template", "debug_bionic", "pain_split", "fireball" ] // このアイテムで学べる呪文のリスト
   }
 },
 ```
 
-For the below example you will learn the spell Greater Acid Resistance once Acid Resistance reaches
-level 15
+以下の例では、酸耐性がレベル15に達することで「Greater Acid Resistance」という呪文を学びます:
 
 ```json
 {
@@ -337,177 +311,169 @@ level 15
 }
 ```
 
-You can study this spellbook for a rate of ~1 experience per turn depending on intelligence,
-spellcraft, and focus.
+この呪文書を学ぶには、知性、呪文能力、集中力に応じて、1ターンあたり約1経験値を得ることができます。
 
 ```json
 "spells_learned": [ [ "debug_hp", 1 ], [ "debug_stamina", 1 ], [ "example_template", 1 ], [ "pain_split", 1 ] ],
 ```
 
-#### Spells in professions and NPC classes
+#### 職業やNPCクラスでの呪文
 
-You can add a "spell" member to professions or an NPC class definition like so:
+職業やNPCクラスに「呪文」フィールドを追加することができます。例えば:
 
 ```json
 "spells": [ { "id": "summon_zombie", "level": 0 }, { "id": "magic_missile", "level": 10 } ]
 ```
 
-NOTE: This makes it possible to learn spells that conflict with a class. It also does not give the
-prompt to gain the class. Be judicious upon adding this to a profession!
+注釈: この方法を使うと、本来クラス(職業・魔法クラスなど)を習得させるための呪文を覚えることが可能になってしまいます。また、そのクラスを獲得するためのプロンプト(確認メッセージ)は表示されません。
+職業定義にこの項目を追加する際は慎重に扱ってください。
 
-#### Spells in monsters
+#### モンスターの呪文
 
-You can assign a spell as a special attack for a monster.
+モンスターに特殊攻撃として呪文を設定することができます。
 
 ```json
 { "type": "spell", "spell_id": "burning_hands", "spell_level": 10, "cooldown": 10 }
 ```
 
-- spell_id: the id for the spell being cast.
-- spell_level: the level at which the spell is cast. Spells cast by monsters do not gain levels like
-  player spells.
-- cooldown: how often the monster can cast this spell
+- spell_id: 発動する呪文のID
+- sspell_level: 呪文が発動するレベル。モンスターが使う呪文はプレイヤーの呪文のようにレベルアップしません。
+- cooldown: モンスターがこの呪文を発動するまでのクールダウン時間
 
-# Enchantments
+# エンチャント
 
-Enchantments make it possible to specify custom effects provided by item, bionic or mutation.
+エンチャントは、アイテム、バイオニック、または変異によるカスタム効果を指定するために使用されます。
 
-## Fields
+## フィールド
 
 ### id
 
-(string) Unique identifier for this enchantment.
+(文字列) このエンチャントの固有の識別子。
 
 ### has
 
-(string) How an enchantment determines if it is in the right location in order to qualify for being
-active.
+(文字列) エンチャントが有効になるために必要な条件を指定します。
 
-This field is relevant only for items.
+主にアイテムの場合
 
-Values:
+値:
 
-- `HELD` (default) - when in your inventory
-- `WIELD` - when wielded in your hand
-- `WORN` - when worn as armor
+- `HELD` (既定値) - 所持品内にあるとき
+- `WIELD` - 手に持ったとき
+- `WORN` - 防具として着用したとき
 
 ### condition
 
-(string) How an enchantment determines if you are in the right environments in order for the
-enchantment to qualify for being active.
+(文字列) エンチャントが有効になるために、使用者が適切な環境にいるかどうかを判定する方法を指定します。
 
-Values:
+値:
 
-- `ALWAYS` (default) - Always active
-- `UNDERGROUND` - When the owner of the item is below Z-level 0
-- `ABOVEGROUND` - When the owner of the item is at or above Z-level 0
-- `UNDERWATER` - When the owner is in swimmable terrain
-- `NIGHT` - When it is night time
-- `DUSK` - When it is dusk
-- `DAY` - When it is day time
-- `DAWN` - When it is dawn
-- `ACTIVE` - whenever the item, mutation, bionic, or whatever the enchantment is attached to is
-  active.
-- `INACTIVE` - the opposite of `ACTIVE`
+- `ALWAYS` (既定値) - 常に有効
+- `UNDERGROUND` - アイテムの所持者が Zレベル 0 より下にいる場合
+- `ABOVEGROUND` - アイテムの所持者が Zレベル 0 以上にいる場合
+- `UNDERWATER` - 所持者が泳げる地形(水中)にいる場合
+- `NIGHT` - 夜間である場合
+- `DUSK` - 夕暮れである場合
+- `DAY` - 昼間である場合
+- `DAWN` - 夜明けである場合
+- `ACTIVE` - エンチャントが付与されているアイテム・変異・バイオニックなどが 有効状態 のとき
+- `INACTIVE` - `ACTIVE`の逆で、無効状態のとき
 
 ### emitter
 
-(string) Identifier of an emitter that's active as long as this enchantment is active. Default: no
-emitter.
+(文字列) エンチャントが有効な間は、継続中のエミッター識別子。既定値は「エミッターなし」。
 
 ### ench_effects
 
-(array) Grants effects of specified intensity as long as this enchantment is active.
+(配列) エンチャントが有効な間、指定された強度で効果を付与します。
 
-Syntax for single entry:
+単一エントリの構文例:
 
 ```json
 {
-  // (required) Identifier of the effect
+  // (必須) 効果の識別子
   "effect": "effect_identifier",
 
-  // (required) Intensity. Setting to 1 works for effects that do not actually have intensities.
+  // (必須) 強度。強度を1に設定することで、実際に強度が設定されていない効果にも適用できます。
   "intensity": 2
 }
 ```
 
 ### hit_you_effect
 
-(array) List of spells that may be cast when enchantment is active and character melee attacks a
-creature.
+(配列) エンチャントが有効な間に、キャラクターがモンスターに近接攻撃を行った際に発動する可能性がある呪文のリスト。
 
-Syntax for single entry:
+単一エントリの構文例:
 
 ```json
 {
-  // (required) Identifier of the spell
+  // (必須) 呪文の識別子
   "id": "spell_identifier",
 
-  // If true, the spell is centered on the character's location.
-  // If false, the spell is centered on the attacking creature.
-  // Default: false
+  // true の場合、呪文はキャラクターの位置に発動します。
+  // false の場合、呪文は攻撃しているクリーチャーの位置に発動します。
+  // 既定値: false
   "hit_self": false,
 
-  // Chance to trigger, one in X.
-  // Default: 1
+  // 発動する確率。X回に1回発動します。
+  // 既定値: 1
   "once_in": 1,
 
-  // Message for when the spell is triggered for you.
-  // %1$s is your name, %2$s is creature's
-  // Default: no message
+  // 呪文が発動したときに表示されるメッセージ(キャラクター用)。
+  // %1$s はキャラクター名、%2$s はクリーチャーの名前
+  // 既定値: メッセージなし
   "message": "You pierce %2$s with Magic Piercing!",
 
-  // Message for when the spell in triggered for an NPC.
-  // %1$s is their name, %2$s is creature's
-  // Default: no message
+  // 呪文がNPCに発動したときに表示されるメッセージ。
+  // %1$s はNPC名、%2$s はクリーチャーの名前
+  // 既定値: メッセージなし
   "npc_message": "%1$s pierces %2$s with Magic Piercing!",
 
-  // TODO: broken?
+  // TODO: 機能していない？
   "min_level": 1,
 
-  // TODO: broken?
+  // TODO: 機能していない？
   "max_level": 2
 }
 ```
 
 ### hit_me_effect
 
-(array) List of spells that may be cast when enchantment is active and character gets melee attacked
-by a creature.
+(配列) エンチャントが有効な間に、キャラクターがクリーチャーから近接攻撃を受けた際に発動する可能性がある呪文のリスト。
 
-Same syntax as for `hit_you_effect`.
+`hit_you_effect` と同じ構文です。
 
-### mutations
+### 変異
 
-(array) List of mutations temporarily granted while enchantment is active.
+(配列) エンチャントが有効な間に、一時的に付与される変異のリスト。
 
 ### intermittent_activation
 
-(object) Rules that specify random effects which occur while enchantment is active.
+(オブジェクト) エンチャントが有効な間に発生するランダム効果を指定するルール。
 
 Syntax:
 
 ```json
 {
-  // List of checks to run on every turn while enchantment is active.
+  // エンチャントが有効な間、毎ターン実行されるチェックのリスト。
   "effects": [
     {
-      // Average activation frequency.
-      // The exact chance to pass is "one in (X converted to turns)" per turn.
+      // 平均発動頻度
+      // 実際の発動確率は「Xターンに1回発動」となります。
       "frequency": "5 minutes",
 
-      // List of spells to cast if the check passed.
+      // チェックに成功した場合に発動する呪文のリスト。
       "spell_effects": [
         {
-          // (required) Identifier of the spell
+          // (必須) 呪文の識別子
           "id": "nasty_random_effect",
 
-          // TODO: broken?
+          // TODO: 機能していない？
           "min_level": 1,
 
-          // TODO: broken?
+          // TODO: 機能していない？
           "max_level": 5
-          // TODO: other fields appear to be loaded, but unused
+          // TODO: 他のフィールドは読み込まれていますが、使用されていないようです。
         }
       ]
     }
@@ -515,124 +481,105 @@ Syntax:
 }
 ```
 
-### values
+### 値 (values)
 
-(array) List of miscellaneous character/item values to modify.
+(配列) キャラクターまたはアイテムの修正対象となるさまざまな値のリスト。
 
-Syntax for single entry:
+単一エントリの構文例:
 
 ```json
 {
-  // (required) Value ID to modify, refer to list below.
+  // (必須) 修正する値の識別子。以下のリストを参照。
   "value": "VALUE_ID_STRING",
 
-  // Additive bonus. Optional integer number, default is 0.
-  // May be ignored for some values.
+  // 加算ボーナス。省略可能な整数値で、既定値は 0
+  // 一部の値では無視される場合があります。
   "add": 13,
 
-  // Multiplicative bonus. Optional, default is 0.
+  // 乗算ボーナス。省略可能、既定値は 0。
   "multiply": -0.3
 }
 ```
 
-Additive bonus is applied separately from multiplicative, like so:
+加算ボーナスは乗算ボーナスとは別に適用されます。計算式は次の通りです:
 
 ```json
 bonus = add + base_value * multiply
 ```
 
-Thus, a `multiply` value of -0.8 is -80%, and a `multiply` of 2.5 is +250%. When modifying integer
-values, final bonus is rounded towards 0 (truncated).
+つまり、`multiply` が -0.8 の場合は -80%、`multiply` が 2.5 の場合は +250% になります。整数値を修正する場合、最終的なボーナスは 0 に向かって切り捨て (四捨五入)されます。
 
-When multiple enchantments (e.g. one from an item and one from a bionic) modify the same value,
-their bonuses are added together without rounding, then the sum is rounded (if necessary) before
-being applied to the base value.
+複数のエンチャント(例:アイテムからのエンチャントとバイオニックからのエンチャント)が同じ値を修正する場合、ボーナスは丸められずに合算され、その後合計値が基準値に適用される前に再度丸められます。
 
-Since there's no limit on number of enchantments the character can have at a time, the final
-calculated values have hardcoded bounds to prevent unintended behavior.
+キャラクターが同時に持つことのできるエンチャントの数に制限はないため、最終的に計算された値には意図しない挙動を防ぐためのハードコードされた制限が適用されます。
 
-#### IDs of modifiable values
+#### 修正可能な値のID
 
-#### Character values
+#### キャラクター値
 
-##### STRENGTH
+##### 筋力 (STRENGTH)
 
-Strength stat. `base_value` here is the base stat value. The final value cannot go below 0.
+筋力。この `base_value` は基本の能力値です。最終的な値は 0 以下にはなりません。
 
-##### DEXTERITY
+##### 器用 (DEXTERITY)
 
-Dexterity stat. `base_value` here is the base stat value. The final value cannot go below 0.
+器用 この `base_value` は基本の能力値です。最終的な値は 0 以下にはなりません。
 
-##### PERCEPTION
+##### 知覚 (PERCEPTION)
 
-Perception stat. `base_value` here is the base stat value. The final value cannot go below 0.
+知覚 この `base_value` は基本の能力値です。最終的な値は 0 以下にはなりません。
 
-##### INTELLIGENCE
+##### 知性 (INTELLIGENCE)
 
-Intelligence stat. `base_value` here is the base stat value. The final value cannot go below 0.
+知性 この `base_value` は基本の能力値です。最終的な値は 0 以下にはなりません。
 
-##### SPEED
+##### 速度 (SPEED)
 
-Character speed. `base_value` here is character speed including pain/hunger/weight penalties. Final
-speed value cannot go below 25% of base speed.
+キャラクターの速度。この `base_value` はキャラクターの速度で、痛み、飢餓、重さのペナルティが含まれます。最終的な速度は基本速度の 25% 以下にはなりません。
 
-##### ATTACK_COST
+##### 攻撃コスト (ATTACK_COST)
 
-Melee attack cost. The lower, the better. `base_value` here is attack cost for given weapon
-including modifiers from stats and skills. The final value cannot go below 25.
+近接攻撃のコスト。低いほど良い。この `base_value` は、ステータスやスキルによる修正を含む、装備した武器の攻撃コストです。最終的な値は 25 以下にはなりません。
 
-##### MOVE_COST
+##### 移動コスト (MOVE_COST)
 
-Movement cost. `base_value` here is tile movement cost including modifiers from clothing and traits.
-The final value cannot go below 20.
+移動コスト。ここでの `base_value` は、衣服や特性による修正を含むタイルごとの移動コストです。最終的な値は 20 以下にはなりません。
 
-##### METABOLISM
+##### 代謝率 (METABOLISM)
 
-Metabolic rate. This modifier ignores `add` field. `base_value` here is `PLAYER_HUNGER_RATE`
-modified by traits. The final value cannot go below 0.
+代謝率。この修正は `add` フィールドを無視します。この `base_value` は `PLAYER_HUNGER_RATE` を特性によって修正したものです。最終的な値は 0 以下にはなりません。
 
-##### MANA_CAP
+##### マナ容量 (MANA_CAP)
 
-Mana capacity. `base_value` here is character's base mana capacity modified by traits. The final
-value cannot go below 0.
+マナ容量。この `base_value` は、特性によって修正されたキャラクターの基本マナ容量です。最終的な値は 0 以下にはなりません。
 
-##### MANA_REGEN
+##### マナ回復率 (MANA_REGEN)
 
-Mana regeneration rate. This modifier ignores `add` field. `base_value` here is character's base
-mana gain rate modified by traits. The final value cannot go below 0.
+マナ回復率。この修正は `add` フィールドを無視します。この `base_value` は、特性によって修正されたキャラクターの基本マナ回復率です。最終的な値は 0 以下にはなりません。
 
-##### STAMINA_CAP
+##### スタミナ容量 (STAMINA_CAP)
 
-Stamina capacity. This modifier ignores `add` field. `base_value` here is character's base stamina
-capacity modified by traits. The final value cannot go below 10% of `PLAYER_MAX_STAMINA`.
+スタミナ容量。この修正は `add` フィールドを無視します。この `base_value` は、特性によって修正されたキャラクターの基本スタミナ容量です。最終的な値は `PLAYER_MAX_STAMINA` の 10% 以下にはなりません。
 
-##### STAMINA_REGEN
+##### スタミナ回復率 (STAMINA_REGEN)
 
-Stamina regeneration rate. This modifier ignores `add` field. `base_value` here is character's base
-stamina gain rate modified by mouth encumbrance. The final value cannot go below 0.
+スタミナ回復率。この修正は `add` フィールドを無視します。この `base_value` は、口の負荷によって修正されたキャラクターの基本スタミナ回復率です。最終的な値は 0 以下にはなりません。
 
-##### THIRST
+##### 渇き (THIRST)
 
-Thirst gain rate. This modifier ignores `add` field. `base_value` here is character's base thirst
-gain rate. The final value cannot go below 0.
+渇きの回復率。この修正は `add` フィールドを無視します。この `base_value` はキャラクターの基本的な渇き回復率です。最終的な値は 0 以下にはなりません。
 
-##### FATIGUE
+##### 疲労 (FATIGUE)
 
-Fatigue gain rate. This modifier ignores `add` field. `base_value` here is character's base fatigue
-gain rate. The final value cannot go below 0.
+疲労の回復率。この修正は `add` フィールドを無視します。この `base_value` はキャラクターの基本的な疲労回復率です。最終的な値は 0 以下にはなりません。
 
-##### BONUS_DODGE
+##### 追加回避 (BONUS_DODGE)
 
-Additional dodges per turn before dodge penalty kicks in. `base_value` here is character's base
-dodges per turn before penalty (usually 1). The final value can go below 0, which results in penalty
-to dodge roll.
+回避ペナルティが発生する前に、1ターンあたり追加される回避回数。この `base_value` は、ペナルティが発生する前のキャラクターの回避回数 (通常は 1)です。最終的な値は 0 以下になることがあります。この場合、回避ロールにペナルティが適用されます。
 
-##### ARMOR_X
+##### 防御力 (ARMOR_X)
 
-Incoming damage modifier. Applied after Active Defense System bionic but before the damage is
-absorbed by items. Note that `base_value` here is incoming damage value of corresponding type, so
-positive `add` and greater than 1 `mul` will **increase** damage received by the character. Each
-damage type has its own enchant value:
+被ダメージの修正。能動防護システムの適用後、防具によってダメージが吸収される前に適用されます。この `base_value` は、対応する属性タイプによって受けるダメージ値です。そのため、`add` が正の値で、`mul` が 1 より大きい場合、キャラクターが受けるダメージが**増加**します。各ダメージタイプにはそれぞれエンチャント値があります。
 
 - `ARMOR_ACID`
 - `ARMOR_BASH`
@@ -647,18 +594,17 @@ damage type has its own enchant value:
 - `ARMOR_HEAT`
 - `ARMOR_STAB`
 
-#### Item values
+#### アイテム値
 
-##### ITEM_ATTACK_COST
+##### アイテム攻撃コスト (ITEM_ATTACK_COST)
 
-Attack cost (melee or throwing) for this item. Ignores condition / location, and is always active.
-`base_value` here is base item attack cost. Note that the final value cannot go below 0.
+このアイテムの攻撃コスト(近接または投擲)。状態や場所を無視し、常に有効です。
+この `base_value` はアイテムの基本的な攻撃コストです。最終的な値は 0 以下にはなりません。
 
-##### ITEM_DAMAGE_X
+##### アイテムダメージ (ITEM_DAMAGE_X)
 
-Melee damage of this item. Ignores condition / location, and is always active. `base_value` here is
-base item damage of corresponding type. Note that the final value cannot go below 0. Supported damage
-types are:
+このアイテムの近接ダメージ。状態や場所を無視し、常に有効です。
+この `base_value` は、対応する属性タイプの基本ダメージです。最終的な値は 0 以下にはなりません。サポートされているダメージタイプは以下の通りです：
 
 - `ITEM_DAMAGE_BASH`
 - `ITEM_DAMAGE_CUT`
@@ -674,12 +620,10 @@ types are:
 - `ITEM_DAMAGE_PSI`
 - `ITEM_DAMAGE_TRUE`
 
-##### ITEM_ARMOR_X
+##### アイテム防御力 (ITEM_ARMOR_X)
 
-Incoming damage modifier for this item, applied before the damage is absorbed by the item. Note that
-`base_value` here is incoming damage value of corresponding type, so positive `add` and greater than
-1 `mul` will **increase** damage received by the character. Each damage type has its own enchant
-value:
+このアイテムが受けるダメージの軽減値。アイテムがダメージを吸収する前に適用されます。
+この `base_value` は、対応する属性タイプによって受けるダメージ値です。したがって、`add` が正の値で、`mul` が 1 より大きい場合、キャラクターが受けるダメージが**増加**します。各ダメージタイプには、それぞれ固有のエンチャント値があります：
 
 - `ITEM_ARMOR_ACID`
 - `ITEM_ARMOR_BASH`
@@ -694,7 +638,7 @@ value:
 - `ITEM_ARMOR_HEAT`
 - `ITEM_ARMOR_STAB`
 
-## Examples
+## 例
 
 ```json
 [
